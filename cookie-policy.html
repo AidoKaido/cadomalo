@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Policy – Cadomalo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .legal-wrap { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+    .legal-wrap h1 { font-size: 2rem; font-weight: 800; letter-spacing: -.03em; margin-bottom: 8px; }
+    .legal-wrap .updated { font-size: .8rem; color: #999; margin-bottom: 40px; }
+    .legal-wrap h2 { font-size: 1.1rem; font-weight: 700; margin: 32px 0 10px; color: #1A1A1A; }
+    .legal-wrap h3 { font-size: .95rem; font-weight: 700; margin: 20px 0 8px; color: #1A1A1A; }
+    .legal-wrap p { font-size: .9rem; color: #555; line-height: 1.8; margin-bottom: 12px; }
+    .legal-wrap ul, .legal-wrap ol { padding-left: 20px; margin-bottom: 16px; }
+    .legal-wrap li { font-size: .9rem; color: #555; line-height: 1.75; margin-bottom: 6px; }
+    .legal-wrap a { color: #9c0202; }
+    .legal-wrap strong { color: #1A1A1A; }
+    .legal-banner { background: #fff5f5; border: 1px solid rgba(156,2,2,.2); border-radius: 8px; padding: 16px 20px; margin-bottom: 32px; font-size: .88rem; color: #9c0202; }
+    .cookie-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+    .cookie-table th { font-size: .8rem; font-weight: 700; color: #1A1A1A; text-align: left; padding: 10px 12px; background: #f9f9f9; border: 1px solid #E8E8E8; }
+    .cookie-table td { font-size: .82rem; color: #555; padding: 9px 12px; border: 1px solid #E8E8E8; line-height: 1.6; vertical-align: top; }
+    .cookie-table tr:nth-child(even) td { background: #fafafa; }
+    .badge { display: inline-block; font-size: .7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+    .badge-required { background: #fff0f0; color: #9c0202; }
+    .badge-optional { background: #f0f4ff; color: #3355cc; }
+  </style>
+</head>
+<body>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" style="display:none;" role="dialog">
+  <div class="cookie-inner">
+    <div class="cookie-text"><strong>We value your privacy 🍪</strong><p>We use cookies. <a href="cookie-policy.html">Cookie Policy</a> · <a href="privacy-policy.html">Privacy Policy</a></p></div>
+    <div class="cookie-btns"><button id="btn-manage-prefs" class="cookie-manage">Manage</button><button id="btn-reject-all" class="btn btn-ghost btn-sm">Reject All</button><button id="btn-accept-all" class="btn btn-primary btn-sm">Accept All</button></div>
+  </div>
+</div>
+<div id="cookie-prefs" role="dialog" aria-modal="true">
+  <div class="cookie-panel"><h3>Cookie Preferences</h3><p>Manage consent below.</p>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Strictly Necessary</span><label class="toggle"><input type="checkbox" checked disabled><span class="toggle-track"></span></label></div><p>Required for the site to function.</p></div>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Analytics</span><label class="toggle"><input type="checkbox" id="toggle-analytics"><span class="toggle-track"></span></label></div><p>Google Analytics.</p></div>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Marketing</span><label class="toggle"><input type="checkbox" id="toggle-marketing"><span class="toggle-track"></span></label></div><p>Facebook, TikTok, Pinterest, Google Ads.</p></div>
+    <div class="cookie-panel-btns"><button id="btn-close-panel" class="btn btn-ghost btn-sm">Cancel</button><button id="btn-accept-panel" class="btn btn-outline btn-sm">Accept All</button><button id="btn-save-prefs" class="btn btn-primary btn-sm">Save</button></div>
+  </div>
+</div>
+
+<!-- Header -->
+<div style="border-bottom:1px solid #E8E8E8;padding:14px 0;background:#fff;position:sticky;top:0;z-index:800;">
+  <div style="max-width:800px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-size:1.2rem;font-weight:900;color:#1A1A1A;text-decoration:none;">cado<span style="color:#9c0202;">malo</span></a>
+    <a href="index.html" style="font-size:.8rem;color:#666;display:flex;align-items:center;gap:4px;text-decoration:none;">← Back to store</a>
+  </div>
+</div>
+
+<div class="legal-wrap">
+
+  <h1>Cookie Policy</h1>
+  <p class="updated">Last updated: May 17, 2026</p>
+
+  <div class="legal-banner">
+    This Cookie Policy explains what cookies are, which ones we use on cadomalo.com, and how you can control them. It is part of our broader <a href="privacy-policy.html" style="color:#9c0202;">Privacy Policy</a>. By continuing to use our site after accepting cookies, you agree to our use of cookies as described here.
+  </div>
+
+  <h2>1. What Are Cookies?</h2>
+  <p>Cookies are small text files that a website saves on your device (computer, tablet, or phone) when you visit. They allow the site to remember your actions and preferences over time, so you do not have to re-enter information every time you return or navigate between pages.</p>
+  <p>Cookies can be:</p>
+  <ul>
+    <li><strong>Session cookies:</strong> Temporary files that are deleted when you close your browser</li>
+    <li><strong>Persistent cookies:</strong> Files that remain on your device for a set period or until you delete them</li>
+    <li><strong>First-party cookies:</strong> Set directly by cadomalo.com</li>
+    <li><strong>Third-party cookies:</strong> Set by external services we use (analytics, advertising, etc.)</li>
+  </ul>
+
+  <h2>2. Why We Use Cookies</h2>
+  <p>We use cookies to:</p>
+  <ul>
+    <li>Keep your shopping cart active as you browse</li>
+    <li>Keep you logged in to your account</li>
+    <li>Remember your cookie preferences</li>
+    <li>Understand how people use our site so we can improve it</li>
+    <li>Show you relevant ads on other platforms after you visit us</li>
+    <li>Measure the effectiveness of our advertising campaigns</li>
+  </ul>
+
+  <h2>3. Categories of Cookies We Use</h2>
+
+  <h3>3.1 Strictly Necessary Cookies <span class="badge badge-required">No consent required</span></h3>
+  <p>These cookies are essential for cadomalo.com to function properly. Without them, core features like your shopping cart, checkout, and account login would not work. We do not need your consent to use these cookies under GDPR because they are technically required.</p>
+
+  <table class="cookie-table">
+    <thead>
+      <tr>
+        <th>Cookie Name</th>
+        <th>Purpose</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>_session</strong></td>
+        <td>Maintains your active browsing session — keeps you logged in as you move between pages</td>
+        <td>Session</td>
+      </tr>
+      <tr>
+        <td><strong>cart_id</strong></td>
+        <td>Remembers the items in your shopping cart so you do not lose them when navigating away</td>
+        <td>7 days</td>
+      </tr>
+      <tr>
+        <td><strong>csrf_token</strong></td>
+        <td>Security cookie that prevents cross-site request forgery attacks</td>
+        <td>Session</td>
+      </tr>
+      <tr>
+        <td><strong>cookie_consent</strong></td>
+        <td>Stores your cookie preferences so we do not show the banner on every visit</td>
+        <td>12 months</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3.2 Analytics Cookies <span class="badge badge-optional">Consent required</span></h3>
+  <p>Analytics cookies help us understand how visitors interact with our website — which pages are most popular, how long visitors stay, where they come from, and what they click on. This information is used in aggregate to improve our site. We only activate these cookies if you consent.</p>
+
+  <h3>Google Analytics (GA4)</h3>
+  <p>We use Google Analytics 4 to collect anonymized data about site usage. GA4 tracks:</p>
+  <ul>
+    <li>Pages visited and time spent on each page</li>
+    <li>How you arrived at our site (search engine, direct link, social media, etc.)</li>
+    <li>Your general geographic region (country/city level, not precise location)</li>
+    <li>Device type, browser, and operating system</li>
+    <li>Which products were viewed, added to cart, or purchased (anonymized event data)</li>
+  </ul>
+  <p>Google Analytics uses IP anonymization by default in GA4. Data collected is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. You can also opt out of Google Analytics tracking across all websites using <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google's opt-out browser add-on</a>.</p>
+
+  <table class="cookie-table">
+    <thead>
+      <tr>
+        <th>Cookie Name</th>
+        <th>Purpose</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>_ga</strong></td>
+        <td>Distinguishes unique users for Google Analytics reporting</td>
+        <td>2 years</td>
+      </tr>
+      <tr>
+        <td><strong>_ga_[ID]</strong></td>
+        <td>Maintains GA4 session state and stores session data</td>
+        <td>2 years</td>
+      </tr>
+      <tr>
+        <td><strong>_gid</strong></td>
+        <td>Distinguishes users — used to throttle request rate</td>
+        <td>24 hours</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3.3 Marketing and Advertising Cookies <span class="badge badge-optional">Consent required</span></h3>
+  <p>Marketing cookies enable us to show you relevant ads on other platforms after you visit cadomalo.com, and to measure how effective those ads are. These cookies track your browsing activity across different websites. We only activate these cookies if you consent.</p>
+
+  <h3>Facebook Pixel (Meta)</h3>
+  <p>The Meta Pixel allows us to track actions you take on our site (such as viewing a product, adding to cart, or completing a purchase) and link them to your Facebook or Instagram account. This helps us:</p>
+  <ul>
+    <li>Show you relevant Cadomalo ads on Facebook and Instagram</li>
+    <li>Retarget visitors who viewed products but did not purchase</li>
+    <li>Build "lookalike audiences" of people similar to our existing customers</li>
+    <li>Measure the return on our ad spend</li>
+  </ul>
+  <p>Governed by <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener">Meta's Privacy Policy</a>.</p>
+
+  <h3>TikTok Pixel</h3>
+  <p>The TikTok Pixel tracks events on our site (page views, product views, add-to-cart, purchases) so we can run and measure targeted ad campaigns on TikTok. It also enables retargeting — showing Cadomalo ads to people who have previously visited our site.</p>
+  <p>Governed by <a href="https://www.tiktok.com/legal/page/us/privacy-policy/en" target="_blank" rel="noopener">TikTok's Privacy Policy</a>.</p>
+
+  <h3>Pinterest Tag</h3>
+  <p>The Pinterest Tag tracks conversions (purchases) from our Pinterest ads and allows us to retarget visitors on Pinterest. It also helps us understand which Pinterest content drives the most sales.</p>
+  <p>Governed by <a href="https://policy.pinterest.com/en/privacy-policy" target="_blank" rel="noopener">Pinterest's Privacy Policy</a>.</p>
+
+  <h3>Google Ads</h3>
+  <p>Google Ads cookies (including Google's conversion tracking tag) help us measure when a visitor clicks one of our Google ads and later makes a purchase. They also allow us to run remarketing campaigns — showing Cadomalo ads to previous visitors on Google Search, YouTube, and the Google Display Network.</p>
+  <p>Governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+
+  <table class="cookie-table">
+    <thead>
+      <tr>
+        <th>Platform</th>
+        <th>Cookie / Identifier</th>
+        <th>Purpose</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Meta (Facebook)</td>
+        <td><strong>_fbp</strong></td>
+        <td>Identifies browser for ad targeting and measurement</td>
+        <td>90 days</td>
+      </tr>
+      <tr>
+        <td>Meta (Facebook)</td>
+        <td><strong>_fbc</strong></td>
+        <td>Stores click ID from Facebook ads</td>
+        <td>90 days</td>
+      </tr>
+      <tr>
+        <td>TikTok</td>
+        <td><strong>_ttp</strong></td>
+        <td>Tracks ad conversions and retargeting on TikTok</td>
+        <td>13 months</td>
+      </tr>
+      <tr>
+        <td>Pinterest</td>
+        <td><strong>_pinterest_ct_ua</strong></td>
+        <td>Tracks conversions from Pinterest ads</td>
+        <td>12 months</td>
+      </tr>
+      <tr>
+        <td>Google Ads</td>
+        <td><strong>_gcl_au</strong></td>
+        <td>Conversion tracking for Google Ads</td>
+        <td>90 days</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. How to Manage Your Cookie Preferences</h2>
+
+  <h3>4.1 Our Cookie Banner</h3>
+  <p>When you first visit cadomalo.com, we display a cookie consent banner where you can choose to accept all cookies, reject non-essential cookies, or manage your preferences by category (Strictly Necessary, Analytics, Marketing). You can update your preferences at any time by clicking the cookie icon in the footer of our site.</p>
+
+  <h3>4.2 Browser Settings</h3>
+  <p>You can also control cookies through your browser settings. Most browsers allow you to:</p>
+  <ul>
+    <li>View and delete existing cookies</li>
+    <li>Block all cookies</li>
+    <li>Block third-party cookies specifically</li>
+    <li>Allow cookies from specific websites only</li>
+  </ul>
+  <p>Here are links to cookie settings for common browsers:</p>
+  <ul>
+    <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+    <li><a href="https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+    <li><a href="https://support.apple.com/en-us/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Apple Safari</a></li>
+    <li><a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a></li>
+  </ul>
+  <p>Please note that disabling certain cookies may affect the functionality of our site — for example, blocking all cookies may prevent your shopping cart from working correctly.</p>
+
+  <h3>4.3 Opt-Out Links for Specific Platforms</h3>
+  <ul>
+    <li><strong>Google Analytics:</strong> <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a></li>
+    <li><strong>Meta (Facebook/Instagram):</strong> Manage ad preferences at <a href="https://www.facebook.com/ads/preferences" target="_blank" rel="noopener">facebook.com/ads/preferences</a></li>
+    <li><strong>TikTok:</strong> Opt out in your TikTok account settings under "Ads"</li>
+    <li><strong>Pinterest:</strong> <a href="https://help.pinterest.com/en/article/personalized-ads-on-pinterest" target="_blank" rel="noopener">Pinterest personalized ads settings</a></li>
+    <li><strong>Google Ads:</strong> <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ads Settings</a></li>
+    <li><strong>Industry opt-out (US):</strong> <a href="https://optout.aboutads.info" target="_blank" rel="noopener">aboutads.info</a> and <a href="https://optout.networkadvertising.org" target="_blank" rel="noopener">networkadvertising.org</a></li>
+  </ul>
+
+  <h2>5. Consent and Your Rights</h2>
+  <p>For visitors in the European Union, we obtain your consent before setting any non-essential cookies, in compliance with the ePrivacy Directive and GDPR. Your consent is recorded along with a timestamp and the version of our policy you consented to.</p>
+  <p>You have the right to withdraw your cookie consent at any time. Withdrawing consent does not affect the lawfulness of any processing that occurred before you withdrew it. It also does not affect processing based on lawful grounds other than consent.</p>
+  <p>For more information about your privacy rights, see our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+
+  <h2>6. Changes to This Cookie Policy</h2>
+  <p>We may update this Cookie Policy when we add new cookies or change how we use existing ones. When we do, we will update the "Last updated" date at the top of this page. If you have previously given consent, we may ask for your consent again if the changes are material.</p>
+
+  <h2>7. Contact Us</h2>
+  <p>If you have questions about how we use cookies or want to exercise your privacy rights, please contact us:</p>
+  <ul>
+    <li><strong>Email:</strong> <a href="mailto:privacy@cadomalo.com">privacy@cadomalo.com</a></li>
+    <li><strong>Mail:</strong> Fokebo LLC, 501 Silverside Rd, Ste 105-291, Wilmington, DE 19809, USA</li>
+  </ul>
+
+</div>
+
+<!-- Footer -->
+<footer style="background:#111;color:#fff;padding:24px 0;">
+  <div style="max-width:800px;margin:0 auto;padding:0 24px;">
+    <p style="font-size:.75rem;color:rgba(255,255,255,.35);margin-bottom:8px;">© 2026 Cadomalo · Fokebo LLC · 501 Silverside Rd, Ste 105-291, Wilmington, DE 19809, USA</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="privacy-policy.html" style="font-size:.75rem;color:rgba(255,255,255,.4);">Privacy Policy</a>
+      <a href="terms.html" style="font-size:.75rem;color:rgba(255,255,255,.4);">Terms of Service</a>
+      <a href="cookie-policy.html" style="font-size:.75rem;color:rgba(255,255,255,.4);">Cookie Policy</a>
+      <a href="returns.html" style="font-size:.75rem;color:rgba(255,255,255,.4);">Return Policy</a>
+      <a href="accessibility.html" style="font-size:.75rem;color:rgba(255,255,255,.4);">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/pixels.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

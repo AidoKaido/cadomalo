@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift Finder Quiz – Find the Perfect Gift in 60 Seconds | Cadomalo</title>
+  <meta name="description" content="Not sure what to gift? Answer 4 quick questions and our Gift Finder will match you with the perfect personalized gift from Cadomalo's catalogue.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .quiz-wrap{max-width:680px;margin:0 auto;padding:64px 0 80px;}
+    .quiz-step{display:none;}
+    .quiz-step.active{display:block;}
+    .quiz-progress{display:flex;gap:8px;margin-bottom:40px;}
+    .q-dot{flex:1;height:4px;border-radius:2px;background:var(--border);transition:background .3s;}
+    .q-dot.done{background:var(--cr);}
+    .quiz-q{font-size:1.4rem;font-weight:800;letter-spacing:-.025em;margin-bottom:8px;}
+    .quiz-sub{font-size:.92rem;color:var(--mid);margin-bottom:28px;}
+    .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    @media(max-width:480px){.quiz-options{grid-template-columns:1fr;}}
+    .quiz-opt{
+      padding:18px 20px;border:2px solid var(--border);border-radius:var(--r12);
+      cursor:pointer;transition:all .2s;text-align:left;background:#fff;
+      font-family:inherit;
+    }
+    .quiz-opt:hover{border-color:var(--cr);background:var(--cr-xl);}
+    .quiz-opt.selected{border-color:var(--cr);background:var(--cr-xl);}
+    .quiz-opt-emoji{font-size:1.5rem;display:block;margin-bottom:6px;}
+    .quiz-opt-label{font-size:.92rem;font-weight:600;color:var(--dark);}
+    .quiz-opt-sub{font-size:.78rem;color:var(--mid);margin-top:3px;}
+    .quiz-nav{display:flex;align-items:center;justify-content:space-between;margin-top:28px;}
+    .quiz-result{text-align:center;}
+    .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;text-align:left;}
+    @media(max-width:560px){.result-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div id="cookie-banner" style="display:none;" role="dialog"><div class="cookie-inner"><div class="cookie-text"><strong>We value your privacy 🍪</strong><p>We use cookies for ads and analytics. <a href="cookie-policy.html">Cookie Policy</a></p></div><div class="cookie-btns"><button id="btn-manage-prefs" class="cookie-manage">Manage</button><button id="btn-reject-all" class="btn btn-ghost btn-sm">Reject All</button><button id="btn-accept-all" class="btn btn-primary btn-sm">Accept All</button></div></div></div>
+<div id="cookie-prefs" role="dialog" aria-modal="true"><div class="cookie-panel"><h3>Cookie Preferences</h3><p>Manage your consent.</p><div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Strictly Necessary</span><label class="toggle"><input type="checkbox" checked disabled><span class="toggle-track"></span></label></div><p>Required to function.</p></div><div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Analytics</span><label class="toggle"><input type="checkbox" id="toggle-analytics"><span class="toggle-track"></span></label></div><p>Google Analytics.</p></div><div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Marketing</span><label class="toggle"><input type="checkbox" id="toggle-marketing"><span class="toggle-track"></span></label></div><p>Facebook, TikTok, Pinterest, Google Ads.</p></div><div class="cookie-panel-btns"><button id="btn-close-panel" class="btn btn-ghost btn-sm">Cancel</button><button id="btn-accept-panel" class="btn btn-outline btn-sm">Accept All</button><button id="btn-save-prefs" class="btn btn-primary btn-sm">Save</button></div></div></div>
+<div class="topbar"><div class="topbar-inner"><p class="topbar-msg">🎁 Free shipping on orders over $50 · <a href="shop.html">Shop Now →</a></p></div></div>
+<header id="site-header"><div class="wrap"><div class="hdr"><a href="index.html" class="logo-wrap"><img src="assets/logo.png" alt="Cadomalo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-text" style="display:none">cado<span>malo</span></span></a><nav class="nav-desktop"><ul class="nav-ul"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li class="nav-active"><a href="gift-finder.html">Gift Finder ✨</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li></ul></nav><div class="hdr-icons"><a href="cart.html" class="ico-btn" style="position:relative"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count">0</span></a><button class="ico-btn mob-toggle" id="nav-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button></div></div></div></header>
+<div id="nav-overlay" class="nav-drawer-overlay"></div>
+<nav id="nav-drawer" class="nav-drawer"><div class="drawer-head"><span class="drawer-logo">cado<span>malo</span></span><button class="ico-btn drawer-close" id="nav-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="drawer-nav"><a href="index.html">Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="shop.html">Shop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="gift-finder.html" class="active">Gift Finder ✨ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="blog.html">Blog <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a></div></nav>
+
+<div class="wrap">
+  <div class="quiz-wrap">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="sec-tag">60-Second Quiz</span>
+      <h1 class="sec-h" style="font-size:clamp(1.8rem,4vw,2.6rem);">Find the perfect gift. <em style="color:var(--cr);font-style:normal;">Right now.</em></h1>
+      <p style="color:var(--mid);font-size:.95rem;">Answer 4 quick questions and we'll match you with personalized gift picks from our full catalogue.</p>
+    </div>
+
+    <!-- Progress Dots -->
+    <div class="quiz-progress">
+      <div class="q-dot done" id="dot-1"></div>
+      <div class="q-dot" id="dot-2"></div>
+      <div class="q-dot" id="dot-3"></div>
+      <div class="q-dot" id="dot-4"></div>
+    </div>
+
+    <!-- Step 1: Occasion -->
+    <div class="quiz-step active" id="step-1">
+      <p class="quiz-q">What's the occasion? 🎉</p>
+      <p class="quiz-sub">Choose the one that fits best — you can always refine later.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="selectOpt(this,'occasion','birthday')" aria-label="Birthday">
+          <span class="quiz-opt-emoji">🎂</span>
+          <span class="quiz-opt-label">Birthday</span>
+          <span class="quiz-opt-sub">Celebrate their big day</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'occasion','anniversary')" aria-label="Anniversary">
+          <span class="quiz-opt-emoji">💕</span>
+          <span class="quiz-opt-label">Anniversary</span>
+          <span class="quiz-opt-sub">Celebrate love & milestones</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'occasion','wedding')" aria-label="Wedding">
+          <span class="quiz-opt-emoji">💍</span>
+          <span class="quiz-opt-label">Wedding</span>
+          <span class="quiz-opt-sub">A gift they'll keep forever</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'occasion','justbecause')" aria-label="Just Because">
+          <span class="quiz-opt-emoji">💝</span>
+          <span class="quiz-opt-label">Just Because</span>
+          <span class="quiz-opt-sub">No reason needed</span>
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <span style="font-size:.8rem;color:var(--light);">Question 1 of 4</span>
+        <button class="btn btn-primary" onclick="nextStep(2)" id="next-1" disabled>Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Budget -->
+    <div class="quiz-step" id="step-2">
+      <p class="quiz-q">What's your budget? 💰</p>
+      <p class="quiz-sub">We have beautiful options across every price range.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="selectOpt(this,'budget','under-30')" aria-label="Under $30">
+          <span class="quiz-opt-emoji">🌱</span>
+          <span class="quiz-opt-label">Under $30</span>
+          <span class="quiz-opt-sub">Thoughtful & affordable</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'budget','30-60')" aria-label="$30–$60">
+          <span class="quiz-opt-emoji">🌿</span>
+          <span class="quiz-opt-label">$30 – $60</span>
+          <span class="quiz-opt-sub">The sweet spot</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'budget','60-100')" aria-label="$60–$100">
+          <span class="quiz-opt-emoji">🌳</span>
+          <span class="quiz-opt-label">$60 – $100</span>
+          <span class="quiz-opt-sub">Make it unforgettable</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'budget','over-100')" aria-label="Over $100">
+          <span class="quiz-opt-emoji">✨</span>
+          <span class="quiz-opt-label">Over $100</span>
+          <span class="quiz-opt-sub">Go all out</span>
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn btn-ghost btn-sm" onclick="prevStep(1)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(3)" id="next-2" disabled>Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Relationship -->
+    <div class="quiz-step" id="step-3">
+      <p class="quiz-q">Who is it for? 👤</p>
+      <p class="quiz-sub">This helps us narrow down the perfect match.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="selectOpt(this,'relationship','partner')" aria-label="Partner">
+          <span class="quiz-opt-emoji">❤️</span>
+          <span class="quiz-opt-label">Partner / Spouse</span>
+          <span class="quiz-opt-sub">Romantic & intimate</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'relationship','parent')" aria-label="Parent">
+          <span class="quiz-opt-emoji">🌸</span>
+          <span class="quiz-opt-label">Parent / In-Law</span>
+          <span class="quiz-opt-sub">Warm & heartfelt</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'relationship','friend')" aria-label="Friend">
+          <span class="quiz-opt-emoji">🤝</span>
+          <span class="quiz-opt-label">Friend</span>
+          <span class="quiz-opt-sub">Fun & personal</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'relationship','colleague')" aria-label="Colleague">
+          <span class="quiz-opt-emoji">💼</span>
+          <span class="quiz-opt-label">Colleague / Boss</span>
+          <span class="quiz-opt-sub">Professional & tasteful</span>
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn btn-ghost btn-sm" onclick="prevStep(2)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(4)" id="next-3" disabled>Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Personality -->
+    <div class="quiz-step" id="step-4">
+      <p class="quiz-q">What's their personality? 🌟</p>
+      <p class="quiz-sub">Pick the one that feels most like them.</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="selectOpt(this,'personality','creative')" aria-label="Creative">
+          <span class="quiz-opt-emoji">🎨</span>
+          <span class="quiz-opt-label">Creative & Artistic</span>
+          <span class="quiz-opt-sub">Loves unique, expressive gifts</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'personality','sentimental')" aria-label="Sentimental">
+          <span class="quiz-opt-emoji">🥹</span>
+          <span class="quiz-opt-label">Sentimental</span>
+          <span class="quiz-opt-sub">Treasures meaningful memories</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'personality','practical')" aria-label="Practical">
+          <span class="quiz-opt-emoji">🛠️</span>
+          <span class="quiz-opt-label">Practical & Organized</span>
+          <span class="quiz-opt-sub">Loves things they'll actually use</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'personality','adventurous')" aria-label="Adventurous">
+          <span class="quiz-opt-emoji">🌍</span>
+          <span class="quiz-opt-label">Bold & Adventurous</span>
+          <span class="quiz-opt-sub">Loves anything different</span>
+        </button>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn btn-ghost btn-sm" onclick="prevStep(3)">← Back</button>
+        <button class="btn btn-primary" onclick="showResults()" id="next-4" disabled>Find My Gift 🎁</button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="quiz-step quiz-result" id="step-results">
+      <div style="width:60px;height:60px;background:var(--cr-xl);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--cr)" stroke-width="2" width="28" height="28"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/></svg>
+      </div>
+      <h2 class="sec-h">Your perfect matches are ready! 🎉</h2>
+      <p style="color:var(--mid);margin-bottom:8px;">Based on your answers, here are our top picks for you:</p>
+      <div class="result-grid">
+        <div class="prod-card">
+          <div class="prod-thumb"><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=400&q=80" alt="Custom Name Necklace"></div>
+          <div class="prod-body">
+            <p class="prod-cat">Top Match ⭐</p>
+            <h3 class="prod-name">Custom Name Necklace</h3>
+            <div class="prod-price"><span class="p-now">$49.99</span></div>
+            <a href="product.html" class="btn btn-primary btn-sm btn-full" style="margin-top:10px;">View Gift →</a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-thumb"><img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=400&q=80" alt="Custom Star Map"></div>
+          <div class="prod-body">
+            <p class="prod-cat">Great Match 💕</p>
+            <h3 class="prod-name">Custom Star Map Print</h3>
+            <div class="prod-price"><span class="p-now">$59.99</span><span class="p-was">$74.99</span></div>
+            <a href="product.html" class="btn btn-outline btn-sm btn-full" style="margin-top:10px;">View Gift →</a>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-thumb"><img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=400&q=80" alt="Custom Photo Mug"></div>
+          <div class="prod-body">
+            <p class="prod-cat">Also Great 💝</p>
+            <h3 class="prod-name">Custom Photo Mug</h3>
+            <div class="prod-price"><span class="p-now">$34.99</span></div>
+            <a href="product.html" class="btn btn-ghost btn-sm btn-full" style="margin-top:10px;">View Gift →</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:32px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="shop.html" class="btn btn-outline">Browse All Gifts →</a>
+        <button class="btn btn-ghost" onclick="restartQuiz()">Start Over</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer aria-label="Site footer"><div class="wrap"><div class="foot-bottom" style="border-top:1px solid rgba(255,255,255,.07);"><p class="foot-copy" style="color:var(--mid)">© 2026 Cadomalo · Fokebo LLC · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p></div></div></footer>
+<script src="js/pixels.js"></script><script src="js/main.js"></script>
+<script>
+  const answers = {};
+  function selectOpt(btn, key, val) {
+    btn.closest('.quiz-options').querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    answers[key] = val;
+    const stepNum = btn.closest('.quiz-step').id.replace('step-','');
+    const nextBtn = document.getElementById('next-' + stepNum);
+    if (nextBtn) nextBtn.disabled = false;
+  }
+  function nextStep(n) {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+    for (let i = 1; i < n; i++) document.getElementById('dot-' + i).classList.add('done');
+    if (n <= 4) document.getElementById('dot-' + n).classList.add('done');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function prevStep(n) {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+    document.getElementById('dot-' + (n + 1))?.classList.remove('done');
+  }
+  function showResults() {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-results').classList.add('active');
+    document.querySelectorAll('.q-dot').forEach(d => d.classList.add('done'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function restartQuiz() {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-1').classList.add('active');
+    document.querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('selected'));
+    document.querySelectorAll('[id^="next-"]').forEach(b => b.disabled = true);
+    document.querySelectorAll('.q-dot').forEach((d,i) => { d.classList.remove('done'); if(i===0) d.classList.add('done'); });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body></html>

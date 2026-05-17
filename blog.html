@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift Ideas & Inspiration Blog – Cadomalo</title>
+  <meta name="description" content="Discover thoughtful gift ideas, occasion guides, and gifting inspiration. Expert advice on personalized gifts, birthday presents, anniversary ideas and more.">
+  <link rel="canonical" href="https://cadomalo.com/blog.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://cadomalo.com/blog.html">
+  <meta property="og:title"       content="Gift Ideas & Inspiration – Cadomalo Blog">
+  <meta property="og:description" content="Expert gift guides, occasion tips, and personalized gift ideas for every budget and every person.">
+  <meta property="og:image"       content="https://cadomalo.com/assets/images/og-blog.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Cadomalo Gift Ideas Blog",
+    "url": "https://cadomalo.com/blog.html",
+    "description": "Gift guides, occasion inspiration, and personalized gift ideas",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Cadomalo",
+      "logo": { "@type": "ImageObject", "url": "https://cadomalo.com/assets/logo.png" }
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Blog-specific styles */
+    .blog-hero{
+      padding:64px 0 52px;background:var(--bg);
+      border-bottom:1px solid var(--border);
+    }
+    .blog-hero-inner{max-width:680px;}
+    .blog-search{
+      display:flex;gap:8px;margin-top:24px;max-width:440px;
+    }
+    .blog-search input{
+      flex:1;padding:11px 18px;border:1.5px solid var(--border);
+      border-radius:var(--rpill);font-size:.875rem;outline:none;
+      transition:border-color .2s;background:#fff;
+    }
+    .blog-search input:focus{border-color:var(--cr);}
+    .blog-cats{
+      display:flex;gap:8px;flex-wrap:wrap;margin:32px 0 0;
+    }
+    .blog-filter-btn{
+      padding:8px 18px;border-radius:var(--rpill);font-size:.8rem;font-weight:600;
+      border:1.5px solid var(--border);background:#fff;color:var(--mid);
+      cursor:pointer;transition:all .2s;
+    }
+    .blog-filter-btn:hover{border-color:var(--cr);color:var(--cr);}
+    .blog-filter-btn.active{background:var(--cr);color:#fff;border-color:var(--cr);}
+    /* Sidebar */
+    .blog-layout{
+      display:grid;grid-template-columns:1fr 300px;gap:48px;
+      align-items:start;padding:64px 0;
+    }
+    @media(max-width:900px){.blog-layout{grid-template-columns:1fr;gap:40px;}}
+    .sidebar-widget{
+      background:var(--bg);border:1px solid var(--border);border-radius:var(--r16);
+      padding:24px;margin-bottom:24px;
+    }
+    .sidebar-widget:last-child{margin-bottom:0;}
+    .sidebar-widget h3{font-size:.88rem;font-weight:700;color:var(--dark);margin-bottom:16px;letter-spacing:.04em;text-transform:uppercase;}
+    .sidebar-cats{display:flex;flex-direction:column;gap:6px;}
+    .sidebar-cats a{
+      display:flex;align-items:center;justify-content:space-between;
+      font-size:.84rem;color:var(--mid);padding:6px 0;
+      border-bottom:1px solid var(--border);transition:color .2s;
+    }
+    .sidebar-cats a:last-child{border-bottom:none;}
+    .sidebar-cats a:hover{color:var(--cr);}
+    .sidebar-cats a span{font-size:.72rem;color:var(--light);}
+    .sidebar-post{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+    .sidebar-post:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+    .sidebar-thumb{width:56px;height:56px;border-radius:var(--r8);overflow:hidden;flex-shrink:0;}
+    .sidebar-thumb img{width:100%;height:100%;object-fit:cover;}
+    .sidebar-post-title{font-size:.8rem;font-weight:600;color:var(--dark);line-height:1.35;margin-bottom:3px;transition:color .2s;}
+    .sidebar-post a:hover .sidebar-post-title{color:var(--cr);}
+    .sidebar-post-date{font-size:.7rem;color:var(--light);}
+    .sidebar-tags{display:flex;flex-wrap:wrap;gap:6px;}
+    .sidebar-tag{
+      padding:5px 11px;background:#fff;border:1px solid var(--border);
+      border-radius:var(--rpill);font-size:.72rem;color:var(--mid);
+      transition:all .2s;
+    }
+    .sidebar-tag:hover{border-color:var(--cr);color:var(--cr);}
+    /* Pagination */
+    .pagination{display:flex;align-items:center;gap:6px;margin-top:48px;}
+    .page-btn{
+      width:36px;height:36px;border-radius:var(--r8);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.84rem;font-weight:600;border:1.5px solid var(--border);
+      background:#fff;color:var(--mid);cursor:pointer;transition:all .2s;
+    }
+    .page-btn:hover,.page-btn.active{background:var(--cr);border-color:var(--cr);color:#fff;}
+    .page-btn svg{width:14px;height:14px;}
+  </style>
+</head>
+<body>
+
+<!-- Cookie Banner (shared snippet) -->
+<div id="cookie-banner" style="display:none;" role="dialog" aria-label="Cookie preferences">
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <strong>We value your privacy 🍪</strong>
+      <p>We use cookies to personalize content, analyze traffic and run ads. <a href="cookie-policy.html">Cookie Policy</a> · <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+    <div class="cookie-btns">
+      <button id="btn-manage-prefs" class="cookie-manage">Manage Preferences</button>
+      <button id="btn-reject-all" class="btn btn-ghost btn-sm">Reject All</button>
+      <button id="btn-accept-all" class="btn btn-primary btn-sm">Accept All</button>
+    </div>
+  </div>
+</div>
+<div id="cookie-prefs" role="dialog" aria-modal="true" aria-label="Manage cookie preferences">
+  <div class="cookie-panel">
+    <h3>Cookie Preferences</h3>
+    <p>Choose which cookies you allow. You can update preferences anytime via our Cookie Policy page.</p>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Strictly Necessary</span><label class="toggle"><input type="checkbox" checked disabled><span class="toggle-track"></span></label></div><p>Required for the website to function.</p></div>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Analytics</span><label class="toggle"><input type="checkbox" id="toggle-analytics"><span class="toggle-track"></span></label></div><p>Google Analytics — how visitors use our site.</p></div>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Marketing</span><label class="toggle"><input type="checkbox" id="toggle-marketing"><span class="toggle-track"></span></label></div><p>Facebook, TikTok, Pinterest and Google Ads.</p></div>
+    <div class="cookie-panel-btns">
+      <button id="btn-close-panel" class="btn btn-ghost btn-sm">Cancel</button>
+      <button id="btn-accept-panel" class="btn btn-outline btn-sm">Accept All</button>
+      <button id="btn-save-prefs" class="btn btn-primary btn-sm">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-social">
+      <a href="https://facebook.com/cadomalo" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="https://instagram.com/cadomalo" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://tiktok.com/@cadomalo" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77.22 2.89 2.89 0 012.89-3.11c.28 0 .54.04.79.1V9.01a6.34 6.34 0 106.33 6.34V8.69a8.16 8.16 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg></a>
+    </div>
+    <p class="topbar-msg">🎁 Free shipping on orders over $50 · <a href="shop.html">Shop Now →</a></p>
+    <div class="topbar-right">
+      <div class="lang-sw">
+        <button class="lang-btn" aria-label="Select language">🇺🇸 EN <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="lang-drop" role="menu">
+          <a href="#" data-lang="en" class="active">🇺🇸 English</a>
+          <a href="#" data-lang="fr">🇫🇷 Français</a>
+          <a href="#" data-lang="de">🇩🇪 Deutsch</a>
+          <a href="#" data-lang="nl">🇳🇱 Nederlands</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header id="site-header">
+  <div class="wrap">
+    <div class="hdr">
+      <a href="index.html" class="logo-wrap" aria-label="Cadomalo – Home">
+        <img src="assets/logo.png" alt="Cadomalo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="logo-text" style="display:none">cado<span>malo</span></span>
+      </a>
+      <nav class="nav-desktop" aria-label="Main navigation">
+        <ul class="nav-ul">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="gift-finder.html">Gift Finder ✨</a></li>
+          <li class="nav-active"><a href="blog.html">Blog</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="nav-sale"><a href="shop.html#sale">Sale 🔥</a></li>
+        </ul>
+      </nav>
+      <div class="hdr-icons">
+        <button class="ico-btn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+        <a href="cart.html" class="ico-btn" style="position:relative" aria-label="Shopping cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count">0</span></a>
+        <button class="ico-btn mob-toggle" id="nav-toggle" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div id="nav-overlay" class="nav-drawer-overlay"></div>
+<nav id="nav-drawer" class="nav-drawer" aria-label="Mobile navigation">
+  <div class="drawer-head"><span class="drawer-logo">cado<span>malo</span></span><button class="ico-btn drawer-close" id="nav-close" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <div class="drawer-nav">
+    <a href="index.html">Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="shop.html">Shop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="gift-finder.html">Gift Finder ✨ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="blog.html" class="active">Blog <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="about.html">About <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="contact.html">Contact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+  </div>
+  <div class="drawer-foot"><a href="gift-finder.html" class="btn btn-primary btn-full">Find the Perfect Gift →</a></div>
+</nav>
+
+<!-- ============================================================
+     BLOG HERO
+     ============================================================ -->
+<section class="blog-hero" aria-labelledby="blog-h1">
+  <div class="wrap">
+    <div class="blog-hero-inner">
+      <span class="sec-tag">Gift Ideas & Inspiration</span>
+      <h1 id="blog-h1" class="sec-h" style="font-size:clamp(2rem,4vw,2.8rem)">The Cadomalo Gift Guide</h1>
+      <p style="font-size:.95rem;color:var(--mid);line-height:1.7;max-width:500px;margin-top:8px;">Expert gift ideas, occasion guides, and gifting tips to help you find the perfect present for every person and every moment.</p>
+      <form class="blog-search" role="search" onsubmit="return false">
+        <input type="search" placeholder="Search gift ideas, occasions, budgets…" aria-label="Search blog posts">
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+      </form>
+      <div class="blog-cats" role="navigation" aria-label="Blog categories">
+        <button class="blog-filter-btn active" data-cat="all">All Posts</button>
+        <button class="blog-filter-btn" data-cat="birthday">🎂 Birthday</button>
+        <button class="blog-filter-btn" data-cat="anniversary">💕 Anniversary</button>
+        <button class="blog-filter-btn" data-cat="wedding">💍 Wedding</button>
+        <button class="blog-filter-btn" data-cat="tips">💡 Gift Tips</button>
+        <button class="blog-filter-btn" data-cat="digital">✨ Digital</button>
+        <button class="blog-filter-btn" data-cat="budget">💰 Budget</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOG CONTENT + SIDEBAR
+     ============================================================ -->
+<div class="wrap">
+  <div class="blog-layout">
+
+    <!-- Main Content -->
+    <main aria-label="Blog posts">
+
+      <!-- Featured Post -->
+      <a href="blog-post.html" class="blog-feat" style="display:grid;" aria-label="Featured post">
+        <div class="blog-feat-img">
+          <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80" alt="50 Thoughtful Birthday Gift Ideas for Her" loading="lazy">
+        </div>
+        <div class="blog-feat-body">
+          <span class="blog-feat-tag">🎂 Birthday</span>
+          <h2 class="blog-feat-title">50 Thoughtful Birthday Gift Ideas for Her (2026 Guide)</h2>
+          <p class="blog-feat-excerpt">From personalized jewelry to instant-download digital surprises — a complete, budget-sorted gift guide every woman will love. Updated for 2026 with our bestsellers included.</p>
+          <div class="blog-feat-meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>8 min read</span>
+            <span>·</span>
+            <span>May 12, 2026</span>
+            <span>·</span>
+            <span>By Cadomalo Team</span>
+          </div>
+          <span class="btn btn-outline btn-sm" style="display:inline-flex;margin-top:20px;">Read the Guide →</span>
+        </div>
+      </a>
+
+      <!-- Post Grid -->
+      <div class="blog-grid">
+
+        <div class="blog-item blog-card rev d1" data-cat="anniversary">
+          <a href="blog-post.html">
+            <div class="blog-thumb">
+              <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?auto=format&fit=crop&w=600&q=80" alt="Anniversary Gift Ideas" loading="lazy">
+            </div>
+          </a>
+          <div class="blog-body">
+            <p class="blog-cat">💕 Anniversary</p>
+            <a href="blog-post.html"><h3 class="blog-title">The Ultimate Anniversary Gift Guide: By Year, Budget & Personality</h3></a>
+            <p class="blog-excerpt">First anniversary? Silver? Golden? We cover every milestone with personalized gift picks that go beyond the obvious.</p>
+            <div class="blog-meta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>6 min read</span>
+              <span class="blog-meta-dot"></span>
+              <span>May 8, 2026</span>
+            </div>
+            <div class="blog-read"><a href="blog-post.html" class="btn btn-ghost btn-sm">Read More →</a></div>
+          </div>
+        </div>
+
+        <div class="blog-item blog-card rev d2" data-cat="tips">
+          <a href="blog-post.html">
+            <div class="blog-thumb">
+              <img src="https://images.unsplash.com/photo-1513201099705-a9746072f043?auto=format&fit=crop&w=600&q=80" alt="How to Choose a Personalized Gift" loading="lazy">
+            </div>
+          </a>
+          <div class="blog-body">
+            <p class="blog-cat">💡 Gift Tips</p>
+            <a href="blog-post.html"><h3 class="blog-title">How to Choose the Perfect Personalized Gift (Without the Guesswork)</h3></a>
+            <p class="blog-excerpt">A 5-step framework for picking gifts that actually land — based on personality, occasion, and budget. Works every single time.</p>
+            <div class="blog-meta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>5 min read</span>
+              <span class="blog-meta-dot"></span>
+              <span>May 3, 2026</span>
+            </div>
+            <div class="blog-read"><a href="blog-post.html" class="btn btn-ghost btn-sm">Read More →</a></div>
+          </div>
+        </div>
+
+        <div class="blog-item blog-card rev d3" data-cat="wedding">
+          <a href="blog-post.html">
+            <div class="blog-thumb">
+              <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80" alt="Wedding Gift Ideas" loading="lazy">
+            </div>
+          </a>
+          <div class="blog-body">
+            <p class="blog-cat">💍 Wedding</p>
+            <a href="blog-post.html"><h3 class="blog-title">25 Wedding Gift Ideas the Couple Will Actually Keep</h3></a>
+            <p class="blog-excerpt">Beyond the registry — personalized wedding gifts that become heirlooms. Grouped by budget: under $50, under $100, splurge-worthy.</p>
+            <div class="blog-meta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>7 min read</span>
+              <span class="blog-meta-dot"></span>
+              <span>April 28, 2026</span>
+            </div>
+            <div class="blog-read"><a href="blog-post.html" class="btn btn-ghost btn-sm">Read More →</a></div>
+          </div>
+        </div>
+
+        <div class="blog-item blog-card rev d1" data-cat="digital">
+          <a href="blog-post.html">
+            <div class="blog-thumb">
+              <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="Digital Gifts That Feel Premium" loading="lazy">
+            </div>
+          </a>
+          <div class="blog-body">
+            <p class="blog-cat">✨ Digital Gifts</p>
+            <a href="blog-post.html"><h3 class="blog-title">Digital Gifts That Feel Expensive (And Cost Under $20)</h3></a>
+            <p class="blog-excerpt">Instant downloads, printable art, digital gift cards — here's how to gift something digital without it feeling like a last-minute decision.</p>
+            <div class="blog-meta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>4 min read</span>
+              <span class="blog-meta-dot"></span>
+              <span>April 22, 2026</span>
+            </div>
+            <div class="blog-read"><a href="blog-post.html" class="btn btn-ghost btn-sm">Read More →</a></div>
+          </div>
+        </div>
+
+        <div class="blog-item blog-card rev d2" data-cat="budget tips">
+          <a href="blog-post.html">
+            <div class="blog-thumb">
+              <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=600&q=80" alt="Best Gifts Under $50" loading="lazy">
+            </div>
+          </a>
+          <div class="blog-body">
+            <p class="blog-cat">💰 Budget Gifts</p>
+            <a href="blog-post.html"><h3 class="blog-title">30 Genuinely Great Gifts Under $50 She'll Actually Love</h3></a>
+            <p class="blog-excerpt">Great gifting doesn't require a big budget. Here are 30 personalized, thoughtful picks that all come in under $50 — and look like you spent more.</p>
+            <div class="blog-meta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>5 min read</span>
+              <span class="blog-meta-dot"></span>
+              <span>April 15, 2026</span>
+            </div>
+            <div class="blog-read"><a href="blog-post.html" class="btn btn-ghost btn-sm">Read More →</a></div>
+          </div>
+        </div>
+
+        <div class="blog-item blog-card rev d3" data-cat="birthday tips">
+          <a href="blog-post.html">
+            <div class="blog-thumb">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80" alt="Last Minute Birthday Gifts" loading="lazy">
+            </div>
+          </a>
+          <div class="blog-body">
+            <p class="blog-cat">🎂 Birthday</p>
+            <a href="blog-post.html"><h3 class="blog-title">Last-Minute Birthday Gifts That Still Feel Thoughtful</h3></a>
+            <p class="blog-excerpt">Forgot the birthday? These instant-download and next-day-delivery options will save the day — and still make them feel incredibly special.</p>
+            <div class="blog-meta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>4 min read</span>
+              <span class="blog-meta-dot"></span>
+              <span>April 9, 2026</span>
+            </div>
+            <div class="blog-read"><a href="blog-post.html" class="btn btn-ghost btn-sm">Read More →</a></div>
+          </div>
+        </div>
+
+      </div><!-- /blog-grid -->
+
+      <!-- Pagination -->
+      <nav class="pagination" aria-label="Blog pagination">
+        <button class="page-btn" aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <span style="color:var(--light);font-size:.84rem;padding:0 4px;">…</span>
+        <button class="page-btn">8</button>
+        <button class="page-btn" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+      </nav>
+    </main>
+
+    <!-- Sidebar -->
+    <aside aria-label="Blog sidebar">
+      <!-- Gift Finder CTA -->
+      <div style="background:var(--cr);border-radius:var(--r16);padding:24px;margin-bottom:24px;text-align:center;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="32" height="32" style="margin:0 auto 12px"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+        <h3 style="font-size:.95rem;font-weight:700;color:#fff;margin-bottom:8px;">Not sure what to get?</h3>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.75);margin-bottom:16px;line-height:1.5;">Answer 4 quick questions and we'll find the perfect gift.</p>
+        <a href="gift-finder.html" class="btn btn-white btn-sm btn-full">Start Gift Finder →</a>
+      </div>
+
+      <!-- Categories -->
+      <div class="sidebar-widget">
+        <h3>Browse Topics</h3>
+        <nav class="sidebar-cats" aria-label="Blog categories">
+          <a href="#">Birthday Gifts <span>18 posts</span></a>
+          <a href="#">Anniversary <span>12 posts</span></a>
+          <a href="#">Wedding Gifts <span>9 posts</span></a>
+          <a href="#">Digital Gifts <span>8 posts</span></a>
+          <a href="#">Budget Gifts <span>11 posts</span></a>
+          <a href="#">Gift Tips <span>15 posts</span></a>
+          <a href="#">Baby & New Arrival <span>7 posts</span></a>
+          <a href="#">Holiday Gifts <span>6 posts</span></a>
+        </nav>
+      </div>
+
+      <!-- Recent Posts -->
+      <div class="sidebar-widget">
+        <h3>Recent Posts</h3>
+        <div class="sidebar-post">
+          <div class="sidebar-thumb"><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=120&q=80" alt=""></div>
+          <a href="blog-post.html">
+            <p class="sidebar-post-title">50 Thoughtful Birthday Gift Ideas for Her</p>
+            <p class="sidebar-post-date">May 12, 2026</p>
+          </a>
+        </div>
+        <div class="sidebar-post">
+          <div class="sidebar-thumb"><img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?auto=format&fit=crop&w=120&q=80" alt=""></div>
+          <a href="blog-post.html">
+            <p class="sidebar-post-title">The Ultimate Anniversary Gift Guide</p>
+            <p class="sidebar-post-date">May 8, 2026</p>
+          </a>
+        </div>
+        <div class="sidebar-post">
+          <div class="sidebar-thumb"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=120&q=80" alt=""></div>
+          <a href="blog-post.html">
+            <p class="sidebar-post-title">25 Wedding Gifts the Couple Will Keep</p>
+            <p class="sidebar-post-date">April 28, 2026</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="sidebar-widget">
+        <h3>Popular Tags</h3>
+        <div class="sidebar-tags">
+          <a href="#" class="sidebar-tag">Birthday</a>
+          <a href="#" class="sidebar-tag">Personalized</a>
+          <a href="#" class="sidebar-tag">Under $50</a>
+          <a href="#" class="sidebar-tag">For Her</a>
+          <a href="#" class="sidebar-tag">Anniversary</a>
+          <a href="#" class="sidebar-tag">Digital</a>
+          <a href="#" class="sidebar-tag">Wedding</a>
+          <a href="#" class="sidebar-tag">Last Minute</a>
+          <a href="#" class="sidebar-tag">Sentimental</a>
+          <a href="#" class="sidebar-tag">Luxury</a>
+        </div>
+      </div>
+
+      <!-- Newsletter mini -->
+      <div class="sidebar-widget" style="background:var(--dark);border-color:var(--dark);">
+        <h3 style="color:#fff;">Weekly Gift Ideas</h3>
+        <p style="font-size:.8rem;color:rgba(255,255,255,.55);margin-bottom:16px;line-height:1.55;">Join 15,000+ gift lovers. Free printable guide on signup.</p>
+        <form class="newsletter-form" style="display:flex;flex-direction:column;gap:8px;">
+          <input type="email" class="nl-input" placeholder="Your email address" required style="border-radius:var(--r8);">
+          <button type="submit" class="btn btn-primary btn-sm btn-full">Subscribe →</button>
+        </form>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<footer aria-label="Site footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo-text">cado<span>malo</span></span>
+        <p>Personalized gifts, print-on-demand treasures, and digital delights for every occasion.</p>
+        <div class="foot-social">
+          <a href="https://facebook.com/cadomalo" class="foot-soc" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://instagram.com/cadomalo" class="foot-soc" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://tiktok.com/@cadomalo" class="foot-soc" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77.22 2.89 2.89 0 012.89-3.11c.28 0 .54.04.79.1V9.01a6.34 6.34 0 106.33 6.34V8.69a8.16 8.16 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg></a>
+          <a href="https://pinterest.com/cadomalo" class="foot-soc" aria-label="Pinterest" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h5>Shop by Occasion</h5><ul class="foot-links"><li><a href="shop.html?occ=birthday">Birthday Gifts</a></li><li><a href="shop.html?occ=anniversary">Anniversary Gifts</a></li><li><a href="shop.html?occ=wedding">Wedding Gifts</a></li><li><a href="shop.html?occ=baby">Baby & New Arrival</a></li><li><a href="shop.html?occ=holiday">Holiday Gifts</a></li><li><a href="shop.html?occ=justbecause">Just Because</a></li></ul></div>
+      <div class="foot-col"><h5>Help & Info</h5><ul class="foot-links"><li><a href="gift-finder.html">Gift Finder ✨</a></li><li><a href="#">Shipping Info</a></li><li><a href="#">Track My Order</a></li><li><a href="#">Returns & Refunds</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+      <div class="foot-col"><h5>Legal & Company</h5><ul class="foot-links"><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="cookie-policy.html">Cookie Policy</a></li><li><a href="returns.html">Return Policy</a></li><li><a href="accessibility.html">Accessibility</a></li><li><a href="about.html">About Cadomalo</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2026 Cadomalo · Fokebo LLC · All rights reserved.</p>
+      <div class="pay-row"><span class="pay-badge">VISA</span><span class="pay-badge">Mastercard</span><span class="pay-badge">PayPal</span><span class="pay-badge">Stripe</span></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/pixels.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

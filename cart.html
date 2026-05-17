@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart – Cadomalo</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .cart-layout{display:grid;grid-template-columns:1fr 360px;gap:40px;padding:48px 0 80px;align-items:start;}
+    @media(max-width:860px){.cart-layout{grid-template-columns:1fr;}}
+    /* Cart items */
+    .cart-items-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;border-bottom:2px solid var(--dark);padding-bottom:12px;}
+    .cart-items-head h2{font-size:1rem;font-weight:700;}
+    .cart-item{display:grid;grid-template-columns:90px 1fr auto;gap:16px;align-items:start;padding:20px 0;border-bottom:1px solid var(--border);}
+    .cart-item:last-child{border-bottom:none;}
+    .cart-item-img{border-radius:var(--r8);overflow:hidden;aspect-ratio:1;background:var(--bg);}
+    .cart-item-img img{width:100%;height:100%;object-fit:cover;}
+    .cart-item-cat{font-size:.65rem;color:var(--light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;}
+    .cart-item-name{font-size:.92rem;font-weight:600;color:var(--dark);margin-bottom:5px;line-height:1.3;}
+    .cart-item-opts{font-size:.78rem;color:var(--mid);margin-bottom:8px;display:flex;flex-direction:column;gap:2px;}
+    .cart-item-personal{font-size:.78rem;background:var(--cr-xl);color:var(--cr);padding:3px 8px;border-radius:var(--r4);display:inline-block;margin-bottom:8px;}
+    .cart-item-price-wrap{text-align:right;}
+    .cart-item-price{font-size:.95rem;font-weight:700;color:var(--dark);}
+    .cart-item-was{font-size:.78rem;color:var(--light);text-decoration:line-through;display:block;}
+    .cart-item-remove{color:var(--light);font-size:.75rem;cursor:pointer;background:none;border:none;font-family:inherit;margin-top:4px;transition:color .2s;}
+    .cart-item-remove:hover{color:var(--cr);}
+    .cart-qty{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:var(--r8);overflow:hidden;width:fit-content;}
+    .cart-qty-btn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:#fff;border:none;cursor:pointer;font-size:1rem;color:var(--dark);transition:background .15s;}
+    .cart-qty-btn:hover{background:var(--bg);}
+    .cart-qty-num{width:36px;text-align:center;font-size:.84rem;font-weight:600;border:none;outline:none;}
+    /* Cart upsell */
+    .cart-upsell{background:var(--cr-xl);border:1px solid rgba(156,2,2,.15);border-radius:var(--r12);padding:16px;margin:20px 0;}
+    .cart-upsell p{font-size:.82rem;color:var(--cr);font-weight:600;margin-bottom:12px;}
+    .cart-upsell-items{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;}
+    .cart-upsell-item{flex-shrink:0;width:80px;text-align:center;cursor:pointer;}
+    .cart-upsell-item img{width:60px;height:60px;border-radius:var(--r8);object-fit:cover;margin:0 auto 4px;border:2px solid transparent;transition:border-color .2s;}
+    .cart-upsell-item:hover img{border-color:var(--cr);}
+    .cart-upsell-item p{font-size:.65rem;color:var(--dark);font-weight:600;line-height:1.3;}
+    .cart-upsell-item span{font-size:.65rem;color:var(--cr);}
+    /* Bundle bar */
+    .bundle-bar{background:var(--dark);border-radius:var(--r8);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap;}
+    .bundle-bar p{font-size:.82rem;color:#fff;}
+    .bundle-bar span{color:var(--cr);font-weight:700;}
+    .bundle-progress{height:4px;background:rgba(255,255,255,.15);border-radius:2px;flex:1;min-width:80px;}
+    .bundle-progress-fill{height:100%;background:var(--cr);border-radius:2px;transition:width .5s;}
+    /* Summary */
+    .summary-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--r16);padding:24px;position:sticky;top:90px;}
+    .summary-box h3{font-size:.95rem;font-weight:700;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+    .summary-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:.88rem;}
+    .summary-row.total{font-size:1rem;font-weight:800;color:var(--dark);border-top:2px solid var(--dark);padding-top:12px;margin-top:12px;}
+    .summary-row span{color:var(--mid);}
+    .summary-row .val{color:var(--dark);font-weight:600;}
+    .summary-row .val.green{color:#059669;}
+    .summary-row .val.red{color:var(--cr);}
+    .promo-row{display:flex;gap:8px;margin-bottom:20px;}
+    .promo-input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--r8);font-size:.84rem;outline:none;transition:border-color .2s;}
+    .promo-input:focus{border-color:var(--cr);}
+    .trust-icons{display:flex;justify-content:center;gap:16px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);}
+    .trust-icon{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.64rem;color:var(--light);}
+    .trust-icon svg{width:18px;height:18px;color:var(--mid);}
+    /* Empty cart */
+    .cart-empty{text-align:center;padding:60px 0;}
+  </style>
+</head>
+<body>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" style="display:none;" role="dialog"><div class="cookie-inner"><div class="cookie-text"><strong>We value your privacy 🍪</strong><p>We use cookies for ads and analytics. <a href="cookie-policy.html">Cookie Policy</a></p></div><div class="cookie-btns"><button id="btn-manage-prefs" class="cookie-manage">Manage</button><button id="btn-reject-all" class="btn btn-ghost btn-sm">Reject All</button><button id="btn-accept-all" class="btn btn-primary btn-sm">Accept All</button></div></div></div>
+<div id="cookie-prefs" role="dialog" aria-modal="true"><div class="cookie-panel"><h3>Cookie Preferences</h3><p>Manage consent.</p><div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Strictly Necessary</span><label class="toggle"><input type="checkbox" checked disabled><span class="toggle-track"></span></label></div><p>Required.</p></div><div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Analytics</span><label class="toggle"><input type="checkbox" id="toggle-analytics"><span class="toggle-track"></span></label></div><p>Google Analytics.</p></div><div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Marketing</span><label class="toggle"><input type="checkbox" id="toggle-marketing"><span class="toggle-track"></span></label></div><p>Facebook, TikTok, Pinterest, Google Ads.</p></div><div class="cookie-panel-btns"><button id="btn-close-panel" class="btn btn-ghost btn-sm">Cancel</button><button id="btn-accept-panel" class="btn btn-outline btn-sm">Accept All</button><button id="btn-save-prefs" class="btn btn-primary btn-sm">Save</button></div></div></div>
+
+<!-- Top Bar -->
+<div class="topbar"><div class="topbar-inner"><p class="topbar-msg">🎁 Free shipping on orders over $50 · You're <strong>$0.02 away</strong> from free shipping!</p></div></div>
+
+<!-- Header -->
+<header id="site-header"><div class="wrap"><div class="hdr"><a href="index.html" class="logo-wrap"><img src="assets/logo.png" alt="Cadomalo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-text" style="display:none">cado<span>malo</span></span></a><nav class="nav-desktop"><ul class="nav-ul"><li><a href="index.html">Home</a></li><li class="nav-active"><a href="shop.html">Shop</a></li><li><a href="gift-finder.html">Gift Finder ✨</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li></ul></nav><div class="hdr-icons"><a href="cart.html" class="ico-btn" style="position:relative"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count">2</span></a><button class="ico-btn mob-toggle" id="nav-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button></div></div></div></header>
+<div id="nav-overlay" class="nav-drawer-overlay"></div>
+<nav id="nav-drawer" class="nav-drawer"><div class="drawer-head"><span class="drawer-logo">cado<span>malo</span></span><button class="ico-btn drawer-close" id="nav-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="drawer-nav"><a href="index.html">Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="shop.html" class="active">Shop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="gift-finder.html">Gift Finder ✨ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="blog.html">Blog <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a></div></nav>
+
+<div class="wrap">
+  <div style="padding:20px 0 8px;">
+    <nav class="breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg><span>Shopping Cart</span></nav>
+  </div>
+
+  <div class="cart-layout">
+
+    <!-- Cart Items -->
+    <div>
+      <div class="cart-items-head">
+        <h2>Your Cart <span style="font-weight:400;color:var(--mid);">(2 items)</span></h2>
+        <a href="shop.html" style="font-size:.8rem;color:var(--cr);">← Continue Shopping</a>
+      </div>
+
+      <!-- Bundle progress bar -->
+      <div class="bundle-bar">
+        <div>
+          <p>🎁 Add <span>1 more item</span> to unlock <span>10% bundle discount</span></p>
+        </div>
+        <div class="bundle-progress">
+          <div class="bundle-progress-fill" style="width:66%"></div>
+        </div>
+        <a href="shop.html" class="btn btn-primary btn-sm">Add Item</a>
+      </div>
+
+      <!-- Item 1 -->
+      <div class="cart-item" id="cart-item-1">
+        <div class="cart-item-img">
+          <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=180&q=80" alt="Custom Name Necklace">
+        </div>
+        <div>
+          <p class="cart-item-cat">Personalized Jewelry</p>
+          <p class="cart-item-name">Custom Name Necklace</p>
+          <div class="cart-item-opts">
+            <span>Metal: Gold Plated</span>
+            <span>Chain: 16 inches</span>
+          </div>
+          <span class="cart-item-personal">✍️ "Sophie"</span>
+          <div class="cart-qty" aria-label="Quantity">
+            <button class="cart-qty-btn" onclick="adjustCartQty('item1-qty', -1, 49.99, 'item1-total')">−</button>
+            <input class="cart-qty-num" type="number" id="item1-qty" value="1" min="1" max="10">
+            <button class="cart-qty-btn" onclick="adjustCartQty('item1-qty', 1, 49.99, 'item1-total')">+</button>
+          </div>
+        </div>
+        <div class="cart-item-price-wrap">
+          <span class="cart-item-was">$64.99</span>
+          <span class="cart-item-price" id="item1-total">$49.99</span>
+          <div><button class="cart-item-remove" onclick="removeItem('cart-item-1')">Remove</button></div>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="cart-item" id="cart-item-2">
+        <div class="cart-item-img">
+          <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=180&q=80" alt="Birthday Printable Bundle">
+        </div>
+        <div>
+          <p class="cart-item-cat">Digital · Instant Download</p>
+          <p class="cart-item-name">Birthday Printable Bundle</p>
+          <div class="cart-item-opts">
+            <span>📥 Delivered instantly to your email</span>
+          </div>
+          <div class="cart-qty" aria-label="Quantity">
+            <button class="cart-qty-btn" onclick="adjustCartQty('item2-qty', -1, 14.99, 'item2-total')">−</button>
+            <input class="cart-qty-num" type="number" id="item2-qty" value="1" min="1" max="10">
+            <button class="cart-qty-btn" onclick="adjustCartQty('item2-qty', 1, 14.99, 'item2-total')">+</button>
+          </div>
+        </div>
+        <div class="cart-item-price-wrap">
+          <span class="cart-item-was">$24.99</span>
+          <span class="cart-item-price" id="item2-total">$14.99</span>
+          <div><button class="cart-item-remove" onclick="removeItem('cart-item-2')">Remove</button></div>
+        </div>
+      </div>
+
+      <!-- Upsell strip -->
+      <div class="cart-upsell">
+        <p>💡 Customers who bought these also added:</p>
+        <div class="cart-upsell-items">
+          <div class="cart-upsell-item" onclick="addUpsell('Personalized Jewelry Box', 54.99)">
+            <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=120&q=80" alt="Jewelry Box">
+            <p>Jewelry Box</p>
+            <span>$54.99</span>
+          </div>
+          <div class="cart-upsell-item" onclick="addUpsell('Custom Star Map', 59.99)">
+            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=120&q=80" alt="Star Map">
+            <p>Star Map</p>
+            <span>$59.99</span>
+          </div>
+          <div class="cart-upsell-item" onclick="addUpsell('Custom Photo Mug', 34.99)">
+            <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=120&q=80" alt="Photo Mug">
+            <p>Photo Mug</p>
+            <span>$34.99</span>
+          </div>
+          <div class="cart-upsell-item" onclick="addUpsell('Gift Card Pack', 9.99)">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=120&q=80" alt="Gift Cards">
+            <p>Gift Cards</p>
+            <span>$9.99</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Order Summary -->
+    <aside>
+      <div class="summary-box">
+        <h3>Order Summary</h3>
+
+        <div class="summary-row"><span>Subtotal (2 items)</span><span class="val">$64.98</span></div>
+        <div class="summary-row"><span>Discount (Sale)</span><span class="val green">−$25.00</span></div>
+        <div class="summary-row"><span>Shipping</span><span class="val green">FREE</span></div>
+        <div class="summary-row"><span>Estimated Tax</span><span class="val">$5.20</span></div>
+        <div class="summary-row total"><span>Total</span><span>$70.18</span></div>
+
+        <div style="margin:16px 0;background:var(--cr-xl);border:1px solid rgba(156,2,2,.15);border-radius:var(--r8);padding:10px 12px;font-size:.78rem;color:var(--cr);">
+          🎉 You're saving <strong>$25.00</strong> on this order!
+        </div>
+
+        <!-- Promo code -->
+        <div class="promo-row">
+          <input class="promo-input" type="text" placeholder="Promo code" id="promo-input">
+          <button class="btn btn-dark btn-sm" onclick="applyPromo()">Apply</button>
+        </div>
+
+        <!-- Checkout -->
+        <a href="checkout.html" class="btn btn-primary btn-xl btn-full" style="font-size:.95rem;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Secure Checkout →
+        </a>
+
+        <!-- Payment logos -->
+        <div style="display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap;">
+          <span class="pay-badge" style="background:var(--border);color:var(--mid);">VISA</span>
+          <span class="pay-badge" style="background:var(--border);color:var(--mid);">Mastercard</span>
+          <span class="pay-badge" style="background:var(--border);color:var(--mid);">PayPal</span>
+          <span class="pay-badge" style="background:var(--border);color:var(--mid);">Apple Pay</span>
+          <span class="pay-badge" style="background:var(--border);color:var(--mid);">Stripe</span>
+        </div>
+
+        <!-- Trust icons -->
+        <div class="trust-icons">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>SSL Secure</div>
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>30-Day Returns</div>
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Quality Guarantee</div>
+        </div>
+
+        <!-- Need help — inside sticky box so it never scrolls away -->
+        <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:16px;text-align:center;">
+          <p style="font-size:.82rem;color:var(--mid);">Questions about your order?</p>
+          <a href="contact.html" style="font-size:.82rem;color:var(--cr);font-weight:600;">Contact us →</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<footer aria-label="Site footer"><div class="wrap"><div class="foot-bottom" style="border-top:1px solid rgba(255,255,255,.07);"><p class="foot-copy" style="color:var(--mid);">© 2026 Cadomalo · Fokebo LLC · <a href="privacy-policy.html" style="color:inherit">Privacy</a> · <a href="terms.html" style="color:inherit">Terms</a></p></div></div></footer>
+
+<script src="js/pixels.js"></script>
+<script src="js/main.js"></script>
+<script>
+  function adjustCartQty(inputId, delta, unitPrice, totalId) {
+    const input = document.getElementById(inputId);
+    const qty   = Math.max(1, Math.min(10, parseInt(input.value || 1) + delta));
+    input.value = qty;
+    document.getElementById(totalId).textContent = '$' + (qty * unitPrice).toFixed(2);
+    recalcTotal();
+  }
+
+  function recalcTotal() {
+    const q1 = parseInt(document.getElementById('item1-qty')?.value || 0);
+    const q2 = parseInt(document.getElementById('item2-qty')?.value || 0);
+    // Simplified total update — full implementation in Round 3 with Snipcart
+  }
+
+  function removeItem(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(20px)';
+    el.style.transition = 'all .3s';
+    setTimeout(() => { el.remove(); recalcTotal(); }, 300);
+    const count = document.querySelector('.cart-count');
+    if (count && parseInt(count.textContent) > 0) count.textContent = parseInt(count.textContent) - 1;
+    showToast('Item removed from cart');
+  }
+
+  function addUpsell(name, price) {
+    const count = document.querySelector('.cart-count');
+    if (count) count.textContent = parseInt(count.textContent || 0) + 1;
+    showToast(`🎁 "${name}" added — $${price.toFixed(2)}`);
+  }
+
+  function applyPromo() {
+    const code = document.getElementById('promo-input')?.value?.trim().toUpperCase();
+    if (!code) return;
+    if (code === 'WELCOME10') showToast('✓ Code applied: 10% off your order!');
+    else if (code === 'GIFT20') showToast('✓ Code applied: 20% off!');
+    else showToast('⚠️ Invalid promo code. Try WELCOME10');
+  }
+
+</script>
+</body>
+</html>

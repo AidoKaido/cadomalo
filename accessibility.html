@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility Statement – Cadomalo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .legal-wrap { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+    .legal-wrap h1 { font-size: 2rem; font-weight: 800; letter-spacing: -.03em; margin-bottom: 8px; }
+    .legal-wrap .updated { font-size: .8rem; color: #999; margin-bottom: 40px; }
+    .legal-wrap h2 { font-size: 1.1rem; font-weight: 700; margin: 32px 0 10px; color: #1A1A1A; }
+    .legal-wrap h3 { font-size: .95rem; font-weight: 700; margin: 20px 0 8px; color: #1A1A1A; }
+    .legal-wrap p { font-size: .9rem; color: #555; line-height: 1.8; margin-bottom: 12px; }
+    .legal-wrap ul, .legal-wrap ol { padding-left: 20px; margin-bottom: 16px; }
+    .legal-wrap li { font-size: .9rem; color: #555; line-height: 1.75; margin-bottom: 6px; }
+    .legal-wrap a { color: #9c0202; }
+    .legal-wrap strong { color: #1A1A1A; }
+    .legal-banner { background: #fff5f5; border: 1px solid rgba(156,2,2,.2); border-radius: 8px; padding: 16px 20px; margin-bottom: 32px; font-size: .88rem; color: #9c0202; }
+    .a11y-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+    @media (max-width: 600px) { .a11y-grid { grid-template-columns: 1fr; } }
+    .a11y-card { background: #f9f9f9; border: 1px solid #E8E8E8; border-radius: 10px; padding: 18px 20px; }
+    .a11y-card-icon { font-size: 1.3rem; margin-bottom: 8px; }
+    .a11y-card-title { font-size: .88rem; font-weight: 700; color: #1A1A1A; margin-bottom: 6px; }
+    .a11y-card-desc { font-size: .83rem; color: #666; line-height: 1.65; }
+    .contact-box { background: #fff5f5; border: 1px solid rgba(156,2,2,.15); border-radius: 10px; padding: 24px; margin-top: 32px; }
+    .contact-box h3 { font-size: 1rem; font-weight: 700; color: #9c0202; margin-bottom: 10px; }
+    .contact-box p { font-size: .88rem; color: #555; line-height: 1.7; margin-bottom: 8px; }
+    .contact-box a { color: #9c0202; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" style="display:none;" role="dialog">
+  <div class="cookie-inner">
+    <div class="cookie-text"><strong>We value your privacy 🍪</strong><p>We use cookies. <a href="cookie-policy.html">Cookie Policy</a> · <a href="privacy-policy.html">Privacy Policy</a></p></div>
+    <div class="cookie-btns"><button id="btn-manage-prefs" class="cookie-manage">Manage</button><button id="btn-reject-all" class="btn btn-ghost btn-sm">Reject All</button><button id="btn-accept-all" class="btn btn-primary btn-sm">Accept All</button></div>
+  </div>
+</div>
+<div id="cookie-prefs" role="dialog" aria-modal="true">
+  <div class="cookie-panel"><h3>Cookie Preferences</h3><p>Manage consent below.</p>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Strictly Necessary</span><label class="toggle"><input type="checkbox" checked disabled><span class="toggle-track"></span></label></div><p>Required for the site to function.</p></div>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Analytics</span><label class="toggle"><input type="checkbox" id="toggle-analytics"><span class="toggle-track"></span></label></div><p>Google Analytics.</p></div>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Marketing</span><label class="toggle"><input type="checkbox" id="toggle-marketing"><span class="toggle-track"></span></label></div><p>Facebook, TikTok, Pinterest, Google Ads.</p></div>
+    <div class="cookie-panel-btns"><button id="btn-close-panel" class="btn btn-ghost btn-sm">Cancel</button><button id="btn-accept-panel" class="btn btn-outline btn-sm">Accept All</button><button id="btn-save-prefs" class="btn btn-primary btn-sm">Save</button></div>
+  </div>
+</div>
+
+<!-- Header -->
+<div style="border-bottom:1px solid #E8E8E8;padding:14px 0;background:#fff;position:sticky;top:0;z-index:800;">
+  <div style="max-width:800px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-size:1.2rem;font-weight:900;color:#1A1A1A;text-decoration:none;">cado<span style="color:#9c0202;">malo</span></a>
+    <a href="index.html" style="font-size:.8rem;color:#666;display:flex;align-items:center;gap:4px;text-decoration:none;">← Back to store</a>
+  </div>
+</div>
+
+<div class="legal-wrap">
+
+  <h1>Accessibility Statement</h1>
+  <p class="updated">Last updated: May 17, 2026 · Last reviewed: May 17, 2026</p>
+
+  <div class="legal-banner">
+    Cadomalo is committed to making our website accessible to everyone, including people with disabilities. We believe that access to great products should not be limited by how you experience the web.
+  </div>
+
+  <h2>1. Our Commitment</h2>
+  <p><strong>Fokebo LLC</strong>, the company behind Cadomalo, is committed to ensuring that cadomalo.com is accessible to people with disabilities — including those who use screen readers, keyboard-only navigation, voice control, or other assistive technologies.</p>
+  <p>We aim to conform to the <strong>Web Content Accessibility Guidelines (WCAG) 2.1, Level AA</strong>, which are the internationally recognized standard for web accessibility. These guidelines cover four principles: that content must be Perceivable, Operable, Understandable, and Robust (POUR).</p>
+  <p>Accessibility is an ongoing effort. We regularly review our site and make improvements as part of our development process.</p>
+
+  <h2>2. What We Have Done</h2>
+  <p>The following accessibility measures are in place on cadomalo.com:</p>
+
+  <div class="a11y-grid">
+    <div class="a11y-card">
+      <div class="a11y-card-title">Semantic HTML Structure</div>
+      <div class="a11y-card-desc">We use proper HTML landmarks, headings (h1–h6), lists, and sectioning elements so screen readers can navigate the page structure logically.</div>
+    </div>
+    <div class="a11y-card">
+      <div class="a11y-card-title">ARIA Labels and Roles</div>
+      <div class="a11y-card-desc">Interactive elements such as dialogs, buttons, and navigation menus include ARIA labels and roles to help assistive technologies communicate their purpose to users.</div>
+    </div>
+    <div class="a11y-card">
+      <div class="a11y-card-title">Keyboard Navigation</div>
+      <div class="a11y-card-desc">All interactive elements — links, buttons, forms, and modals — are accessible using a keyboard alone. We maintain logical focus order and visible focus indicators throughout the site.</div>
+    </div>
+    <div class="a11y-card">
+      <div class="a11y-card-title">Color Contrast</div>
+      <div class="a11y-card-desc">Text and interactive elements are designed to meet or exceed the WCAG AA minimum contrast ratio of 4.5:1 for normal text and 3:1 for large text, ensuring readability for users with low vision.</div>
+    </div>
+    <div class="a11y-card">
+      <div class="a11y-card-title">Alternative Text for Images</div>
+      <div class="a11y-card-desc">All meaningful images on our site include descriptive alt text. Decorative images are marked so screen readers can skip them. Product photos include descriptions of the item depicted.</div>
+    </div>
+    <div class="a11y-card">
+      <div class="a11y-card-title">Responsive Design</div>
+      <div class="a11y-card-desc">Our site is fully responsive and works across a wide range of screen sizes and zoom levels. Content reflows correctly when the browser is zoomed to 200% without requiring horizontal scrolling.</div>
+    </div>
+    <div class="a11y-card">
+      <div class="a11y-card-title">Readable Fonts and Sizing</div>
+      <div class="a11y-card-desc">We use the Inter typeface with sufficient base font sizes and line heights to support readability. Font sizes respect browser default settings and user preferences.</div>
+    </div>
+    <div class="a11y-card">
+      <div class="a11y-card-title">Form Accessibility</div>
+      <div class="a11y-card-desc">All form fields (checkout, contact, personalization) have associated labels, clear placeholder text, and descriptive error messages that do not rely on color alone.</div>
+    </div>
+  </div>
+
+  <h3>Language and Readability</h3>
+  <p>All pages are written in English and the <code>lang="en"</code> attribute is set on every HTML document, allowing screen readers to use the correct language settings and pronunciation rules.</p>
+
+  <h3>Skip Navigation</h3>
+  <p>We include a "Skip to main content" link at the top of each page, allowing keyboard and screen reader users to bypass repetitive navigation and jump directly to the page content.</p>
+
+  <h3>No Auto-Playing Media</h3>
+  <p>We do not auto-play video or audio content on cadomalo.com. Any media player on our site includes accessible play/pause controls.</p>
+
+  <h2>3. Known Limitations</h2>
+  <p>While we strive for full WCAG 2.1 AA compliance, there are some areas that may not yet meet all standards. We are actively working to address these:</p>
+  <ul>
+    <li><strong>Third-party payment widgets:</strong> Our checkout uses Stripe's and PayPal's embedded payment forms. While both providers are committed to accessibility, some elements of their embedded widgets may not be fully under our control. We encourage users who encounter barriers in the payment flow to contact us for assistance completing their order</li>
+    <li><strong>User-generated content:</strong> Personalization previews generated dynamically from your text or image input may have limited accessibility for screen reader users in real time. We are exploring improvements to this experience</li>
+    <li><strong>Some older blog content:</strong> Older blog posts may contain images without alt text or other accessibility gaps. We are working through these pages and updating them</li>
+    <li><strong>Complex data tables:</strong> Some product comparison features use tables that may not be fully optimized for assistive technologies on all browsers — we are improving these</li>
+  </ul>
+  <p>If you encounter a barrier not listed here, please let us know so we can address it.</p>
+
+  <h2>4. Assistive Technology Compatibility</h2>
+  <p>Cadomalo.com has been designed and tested with the goal of supporting the following assistive technologies:</p>
+  <ul>
+    <li><strong>Screen readers:</strong> NVDA with Firefox (Windows), VoiceOver with Safari (macOS/iOS), TalkBack with Chrome (Android)</li>
+    <li><strong>Keyboard-only navigation:</strong> All major browsers on desktop</li>
+    <li><strong>Voice control:</strong> Dragon NaturallySpeaking (Windows), Voice Control (macOS/iOS)</li>
+    <li><strong>Browser zoom:</strong> Up to 200% zoom with no loss of content or functionality</li>
+    <li><strong>High contrast mode:</strong> Windows High Contrast mode and macOS Increase Contrast setting</li>
+  </ul>
+
+  <h2>5. How to Get Accessibility Help</h2>
+  <p>If you are having difficulty using any part of cadomalo.com — whether due to a disability or an accessibility barrier — we are here to help. You can:</p>
+  <ul>
+    <li>Email us at <a href="mailto:accessibility@cadomalo.com">accessibility@cadomalo.com</a> — we respond within <strong>2 business days</strong> (Monday–Friday)</li>
+    <li>Email us at <a href="mailto:hello@cadomalo.com">hello@cadomalo.com</a> for general support</li>
+    <li>If you need help placing an order due to an accessibility barrier, our support team can assist you by email</li>
+  </ul>
+  <p>When you contact us, please describe the barrier you encountered as specifically as possible, including the page, the feature, and the assistive technology you are using. This helps us reproduce and fix the issue faster.</p>
+
+  <div class="contact-box">
+    <h3>Accessibility Contact</h3>
+    <p><strong>Email:</strong> <a href="mailto:accessibility@cadomalo.com">accessibility@cadomalo.com</a></p>
+    <p><strong>Response time:</strong> Within 2 business days</p>
+    <p><strong>Mailing address:</strong> Fokebo LLC, 501 Silverside Rd, Ste 105-291, Wilmington, DE 19809, USA</p>
+    <p>We welcome all feedback — positive or constructive — and use it to continually improve the experience for everyone.</p>
+  </div>
+
+  <h2>6. Formal Complaints</h2>
+  <p>If you are not satisfied with our response to your accessibility concern, you may contact the relevant national accessibility authority or enforcement body in your country.</p>
+  <p>For users in the <strong>United States</strong>, accessibility-related complaints may be directed to the U.S. Department of Justice Civil Rights Division or the U.S. Access Board.</p>
+  <p>For users in the <strong>European Union</strong>, the <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016L2102" target="_blank" rel="noopener">European Web Accessibility Directive</a> may apply to public sector bodies. While Cadomalo is a private commercial entity, we strive to meet those same standards voluntarily.</p>
+
+  <h2>7. Our Ongoing Efforts</h2>
+  <p>Accessibility is not a one-time project. We are committed to making continuous improvements through:</p>
+  <ul>
+    <li>Regular accessibility audits as part of our development cycle</li>
+    <li>Testing new features with screen readers and keyboard navigation before launch</li>
+    <li>Training our team on accessibility best practices</li>
+    <li>Acting on user feedback in a timely manner</li>
+    <li>Reviewing this statement and our site's conformance annually (or more frequently as changes are made)</li>
+  </ul>
+  <p>We aim to review and update this Accessibility Statement at least once per year, or whenever significant changes are made to the website.</p>
+
+</div>
+
+<!-- Footer -->
+<footer style="background:#111;color:#fff;padding:24px 0;">
+  <div style="max-width:800px;margin:0 auto;padding:0 24px;">
+    <p style="font-size:.75rem;color:rgba(255,255,255,.35);margin-bottom:8px;">© 2026 Cadomalo · Fokebo LLC · 501 Silverside Rd, Ste 105-291, Wilmington, DE 19809, USA</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="privacy-policy.html" style="font-size:.75rem;color:rgba(255,255,255,.4);">Privacy Policy</a>
+      <a href="terms.html" style="font-size:.75rem;color:rgba(255,255,255,.4);">Terms of Service</a>
+      <a href="cookie-policy.html" style="font-size:.75rem;color:rgba(255,255,255,.4);">Cookie Policy</a>
+      <a href="returns.html" style="font-size:.75rem;color:rgba(255,255,255,.4);">Return Policy</a>
+      <a href="accessibility.html" style="font-size:.75rem;color:rgba(255,255,255,.4);">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/pixels.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

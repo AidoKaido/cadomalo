@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadomalo – Gifts That Say More Than Words</title>
+  <meta name="description" content="Personalized gifts, print-on-demand treasures, and digital delights for every occasion. Birthday, anniversary, wedding and more — crafted to make them smile.">
+  <meta name="keywords" content="personalized gifts, custom gifts, gift ideas, birthday gifts, anniversary gifts, print on demand gifts">
+  <link rel="canonical" href="https://cadomalo.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://cadomalo.com/">
+  <meta property="og:title"       content="Cadomalo – Gifts That Say More Than Words">
+  <meta property="og:description" content="Personalized gifts for every occasion. Find the perfect gift in 60 seconds with our Gift Finder.">
+  <meta property="og:image"       content="https://cadomalo.com/assets/images/og-home.jpg">
+  <meta name="twitter:card"       content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Structured Data (GEO / AI Search) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "OnlineStore",
+    "name": "Cadomalo",
+    "url": "https://cadomalo.com",
+    "description": "Personalized gifts, print-on-demand products and digital gifts for every occasion.",
+    "currenciesAccepted": "USD, EUR",
+    "paymentAccepted": "Credit Card, PayPal",
+    "areaServed": "Worldwide",
+    "sameAs": [
+      "https://www.facebook.com/cadomalo",
+      "https://www.instagram.com/cadomalo",
+      "https://www.tiktok.com/@cadomalo",
+      "https://www.pinterest.com/cadomalo"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ============================================================
+     COOKIE CONSENT BANNER
+     ============================================================ -->
+<div id="cookie-banner" style="display:none;" aria-live="polite" role="dialog" aria-label="Cookie preferences">
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <strong>We value your privacy 🍪</strong>
+      <p>We use cookies to personalize content and ads, analyze traffic, and improve your experience. By clicking "Accept All" you consent to our use of cookies. <a href="cookie-policy.html">Cookie Policy</a> · <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+    <div class="cookie-btns">
+      <button id="btn-manage-prefs" class="cookie-manage">Manage Preferences</button>
+      <button id="btn-reject-all" class="btn btn-ghost btn-sm">Reject All</button>
+      <button id="btn-accept-all" class="btn btn-primary btn-sm">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie Preferences Panel -->
+<div id="cookie-prefs" role="dialog" aria-modal="true" aria-label="Manage cookie preferences">
+  <div class="cookie-panel">
+    <h3>Cookie Preferences</h3>
+    <p>Choose which cookies you allow. You can update your preferences at any time via the Cookie Policy page.</p>
+
+    <div class="cookie-cat">
+      <div class="cookie-cat-hd">
+        <span class="cookie-cat-name">Strictly Necessary</span>
+        <label class="toggle">
+          <input type="checkbox" checked disabled>
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+      <p>Required for the website to function. Cannot be disabled.</p>
+    </div>
+
+    <div class="cookie-cat">
+      <div class="cookie-cat-hd">
+        <span class="cookie-cat-name">Analytics</span>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-analytics">
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+      <p>Help us understand how visitors interact with our site (Google Analytics).</p>
+    </div>
+
+    <div class="cookie-cat">
+      <div class="cookie-cat-hd">
+        <span class="cookie-cat-name">Marketing</span>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-marketing">
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+      <p>Used to show you relevant ads on Facebook, TikTok, Pinterest and Google.</p>
+    </div>
+
+    <div class="cookie-panel-btns">
+      <button id="btn-close-panel" class="btn btn-ghost btn-sm">Cancel</button>
+      <button id="btn-accept-panel" class="btn btn-outline btn-sm">Accept All</button>
+      <button id="btn-save-prefs" class="btn btn-primary btn-sm">Save Preferences</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOP BAR
+     ============================================================ -->
+<div class="topbar" aria-label="Promotions and social links">
+  <div class="topbar-inner">
+    <div class="topbar-social">
+      <a href="https://facebook.com/cadomalo" aria-label="Facebook" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+      <a href="https://instagram.com/cadomalo" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://tiktok.com/@cadomalo" aria-label="TikTok" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77.22 2.89 2.89 0 012.89-3.11c.28 0 .54.04.79.1V9.01a6.34 6.34 0 106.33 6.34V8.69a8.16 8.16 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg>
+      </a>
+      <a href="https://pinterest.com/cadomalo" aria-label="Pinterest" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+      </a>
+    </div>
+
+    <p class="topbar-msg">🎁 Free shipping on orders over $50 · <a href="shop.html">Shop Now →</a></p>
+
+    <div class="topbar-right">
+      <div class="lang-sw">
+        <button class="lang-btn" aria-label="Select language" aria-expanded="false">
+          🇺🇸 EN
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="lang-drop" role="menu">
+          <a href="#" data-lang="en" class="active" role="menuitem">🇺🇸 English</a>
+          <a href="#" data-lang="fr" role="menuitem">🇫🇷 Français</a>
+          <a href="#" data-lang="de" role="menuitem">🇩🇪 Deutsch</a>
+          <a href="#" data-lang="nl" role="menuitem">🇳🇱 Nederlands</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header id="site-header" role="banner">
+  <div class="wrap">
+    <div class="hdr">
+      <!-- Logo -->
+      <a href="index.html" class="logo-wrap" aria-label="Cadomalo – Home">
+        <img src="assets/logo.png" alt="Cadomalo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="logo-text" style="display:none">cado<span>malo</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-desktop" aria-label="Main navigation">
+        <ul class="nav-ul">
+          <li class="nav-active"><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="gift-finder.html">Gift Finder ✨</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="nav-sale"><a href="shop.html#sale">Sale 🔥</a></li>
+        </ul>
+      </nav>
+
+      <!-- Icons -->
+      <div class="hdr-icons">
+        <button class="ico-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <a href="cart.html" class="ico-btn" aria-label="Shopping cart" style="position:relative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-count" aria-label="0 items in cart">0</span>
+        </a>
+        <a href="#" class="ico-btn" aria-label="My account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <button class="ico-btn mob-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav Drawer -->
+<div id="nav-overlay" class="nav-drawer-overlay" aria-hidden="true"></div>
+<nav id="nav-drawer" class="nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="drawer-logo">cado<span>malo</span></span>
+    <button class="ico-btn drawer-close" id="nav-close" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="drawer-nav">
+    <a href="index.html" class="active">Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="shop.html">Shop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="gift-finder.html">Gift Finder ✨ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="blog.html">Blog <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="about.html">About <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="contact.html">Contact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+    <a href="shop.html#sale">Sale 🔥 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+  </div>
+  <div class="drawer-foot">
+    <a href="gift-finder.html" class="btn btn-primary btn-full">Find the Perfect Gift →</a>
+    <div class="drawer-social">
+      <a href="https://facebook.com/cadomalo" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="https://instagram.com/cadomalo" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://tiktok.com/@cadomalo" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77.22 2.89 2.89 0 012.89-3.11c.28 0 .54.04.79.1V9.01a6.34 6.34 0 106.33 6.34V8.69a8.16 8.16 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg></a>
+      <a href="https://pinterest.com/cadomalo" aria-label="Pinterest" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="rev">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-line"></span>
+          <span class="hero-eyebrow-txt">Trusted by 20,000+ happy gifters</span>
+        </div>
+        <h1 id="hero-h1">Gifts that say<br><em>more than words.</em></h1>
+        <p class="hero-sub">Personalized gifts, print-on-demand treasures, and instant-download digital surprises — crafted for every occasion and every person you love.</p>
+        <div class="hero-ctas">
+          <a href="gift-finder.html" class="btn btn-primary btn-lg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            Find Their Gift
+          </a>
+          <a href="shop.html" class="btn btn-ghost btn-lg">Browse All Gifts</a>
+        </div>
+        <div class="hero-proof">
+          <div class="hero-avatars" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=60&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=60&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=60&q=80" alt="">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=60&q=80" alt="">
+          </div>
+          <p class="hero-proof-txt"><strong>4.9★</strong> from 3,200+ verified reviews</p>
+        </div>
+      </div>
+
+      <div class="hero-visual rev d2">
+        <div class="hero-img-wrap">
+          <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80" alt="Beautifully wrapped personalized gifts from Cadomalo">
+        </div>
+        <div class="hero-badge2">
+          <div class="hero-badge2-num">50+</div>
+          <div class="hero-badge2-lbl">Occasions</div>
+        </div>
+        <div class="hero-badge">
+          <div class="hero-badge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="hero-badge-title">Happiness Guaranteed</div>
+            <div class="hero-badge-sub">30-day returns · Secure checkout</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRUST BAR
+     ============================================================ -->
+<div class="trust" aria-label="Key benefits">
+  <div class="wrap">
+    <div class="trust-row">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <span>Free shipping over $50</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        <span>Secure checkout</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+        <span>30-day easy returns</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Instant digital delivery</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>3,200+ five-star reviews</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SHOP BY OCCASION
+     ============================================================ -->
+<section class="occasions section" id="occasions" aria-labelledby="occ-h">
+  <div class="wrap">
+    <div class="sec-hd rev">
+      <span class="sec-tag">Every moment matters</span>
+      <h2 class="sec-h" id="occ-h">Shop by Occasion</h2>
+      <p class="sec-sub">Find the perfect gift for any celebration, big or small.</p>
+    </div>
+
+    <div class="occ-tabs" data-tab-group="occasions">
+      <button class="tab-btn occ-tab active" data-filter="all">All Gifts</button>
+      <button class="tab-btn occ-tab" data-filter="birthday">🎂 Birthday</button>
+      <button class="tab-btn occ-tab" data-filter="anniversary">💕 Anniversary</button>
+      <button class="tab-btn occ-tab" data-filter="wedding">💍 Wedding</button>
+      <button class="tab-btn occ-tab" data-filter="baby">👶 Baby</button>
+      <button class="tab-btn occ-tab" data-filter="digital">✨ Digital</button>
+      <button class="tab-btn occ-tab" data-filter="justbecause">💝 Just Because</button>
+    </div>
+
+    <div class="prod-grid" data-tab-items="occasions">
+
+      <div class="prod-item rev d1" data-cat="birthday anniversary">
+        <div class="prod-card">
+          <div class="prod-thumb">
+            <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=500&q=80" alt="Custom Name Necklace" loading="lazy">
+            <span class="prod-bdg bdg-bestseller">Bestseller</span>
+            <div class="prod-wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+            <div class="prod-quick" role="button">+ Quick Add</div>
+          </div>
+          <div class="prod-body">
+            <p class="prod-cat">Personalized Jewelry</p>
+            <h3 class="prod-name">Custom Name Necklace</h3>
+            <div class="prod-price"><span class="p-now">$49.99</span></div>
+            <div class="prod-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(412)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-item rev d2" data-cat="birthday justbecause">
+        <div class="prod-card">
+          <div class="prod-thumb">
+            <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=500&q=80" alt="Personalized Mug" loading="lazy">
+            <span class="prod-bdg bdg-new">New</span>
+            <div class="prod-wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+            <div class="prod-quick" role="button">+ Quick Add</div>
+          </div>
+          <div class="prod-body">
+            <p class="prod-cat">Home & Living</p>
+            <h3 class="prod-name">Custom Photo Mug</h3>
+            <div class="prod-price"><span class="p-now">$34.99</span></div>
+            <div class="prod-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(287)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-item rev d3" data-cat="digital birthday anniversary wedding justbecause">
+        <div class="prod-card">
+          <div class="prod-thumb">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=500&q=80" alt="Digital Gift Card" loading="lazy">
+            <span class="prod-bdg bdg-digital">Digital</span>
+            <div class="prod-wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+            <div class="prod-quick" role="button">+ Download Now</div>
+          </div>
+          <div class="prod-body">
+            <p class="prod-cat">Digital · Instant Download</p>
+            <h3 class="prod-name">Printable Gift Card Pack</h3>
+            <div class="prod-price"><span class="p-now">$9.99</span></div>
+            <div class="prod-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(189)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-item rev d4" data-cat="anniversary wedding">
+        <div class="prod-card">
+          <div class="prod-thumb">
+            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=500&q=80" alt="Custom Star Map" loading="lazy">
+            <span class="prod-bdg bdg-sale">–20%</span>
+            <div class="prod-wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+            <div class="prod-quick" role="button">+ Quick Add</div>
+          </div>
+          <div class="prod-body">
+            <p class="prod-cat">Wall Art · Personalized</p>
+            <h3 class="prod-name">Custom Star Map Print</h3>
+            <div class="prod-price"><span class="p-now">$59.99</span><span class="p-was">$74.99</span><span class="p-pct">–20%</span></div>
+            <div class="prod-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(331)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-item rev d1" data-cat="baby justbecause">
+        <div class="prod-card">
+          <div class="prod-thumb">
+            <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=500&q=80" alt="Baby Gift Set" loading="lazy">
+            <span class="prod-bdg bdg-new">New</span>
+            <div class="prod-wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+            <div class="prod-quick" role="button">+ Quick Add</div>
+          </div>
+          <div class="prod-body">
+            <p class="prod-cat">Baby & New Arrival</p>
+            <h3 class="prod-name">Personalized Baby Gift Set</h3>
+            <div class="prod-price"><span class="p-now">$69.99</span></div>
+            <div class="prod-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(156)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-item rev d2" data-cat="birthday justbecause">
+        <div class="prod-card">
+          <div class="prod-thumb">
+            <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=500&q=80" alt="Custom Tote Bag" loading="lazy">
+            <div class="prod-wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+            <div class="prod-quick" role="button">+ Quick Add</div>
+          </div>
+          <div class="prod-body">
+            <p class="prod-cat">Bags & Accessories</p>
+            <h3 class="prod-name">Custom Quote Tote Bag</h3>
+            <div class="prod-price"><span class="p-now">$32.00</span></div>
+            <div class="prod-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(203)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-item rev d3" data-cat="wedding anniversary">
+        <div class="prod-card">
+          <div class="prod-thumb">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=500&q=80" alt="Personalized Cutting Board" loading="lazy">
+            <span class="prod-bdg bdg-bestseller">Bestseller</span>
+            <div class="prod-wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+            <div class="prod-quick" role="button">+ Quick Add</div>
+          </div>
+          <div class="prod-body">
+            <p class="prod-cat">Kitchen & Home</p>
+            <h3 class="prod-name">Engraved Cutting Board</h3>
+            <div class="prod-price"><span class="p-now">$79.99</span></div>
+            <div class="prod-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(94)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-item rev d4" data-cat="digital birthday">
+        <div class="prod-card">
+          <div class="prod-thumb">
+            <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=500&q=80" alt="Birthday Printable Bundle" loading="lazy">
+            <span class="prod-bdg bdg-digital">Digital</span>
+            <span class="prod-bdg bdg-sale" style="top:10px;left:70px">–40%</span>
+            <div class="prod-wish" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+            <div class="prod-quick" role="button">+ Download Now</div>
+          </div>
+          <div class="prod-body">
+            <p class="prod-cat">Digital · Bundle</p>
+            <h3 class="prod-name">Birthday Printable Bundle</h3>
+            <div class="prod-price"><span class="p-now">$14.99</span><span class="p-was">$24.99</span><span class="p-pct">–40%</span></div>
+            <div class="prod-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(541)</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="text-center mt-40">
+      <a href="shop.html" class="btn btn-outline btn-lg">View All Gifts →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GIFT FINDER BANNER
+     ============================================================ -->
+<section class="gf-banner" aria-labelledby="gf-h">
+  <div class="wrap">
+    <div class="gf-inner">
+      <div class="rev">
+        <div class="gf-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          Gift Finder
+        </div>
+        <h2 id="gf-h">Not sure what to gift?<br>We'll find it <em>in 60 seconds.</em></h2>
+        <p>Answer 4 quick questions about the recipient and we'll match you with the perfect gift from our catalogue.</p>
+        <div class="gf-steps">
+          <div class="gf-step"><span class="gf-step-num">1</span><span>Pick the occasion</span></div>
+          <div class="gf-step"><span class="gf-step-num">2</span><span>Set your budget</span></div>
+          <div class="gf-step"><span class="gf-step-num">3</span><span>Their personality</span></div>
+          <div class="gf-step"><span class="gf-step-num">4</span><span>Get matched!</span></div>
+        </div>
+        <a href="gift-finder.html" class="btn btn-primary btn-xl mt-32">Start the Gift Finder →</a>
+      </div>
+      <div class="gf-visual rev d3">
+        <div class="gf-card">
+          <div class="gf-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+          </div>
+          <h4>Perfect Match</h4>
+          <p>Curated just for them, not just for anyone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY CADOMALO
+     ============================================================ -->
+<section class="why section" aria-labelledby="why-h">
+  <div class="wrap">
+    <div class="sec-hd rev">
+      <span class="sec-tag">Why Cadomalo</span>
+      <h2 class="sec-h" id="why-h">Everything they'll love, nothing they won't</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card rev d1">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="why-name">Personalized to Perfection</div>
+        <div class="why-desc">Every item is customized with care — names, dates, photos, and messages that make it truly one-of-a-kind.</div>
+      </div>
+      <div class="why-card rev d2">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="why-name">Ships Worldwide</div>
+        <div class="why-desc">Fast, reliable delivery to 150+ countries. Physical items dispatched within 1–3 business days via trusted carriers.</div>
+      </div>
+      <div class="why-card rev d3">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <div class="why-name">Safe & Secure Checkout</div>
+        <div class="why-desc">256-bit SSL encryption. Pay via Stripe or PayPal. Your data is never stored or shared. Shop with total confidence.</div>
+      </div>
+      <div class="why-card rev d4">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></div>
+        <div class="why-name">Happiness Guaranteed</div>
+        <div class="why-desc">Not delighted? Return within 30 days for a full refund. No forms, no stress, no questions asked.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FEATURED PRODUCT
+     ============================================================ -->
+<section class="feat section" style="background:var(--bg);" aria-labelledby="feat-h">
+  <div class="wrap">
+    <div class="feat-grid">
+      <div class="feat-img rev">
+        <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80" alt="The Signature Gift Bundle">
+        <span class="feat-img-tag">⭐ Bestseller</span>
+      </div>
+      <div class="rev d2">
+        <p class="feat-eyebrow">Curated Bundle</p>
+        <h2 class="feat-h" id="feat-h">The Signature<br>Gift Bundle</h2>
+        <p class="feat-desc">Our most-gifted bundle — three handpicked personalized items paired with an instant-download digital bonus. Works for birthdays, anniversaries, and any excuse to celebrate.</p>
+        <ul class="feat-list">
+          <li>1 Custom engraved jewelry piece</li>
+          <li>1 Personalized photo item of your choice</li>
+          <li>1 Premium gift box with ribbon</li>
+          <li>Instant-download digital card template (free)</li>
+          <li>Free express shipping included</li>
+        </ul>
+        <div class="feat-price-row">
+          <span class="feat-price">$99.99</span>
+          <span class="feat-was">$139.99</span>
+          <span class="feat-save">Save $40</span>
+        </div>
+        <div class="feat-actions">
+          <a href="product.html" class="btn btn-primary btn-lg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Add to Cart
+          </a>
+          <a href="product.html" class="btn btn-ghost btn-lg">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+     ============================================================ -->
+<section class="testi section" aria-labelledby="testi-h">
+  <div class="wrap">
+    <div class="sec-hd rev">
+      <span class="sec-tag">Real Reviews</span>
+      <h2 class="sec-h" id="testi-h">They loved it — and so will you</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card rev d1">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-quote">"The custom necklace arrived beautifully packaged and my mum literally cried. I've never seen a gift land so perfectly. Will be ordering again for her birthday!"</p>
+        <div class="testi-author">
+          <img class="testi-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" alt="Sophie K.">
+          <div>
+            <div class="testi-name">Sophie K.</div>
+            <div class="testi-meta">Verified Buyer · Birthday Gift · New York, USA</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rev d2">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-quote">"Ordered the anniversary star map and it shipped within 2 days. The print quality is stunning — it looks like something from an art gallery, not an online shop."</p>
+        <div class="testi-author">
+          <img class="testi-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&q=80" alt="Marie L.">
+          <div>
+            <div class="testi-name">Marie L.</div>
+            <div class="testi-meta">Verified Buyer · Anniversary Gift · London, UK</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rev d3">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-quote">"The digital printable bundle was exactly what I needed last minute. Downloaded instantly, printed at home, and it looked completely professional. A lifesaver!"</p>
+        <div class="testi-author">
+          <img class="testi-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80" alt="Emma R.">
+          <div>
+            <div class="testi-name">Emma R.</div>
+            <div class="testi-meta">Verified Buyer · Digital Gift · Chicago, USA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS
+     ============================================================ -->
+<section class="stats" aria-label="Cadomalo by the numbers">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="rev"><div class="stat-n" data-count="20000" data-suffix="+">20,000+</div><div class="stat-l">Happy Gifters</div></div>
+      <div class="rev d1"><div class="stat-n" data-count="3200" data-suffix="+">3,200+</div><div class="stat-l">5-Star Reviews</div></div>
+      <div class="rev d2"><div class="stat-n" data-count="150" data-suffix="+">150+</div><div class="stat-l">Countries Reached</div></div>
+      <div class="rev d3"><div class="stat-n" data-count="50" data-suffix="+">50+</div><div class="stat-l">Gift Occasions</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MISSION
+     ============================================================ -->
+<section class="mission" aria-labelledby="mission-q">
+  <div class="wrap">
+    <div class="mission-inner rev">
+      <span class="mission-tag">Our Purpose</span>
+      <blockquote id="mission-q">A gift is a message.<br>We help you send the <em>right one.</em></blockquote>
+      <p class="mission-sub">Every person deserves to feel seen and celebrated. We believe the right gift — thoughtful, personal, and beautifully made — can do exactly that. That's why we built Cadomalo.</p>
+      <a href="about.html" class="btn btn-white btn-lg">Read Our Story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     NEWSLETTER
+     ============================================================ -->
+<section class="newsletter section" aria-labelledby="nl-h">
+  <div class="wrap">
+    <div class="nl-inner rev">
+      <span class="sec-tag">Join the Community</span>
+      <h2 class="sec-h" id="nl-h">Get gift ideas before everyone else</h2>
+      <p class="sec-sub">Join 15,000+ gift lovers. Get weekly inspiration, exclusive discounts, and a free printable gift guide on signup.</p>
+      <form class="nl-form newsletter-form" aria-label="Newsletter signup">
+        <input class="nl-input" type="email" placeholder="Your email address" required aria-label="Email address">
+        <button type="submit" class="btn btn-primary">Subscribe Free →</button>
+      </form>
+      <p class="nl-note">No spam. Unsubscribe anytime. 🔒 We respect your privacy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer aria-label="Site footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <!-- Brand -->
+      <div class="foot-brand">
+        <span class="logo-text">cado<span>malo</span></span>
+        <p>Personalized gifts, print-on-demand treasures, and digital delights for every occasion and every person you love.</p>
+        <div class="foot-social">
+          <a href="https://facebook.com/cadomalo" class="foot-soc" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://instagram.com/cadomalo" class="foot-soc" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://tiktok.com/@cadomalo" class="foot-soc" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77.22 2.89 2.89 0 012.89-3.11c.28 0 .54.04.79.1V9.01a6.34 6.34 0 106.33 6.34V8.69a8.16 8.16 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg></a>
+          <a href="https://pinterest.com/cadomalo" class="foot-soc" aria-label="Pinterest" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Occasions -->
+      <div class="foot-col">
+        <h5>Shop by Occasion</h5>
+        <ul class="foot-links">
+          <li><a href="shop.html?occ=birthday">Birthday Gifts</a></li>
+          <li><a href="shop.html?occ=anniversary">Anniversary Gifts</a></li>
+          <li><a href="shop.html?occ=wedding">Wedding Gifts</a></li>
+          <li><a href="shop.html?occ=baby">Baby & New Arrival</a></li>
+          <li><a href="shop.html?occ=holiday">Holiday Gifts</a></li>
+          <li><a href="shop.html?occ=justbecause">Just Because</a></li>
+          <li><a href="shop.html#sale">Sale 🔥</a></li>
+        </ul>
+      </div>
+
+      <!-- Help -->
+      <div class="foot-col">
+        <h5>Help & Info</h5>
+        <ul class="foot-links">
+          <li><a href="gift-finder.html">Gift Finder ✨</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Track My Order</a></li>
+          <li><a href="#">Returns & Refunds</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div class="foot-col">
+        <h5>Legal & Company</h5>
+        <ul class="foot-links">
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="returns.html">Return Policy</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="about.html">About Cadomalo</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2026 Cadomalo. All rights reserved. · <a href="privacy-policy.html" style="color:inherit">Privacy</a> · <a href="terms.html" style="color:inherit">Terms</a></p>
+      <div class="pay-row" aria-label="Accepted payment methods">
+        <span class="pay-badge">VISA</span>
+        <span class="pay-badge">Mastercard</span>
+        <span class="pay-badge">PayPal</span>
+        <span class="pay-badge">Apple Pay</span>
+        <span class="pay-badge">Google Pay</span>
+        <span class="pay-badge">Stripe</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="js/pixels.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

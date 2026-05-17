@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All Gifts – Cadomalo</title>
+  <meta name="description" content="Browse all personalized gifts, print-on-demand products and digital downloads at Cadomalo. Filter by occasion and budget.">
+  <link rel="canonical" href="https://cadomalo.com/shop.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .shop-layout{display:grid;grid-template-columns:240px 1fr;gap:36px;padding:48px 0 80px;align-items:start;}
+    @media(max-width:900px){.shop-layout{grid-template-columns:1fr;}}
+    /* Filters sidebar */
+    .filter-panel{position:sticky;top:90px;}
+    @media(max-width:900px){.filter-panel{position:static;}}
+    .filter-mob-toggle{display:none;width:100%;margin-bottom:16px;}
+    @media(max-width:900px){.filter-mob-toggle{display:flex;}}
+    .filter-widget{background:var(--bg);border:1px solid var(--border);border-radius:var(--r12);padding:20px;margin-bottom:16px;}
+    .filter-widget:last-child{margin-bottom:0;}
+    .filter-widget h3{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
+    .filter-list{display:flex;flex-direction:column;gap:8px;}
+    .filter-check{display:flex;align-items:center;gap:8px;cursor:pointer;}
+    .filter-check input[type=checkbox]{
+      width:16px;height:16px;accent-color:var(--cr);cursor:pointer;
+    }
+    .filter-check span{font-size:.84rem;color:var(--mid);}
+    .filter-check .count{font-size:.72rem;color:var(--light);margin-left:auto;}
+    .price-range{display:flex;flex-direction:column;gap:10px;}
+    .price-row{display:flex;gap:8px;align-items:center;}
+    .price-input{flex:1;padding:8px 10px;border:1.5px solid var(--border);border-radius:var(--r8);font-size:.82rem;outline:none;text-align:center;}
+    .price-input:focus{border-color:var(--cr);}
+    /* Shop header */
+    .shop-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+    .shop-count{font-size:.88rem;color:var(--mid);}
+    .shop-sort{display:flex;align-items:center;gap:8px;font-size:.84rem;}
+    .sort-select{padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--r8);font-size:.84rem;outline:none;font-family:inherit;background:#fff;cursor:pointer;}
+    .sort-select:focus{border-color:var(--cr);}
+    /* Active filters */
+    .active-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+    .filter-tag{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:var(--cr-l);border:1px solid var(--cr);border-radius:var(--rpill);font-size:.72rem;font-weight:600;color:var(--cr);}
+    .filter-tag button{background:none;border:none;color:var(--cr);cursor:pointer;font-size:.9rem;line-height:1;padding:0 0 0 2px;}
+    /* View toggle */
+    .view-toggle{display:flex;gap:4px;}
+    .view-btn{padding:7px;border:1.5px solid var(--border);border-radius:var(--r8);background:#fff;cursor:pointer;transition:all .2s;}
+    .view-btn.active{background:var(--cr);border-color:var(--cr);}
+    .view-btn svg{width:16px;height:16px;color:var(--mid);}
+    .view-btn.active svg{color:#fff;}
+    /* List view */
+    .prod-grid.list-view{grid-template-columns:1fr !important;}
+    .prod-grid.list-view .prod-card{display:grid;grid-template-columns:160px 1fr auto;}
+    @media(max-width:600px){.prod-grid.list-view .prod-card{grid-template-columns:1fr;}}
+    .prod-grid.list-view .prod-thumb{aspect-ratio:1;width:160px;}
+    @media(max-width:600px){.prod-grid.list-view .prod-thumb{width:100%;}}
+    .prod-grid.list-view .prod-body{padding:16px 20px;display:flex;flex-direction:column;justify-content:center;}
+    .prod-grid.list-view .prod-dots{display:none;}
+    .list-actions{display:flex;flex-direction:column;gap:8px;justify-content:center;padding:16px;}
+    @media(max-width:600px){.list-actions{padding:0 16px 16px;flex-direction:row;}}
+    /* No results */
+    .no-results{text-align:center;padding:60px 0;display:none;}
+    .no-results.show{display:block;}
+  </style>
+</head>
+<body>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" style="display:none;" role="dialog" aria-label="Cookie preferences">
+  <div class="cookie-inner">
+    <div class="cookie-text"><strong>We value your privacy 🍪</strong><p>We use cookies for ads and analytics. <a href="cookie-policy.html">Cookie Policy</a> · <a href="privacy-policy.html">Privacy Policy</a></p></div>
+    <div class="cookie-btns"><button id="btn-manage-prefs" class="cookie-manage">Manage Preferences</button><button id="btn-reject-all" class="btn btn-ghost btn-sm">Reject All</button><button id="btn-accept-all" class="btn btn-primary btn-sm">Accept All</button></div>
+  </div>
+</div>
+<div id="cookie-prefs" role="dialog" aria-modal="true" aria-label="Cookie preferences">
+  <div class="cookie-panel">
+    <h3>Cookie Preferences</h3><p>Manage your consent. Update anytime via Cookie Policy.</p>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Strictly Necessary</span><label class="toggle"><input type="checkbox" checked disabled><span class="toggle-track"></span></label></div><p>Required to function.</p></div>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Analytics</span><label class="toggle"><input type="checkbox" id="toggle-analytics"><span class="toggle-track"></span></label></div><p>Google Analytics.</p></div>
+    <div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Marketing</span><label class="toggle"><input type="checkbox" id="toggle-marketing"><span class="toggle-track"></span></label></div><p>Facebook, TikTok, Pinterest, Google Ads.</p></div>
+    <div class="cookie-panel-btns"><button id="btn-close-panel" class="btn btn-ghost btn-sm">Cancel</button><button id="btn-accept-panel" class="btn btn-outline btn-sm">Accept All</button><button id="btn-save-prefs" class="btn btn-primary btn-sm">Save</button></div>
+  </div>
+</div>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-social">
+      <a href="https://facebook.com/cadomalo" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="https://instagram.com/cadomalo" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    </div>
+    <p class="topbar-msg">🎁 Free shipping on orders over $50 · <a href="#">Shop Now →</a></p>
+    <div class="topbar-right">
+      <div class="lang-sw"><button class="lang-btn">🇺🇸 EN <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="lang-drop"><a href="#" data-lang="en" class="active">🇺🇸 English</a><a href="#" data-lang="fr">🇫🇷 Français</a><a href="#" data-lang="de">🇩🇪 Deutsch</a><a href="#" data-lang="nl">🇳🇱 Nederlands</a></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header id="site-header">
+  <div class="wrap">
+    <div class="hdr">
+      <a href="index.html" class="logo-wrap" aria-label="Cadomalo">
+        <img src="assets/logo.png" alt="Cadomalo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="logo-text" style="display:none">cado<span>malo</span></span>
+      </a>
+      <nav class="nav-desktop"><ul class="nav-ul">
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-active"><a href="shop.html">Shop</a></li>
+        <li><a href="gift-finder.html">Gift Finder ✨</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="nav-sale"><a href="shop.html#sale">Sale 🔥</a></li>
+      </ul></nav>
+      <div class="hdr-icons">
+        <button class="ico-btn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+        <a href="cart.html" class="ico-btn" style="position:relative" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count">0</span></a>
+        <a href="#" class="ico-btn" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="ico-btn mob-toggle" id="nav-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      </div>
+    </div>
+  </div>
+</header>
+<div id="nav-overlay" class="nav-drawer-overlay"></div>
+<nav id="nav-drawer" class="nav-drawer"><div class="drawer-head"><span class="drawer-logo">cado<span>malo</span></span><button class="ico-btn drawer-close" id="nav-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="drawer-nav"><a href="index.html">Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="shop.html" class="active">Shop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="gift-finder.html">Gift Finder ✨ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="blog.html">Blog <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="about.html">About <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="contact.html">Contact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a></div><div class="drawer-foot"><a href="gift-finder.html" class="btn btn-primary btn-full">Find the Perfect Gift →</a></div></nav>
+
+<!-- Page Hero -->
+<section style="background:var(--bg);border-bottom:1px solid var(--border);padding:40px 0;">
+  <div class="wrap">
+    <span class="sec-tag">All Gifts</span>
+    <h1 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:900;letter-spacing:-.03em;margin-top:6px;margin-bottom:8px;">Shop All Gifts</h1>
+    <p style="color:var(--mid);font-size:.92rem;">Personalized gifts, print-on-demand products, and digital downloads — for every occasion and every budget.</p>
+    <!-- Occasion quick-filter strip -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;" role="navigation" aria-label="Filter by occasion">
+      <a href="shop.html" class="tab-btn occ-tab active" style="padding:7px 14px;font-size:.78rem;">All</a>
+      <a href="shop.html?occ=birthday" class="tab-btn occ-tab" style="padding:7px 14px;font-size:.78rem;">🎂 Birthday</a>
+      <a href="shop.html?occ=anniversary" class="tab-btn occ-tab" style="padding:7px 14px;font-size:.78rem;">💕 Anniversary</a>
+      <a href="shop.html?occ=wedding" class="tab-btn occ-tab" style="padding:7px 14px;font-size:.78rem;">💍 Wedding</a>
+      <a href="shop.html?occ=baby" class="tab-btn occ-tab" style="padding:7px 14px;font-size:.78rem;">👶 Baby</a>
+      <a href="shop.html?occ=digital" class="tab-btn occ-tab" style="padding:7px 14px;font-size:.78rem;">✨ Digital</a>
+      <a href="shop.html?occ=justbecause" class="tab-btn occ-tab" style="padding:7px 14px;font-size:.78rem;">💝 Just Because</a>
+      <a href="shop.html#sale" class="tab-btn occ-tab nav-sale" style="padding:7px 14px;font-size:.78rem;color:var(--cr);font-weight:700;">🔥 Sale</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="shop-layout">
+
+    <!-- Filter Sidebar -->
+    <aside aria-label="Product filters">
+      <button class="btn btn-ghost filter-mob-toggle" onclick="document.getElementById('filter-panel').classList.toggle('hidden')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="10" y2="18"/></svg>
+        Filters &amp; Sort
+      </button>
+      <div class="filter-panel" id="filter-panel">
+
+        <div class="filter-widget">
+          <h3>Occasion</h3>
+          <div class="filter-list">
+            <label class="filter-check"><input type="checkbox" data-filter="birthday"><span>Birthday</span><span class="count">18</span></label>
+            <label class="filter-check"><input type="checkbox" data-filter="anniversary"><span>Anniversary</span><span class="count">12</span></label>
+            <label class="filter-check"><input type="checkbox" data-filter="wedding"><span>Wedding</span><span class="count">9</span></label>
+            <label class="filter-check"><input type="checkbox" data-filter="baby"><span>Baby & New Arrival</span><span class="count">6</span></label>
+            <label class="filter-check"><input type="checkbox" data-filter="holiday"><span>Holidays</span><span class="count">8</span></label>
+            <label class="filter-check"><input type="checkbox" data-filter="justbecause"><span>Just Because</span><span class="count">11</span></label>
+          </div>
+        </div>
+
+        <div class="filter-widget">
+          <h3>Product Type</h3>
+          <div class="filter-list">
+            <label class="filter-check"><input type="checkbox" data-filter="physical"><span>Physical Gifts</span><span class="count">32</span></label>
+            <label class="filter-check"><input type="checkbox" data-filter="digital"><span>Digital Downloads</span><span class="count">14</span></label>
+            <label class="filter-check"><input type="checkbox" data-filter="bundle"><span>Bundles</span><span class="count">8</span></label>
+          </div>
+        </div>
+
+        <div class="filter-widget">
+          <h3>Price Range</h3>
+          <div class="price-range">
+            <div class="price-row">
+              <input class="price-input" type="number" placeholder="Min" min="0" max="500" value="0">
+              <span style="color:var(--light);font-size:.84rem;">–</span>
+              <input class="price-input" type="number" placeholder="Max" min="0" max="500" value="100">
+            </div>
+            <button class="btn btn-primary btn-sm">Apply</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px;">
+            <label class="filter-check"><input type="radio" name="price" value="under-30"><span>Under $30</span></label>
+            <label class="filter-check"><input type="radio" name="price" value="30-60"><span>$30 – $60</span></label>
+            <label class="filter-check"><input type="radio" name="price" value="60-100"><span>$60 – $100</span></label>
+            <label class="filter-check"><input type="radio" name="price" value="over-100"><span>Over $100</span></label>
+          </div>
+        </div>
+
+        <div class="filter-widget">
+          <h3>For</h3>
+          <div class="filter-list">
+            <label class="filter-check"><input type="checkbox"><span>For Her</span><span class="count">28</span></label>
+            <label class="filter-check"><input type="checkbox"><span>For Him</span><span class="count">16</span></label>
+            <label class="filter-check"><input type="checkbox"><span>For Couples</span><span class="count">12</span></label>
+            <label class="filter-check"><input type="checkbox"><span>For Kids / Baby</span><span class="count">8</span></label>
+          </div>
+        </div>
+
+        <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:4px;">Clear All Filters</button>
+      </div>
+    </aside>
+
+    <!-- Product Grid -->
+    <main>
+      <div class="shop-head">
+        <p class="shop-count"><strong>10 gifts</strong> found</p>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div class="view-toggle" aria-label="View mode">
+            <button class="view-btn active" id="grid-view" aria-label="Grid view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </button>
+            <button class="view-btn" id="list-view-btn" aria-label="List view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            </button>
+          </div>
+          <div class="shop-sort">
+            <label style="color:var(--mid);">Sort:</label>
+            <select class="sort-select" aria-label="Sort products">
+              <option>Best Sellers</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Newest First</option>
+              <option>Best Rated</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Grid — 10 products -->
+      <div class="prod-grid" id="product-grid" style="grid-template-columns:repeat(3,1fr);">
+
+        <!-- Product 1 -->
+        <div class="prod-item rev d1" data-cat="birthday anniversary jewelry physical" data-price="49.99">
+          <div class="prod-card">
+            <div class="prod-thumb">
+              <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=500&q=80" alt="Custom Name Necklace" loading="lazy">
+              <span class="prod-bdg bdg-bestseller">Bestseller</span>
+              <div class="prod-wish" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div class="prod-quick" role="button">+ Quick Add</div>
+            </div>
+            <div class="prod-body">
+              <p class="prod-cat">Personalized Jewelry</p>
+              <h3 class="prod-name"><a href="product.html?id=1" style="color:inherit">Custom Name Necklace</a></h3>
+              <div class="prod-price"><span class="p-now">$49.99</span></div>
+              <div class="prod-stars"><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(412)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="prod-item rev d2" data-cat="birthday justbecause home physical" data-price="34.99">
+          <div class="prod-card">
+            <div class="prod-thumb">
+              <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=500&q=80" alt="Custom Photo Mug" loading="lazy">
+              <span class="prod-bdg bdg-new">New</span>
+              <div class="prod-wish" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div class="prod-quick" role="button">+ Quick Add</div>
+            </div>
+            <div class="prod-body">
+              <p class="prod-cat">Home & Living</p>
+              <h3 class="prod-name"><a href="product.html?id=2" style="color:inherit">Custom Photo Mug</a></h3>
+              <div class="prod-price"><span class="p-now">$34.99</span></div>
+              <div class="prod-stars"><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(287)</span></div>
+              <div class="prod-dots"><div class="dot" style="background:#fff;border-color:#ccc"></div><div class="dot" style="background:#1a1a1a"></div><div class="dot" style="background:#ad0000"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="prod-item rev d3" data-cat="birthday digital" data-price="9.99">
+          <div class="prod-card">
+            <div class="prod-thumb">
+              <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=500&q=80" alt="Printable Gift Card Pack" loading="lazy">
+              <span class="prod-bdg bdg-digital">Digital</span>
+              <div class="prod-wish" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div class="prod-quick" role="button">+ Download Now</div>
+            </div>
+            <div class="prod-body">
+              <p class="prod-cat">Digital · Instant Download</p>
+              <h3 class="prod-name"><a href="product.html?id=3" style="color:inherit">Printable Gift Card Pack</a></h3>
+              <div class="prod-price"><span class="p-now">$9.99</span></div>
+              <div class="prod-stars"><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(189)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="prod-item rev d1" data-cat="anniversary wedding physical wall-art" data-price="59.99">
+          <div class="prod-card">
+            <div class="prod-thumb">
+              <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=500&q=80" alt="Custom Star Map Print" loading="lazy">
+              <span class="prod-bdg bdg-sale">–20%</span>
+              <div class="prod-wish" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div class="prod-quick" role="button">+ Quick Add</div>
+            </div>
+            <div class="prod-body">
+              <p class="prod-cat">Wall Art · Personalized</p>
+              <h3 class="prod-name"><a href="product.html?id=4" style="color:inherit">Custom Star Map Print</a></h3>
+              <div class="prod-price"><span class="p-now">$59.99</span><span class="p-was">$74.99</span><span class="p-pct">–20%</span></div>
+              <div class="prod-stars"><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(331)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="prod-item rev d2" data-cat="baby justbecause physical" data-price="69.99">
+          <div class="prod-card">
+            <div class="prod-thumb">
+              <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=500&q=80" alt="Personalized Baby Gift Set" loading="lazy">
+              <span class="prod-bdg bdg-new">New</span>
+              <div class="prod-wish" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div class="prod-quick" role="button">+ Quick Add</div>
+            </div>
+            <div class="prod-body">
+              <p class="prod-cat">Baby & New Arrival</p>
+              <h3 class="prod-name"><a href="product.html?id=5" style="color:inherit">Personalized Baby Gift Set</a></h3>
+              <div class="prod-price"><span class="p-now">$69.99</span></div>
+              <div class="prod-stars"><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(156)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="prod-item rev d3" data-cat="birthday justbecause bags physical" data-price="32.00">
+          <div class="prod-card">
+            <div class="prod-thumb">
+              <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=500&q=80" alt="Custom Quote Tote Bag" loading="lazy">
+              <div class="prod-wish" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div class="prod-quick" role="button">+ Quick Add</div>
+            </div>
+            <div class="prod-body">
+              <p class="prod-cat">Bags & Accessories</p>
+              <h3 class="prod-name"><a href="product.html?id=6" style="color:inherit">Custom Quote Tote Bag</a></h3>
+              <div class="prod-price"><span class="p-now">$32.00</span></div>
+              <div class="prod-stars"><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(203)</span></div>
+              <div class="prod-dots"><div class="dot" style="background:#1a1a1a"></div><div class="dot" style="background:#8B7355"></div><div class="dot" style="background:#ad0000"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="prod-item rev d1" data-cat="wedding anniversary kitchen physical" data-price="79.99">
+          <div class="prod-card">
+            <div class="prod-thumb">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=500&q=80" alt="Engraved Cutting Board" loading="lazy">
+              <span class="prod-bdg bdg-bestseller">Bestseller</span>
+              <div class="prod-wish" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div class="prod-quick" role="button">+ Quick Add</div>
+            </div>
+            <div class="prod-body">
+              <p class="prod-cat">Kitchen & Home</p>
+              <h3 class="prod-name"><a href="product.html?id=7" style="color:inherit">Engraved Cutting Board</a></h3>
+              <div class="prod-price"><span class="p-now">$79.99</span></div>
+              <div class="prod-stars"><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(94)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="prod-item rev d2" data-cat="birthday digital" data-price="14.99">
+          <div class="prod-card">
+            <div class="prod-thumb">
+              <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=500&q=80" alt="Birthday Printable Bundle" loading="lazy">
+              <span class="prod-bdg bdg-digital">Digital</span>
+              <span class="prod-bdg bdg-sale" style="top:10px;left:68px">–40%</span>
+              <div class="prod-wish" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div class="prod-quick" role="button">+ Download Now</div>
+            </div>
+            <div class="prod-body">
+              <p class="prod-cat">Digital · Bundle</p>
+              <h3 class="prod-name"><a href="product.html?id=8" style="color:inherit">Birthday Printable Bundle</a></h3>
+              <div class="prod-price"><span class="p-now">$14.99</span><span class="p-was">$24.99</span><span class="p-pct">–40%</span></div>
+              <div class="prod-stars"><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(541)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 9 -->
+        <div class="prod-item rev d3" data-cat="birthday anniversary home physical" data-price="89.99">
+          <div class="prod-card">
+            <div class="prod-thumb">
+              <img src="https://images.unsplash.com/photo-1578991624414-276ef23a534f?auto=format&fit=crop&w=500&q=80" alt="Custom Photo Blanket" loading="lazy">
+              <span class="prod-bdg bdg-new">New</span>
+              <div class="prod-wish" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div class="prod-quick" role="button">+ Quick Add</div>
+            </div>
+            <div class="prod-body">
+              <p class="prod-cat">Home & Living</p>
+              <h3 class="prod-name"><a href="product.html?id=9" style="color:inherit">Custom Photo Blanket</a></h3>
+              <div class="prod-price"><span class="p-now">$89.99</span></div>
+              <div class="prod-stars"><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(78)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 10 -->
+        <div class="prod-item rev d1" data-cat="birthday anniversary jewelry physical" data-price="54.99">
+          <div class="prod-card">
+            <div class="prod-thumb">
+              <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=500&q=80" alt="Personalized Jewelry Box" loading="lazy">
+              <span class="prod-bdg bdg-bestseller">Bestseller</span>
+              <div class="prod-wish" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div class="prod-quick" role="button">+ Quick Add</div>
+            </div>
+            <div class="prod-body">
+              <p class="prod-cat">Jewelry & Accessories</p>
+              <h3 class="prod-name"><a href="product.html?id=10" style="color:inherit">Personalized Jewelry Box</a></h3>
+              <div class="prod-price"><span class="p-now">$54.99</span></div>
+              <div class="prod-stars"><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="var(--cr)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>(167)</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /prod-grid -->
+
+      <div class="no-results" id="no-results">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--light)" stroke-width="1.5" width="48" height="48" style="margin:0 auto 16px"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <p style="color:var(--mid);font-size:.92rem;">No products match your filters. <button onclick="clearFilters()" style="color:var(--cr);font-weight:600;cursor:pointer;background:none;border:none;font-family:inherit;">Clear filters</button></p>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer aria-label="Site footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand"><span class="logo-text">cado<span>malo</span></span><p>Personalized gifts for every occasion and every person you love.</p></div>
+      <div class="foot-col"><h5>Shop by Occasion</h5><ul class="foot-links"><li><a href="shop.html?occ=birthday">Birthday Gifts</a></li><li><a href="shop.html?occ=anniversary">Anniversary Gifts</a></li><li><a href="shop.html?occ=wedding">Wedding Gifts</a></li><li><a href="shop.html?occ=baby">Baby & New Arrival</a></li><li><a href="shop.html#sale">Sale 🔥</a></li></ul></div>
+      <div class="foot-col"><h5>Help</h5><ul class="foot-links"><li><a href="gift-finder.html">Gift Finder ✨</a></li><li><a href="#">Shipping Info</a></li><li><a href="#">Track Order</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+      <div class="foot-col"><h5>Legal</h5><ul class="foot-links"><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="cookie-policy.html">Cookie Policy</a></li><li><a href="returns.html">Return Policy</a></li><li><a href="accessibility.html">Accessibility</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><p class="foot-copy">© 2026 Cadomalo · Fokebo LLC · All rights reserved.</p><div class="pay-row"><span class="pay-badge">VISA</span><span class="pay-badge">Mastercard</span><span class="pay-badge">PayPal</span><span class="pay-badge">Stripe</span></div></div>
+  </div>
+</footer>
+
+<script src="js/pixels.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // View toggle
+  document.getElementById('grid-view')?.addEventListener('click', function() {
+    document.getElementById('product-grid').classList.remove('list-view');
+    this.classList.add('active');
+    document.getElementById('list-view-btn').classList.remove('active');
+    document.getElementById('product-grid').style.gridTemplateColumns = 'repeat(3,1fr)';
+  });
+  document.getElementById('list-view-btn')?.addEventListener('click', function() {
+    document.getElementById('product-grid').classList.add('list-view');
+    this.classList.add('active');
+    document.getElementById('grid-view').classList.remove('active');
+    document.getElementById('product-grid').style.gridTemplateColumns = '1fr';
+  });
+
+  // Responsive grid columns
+  function setGridCols() {
+    const grid = document.getElementById('product-grid');
+    if (grid?.classList.contains('list-view')) return;
+    if (window.innerWidth < 500) grid.style.gridTemplateColumns = 'repeat(2,1fr)';
+    else if (window.innerWidth < 900) grid.style.gridTemplateColumns = 'repeat(2,1fr)';
+    else grid.style.gridTemplateColumns = 'repeat(3,1fr)';
+  }
+  window.addEventListener('resize', setGridCols);
+  setGridCols();
+
+  function clearFilters() {
+    document.querySelectorAll('.filter-check input').forEach(i => i.checked = false);
+    document.querySelectorAll('.prod-item').forEach(i => i.classList.remove('hidden'));
+    document.getElementById('no-results').classList.remove('show');
+  }
+</script>
+</body>
+</html>
