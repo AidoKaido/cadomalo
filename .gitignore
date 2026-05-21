@@ -1,0 +1,15 @@
+CADOMALO_PROJECT_NOTES.md
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.vscode/
+.idea/
+*.swp
+*~
+
+node_modules/
+.env
+.env.local
+.env.*.local
