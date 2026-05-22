@@ -95,25 +95,33 @@ async function fetchPrintifyProducts() {
     warn('Printify: no shops on this account — skipping')
     return []
   }
-  const shopId = shops[0].id
-  log(`Printify: using shop "${shops[0].title}" (id ${shopId})`)
-  const prodRes = await fetch(`${PRINTIFY_API}/shops/${shopId}/products.json?limit=50`, {headers})
-  if (!prodRes.ok) {
-    const body = await prodRes.text().catch(() => '<no body>')
-    warn(`Printify products fetch failed (${prodRes.status}): ${body.slice(0, 500)}`)
-    return []
+
+  // Iterate ALL shops (API channel + Etsy channel + any others). Products
+  // from non-API channels are still displayed; orders for them are
+  // fulfilled manually via the Printify dashboard for now.
+  const all = []
+  for (const shop of shops) {
+    const prodRes = await fetch(`${PRINTIFY_API}/shops/${shop.id}/products.json?limit=50`, {headers})
+    if (!prodRes.ok) {
+      const body = await prodRes.text().catch(() => '<no body>')
+      warn(`Printify shop "${shop.title}" (id ${shop.id}) failed (${prodRes.status}): ${body.slice(0, 200)}`)
+      continue
+    }
+    const {data} = await prodRes.json()
+    const visible = (data || []).filter((p) => p.visible !== false)
+    log(`Printify "${shop.title}" (${shop.sales_channel || 'unknown'} channel): ${visible.length} visible products`)
+    visible.forEach((p) => all.push(normalizePrintify(p, shop)))
   }
-  const {data} = await prodRes.json()
-  const visible = (data || []).filter((p) => p.visible !== false)
-  log(`Printify: ${visible.length} visible products`)
-  return visible.map(normalizePrintify)
+  return all
 }
 
-function normalizePrintify(p) {
+function normalizePrintify(p, shop) {
   const minPrice = Math.min(...(p.variants || []).filter((v) => v.is_enabled).map((v) => v.price)) || 0
   return {
     id: `printify-${p.id}`,
     source: 'printify',
+    sourceShopId: shop?.id || null,
+    sourceShopChannel: shop?.sales_channel || null,
     slug: slugify(p.title) + '-' + p.id.slice(0, 6),
     title: p.title,
     shortDescription: stripHtml(p.description).slice(0, 200),
