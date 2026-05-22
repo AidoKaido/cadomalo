@@ -42,13 +42,15 @@ async function main() {
   )
   const body = await res.text()
   if (!res.ok) {
-    console.error(`[alias] FAILED (${res.status}): ${body.slice(0, 400)}`)
-    process.exit(1)
+    // Non-fatal: build runs BEFORE deployment is finalized, so this often
+    // 400s with deployment_not_ready. The GitHub Action backup will
+    // catch up within ~5 minutes.
+    console.warn(`[alias] skipped (${res.status}): ${body.slice(0, 200)}`)
+    return
   }
   console.log(`[alias] ✓ ${TARGET_DOMAIN} → ${deploymentUrl}`)
 }
 
 main().catch((e) => {
-  console.error('[alias] error:', e.message)
-  process.exit(1)
+  console.warn('[alias] error (non-fatal):', e.message)
 })
