@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-05-21T22:40:17.937Z",
+  "count": 1,
+  "products": [
+    {
+      "id": "7e8ef4f4-f8d6-4348-b020-692201db40c2",
+      "source": "sanity",
+      "slug": "claritysheet-multilingual-personal-finance-planner-or-excel-budget-spreadsheet-goals-debt-and",
+      "title": "ClaritySheet Multilingual Personal Finance Planner | Excel Budget Spreadsheet, Goals, Debt & Net Worth Tracker",
+      "shortDescription": "ClaritySheet is an Excel budget planner to track income, expenses, savings, debt, goals, net worth, and account balances in one clean dashboard.",
+      "description": "All-in-one yearly budget planner designed to help you track income, expenses, savings, debt, net worth, goals, and account balances in one organized Excel workbook.\n\nClean financial dashboard with monthly snapshots, visual charts, spending breakdowns, budget vs actual tracking, savings rate, total debt, and net worth overview.\n\nAnnual summary dashboard that helps you review your full-year income, expenses, savings, debt progress, top categories, goals progress, and net worth growth.\n\nBuilt-in transaction tracker to record and organize your spending, income, recurring payments, bills, categories, and financial activity throughout the year.\n\nDebt Crusher section created to help you monitor debt balances, payments, payoff progress, and stay motivated as you work toward becoming debt-free.\n\nGoals Vault included so you can track emergency funds, savings goals, vacation funds, home savings, education funds, and other personal financial targets.\n\nNet worth and account balance tracking to help you see the bigger picture of what you own, what you owe, and how your financial position changes over time.\n\nThoughtful, premium design with a colorful navigation menu, simple layout, clean typography, and dashboard-style visuals that make budgeting easier to understand.\n\nExcel-based digital download with no monthly subscription, no complicated apps, and no account sign-up required.\n\nCreated by FOKEBO LLC for people who want a beautiful, structured, and practical way to manage their money with clarity.\n\n\n\nMeet ClaritySheet, a thoughtfully designed yearly budget planner created to help you understand your money, organize your finances, and make confident financial decisions throughout the year.\n\nThis Excel budget planner brings your most important financial information into one clean, easy-to-use workbook. Instead of jumping between apps, notes, bank statements, and random spreadsheets, ClaritySheet gives you a structured place to track your income, expenses, savings, debts, goals, account balances, and net worth.\n\nThe workbook includes a modern Dashboard where you can view your monthly financial snapshot at a glance. Track total income, total expenses, savings, savings rate, debt, net worth, spending breakdowns, bills due, top categories, and goal progress in a visual format that is easy to read and understand.\n\nThe Annual Summary gives you a bigger-picture view of your finances across the year. See your yearly income, yearly expenses, total savings, debt paydown, net worth growth, top spending categories, and yearly goal progress in one polished overview.\n\nClaritySheet also includes dedicated sections for transactions, budget planning, goals, debt payoff, net worth, and account balances. Each tab is designed to work together so you can build better money habits, stay organized, and see your progress clearly.\n\nWhether you are trying to reduce debt, save more consistently, prepare for big goals, or simply understand where your money is going, ClaritySheet gives you a clear system to follow.\n\nWhat’s included\n\nInstructions\n\nSetup section\n\nDashboard\n\nTransactions tracker\n\nBudget Planner\n\nGoals Vault\n\nDebt Crusher\n\nNet Worth tracker\n\nAccount Balances\n\nAnnual Summary\n\nPerfect for\n\nPersonal budgeting\n\nHousehold budgeting\n\nYearly financial planning\n\nDebt payoff tracking\n\nSavings goal tracking\n\nNet worth tracking\n\nMonthly expense reviews\n\nBudget-conscious families, couples, and individuals\n\nPlease note\n\nThis is a digital Excel spreadsheet template. You will need Microsoft Excel to use the workbook properly. For best results, use the desktop version of Excel, especially if the workbook contains charts, formulas, or macros.\n\n\n\nAdditional SEO tags:\n\nbudget dashboarddebt payoffsavings goalsaccount trackerincome trackerexpense plannerfinance spreadsheetmoney managementdigital plannerexcel financebudget templateannual budgetcash flow trackerfinancial dashboardpersonal budget",
+      "category": {
+        "slug": "/digital_product",
+        "title": "Digital Product"
+      },
+      "subcategory": null,
+      "productType": "physical",
+      "price": 14.99,
+      "compareAtPrice": 49.99,
+      "badges": [
+        "Bestseller",
+        "Sale"
+      ],
+      "images": [
+        {
+          "alt": "budget dashboard debt payoff savings goals account tracker income tracker expense planner finance spreadsheet money management digital planner excel finance budget template annual budget cash flow tracker financial dashboard personal budget",
+          "url": "https://cdn.sanity.io/images/8ue8kmgn/production/1cb6aaf1972e0665de4d34fbfe246790f02c0efa-1667x790.png"
+        }
+      ],
+      "personalization": {
+        "allowText": false,
+        "textMaxLength": 20,
+        "textLabel": "Custom text",
+        "textRequired": false,
+        "allowImage": false,
+        "imageMaxSizeMB": 10,
+        "imageRequired": false
+      },
+      "printifyProductId": null,
+      "sku": null,
+      "stock": null,
+      "digitalFile": null,
+      "seo": {
+        "title": "ClaritySheet MultiLingual Personal Finance Planner",
+        "description": "More than a budget spreadsheet — it is a financial command center designed to help you plan, track, and grow with clarity."
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "cadomalo-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cadomalo static site with Sanity + Printify product sync",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/sync-products.js",
+    "sync": "node scripts/sync-products.js"
+  }
+}

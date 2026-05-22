@@ -218,7 +218,7 @@
 <!-- Breadcrumb -->
 <div style="background:var(--bg);border-bottom:1px solid var(--border);padding:12px 0;">
   <div class="wrap">
-    <nav class="breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg><a href="shop.html">Shop</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg><a href="shop.html">Personalized Jewelry</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg><span>Custom Name Necklace</span></nav>
+    <nav class="breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg><a href="shop.html">Shop</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg><a href="shop.html" data-bc-cat>Shop</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg><span data-bc-name>Product</span></nav>
   </div>
 </div>
 
@@ -226,7 +226,7 @@
      PRODUCT MAIN
      ============================================================ -->
 <div class="wrap">
-  <div class="product-layout">
+  <div class="product-layout" data-product-page>
 
     <!-- Gallery -->
     <div class="gallery" aria-label="Product images">
@@ -236,20 +236,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
         </button>
       </div>
-      <div class="gallery-thumbs" role="tablist" aria-label="Product image thumbnails">
-        <div class="gallery-thumb active" role="tab" onclick="switchImg(this,'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80')">
-          <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=200&q=70" alt="View 1">
-        </div>
-        <div class="gallery-thumb" role="tab" onclick="switchImg(this,'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=800&q=80')">
-          <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=200&q=70" alt="View 2">
-        </div>
-        <div class="gallery-thumb" role="tab" onclick="switchImg(this,'https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=800&q=80')">
-          <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=200&q=70" alt="View 3">
-        </div>
-        <div class="gallery-thumb" role="tab" onclick="switchImg(this,'https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=800&q=80')">
-          <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=200&q=70" alt="View 4">
-        </div>
-      </div>
+      <div class="gallery-thumbs" data-thumb-wrap role="tablist" aria-label="Product image thumbnails"></div>
     </div>
 
     <!-- Product Info -->
@@ -508,6 +495,7 @@
 
 <script src="js/pixels.js"></script>
 <script src="js/main.js"></script>
+<script src="js/products.js"></script>
 <script>
   function switchImg(thumb, src) {
     document.getElementById('main-img').src = src;
@@ -555,166 +543,6 @@
     if (!txt) { document.getElementById('custom-text').focus(); showToast('⚠️ Please add your personalization text first.'); return false; }
     return true;
   }
-  /* ─── PRODUCT ROUTING — reads ?id=X from URL and updates page ─── */
-  const PRODUCTS = {
-    1: { name:'Custom Name Necklace', cat:'Personalized Jewelry', price:49.99, was:64.99, save:15,
-         img:'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80',
-         badges:['⭐ Bestseller','🚀 Ships in 1–3 days','🎁 Gift box included'],
-         desc:'A beautifully hand-crafted necklace personalized with any name, word, or short phrase. Comes in a premium velvet gift box — ready to give. 316L stainless steel, 18K plated, hypoallergenic.',
-         digital:false, reviews:412, rating:4.9,
-         opts:[{label:'Metal',id:'metal-selected',vals:['Gold Plated','Silver Plated','Rose Gold']},{label:'Chain Length',id:'chain-selected',vals:['14″','16″','18″','20″']}] },
-    2: { name:'Custom Photo Mug', cat:'Home & Living', price:34.99, was:null, save:null,
-         img:'https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=800&q=80',
-         badges:['🆕 New Arrival','🚀 Ships in 1–3 days'],
-         desc:'Premium 11oz ceramic mug printed with your favourite photo or custom design. Dishwasher-safe, microwave-safe, fade-resistant printing. An everyday gift that lasts for years.',
-         digital:false, reviews:287, rating:4.9,
-         opts:[{label:'Color',id:'color-selected',vals:['White','Black','Red']},{label:'Size',id:'size-selected',vals:['11oz (Standard)','15oz (Large)']}] },
-    3: { name:'Printable Gift Card Pack', cat:'Digital · Instant Download', price:9.99, was:null, save:null,
-         img:'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=800&q=80',
-         badges:['✨ Instant Download','📥 No shipping needed'],
-         desc:'20 beautifully designed, print-ready gift card templates for every occasion. Download immediately after purchase. Print at home or any print shop. Delivered to your inbox in seconds.',
-         digital:true, reviews:189, rating:4.9, opts:[] },
-    4: { name:'Custom Star Map Print', cat:'Wall Art · Personalized', price:59.99, was:74.99, save:15,
-         img:'https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=800&q=80',
-         badges:['🔥 On Sale','🚀 Ships in 2–4 days'],
-         desc:'A stunning personalized star map showing the exact night sky above any location on any date. Choose your city, your date, your title. Perfect for anniversaries, weddings, and birthdays.',
-         digital:false, reviews:331, rating:4.9,
-         opts:[{label:'Size',id:'size-selected',vals:['A4 / 8×10″','A3 / 12×16″','18×24″']},{label:'Style',id:'style-selected',vals:['Classic Dark','Midnight Blue','Warm Beige']}] },
-    5: { name:'Personalized Baby Gift Set', cat:'Baby & New Arrival', price:69.99, was:null, save:null,
-         img:'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80',
-         badges:['🆕 New Arrival','🚀 Ships in 2–4 days','🎁 Gift wrapped'],
-         desc:'A curated set of soft, personalized baby essentials — embroidered or printed with the baby\'s name. A thoughtful new arrival gift the parents will cherish for years.',
-         digital:false, reviews:156, rating:4.9,
-         opts:[{label:'Color Theme',id:'theme-selected',vals:['Soft Pink','Baby Blue','Sage Green','Neutral Cream']}] },
-    6: { name:'Custom Quote Tote Bag', cat:'Bags & Accessories', price:32.00, was:null, save:null,
-         img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=80',
-         badges:['🚀 Ships in 1–3 days'],
-         desc:'Premium canvas tote bag printed with any quote, song lyric, or personal message. Durable, washable, large enough for daily use. A gift that gets seen everywhere.',
-         digital:false, reviews:203, rating:4.9,
-         opts:[{label:'Color',id:'color-selected',vals:['Natural / Black Text','Natural / Red Text','Black / White Text']},{label:'Size',id:'size-selected',vals:['Standard (15″×16″)','Large (18″×20″)']}] },
-    7: { name:'Engraved Cutting Board', cat:'Kitchen & Home', price:79.99, was:null, save:null,
-         img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80',
-         badges:['⭐ Bestseller','🚀 Ships in 2–4 days','🎁 Gift wrapped'],
-         desc:'Solid bamboo cutting board laser-engraved with names, a family name, wedding date, or personal message. Practical and deeply personal — it shows up at every dinner party.',
-         digital:false, reviews:94, rating:4.9,
-         opts:[{label:'Size',id:'size-selected',vals:['Medium (12″×9″)','Large (16″×12″)']}] },
-    8: { name:'Birthday Printable Bundle', cat:'Digital · Bundle', price:14.99, was:24.99, save:10,
-         img:'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80',
-         badges:['✨ Instant Download','📥 40% Off'],
-         desc:'10 premium birthday card designs + gift tag templates + printable gift guide — all at full print resolution. Download instantly, print at home or any print shop.',
-         digital:true, reviews:541, rating:4.9, opts:[] },
-    9: { name:'Custom Photo Blanket', cat:'Home & Living', price:89.99, was:null, save:null,
-         img:'https://images.unsplash.com/photo-1578991624414-276ef23a534f?auto=format&fit=crop&w=800&q=80',
-         badges:['🆕 New Arrival','🚀 Ships in 2–5 days'],
-         desc:'Super-soft plush blanket printed with your chosen photo or collage. Fade-resistant, machine-washable. A gift they\'ll reach for every movie night.',
-         digital:false, reviews:78, rating:4.8,
-         opts:[{label:'Size',id:'size-selected',vals:['Throw (50″×60″)','Large (60″×80″)']},{label:'Material',id:'material-selected',vals:['Sherpa (Extra Soft)','Fleece (Lightweight)']}] },
-    10:{ name:'Personalized Jewelry Box', cat:'Jewelry & Accessories', price:54.99, was:null, save:null,
-         img:'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=800&q=80',
-         badges:['⭐ Bestseller','🚀 Ships in 1–3 days','🎁 Gift ready'],
-         desc:'Elegant velvet-lined jewelry box engraved with a name or initials on the lid. Perfect for storing rings, necklaces, and keepsakes. A gift that holds other gifts inside it.',
-         digital:false, reviews:167, rating:4.9,
-         opts:[{label:'Color',id:'color-selected',vals:['Ivory White','Dusty Pink','Midnight Black']}] }
-  };
-
-  (function loadProduct() {
-    const id  = parseInt(new URLSearchParams(window.location.search).get('id')) || 1;
-    const p   = PRODUCTS[id];
-    if (!p) return;
-
-    // Title + meta
-    document.title = p.name + ' – Personalized Gift | Cadomalo';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.content = p.desc;
-
-    // Breadcrumb last item
-    const bc = document.querySelector('.breadcrumb span:last-child');
-    if (bc) bc.textContent = p.name;
-
-    // Hero image
-    const mainImg = document.getElementById('main-img');
-    if (mainImg) { mainImg.src = p.img; mainImg.alt = p.name; }
-
-    // Thumb 1 stays same as main
-    const firstThumb = document.querySelector('.gallery-thumb img');
-    if (firstThumb) firstThumb.src = p.img.replace('w=800','w=200');
-
-    // Badges
-    const badgeWrap = document.querySelector('.prod-badges');
-    if (badgeWrap) {
-      badgeWrap.innerHTML = p.badges.map(b => {
-        const cls = b.includes('Bestseller') ? 'badge-bestseller' : b.includes('Ships') ? 'badge-ships-fast' : 'badge-gift-box';
-        return `<span class="prod-badge ${cls}">${b}</span>`;
-      }).join('');
-    }
-
-    // Name
-    const titleEl = document.querySelector('.prod-title');
-    if (titleEl) titleEl.textContent = p.name;
-
-    // Category in breadcrumb
-    const catBc = document.querySelectorAll('.breadcrumb a');
-    if (catBc[2]) catBc[2].textContent = p.cat;
-
-    // Rating count
-    const ratingCount = document.querySelector('.prod-rating-count');
-    if (ratingCount) ratingCount.innerHTML = `<strong>${p.rating}</strong> · <a href="#reviews">${p.reviews} reviews</a>`;
-
-    // Price
-    const priceNow = document.querySelector('.prod-price-now');
-    const priceWas = document.querySelector('.prod-price-was');
-    const priceSave = document.querySelector('.prod-price-save');
-    if (priceNow) priceNow.textContent = '$' + p.price.toFixed(2);
-    if (priceWas) priceWas.textContent = p.was ? '$' + p.was.toFixed(2) : '';
-    if (priceSave) { priceSave.textContent = p.save ? 'Save $' + p.save : ''; priceSave.style.display = p.save ? '' : 'none'; }
-
-    // Description paragraph
-    const descEl = document.getElementById('prod-desc-text');
-    if (descEl) descEl.textContent = p.desc;
-
-    // Tab description content
-    const tabDesc = document.getElementById('tab-desc');
-    if (tabDesc) tabDesc.innerHTML = `<p>${p.desc}</p>${p.digital ? '<p style="margin-top:12px;"><strong>Delivery:</strong> Instantly via email after payment. Works with any printer. File formats: PDF + PNG at 300 DPI.</p>' : '<p style="margin-top:12px;"><strong>Processing:</strong> 1–3 business days (made to order). Ships with full tracking via USPS / DHL.</p>'}`;
-
-    // Options rebuild
-    const customTextWrap = document.querySelector('.custom-text-wrap');
-    const optionArea = customTextWrap?.parentElement;
-    if (!optionArea) return;
-    optionArea.querySelectorAll('.option-group').forEach(g => g.remove());
-    p.opts.forEach(opt => {
-      const div = document.createElement('div');
-      div.className = 'option-group';
-      div.innerHTML = `<p class="option-label">${opt.label} <span id="${opt.id}">${opt.vals[0]}</span></p>
-        <div class="option-btns" role="group">
-          ${opt.vals.map((v,i) => `<button class="opt-btn${i===0?' selected':''}" onclick="selectOpt(this,'${opt.id}')" data-val="${v}">${v}</button>`).join('')}
-        </div>`;
-      optionArea.insertBefore(div, customTextWrap);
-    });
-
-    // Digital products: tweak CTA text
-    if (p.digital) {
-      const addBtn = document.getElementById('add-to-cart-btn');
-      if (addBtn) addBtn.innerHTML = addBtn.innerHTML.replace('Add to Cart','Add to Cart — Instant Download');
-      const buyBtn = document.querySelector('.btn-buy-now');
-      if (buyBtn) buyBtn.innerHTML = buyBtn.innerHTML.replace('Buy Now — Secure Checkout','Buy Now — Download Immediately');
-      // Hide personalization input for digital
-      const customWrap = document.querySelector('.custom-text-wrap');
-      if (customWrap) customWrap.style.display = 'none';
-      const personNote = document.querySelector('.personalization-note');
-      if (personNote) personNote.style.display = 'none';
-    }
-
-    // Reviews tab count
-    const reviewsTabBtn = document.getElementById('reviews-tab');
-    if (reviewsTabBtn) reviewsTabBtn.textContent = `Reviews (${p.reviews})`;
-
-    // Bundle upsell price update
-    const bundleNow = document.querySelector('.bundle-now');
-    if (bundleNow && p.price) bundleNow.textContent = '$' + (p.price * 0.8 + 9.99).toFixed(2);
-
-    // Track product view
-    if (typeof window.gaTrack === 'function') window.gaTrack.viewItem({ currency:'USD', value:p.price, items:[{item_id:'CDM-00'+id, item_name:p.name, price:p.price}] });
-  })();
 </script>
 </body>
 </html>
