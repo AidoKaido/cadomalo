@@ -96,21 +96,37 @@ async function fetchPrintifyProducts() {
     return []
   }
 
-  // Iterate ALL shops (API channel + Etsy channel + any others). Products
-  // from non-API channels are still displayed; orders for them are
-  // fulfilled manually via the Printify dashboard for now.
+  // Iterate connected shops only. Products from non-API channels are
+  // displayed identically on the site; orders are fulfilled manually
+  // via the Printify dashboard for now.
   const all = []
   for (const shop of shops) {
-    const prodRes = await fetch(`${PRINTIFY_API}/shops/${shop.id}/products.json?limit=50`, {headers})
-    if (!prodRes.ok) {
-      const body = await prodRes.text().catch(() => '<no body>')
-      warn(`Printify shop "${shop.title}" (id ${shop.id}) failed (${prodRes.status}): ${body.slice(0, 200)}`)
+    if (shop.sales_channel === 'disconnected') {
+      log(`Printify "${shop.title}": disconnected channel — skipping`)
       continue
     }
-    const {data} = await prodRes.json()
-    const visible = (data || []).filter((p) => p.visible !== false)
-    log(`Printify "${shop.title}" (${shop.sales_channel || 'unknown'} channel): ${visible.length} visible products`)
-    visible.forEach((p) => all.push(normalizePrintify(p, shop)))
+    let page = 1
+    let count = 0
+    while (true) {
+      const prodRes = await fetch(
+        `${PRINTIFY_API}/shops/${shop.id}/products.json?limit=50&page=${page}`,
+        {headers}
+      )
+      if (!prodRes.ok) {
+        const body = await prodRes.text().catch(() => '<no body>')
+        warn(`Printify "${shop.title}" page ${page} failed (${prodRes.status}): ${body.slice(0, 200)}`)
+        break
+      }
+      const json = await prodRes.json()
+      const data = json.data || []
+      const visible = data.filter((p) => p.visible !== false)
+      visible.forEach((p) => all.push(normalizePrintify(p, shop)))
+      count += visible.length
+      const lastPage = json.last_page || (data.length < 50 ? page : page + 1)
+      if (page >= lastPage || data.length === 0) break
+      page++
+    }
+    log(`Printify "${shop.title}" (${shop.sales_channel || 'unknown'}): ${count} visible products`)
   }
   return all
 }
