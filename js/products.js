@@ -511,16 +511,84 @@ function modQuantity(p) {
 function modActions(p) {
   const wrap = document.querySelector('[data-mod="actions"]')
   if (!wrap) return
-  const btn = wrap.querySelector('[data-action="buy-now"]')
-  if (!btn) return
-  const lbl = btn.querySelector('[data-action-label]')
-  if (lbl) lbl.textContent = actionLabelFor(p)
-  // Remove old listeners by cloning
-  const fresh = btn.cloneNode(true)
-  btn.parentNode.replaceChild(fresh, btn)
-  fresh.addEventListener('click', () => buyNow(p, fresh))
-  state._actionBtn = fresh
+  const buyBtn = wrap.querySelector('[data-action="buy-now"]')
+  const addBtn = wrap.querySelector('[data-action="add-to-cart"]')
+  if (!buyBtn) return
+  const buyLbl = buyBtn.querySelector('[data-action-label]')
+  if (buyLbl) buyLbl.textContent = actionLabelFor(p)
+  const buyFresh = buyBtn.cloneNode(true)
+  buyBtn.parentNode.replaceChild(buyFresh, buyBtn)
+  buyFresh.addEventListener('click', () => buyNow(p, buyFresh))
+  state._actionBtn = buyFresh
+
+  if (addBtn) {
+    const addFresh = addBtn.cloneNode(true)
+    addBtn.parentNode.replaceChild(addFresh, addBtn)
+    addFresh.addEventListener('click', () => addToCart(p, addFresh))
+  }
   updateActionState()
+}
+
+function addToCart(p, btn) {
+  const c = p.personalization || {}
+  if (c.allowText && c.textRequired && !state.personalization.text.trim()) {
+    if (typeof showToast === 'function') showToast('⚠️ Please add your personalization text.')
+    document.getElementById('pers-text')?.focus()
+    return
+  }
+  if (c.allowImage && c.imageRequired && !state.personalization.image) {
+    if (typeof showToast === 'function') showToast('⚠️ Please upload the required image.')
+    document.getElementById('pers-image')?.focus()
+    return
+  }
+  // Persist cart item to localStorage. Image files aren't serializable; for
+  // now we just keep the filename hint. Real upload happens at checkout.
+  const item = {
+    slug: p.slug,
+    title: p.title,
+    image: p.images?.[0]?.url || null,
+    quantity: state.quantity,
+    variantId: state.selectedVariant?.id || null,
+    variantLabel: state.selectedVariant?.title || null,
+    unitPrice: effectivePrice(),
+    personalization: {
+      text: state.personalization.text || null,
+      imageName: state.personalization.image?.name || null,
+    },
+    addedAt: Date.now(),
+  }
+  try {
+    const raw = localStorage.getItem('cadomalo_cart') || '[]'
+    const cart = JSON.parse(raw)
+    const existing = cart.find(
+      (x) => x.slug === item.slug && x.variantId === item.variantId && x.personalization.text === item.personalization.text
+    )
+    if (existing) existing.quantity += item.quantity
+    else cart.push(item)
+    localStorage.setItem('cadomalo_cart', JSON.stringify(cart))
+    if (window.Cart?.bump) window.Cart.bump()
+    else {
+      const counter = document.querySelector('.cart-count')
+      if (counter) {
+        const n = cart.reduce((a, x) => a + (x.quantity || 0), 0)
+        counter.textContent = n
+        counter.setAttribute('aria-label', `${n} items in cart`)
+      }
+    }
+  } catch (err) {
+    console.error('[cart] save failed', err)
+  }
+  const lbl = btn.querySelector('[data-add-label]')
+  const originalLbl = lbl ? lbl.textContent : btn.textContent
+  if (lbl) lbl.textContent = '✓ Added to Cart'
+  btn.style.background = '#059669'
+  setTimeout(() => {
+    if (lbl) lbl.textContent = originalLbl
+    btn.style.background = ''
+  }, 1800)
+  if (typeof window.trackAddToCart === 'function') {
+    window.trackAddToCart({id: p.id, name: p.title, price: effectivePrice(), quantity: state.quantity})
+  }
 }
 
 function actionLabelFor(p) {
@@ -701,7 +769,36 @@ function formatReviewDate(d) {
 
 // ─────────────────────────────────────────────────── Boot
 
+function showBootError(msg) {
+  const grid = document.getElementById('product-grid')
+  if (grid) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:48px;text-align:center;color:#b00;font-family:monospace;">JS error: ${esc(msg)}</div>`
+  }
+  console.error('[products.js boot]', msg)
+}
+
+window.addEventListener('error', (e) => showBootError(e.message + ' @ ' + (e.filename || '') + ':' + (e.lineno || '')))
+window.addEventListener('unhandledrejection', (e) => showBootError('Unhandled: ' + (e.reason?.message || e.reason)))
+
+function syncCartCount() {
+  try {
+    const cart = JSON.parse(localStorage.getItem('cadomalo_cart') || '[]')
+    const n = cart.reduce((a, x) => a + (x.quantity || 0), 0)
+    document.querySelectorAll('.cart-count').forEach((el) => {
+      el.textContent = n
+      el.setAttribute('aria-label', `${n} items in cart`)
+    })
+  } catch (e) {
+    /* ignore */
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  renderShopGrid()
-  renderProductPage()
+  try {
+    syncCartCount()
+    renderShopGrid()
+    renderProductPage()
+  } catch (err) {
+    showBootError(err.message)
+  }
 })
