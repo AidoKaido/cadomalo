@@ -24,6 +24,8 @@ export default async function handler(req, res) {
   const body = req.body || (await readJson(req))
   const slug = body?.slug
   const quantity = Math.max(1, Math.min(99, parseInt(body?.quantity) || 1))
+  const variantId = body?.variantId || null
+  const personalizationText = (body?.personalization?.text || '').toString().slice(0, 200)
   if (!slug) return res.status(400).json({error: 'Missing slug'})
 
   let product
@@ -36,7 +38,18 @@ export default async function handler(req, res) {
     return res.status(500).json({error: 'Catalogue unavailable'})
   }
   if (!product) return res.status(404).json({error: 'Product not found'})
-  if (typeof product.price !== 'number' || product.price <= 0) {
+
+  // Resolve effective price and label from variant if provided
+  let unitPrice = product.price
+  let variantLabel = ''
+  if (variantId && Array.isArray(product.variants)) {
+    const v = product.variants.find((x) => x.id === variantId)
+    if (v) {
+      unitPrice = v.price
+      variantLabel = v.title || ''
+    }
+  }
+  if (typeof unitPrice !== 'number' || unitPrice <= 0) {
     return res.status(400).json({error: 'Product is not purchasable'})
   }
 
@@ -52,7 +65,7 @@ export default async function handler(req, res) {
         price_data: {
           currency: 'usd',
           product_data: {
-            name: product.title,
+            name: variantLabel ? `${product.title} — ${variantLabel}` : product.title,
             description: (product.shortDescription || '').slice(0, 200) || undefined,
             images: (product.images || []).slice(0, 8).map((i) => i.url).filter(Boolean),
             metadata: {
@@ -60,9 +73,12 @@ export default async function handler(req, res) {
               source_shop_channel: product.sourceShopChannel || '',
               printify_product_id: product.printifyProductId || '',
               slug: product.slug,
+              variant_id: variantId || '',
+              variant_label: variantLabel,
+              personalization_text: personalizationText,
             },
           },
-          unit_amount: Math.round(product.price * 100),
+          unit_amount: Math.round(unitPrice * 100),
         },
         quantity,
         adjustable_quantity: {enabled: true, minimum: 1, maximum: 10},
@@ -79,6 +95,9 @@ export default async function handler(req, res) {
       product_source: product.source || '',
       printify_product_id: product.printifyProductId || '',
       printify_shop_id: String(product.sourceShopId || ''),
+      variant_id: variantId || '',
+      variant_label: variantLabel,
+      personalization_text: personalizationText,
     },
   })
 

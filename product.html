@@ -11,28 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Product Structured Data (GEO) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Custom Name Necklace",
-    "description": "A beautifully crafted custom name necklace personalized with any name, date or message.",
-    "brand": { "@type": "Brand", "name": "Cadomalo" },
-    "offers": {
-      "@type": "Offer",
-      "price": "49.99",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "seller": { "@type": "Organization", "name": "Cadomalo" }
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "412"
-    }
-  }
-  </script>
+  <!-- Product Structured Data injected dynamically by js/products.js -->
+  <script type="application/ld+json" id="product-jsonld">{}</script>
 
   <style>
     /* Product page layout */
@@ -151,6 +131,30 @@
     .tab-content.active{display:block;}
     .tab-content p,.tab-content li{font-size:.88rem;color:var(--mid);line-height:1.75;}
     .tab-content ul{padding-left:20px;margin-top:8px;}
+    .tab-content h3,.tab-content h4{margin:14px 0 6px;color:var(--dark);font-size:.95rem;}
+    .tab-content strong{color:var(--dark);}
+
+    /* Reviews */
+    .review-card{padding:16px 0;border-bottom:1px solid var(--border);}
+    .review-card:last-child{border-bottom:none;}
+    .review-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+    .review-author{font-size:.88rem;font-weight:600;color:var(--dark);}
+    .review-verified{font-size:.7rem;color:#059669;background:#d1fae5;padding:2px 6px;border-radius:var(--rpill);margin-left:6px;font-weight:600;}
+    .review-date{font-size:.74rem;color:var(--light);margin-left:auto;}
+    .review-stars{display:flex;gap:2px;}
+    .review-stars svg{width:14px;height:14px;fill:var(--cr);}
+    .review-title{font-size:.92rem;font-weight:700;color:var(--dark);margin:6px 0 4px;}
+    .review-body{font-size:.88rem;color:var(--mid);line-height:1.65;}
+    .review-empty{padding:32px 0;text-align:center;color:var(--mid);font-size:.88rem;}
+
+    /* Personalization input */
+    .pers-block{margin-bottom:12px;}
+    .pers-label{font-size:.84rem;font-weight:700;color:var(--dark);display:block;margin-bottom:6px;}
+    .pers-required{color:var(--cr);}
+    .pers-input{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--r8);font-size:.92rem;font-family:inherit;outline:none;}
+    .pers-input:focus{border-color:var(--cr);}
+    .pers-file{display:block;font-size:.84rem;}
+    .pers-hint{font-size:.72rem;color:var(--light);margin-top:4px;}
     .tab-content li{margin-bottom:6px;}
 
     /* Reviews */
@@ -241,219 +245,72 @@
 
     <!-- Product Info -->
     <div class="prod-info">
-      <div class="prod-badges">
-        <span class="prod-badge badge-bestseller">⭐ Bestseller</span>
-        <span class="prod-badge badge-ships-fast">🚀 Ships in 1–3 days</span>
-        <span class="prod-badge badge-gift-box">🎁 Gift box included</span>
+      <div class="prod-badges" data-mod="badges"></div>
+
+      <h1 class="prod-title" data-mod="title">Loading…</h1>
+
+      <div class="prod-rating" data-mod="rating" style="display:none;">
+        <div class="prod-rating-stars" data-rating-stars></div>
+        <p class="prod-rating-count" data-rating-text></p>
       </div>
 
-      <h1 class="prod-title">Custom Name Necklace</h1>
-
-      <div class="prod-rating">
-        <div class="prod-rating-stars" aria-label="4.9 out of 5 stars">
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <p class="prod-rating-count"><strong>4.9</strong> · <a href="#reviews">412 reviews</a></p>
+      <div class="prod-price-wrap" data-mod="price">
+        <span class="prod-price-now" data-price-now>—</span>
+        <span class="prod-price-was" data-price-was style="display:none;"></span>
+        <span class="prod-price-save" data-price-save style="display:none;"></span>
       </div>
 
-      <div class="prod-price-wrap">
-        <span class="prod-price-now">$49.99</span>
-        <span class="prod-price-was">$64.99</span>
-        <span class="prod-price-save">Save $15</span>
-      </div>
+      <p id="prod-desc-text" data-mod="short-desc" style="font-size:.9rem;color:var(--mid);line-height:1.7;margin-bottom:20px;"></p>
 
-      <p id="prod-desc-text" style="font-size:.9rem;color:var(--mid);line-height:1.7;margin-bottom:20px;">A beautifully hand-crafted necklace personalized with <strong>any name, word, or short phrase</strong> of your choice. Comes in a premium gift box — ready to give, no wrapping needed. Perfect for birthdays, anniversaries, and Mother's Day.</p>
+      <div data-mod="variants"></div>
 
-      <!-- Metal Option -->
-      <div class="option-group">
-        <p class="option-label">Metal <span id="metal-selected">Gold Plated</span></p>
-        <div class="option-btns" role="group" aria-label="Choose metal">
-          <button class="opt-btn selected" onclick="selectOpt(this,'metal-selected')" data-val="Gold Plated">Gold Plated</button>
-          <button class="opt-btn" onclick="selectOpt(this,'metal-selected')" data-val="Silver Plated">Silver Plated</button>
-          <button class="opt-btn" onclick="selectOpt(this,'metal-selected')" data-val="Rose Gold">Rose Gold</button>
-        </div>
-      </div>
+      <div class="custom-text-wrap" data-mod="personalization" style="display:none;"></div>
 
-      <!-- Chain length -->
-      <div class="option-group">
-        <p class="option-label">Chain Length <span id="chain-selected">16 inches</span></p>
-        <div class="option-btns" role="group" aria-label="Choose chain length">
-          <button class="opt-btn" onclick="selectOpt(this,'chain-selected')" data-val="14 inches">14&rdquo;</button>
-          <button class="opt-btn selected" onclick="selectOpt(this,'chain-selected')" data-val="16 inches">16&rdquo;</button>
-          <button class="opt-btn" onclick="selectOpt(this,'chain-selected')" data-val="18 inches">18&rdquo;</button>
-          <button class="opt-btn" onclick="selectOpt(this,'chain-selected')" data-val="20 inches">20&rdquo;</button>
-        </div>
-      </div>
-
-      <!-- Personalization Text -->
-      <div class="custom-text-wrap">
-        <label class="form-label" for="custom-text" style="font-size:.84rem;font-weight:700;display:block;margin-bottom:8px;">Your Personalization <span style="color:var(--cr);">*</span></label>
-        <input class="form-input" type="text" id="custom-text" placeholder="e.g. Sophie · Mum · Forever" maxlength="20" oninput="document.getElementById('char-count').textContent = this.value.length">
-        <p class="char-count"><span id="char-count">0</span>/20 characters</p>
-      </div>
-
-      <div class="personalization-note">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <p>Your personalization will appear exactly as you type it. Use correct capitalization. We'll confirm before production if anything looks unusual.</p>
-      </div>
-
-      <!-- Quantity -->
-      <div class="qty-wrap">
+      <div class="qty-wrap" data-mod="quantity">
         <span class="qty-label">Quantity</span>
         <div class="qty-ctrl" role="group" aria-label="Quantity">
-          <button class="qty-btn" onclick="adjustQty(-1)" aria-label="Decrease">−</button>
-          <input class="qty-num" type="number" id="qty" value="1" min="1" max="10" aria-label="Quantity">
-          <button class="qty-btn" onclick="adjustQty(1)" aria-label="Increase">+</button>
+          <button class="qty-btn" type="button" data-qty-down aria-label="Decrease">−</button>
+          <input class="qty-num" type="number" data-qty-input value="1" min="1" max="10" aria-label="Quantity">
+          <button class="qty-btn" type="button" data-qty-up aria-label="Increase">+</button>
         </div>
         <span style="font-size:.8rem;color:var(--mid);">Max 10 per order</span>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="product-actions">
-        <div style="display:flex;gap:10px;">
-          <button class="btn-add-cart" id="add-to-cart-btn" onclick="addToCart()" aria-label="Add to cart">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-            Add to Cart
-          </button>
-          <button class="btn-wishlist-full" aria-label="Add to wishlist" onclick="toggleWishlistFull(this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-          </button>
-        </div>
-        <a href="checkout.html" class="btn-buy-now" onclick="return validateAndBuyNow()">
+      <div class="product-actions" data-mod="actions">
+        <button class="btn-buy-now" type="button" data-action="buy-now">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-          Buy Now — Secure Checkout
-        </a>
+          <span data-action-label>Buy Now — Secure Checkout</span>
+        </button>
       </div>
 
-      <!-- Trust mini -->
-      <div class="trust-mini">
+      <div class="trust-mini" data-mod="trust">
         <div class="trust-mini-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span><strong>Secure checkout</strong> — SSL encrypted, Stripe &amp; PayPal accepted</span></div>
-        <div class="trust-mini-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span><strong>Ships in 1–3 business days</strong> — tracked worldwide</span></div>
-        <div class="trust-mini-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg><span><strong>30-day returns</strong> — no questions asked</span></div>
-        <div class="trust-mini-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/></svg><span><strong>Gift box included</strong> — arrives ready to give</span></div>
-      </div>
-
-      <!-- Share -->
-      <div style="display:flex;align-items:center;gap:8px;">
-        <span style="font-size:.78rem;color:var(--mid);">Share:</span>
-        <a href="#" class="share-btn" style="font-size:.72rem;"><svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg> Facebook</a>
-        <a href="#" class="share-btn" style="font-size:.72rem;"><svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg> Pinterest</a>
-      </div>
-
-      <!-- Bundle Upsell -->
-      <div class="bundle-upsell highlighted" style="margin-top:28px;">
-        <h3>🎁 Bundle & Save 20%</h3>
-        <p>Add the Printable Gift Card Pack and save on both.</p>
-        <div class="bundle-items">
-          <div class="bundle-img"><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=96&q=80" alt="Necklace"></div>
-          <span class="bundle-plus">+</span>
-          <div class="bundle-img"><img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=96&q=80" alt="Gift Card"></div>
-          <div>
-            <p style="font-size:.8rem;font-weight:600;color:var(--dark);">Necklace + Gift Card Pack</p>
-            <p style="font-size:.72rem;color:var(--mid);">2 items · bundle deal</p>
-          </div>
-        </div>
-        <div class="bundle-price">
-          <span class="bundle-now">$47.99</span>
-          <span class="bundle-was">$59.98</span>
-          <span class="bundle-save">Save $12</span>
-        </div>
-        <button class="btn btn-primary btn-sm" style="margin-top:12px;width:100%;" onclick="showToast('🎁 Bundle added to cart!')">Add Bundle to Cart</button>
+        <div class="trust-mini-item" data-trust-shipping><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span><strong>Ships in 1–3 business days</strong> — tracked worldwide</span></div>
+        <div class="trust-mini-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg><span><strong>30-day returns</strong> — on non-personalized items</span></div>
       </div>
 
       <!-- Product Tabs -->
-      <div class="prod-tabs">
+      <div class="prod-tabs" data-mod="tabs">
         <div class="tab-nav">
-          <button class="tab-nav-btn active" onclick="switchTab(this,'tab-desc')">Description</button>
-          <button class="tab-nav-btn" onclick="switchTab(this,'tab-ship')">Shipping & Returns</button>
-          <button class="tab-nav-btn" onclick="switchTab(this,'tab-reviews')" id="reviews-tab">Reviews (412)</button>
+          <button class="tab-nav-btn active" type="button" data-tab="desc">Description</button>
+          <button class="tab-nav-btn" type="button" data-tab="ship">Shipping &amp; Returns</button>
+          <button class="tab-nav-btn" type="button" data-tab="reviews" data-tab-reviews>Reviews</button>
         </div>
 
-        <div class="tab-content active" id="tab-desc">
-          <p>Our Custom Name Necklace is hand-crafted from premium 316L stainless steel and plated in your choice of 18K gold, silver, or rose gold — a finish that won't tarnish, fade, or cause skin irritation.</p>
-          <p style="margin-top:12px;">Each necklace is personalized with your chosen name, word, or short phrase using our precision laser-engraving process. The result is a piece that looks like it came from a high-end boutique, not an online store.</p>
-          <ul style="margin-top:12px;">
-            <li>Material: 316L stainless steel, 18K plated</li>
-            <li>Pendant size: approx. 20mm × 15mm</li>
-            <li>Chain: fine rope chain, 14"–20" adjustable</li>
-            <li>Gift box: premium velvet-lined box included</li>
-            <li>Hypoallergenic — safe for sensitive skin</li>
-            <li>Water resistant — shower-safe</li>
-          </ul>
-        </div>
+        <div class="tab-content active" data-tab-pane="desc"></div>
 
-        <div class="tab-content" id="tab-ship">
-          <p><strong>Processing time:</strong> 1–3 business days (personalized items are made to order).</p>
+        <div class="tab-content" data-tab-pane="ship">
+          <p><strong>Processing time:</strong> 1–3 business days for made-to-order items; instant delivery for digital products.</p>
           <p style="margin-top:10px;"><strong>Shipping times:</strong></p>
           <ul>
-            <li>United States: 3–7 business days (Standard) · 1–2 days (Express)</li>
+            <li>United States: 3–7 business days standard, 1–2 days express</li>
             <li>Europe: 5–10 business days</li>
             <li>Rest of World: 7–14 business days</li>
           </ul>
-          <p style="margin-top:10px;"><strong>Returns:</strong> We accept returns on non-personalized items within 30 days. Personalized items are non-refundable unless there is a production defect. If your item arrives damaged or incorrect, contact us and we'll replace it at no charge.</p>
-          <p style="margin-top:10px;"><strong>Tracking:</strong> All orders include a tracking number sent via email once dispatched.</p>
+          <p style="margin-top:10px;"><strong>Returns:</strong> 30-day returns on non-personalized items. Personalized items are non-refundable unless there is a production defect. If something arrives damaged, contact <a href="mailto:support@cadomalo.com">support@cadomalo.com</a> and we'll replace it.</p>
         </div>
 
-        <div class="tab-content" id="tab-reviews" id="reviews">
-          <div class="review-summary">
-            <div>
-              <div class="review-big-num">4.9</div>
-              <div class="prod-rating-stars" style="margin-top:6px;">
-                <svg viewBox="0 0 24 24" fill="var(--cr)" width="14"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <svg viewBox="0 0 24 24" fill="var(--cr)" width="14"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <svg viewBox="0 0 24 24" fill="var(--cr)" width="14"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <svg viewBox="0 0 24 24" fill="var(--cr)" width="14"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <svg viewBox="0 0 24 24" fill="var(--cr)" width="14"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              </div>
-              <p style="font-size:.72rem;color:var(--light);margin-top:4px;">412 reviews</p>
-            </div>
-            <div class="review-bars">
-              <div class="review-bar-row"><span>5★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:89%"></div></div><span style="font-size:.72rem;color:var(--light);">89%</span></div>
-              <div class="review-bar-row"><span>4★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:8%"></div></div><span style="font-size:.72rem;color:var(--light);">8%</span></div>
-              <div class="review-bar-row"><span>3★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:2%"></div></div><span style="font-size:.72rem;color:var(--light);">2%</span></div>
-              <div class="review-bar-row"><span>2★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%"></div></div><span style="font-size:.72rem;color:var(--light);">1%</span></div>
-            </div>
-          </div>
-          <!-- Reviews -->
-          <div class="review-card">
-            <div class="review-header">
-              <img class="review-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" alt="Sophie K.">
-              <div>
-                <p class="review-name">Sophie K. <span class="verified">✓ Verified</span></p>
-                <p class="review-date">May 10, 2026</p>
-              </div>
-              <div class="review-stars" style="margin-left:auto;">
-                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              </div>
-            </div>
-            <p class="review-text">"My mum literally cried when she opened this. The gold plating is beautiful and the engraving is perfectly crisp. Came in a gorgeous box — looked like a $200 piece from a boutique. Will be ordering again!"</p>
-          </div>
-          <div class="review-card">
-            <div class="review-header">
-              <img class="review-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&q=80" alt="Marie L.">
-              <div><p class="review-name">Marie L. <span class="verified">✓ Verified</span></p><p class="review-date">May 2, 2026</p></div>
-              <div class="review-stars" style="margin-left:auto;"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-            </div>
-            <p class="review-text">"Ordered the rose gold one for my daughter's graduation and it's stunning. Very fast shipping — arrived in 4 days to the UK. The quality feels much higher than the price."</p>
-          </div>
-          <div class="review-card">
-            <div class="review-header">
-              <img class="review-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80" alt="Emma R.">
-              <div><p class="review-name">Emma R. <span class="verified">✓ Verified</span></p><p class="review-date">April 22, 2026</p></div>
-              <div class="review-stars" style="margin-left:auto;"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-            </div>
-            <p class="review-text">"Bought this for my best friend's 30th birthday and she absolutely loved it. The personalization is exactly as I typed it. Excellent gift, excellent packaging, will buy again."</p>
-          </div>
-          <button class="btn btn-ghost btn-sm" style="margin-top:16px;">Load More Reviews</button>
-        </div>
+        <div class="tab-content" data-tab-pane="reviews" id="reviews"></div>
       </div>
     </div>
 
@@ -496,53 +353,5 @@
 <script src="js/pixels.js"></script>
 <script src="js/main.js"></script>
 <script src="js/products.js"></script>
-<script>
-  function switchImg(thumb, src) {
-    document.getElementById('main-img').src = src;
-    document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
-    thumb.classList.add('active');
-  }
-  function selectOpt(btn, labelId) {
-    btn.closest('.option-btns').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    document.getElementById(labelId).textContent = btn.dataset.val;
-  }
-  function adjustQty(delta) {
-    const input = document.getElementById('qty');
-    const newVal = Math.max(1, Math.min(10, parseInt(input.value || 1) + delta));
-    input.value = newVal;
-  }
-  function switchTab(btn, tabId) {
-    document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(tabId).classList.add('active');
-  }
-  function toggleWishlistFull(btn) {
-    const svg = btn.querySelector('svg');
-    const wishlisted = btn.dataset.wishlisted === 'true';
-    btn.dataset.wishlisted = String(!wishlisted);
-    svg.style.fill = wishlisted ? 'none' : 'var(--cr)';
-    svg.style.stroke = wishlisted ? 'currentColor' : 'var(--cr)';
-    showToast(wishlisted ? 'Removed from wishlist' : '♥ Saved to wishlist');
-  }
-  function addToCart() {
-    const txt = document.getElementById('custom-text')?.value?.trim();
-    if (!txt) { document.getElementById('custom-text').focus(); showToast('⚠️ Please add your personalization text first.'); return; }
-    const btn = document.getElementById('add-to-cart-btn');
-    const original = btn.innerHTML;
-    btn.innerHTML = '✓ Added to Cart!';
-    btn.style.background = '#059669';
-    if (window.Cart) window.Cart.bump();
-    // Track add to cart event
-    if (typeof trackAddToCart === 'function') trackAddToCart({ id: 'CDM-001', name: 'Custom Name Necklace', price: 49.99 });
-    setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; }, 2500);
-  }
-  function validateAndBuyNow() {
-    const txt = document.getElementById('custom-text')?.value?.trim();
-    if (!txt) { document.getElementById('custom-text').focus(); showToast('⚠️ Please add your personalization text first.'); return false; }
-    return true;
-  }
-</script>
 </body>
 </html>
