@@ -38,6 +38,18 @@
 
     .confirm-cta{text-align:center;padding:32px 0 72px;}
     .confirm-cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+
+    /* Order summary card */
+    .order-summary{max-width:560px;margin:32px auto 0;background:var(--white);border:1px solid var(--border);border-radius:var(--r12);padding:24px;}
+    .order-summary h3{font-size:.84rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+    .order-line{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:.92rem;}
+    .order-line:last-of-type{border-bottom:none;}
+    .order-line-name{color:var(--dark);}
+    .order-line-qty{color:var(--mid);font-size:.82rem;}
+    .order-line-amount{font-weight:600;color:var(--dark);}
+    .order-total{display:flex;justify-content:space-between;padding-top:14px;margin-top:6px;border-top:2px solid var(--dark);font-weight:700;font-size:1.05rem;color:var(--dark);}
+    .order-meta{font-size:.78rem;color:var(--light);margin-top:14px;text-align:center;}
+    .order-error{max-width:560px;margin:32px auto 0;padding:16px 20px;background:#fdecec;border-left:3px solid #b00;border-radius:var(--r8);color:#7a0000;font-size:.88rem;}
   </style>
 </head>
 <body>
@@ -60,6 +72,15 @@
     <p class="confirm-sub">Your gift is now in the hands of our team. We'll start preparing it with care right away.</p>
     <p class="confirm-sub">A confirmation email is on its way to <strong id="confirm-email">your inbox</strong>.</p>
     <div class="confirm-order-id">Order ID: <span id="confirm-order-id">—</span></div>
+    <div id="order-summary-wrap" style="display:none;">
+      <div class="order-summary">
+        <h3>Order summary</h3>
+        <div id="order-lines"></div>
+        <div class="order-total"><span>Total</span><span id="order-total-amount">—</span></div>
+        <p class="order-meta" id="order-meta"></p>
+      </div>
+    </div>
+    <div id="order-error" class="order-error" style="display:none;"></div>
   </div>
 </section>
 
@@ -111,18 +132,79 @@
 <script src="js/pixels.js"></script>
 <script src="js/main.js"></script>
 <script>
-  (function () {
+  (async function () {
     const params = new URLSearchParams(window.location.search);
-    const orderId = params.get('order') || params.get('session_id') || ('CDM-' + Date.now().toString(36).toUpperCase());
-    const email = params.get('email');
-    document.getElementById('confirm-order-id').textContent = orderId;
-    if (email) document.getElementById('confirm-email').textContent = email;
+    const sessionId = params.get('session_id');
+    const orderIdEl = document.getElementById('confirm-order-id');
+    const emailEl = document.getElementById('confirm-email');
+    const summaryWrap = document.getElementById('order-summary-wrap');
+    const errorEl = document.getElementById('order-error');
 
-    // Order complete — clear the cart count
-    if (window.Cart) window.Cart.clear();
+    if (!sessionId) {
+      orderIdEl.textContent = '(no session id)';
+      errorEl.textContent = 'No order session was provided in the URL. If you just completed a purchase and landed here, check your email for the order confirmation.';
+      errorEl.style.display = '';
+      return;
+    }
 
-    // Track purchase event if pixels are loaded (Phase 5 will pass real values)
-    if (typeof trackPurchase === 'function') trackPurchase({ orderId });
+    orderIdEl.textContent = sessionId.slice(-12).toUpperCase();
+    if (window.Cart && typeof window.Cart.clear === 'function') window.Cart.clear();
+
+    try {
+      const res = await fetch('/api/get-checkout-session?session_id=' + encodeURIComponent(sessionId));
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('Lookup failed (' + res.status + ')'));
+
+      if (data.payment_status !== 'paid') {
+        errorEl.textContent = 'Your payment is ' + data.payment_status + '. If you were charged, please contact support@cadomalo.com with this order ID.';
+        errorEl.style.display = '';
+      }
+
+      if (data.customer_email) emailEl.textContent = data.customer_email;
+
+      const linesEl = document.getElementById('order-lines');
+      linesEl.innerHTML = '';
+      (data.line_items || []).forEach(function (li) {
+        const row = document.createElement('div');
+        row.className = 'order-line';
+        const left = document.createElement('div');
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'order-line-name';
+        nameDiv.textContent = li.description || '(item)';
+        const qtyDiv = document.createElement('div');
+        qtyDiv.className = 'order-line-qty';
+        qtyDiv.textContent = 'Quantity: ' + (li.quantity || 1);
+        left.appendChild(nameDiv);
+        left.appendChild(qtyDiv);
+        const amountDiv = document.createElement('div');
+        amountDiv.className = 'order-line-amount';
+        amountDiv.textContent = formatMoney(li.amount_total, li.currency);
+        row.appendChild(left);
+        row.appendChild(amountDiv);
+        linesEl.appendChild(row);
+      });
+      document.getElementById('order-total-amount').textContent = formatMoney(data.amount_total, data.currency);
+      document.getElementById('order-meta').textContent = 'Paid · Session ' + data.id.slice(-16);
+      summaryWrap.style.display = '';
+
+      if (typeof trackPurchase === 'function') {
+        trackPurchase({ orderId: data.id, value: (data.amount_total || 0) / 100, currency: (data.currency || 'usd').toUpperCase() });
+      }
+    } catch (err) {
+      console.error(err);
+      errorEl.textContent = "We couldn't load your order details right now, but your purchase should still be confirmed by email. (" + err.message + ')';
+      errorEl.style.display = '';
+    }
+
+    function formatMoney(amount, currency) {
+      if (amount == null) return '—';
+      const value = amount / 100;
+      try {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: (currency || 'usd').toUpperCase() }).format(value);
+      } catch (e) {
+        return '$' + value.toFixed(2);
+      }
+    }
   })();
 </script>
 </body></html>

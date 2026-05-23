@@ -10,5 +10,8 @@
   "scripts": {
     "build": "node scripts/sync-products.js && node scripts/alias-to-prod-domain.js",
     "sync": "node scripts/sync-products.js"
+  },
+  "dependencies": {
+    "stripe": "^19"
   }
 }

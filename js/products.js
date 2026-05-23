@@ -218,6 +218,52 @@ function populateProduct(p) {
 
   // Personalization
   renderPersonalization(p)
+
+  // Buy Now → Stripe Checkout
+  wireBuyNow(p)
+}
+
+function wireBuyNow(p) {
+  const buyBtn = document.querySelector('.btn-buy-now')
+  if (!buyBtn) return
+  const originalHtml = buyBtn.innerHTML
+
+  // Wipe any previous handler (this function runs again on hot navigation).
+  const fresh = buyBtn.cloneNode(true)
+  buyBtn.parentNode.replaceChild(fresh, buyBtn)
+
+  fresh.addEventListener('click', async (e) => {
+    e.preventDefault()
+    const qtyInput = document.querySelector('.qty-num, #qty-input, [name="qty"]')
+    const quantity = Math.max(1, parseInt(qtyInput?.value) || 1)
+
+    fresh.disabled = true
+    fresh.innerHTML =
+      '<svg class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"><circle cx="12" cy="12" r="10" stroke-opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/></svg> Redirecting to checkout…'
+
+    try {
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({slug: p.slug, quantity}),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || !data.url) {
+        throw new Error(data.error || `Checkout error (${res.status})`)
+      }
+      // Track InitiateCheckout if pixels are loaded
+      if (typeof window.fbTrack?.initiateCheckout === 'function') {
+        window.fbTrack.initiateCheckout({value: p.price * quantity, currency: 'USD'})
+      }
+      window.location.href = data.url
+    } catch (err) {
+      console.error('[buy-now]', err)
+      fresh.disabled = false
+      fresh.innerHTML = originalHtml
+      if (typeof showToast === 'function') showToast(`⚠️ ${err.message}`)
+      else alert(err.message)
+    }
+  })
 }
 
 function renderPersonalization(p) {
