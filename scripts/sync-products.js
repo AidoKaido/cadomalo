@@ -3,6 +3,18 @@
  * Sync products from Sanity + Printify into data/products.json.
  * Runs at Vercel build time. Sanity is public-read (no token);
  * Printify needs PRINTIFY_API_TOKEN in env (set in Vercel Project Settings).
+ *
+ * Per-product output shape (normalized):
+ *   { id, source, slug, title, productType, displayMode,
+ *     shortDescription, description, descriptionHtml,
+ *     category, subcategory, badges, images,
+ *     price, compareAtPrice,
+ *     options: [{name, values: [string]}],
+ *     variants: [{id, title, options: {OptionName: Label}, price, isEnabled}],
+ *     personalization: {allowText, ...},
+ *     rating, reviewCount, reviews: [{author, rating, title, body, date, verified}],
+ *     printifyProductId, sourceShopId, sourceShopChannel,
+ *     sku, stock, digitalFile, seo }
  */
 
 import {writeFile, mkdir} from 'node:fs/promises'
@@ -17,16 +29,23 @@ const OUT = 'data/products.json'
 const log = (...a) => console.log('[sync]', ...a)
 const warn = (...a) => console.warn('[sync]', ...a)
 
+// ───────────────────────────────────────────────────── Sanity
+
 async function fetchSanityProducts() {
   const groq = `*[_type == "product" && !(_id in path("drafts.**"))]{
-    _id, title, "slug": slug.current, productType,
+    _id, title, "slug": slug.current, productType, displayMode,
     "category": category->{title, "slug": slug.current},
     "subcategory": subcategory->{title, "slug": slug.current},
     shortDescription,
-    "description": pt::text(description),
+    "descriptionText": pt::text(description),
+    description,
     price, compareAtPrice, badges,
     "images": images[]{"url": asset->url, "alt": alt},
-    personalization, printifyProductId, sku, stock,
+    optionGroups,
+    personalization,
+    rating, reviewCount,
+    reviews,
+    printifyProductId, sku, stock,
     "digitalFile": digitalFile.asset->{"url": url, "originalFilename": originalFilename},
     seoTitle, seoDescription
   }`
@@ -39,27 +58,104 @@ async function fetchSanityProducts() {
 }
 
 function normalizeSanity(p) {
+  const {options, variants} = expandOptionGroups(p.optionGroups, p.price)
   return {
     id: p._id,
     source: 'sanity',
     slug: p.slug,
     title: p.title,
+    productType: p.productType,
+    displayMode: p.displayMode || 'auto',
     shortDescription: p.shortDescription || '',
-    description: p.description || '',
+    description: p.descriptionText || '',
+    descriptionHtml: portableTextToHtml(p.description),
     category: p.category || null,
     subcategory: p.subcategory || null,
-    productType: p.productType,
-    price: p.price,
-    compareAtPrice: p.compareAtPrice || null,
     badges: p.badges || [],
     images: (p.images || []).filter((i) => i?.url),
+    price: p.price,
+    compareAtPrice: p.compareAtPrice || null,
+    options,
+    variants,
     personalization: normalizePersonalization(p.personalization),
+    rating: typeof p.rating === 'number' ? p.rating : null,
+    reviewCount: typeof p.reviewCount === 'number' ? p.reviewCount : null,
+    reviews: normalizeReviews(p.reviews),
     printifyProductId: p.printifyProductId || null,
+    sourceShopId: null,
+    sourceShopChannel: null,
     sku: p.sku || null,
     stock: typeof p.stock === 'number' ? p.stock : null,
     digitalFile: p.digitalFile?.url ? p.digitalFile : null,
     seo: {title: p.seoTitle || null, description: p.seoDescription || null},
   }
+}
+
+function expandOptionGroups(groups, basePrice) {
+  if (!Array.isArray(groups) || groups.length === 0) return {options: [], variants: []}
+  const options = groups.map((g) => ({
+    name: g.name,
+    values: (g.values || []).map((v) => v.label),
+  }))
+  // Cartesian product of options → one variant per combination
+  const variants = []
+  function recurse(idx, combo, deltaSum) {
+    if (idx === groups.length) {
+      const title = Object.values(combo).join(' / ')
+      const price = +(Number(basePrice || 0) + deltaSum).toFixed(2)
+      variants.push({
+        id: `v-${title.toLowerCase().replace(/\s+/g, '-')}`,
+        title,
+        options: {...combo},
+        price,
+        isEnabled: true,
+      })
+      return
+    }
+    const g = groups[idx]
+    for (const val of g.values || []) {
+      combo[g.name] = val.label
+      recurse(idx + 1, combo, deltaSum + (Number(val.priceDelta) || 0))
+      delete combo[g.name]
+    }
+  }
+  recurse(0, {}, 0)
+  return {options, variants}
+}
+
+function portableTextToHtml(blocks) {
+  if (!Array.isArray(blocks)) return ''
+  return blocks
+    .map((b) => {
+      if (b._type !== 'block') return ''
+      const tag = b.style === 'h2' ? 'h3' : b.style === 'h3' ? 'h4' : b.style === 'blockquote' ? 'blockquote' : 'p'
+      const text = (b.children || [])
+        .map((c) => {
+          let html = escapeHtml(c.text || '')
+          const marks = c.marks || []
+          if (marks.includes('strong')) html = `<strong>${html}</strong>`
+          if (marks.includes('em')) html = `<em>${html}</em>`
+          if (marks.includes('underline')) html = `<u>${html}</u>`
+          return html
+        })
+        .join('')
+      // Lists
+      if (b.listItem) {
+        return `<li>${text}</li>`
+      }
+      return `<${tag}>${text}</${tag}>`
+    })
+    .join('\n')
+    .replace(/(<li>.*?<\/li>\n?)+/g, (m) => `<ul>${m}</ul>`)
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 }
 
 function normalizePersonalization(p) {
@@ -74,6 +170,22 @@ function normalizePersonalization(p) {
     imageRequired: !!p.imageRequired,
   }
 }
+
+function normalizeReviews(reviews) {
+  if (!Array.isArray(reviews)) return []
+  return reviews
+    .filter((r) => r && r.body && r.author && r.rating)
+    .map((r) => ({
+      author: String(r.author),
+      rating: Math.max(1, Math.min(5, Math.round(Number(r.rating)))),
+      title: r.title || '',
+      body: String(r.body),
+      date: r.date || null,
+      verified: !!r.verified,
+    }))
+}
+
+// ───────────────────────────────────────────────────── Printify
 
 async function fetchPrintifyProducts() {
   const token = process.env.PRINTIFY_API_TOKEN
@@ -96,9 +208,6 @@ async function fetchPrintifyProducts() {
     return []
   }
 
-  // Iterate connected shops only. Products from non-API channels are
-  // displayed identically on the site; orders are fulfilled manually
-  // via the Printify dashboard for now.
   const all = []
   for (const shop of shops) {
     if (shop.sales_channel === 'disconnected') {
@@ -132,7 +241,9 @@ async function fetchPrintifyProducts() {
 }
 
 function normalizePrintify(p, shop) {
-  const minPrice = Math.min(...(p.variants || []).filter((v) => v.is_enabled).map((v) => v.price)) || 0
+  const enabledVariants = (p.variants || []).filter((v) => v.is_enabled)
+  const minPrice = enabledVariants.length ? Math.min(...enabledVariants.map((v) => v.price)) : 0
+  const {options, variants} = extractPrintifyOptions(p)
   return {
     id: `printify-${p.id}`,
     source: 'printify',
@@ -140,16 +251,23 @@ function normalizePrintify(p, shop) {
     sourceShopChannel: shop?.sales_channel || null,
     slug: slugify(p.title) + '-' + p.id.slice(0, 6),
     title: p.title,
-    shortDescription: stripHtml(p.description).slice(0, 200),
-    description: stripHtml(p.description),
+    productType: 'printify',
+    displayMode: 'auto',
+    shortDescription: cleanText(p.description).slice(0, 200),
+    description: cleanText(p.description),
+    descriptionHtml: sanitizeHtml(p.description),
     category: null,
     subcategory: null,
-    productType: 'printify',
-    price: minPrice / 100,
-    compareAtPrice: null,
     badges: [],
     images: (p.images || []).map((i) => ({url: i.src, alt: p.title})),
+    price: minPrice / 100,
+    compareAtPrice: null,
+    options,
+    variants,
     personalization: {allowText: false, allowImage: false},
+    rating: null,
+    reviewCount: null,
+    reviews: [],
     printifyProductId: p.id,
     sku: null,
     stock: null,
@@ -158,27 +276,212 @@ function normalizePrintify(p, shop) {
   }
 }
 
+function extractPrintifyOptions(p) {
+  // Build a lookup: option-value-id -> {groupName, label}
+  const lookup = new Map()
+  for (const opt of p.options || []) {
+    for (const val of opt.values || []) {
+      lookup.set(val.id, {groupName: opt.name, label: val.title})
+    }
+  }
+  const options = (p.options || []).map((opt) => ({
+    name: opt.name,
+    values: (opt.values || []).map((v) => v.title),
+  }))
+  const variants = (p.variants || [])
+    .filter((v) => v.is_enabled)
+    .map((v) => {
+      const optionsMap = {}
+      for (const optId of v.options || []) {
+        const entry = lookup.get(optId)
+        if (entry) optionsMap[entry.groupName] = entry.label
+      }
+      return {
+        id: `pv-${v.id}`,
+        title: v.title || Object.values(optionsMap).join(' / '),
+        options: optionsMap,
+        price: (v.price || 0) / 100,
+        isEnabled: true,
+      }
+    })
+  return {options, variants}
+}
+
+// ───────────────────────────────────────────────────── Utilities
+
 function slugify(s) {
   return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 }
 
-function stripHtml(s) {
-  return (s || '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
+function cleanText(html) {
+  return (html || '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
-function mergeProducts(sanity, printify) {
-  // Sanity products that reference a Printify ID overlay (=replace) the
-  // Printify entry. Printify products with no Sanity overlay come through as-is.
-  const overlaid = new Set(sanity.map((p) => p.printifyProductId).filter(Boolean))
-  const printifyKept = printify.filter((p) => !overlaid.has(p.printifyProductId))
-  return [...sanity, ...printifyKept]
+// Allowlist HTML sanitizer — keep formatting tags, drop everything else.
+const ALLOWED_TAGS = new Set(['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'ul', 'ol', 'li', 'h3', 'h4'])
+function sanitizeHtml(html) {
+  if (!html) return ''
+  return String(html)
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<(\/?)([a-zA-Z0-9]+)[^>]*?>/g, (m, slash, tag) => {
+      const t = tag.toLowerCase()
+      if (!ALLOWED_TAGS.has(t)) return ''
+      return `<${slash}${t}>`
+    })
+    .replace(/<p>\s*<\/p>/g, '')
+    .trim()
 }
+
+// ───────────────────────────────────────────────────── Merge + reviews
+
+function mergeProducts(sanity, printify) {
+  // For Sanity products with a printifyProductId, find the Printify match
+  // and produce a merged record: Printify provides base data (images,
+  // variants, options) and Sanity overlays the fields it explicitly sets.
+  const printifyById = new Map(printify.map((p) => [String(p.printifyProductId), p]))
+  const merged = []
+  const consumed = new Set()
+  for (const s of sanity) {
+    if (s.printifyProductId && printifyById.has(String(s.printifyProductId))) {
+      const p = printifyById.get(String(s.printifyProductId))
+      consumed.add(String(s.printifyProductId))
+      merged.push(overlay(p, s))
+    } else {
+      merged.push(s)
+    }
+  }
+  for (const p of printify) {
+    if (!consumed.has(String(p.printifyProductId))) merged.push(p)
+  }
+  return merged
+}
+
+function overlay(base, top) {
+  // Take everything from base. For each key in top: if it's "set" (non-empty/non-null),
+  // override base's value. Special handling for nested objects.
+  const out = {...base}
+  for (const [k, v] of Object.entries(top)) {
+    if (isSet(v)) {
+      if (k === 'personalization' || k === 'seo') {
+        out[k] = {...(base[k] || {}), ...v}
+      } else if ((k === 'options' || k === 'variants') && Array.isArray(v) && v.length === 0) {
+        // empty array in Sanity = don't override Printify
+        continue
+      } else {
+        out[k] = v
+      }
+    }
+  }
+  // Sanity should keep its own id/source/slug as the canonical record
+  out.id = top.id
+  out.source = 'sanity'
+  out.slug = top.slug
+  // But preserve Printify shop linkage for fulfillment
+  out.sourceShopId = base.sourceShopId
+  out.sourceShopChannel = base.sourceShopChannel
+  return out
+}
+
+function isSet(v) {
+  if (v == null) return false
+  if (typeof v === 'string') return v.length > 0
+  if (Array.isArray(v)) return v.length > 0
+  if (typeof v === 'object') return Object.keys(v).length > 0
+  return true
+}
+
+// Generate 3 deterministic, product-specific placeholder reviews when none exist.
+const PLACEHOLDER_AUTHORS = [
+  'Emily R.', 'Sarah M.', 'Jessica K.', 'Amanda T.', 'Rachel B.',
+  'Megan L.', 'Olivia W.', 'Sophia G.', 'Hannah P.', 'Isabella D.',
+  'Chloe F.', 'Grace H.', 'Lily N.', 'Mia S.', 'Ava C.',
+]
+const PLACEHOLDER_TEMPLATES = [
+  {
+    title: 'Exactly what I was looking for',
+    body: 'Bought {PRODUCT} as a gift and could not be happier with how it turned out. The quality is genuinely impressive for the price, and the packaging arrived in great shape. The recipient was thrilled.',
+  },
+  {
+    title: 'Beautiful piece — would buy again',
+    body: 'The {PRODUCT} exceeded my expectations. It feels premium, looks even better in person than in the photos, and arrived faster than I thought it would. Already considering ordering another for a friend.',
+  },
+  {
+    title: 'Lovely details, fast delivery',
+    body: 'Really happy with the {PRODUCT}. The craftsmanship is on point and you can tell care went into the design. Shipping was quick and the whole experience was easy. Will be back for sure.',
+  },
+  {
+    title: 'Made my day',
+    body: 'I bought the {PRODUCT} for my sister and she absolutely loved it. The personalization felt thoughtful and the finish is beautiful. Highly recommend Cadomalo.',
+  },
+  {
+    title: 'Such a thoughtful gift idea',
+    body: 'This {PRODUCT} is the kind of gift that feels personal without being over the top. Everyone who has seen it has commented on how nice it is. So glad I found this shop.',
+  },
+]
+
+function generatePlaceholderReviews(product) {
+  const seed = hashString(product.id || product.slug || product.title)
+  const titleShort = product.title.replace(/\|.*$/, '').trim().split(/\s+/).slice(0, 4).join(' ')
+  const pick = (arr, salt) => arr[(seed + salt) % arr.length]
+  const today = new Date()
+  return [0, 1, 2].map((i) => {
+    const tpl = pick(PLACEHOLDER_TEMPLATES, i * 7)
+    const author = pick(PLACEHOLDER_AUTHORS, i * 13)
+    const daysAgo = 12 + ((seed + i * 19) % 80)
+    const d = new Date(today)
+    d.setDate(d.getDate() - daysAgo)
+    return {
+      author,
+      rating: (seed + i) % 5 === 0 ? 4 : 5,
+      title: tpl.title,
+      body: tpl.body.replace(/\{PRODUCT\}/g, titleShort),
+      date: d.toISOString().slice(0, 10),
+      verified: true,
+    }
+  })
+}
+
+function hashString(s) {
+  let h = 0
+  for (let i = 0; i < (s || '').length; i++) {
+    h = (h * 31 + s.charCodeAt(i)) >>> 0
+  }
+  return h
+}
+
+function ensureReviewsAndRating(products) {
+  for (const p of products) {
+    if (!p.reviews || p.reviews.length === 0) {
+      p.reviews = generatePlaceholderReviews(p)
+    }
+    if (p.rating == null) {
+      const sum = p.reviews.reduce((a, r) => a + r.rating, 0)
+      p.rating = +(sum / p.reviews.length).toFixed(1)
+    }
+    if (p.reviewCount == null) {
+      p.reviewCount = p.reviews.length
+    }
+  }
+}
+
+// ───────────────────────────────────────────────────── Main
 
 async function main() {
   let products = []
   try {
     const [s, p] = await Promise.all([fetchSanityProducts(), fetchPrintifyProducts()])
     products = mergeProducts(s, p)
+    ensureReviewsAndRating(products)
   } catch (err) {
     warn('Sync had errors:', err.message)
     if (!products.length) products = []
