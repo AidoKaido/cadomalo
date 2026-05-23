@@ -23,8 +23,6 @@ const esc = (s) => {
   return d.innerHTML
 }
 const money = (n) => (typeof n === 'number' ? '$' + n.toFixed(2) : '')
-const $ = (sel, ctx = document) => ctx.querySelector(sel)
-const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)]
 
 let _cache = null
 async function loadProducts() {
