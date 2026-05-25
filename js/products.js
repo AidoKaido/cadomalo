@@ -506,12 +506,31 @@ function modQuantity(p) {
   sync()
 }
 
+// TEMP: products whose purchase is paused while digital delivery is being built.
+// Remove a slug here once the delivery flow is verified end-to-end.
+const PURCHASE_PAUSED_SLUGS = new Set([
+  'claritysheet-multilingual-personal-finance-planner-or-excel-budget-spreadsheet-goals-debt-and',
+])
+
 function modActions(p) {
   const wrap = document.querySelector('[data-mod="actions"]')
   if (!wrap) return
   const buyBtn = wrap.querySelector('[data-action="buy-now"]')
   const addBtn = wrap.querySelector('[data-action="add-to-cart"]')
   if (!buyBtn) return
+
+  if (PURCHASE_PAUSED_SLUGS.has(p.slug)) {
+    const buyLbl = buyBtn.querySelector('[data-action-label]')
+    if (buyLbl) buyLbl.textContent = 'Coming soon — digital delivery in setup'
+    buyBtn.setAttribute('disabled', 'disabled')
+    buyBtn.classList.add('is-disabled')
+    if (addBtn) {
+      addBtn.setAttribute('disabled', 'disabled')
+      addBtn.classList.add('is-disabled')
+    }
+    return
+  }
+
   const buyLbl = buyBtn.querySelector('[data-action-label]')
   if (buyLbl) buyLbl.textContent = actionLabelFor(p)
   const buyFresh = buyBtn.cloneNode(true)
