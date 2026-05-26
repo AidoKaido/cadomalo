@@ -506,11 +506,9 @@ function modQuantity(p) {
   sync()
 }
 
-// TEMP: products whose purchase is paused while digital delivery is being built.
-// Remove a slug here once the delivery flow is verified end-to-end.
-const PURCHASE_PAUSED_SLUGS = new Set([
-  'claritysheet-multilingual-personal-finance-planner-or-excel-budget-spreadsheet-goals-debt-and',
-])
+// Products whose purchase is paused (e.g., during a delivery flow change).
+// Add a slug here to disable Buy/Add to Cart; remove to re-enable.
+const PURCHASE_PAUSED_SLUGS = new Set([])
 
 function modActions(p) {
   const wrap = document.querySelector('[data-mod="actions"]')

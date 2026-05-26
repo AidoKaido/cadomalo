@@ -39,11 +39,8 @@ export default async function handler(req, res) {
   }
   if (!product) return res.status(404).json({error: 'Product not found'})
 
-  // TEMP: slugs paused while digital delivery is being built. Keep in sync with
-  // PURCHASE_PAUSED_SLUGS in js/products.js. Remove once delivery is verified.
-  const PURCHASE_PAUSED_SLUGS = new Set([
-    'claritysheet-multilingual-personal-finance-planner-or-excel-budget-spreadsheet-goals-debt-and',
-  ])
+  // Slugs paused from purchase. Keep in sync with PURCHASE_PAUSED_SLUGS in js/products.js.
+  const PURCHASE_PAUSED_SLUGS = new Set([])
   if (PURCHASE_PAUSED_SLUGS.has(slug)) {
     return res.status(409).json({error: 'This product is temporarily unavailable for purchase.'})
   }
