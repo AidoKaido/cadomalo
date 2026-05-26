@@ -50,6 +50,15 @@
     .order-total{display:flex;justify-content:space-between;padding-top:14px;margin-top:6px;border-top:2px solid var(--dark);font-weight:700;font-size:1.05rem;color:var(--dark);}
     .order-meta{font-size:.78rem;color:var(--light);margin-top:14px;text-align:center;}
     .order-error{max-width:560px;margin:32px auto 0;padding:16px 20px;background:#fdecec;border-left:3px solid #b00;border-radius:var(--r8);color:#7a0000;font-size:.88rem;}
+
+    /* Digital download card */
+    .download-wrap{max-width:560px;margin:32px auto 0;padding:28px 28px;background:linear-gradient(135deg,#fff8e7 0%,#fff 100%);border:1.5px solid #f1d77a;border-radius:var(--r16);text-align:center;}
+    .download-wrap h3{font-size:1.1rem;font-weight:800;color:var(--dark);margin:0 0 8px;}
+    .download-wrap p{font-size:.92rem;color:var(--mid);line-height:1.55;margin:0 0 18px;}
+    .download-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:var(--cr);color:#fff;text-decoration:none;border-radius:var(--r12);font-weight:700;font-size:1rem;transition:transform .15s;}
+    .download-btn:hover{transform:translateY(-1px);background:#7a0202;}
+    .download-btn svg{width:18px;height:18px;}
+    .download-note{display:block;margin-top:14px;font-size:.78rem;color:var(--light);}
   </style>
 </head>
 <body>
@@ -79,6 +88,15 @@
         <div class="order-total"><span>Total</span><span id="order-total-amount">—</span></div>
         <p class="order-meta" id="order-meta"></p>
       </div>
+    </div>
+    <div id="digital-download-wrap" class="download-wrap" style="display:none;">
+      <h3>📥 Your digital download is ready</h3>
+      <p id="digital-download-desc">We've also sent it to your email as a PDF attachment.</p>
+      <a id="digital-download-btn" class="download-btn" href="#" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download now
+      </a>
+      <span class="download-note">Save this file — the link is unique to your order.</span>
     </div>
     <div id="order-error" class="order-error" style="display:none;"></div>
   </div>
@@ -186,6 +204,14 @@
       document.getElementById('order-total-amount').textContent = formatMoney(data.amount_total, data.currency);
       document.getElementById('order-meta').textContent = 'Paid · Session ' + data.id.slice(-16);
       summaryWrap.style.display = '';
+
+      if (data.digital_delivery && data.digital_delivery.url) {
+        const dl = data.digital_delivery;
+        const btn = document.getElementById('digital-download-btn');
+        btn.href = dl.url;
+        if (dl.filename) btn.setAttribute('download', dl.filename);
+        document.getElementById('digital-download-wrap').style.display = '';
+      }
 
       if (typeof trackPurchase === 'function') {
         trackPurchase({ orderId: data.id, value: (data.amount_total || 0) / 100, currency: (data.currency || 'usd').toUpperCase() });

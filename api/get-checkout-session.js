@@ -1,6 +1,26 @@
 import Stripe from 'stripe'
+import {readFile} from 'node:fs/promises'
+import {join} from 'node:path'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+
+async function loadDigitalDelivery(slug) {
+  if (!slug) return null
+  try {
+    const raw = await readFile(join(process.cwd(), 'data', 'products.json'), 'utf8')
+    const data = JSON.parse(raw)
+    const p = data.products.find((x) => x.slug === slug)
+    if (!p || p.productType !== 'digital') return null
+    if (!p.digitalFile?.url) return null
+    return {
+      url: p.digitalFile.url,
+      filename: p.digitalFile.originalFilename || `${slug}.pdf`,
+      productTitle: p.title,
+    }
+  } catch {
+    return null
+  }
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -19,6 +39,10 @@ export default async function handler(req, res) {
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
       expand: ['line_items'],
     })
+    const digitalDelivery =
+      session.payment_status === 'paid'
+        ? await loadDigitalDelivery(session.metadata?.product_slug)
+        : null
     return res.status(200).json({
       id: session.id,
       status: session.status,
@@ -36,6 +60,7 @@ export default async function handler(req, res) {
         currency: item.currency,
       })),
       metadata: session.metadata || {},
+      digital_delivery: digitalDelivery,
     })
   } catch (err) {
     console.error('[get-checkout-session]', err.message)
