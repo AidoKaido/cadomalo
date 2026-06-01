@@ -1,7 +1,8 @@
 /* ==========================================================
-   CADOMALO – Tracking Pixels v1.0
-   All pixels are GDPR-compliant: they ONLY fire after the
-   user accepts marketing cookies via the cookie banner.
+   CADOMALO – Tracking Pixels v2.0
+   Google Consent Mode v2: gtag loads immediately with denied
+   defaults (cookieless pings only). Marketing/analytics pixels
+   for other networks still gate on cookie banner acceptance.
    Replace placeholder IDs with your real values.
    ========================================================== */
 
@@ -17,10 +18,77 @@ const PIXEL_CONFIG = {
 };
 
 /* ----------------------------------------------------------
+   GOOGLE CONSENT MODE v2 — runs IMMEDIATELY on every page.
+   gtag.js loads with all consent denied by default. When the
+   user accepts cookies, updateGoogleConsent() promotes the
+   relevant signals. This lets Google still receive cookieless
+   pings + model conversions for declined users (DMA-compliant).
+   ---------------------------------------------------------- */
+(function initGoogleConsentMode() {
+  const hasGA4 = PIXEL_CONFIG.google && PIXEL_CONFIG.google !== 'G-XXXXXXXXXX';
+  const hasAds = PIXEL_CONFIG.googleAds && PIXEL_CONFIG.googleAds !== 'AW-XXXXXXXXXX';
+  if (!hasGA4 && !hasAds) return; // nothing real to load
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ window.dataLayer.push(arguments); }
+  window.gtag = gtag;
+
+  // Set consent defaults BEFORE loading gtag.js. All denied; gtag
+  // will send anonymous pings until updateGoogleConsent() upgrades them.
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'wait_for_update': 500
+  });
+
+  // Load the actual gtag.js library (use whichever ID we have).
+  const loaderId = hasGA4 ? PIXEL_CONFIG.google : PIXEL_CONFIG.googleAds;
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${loaderId}`;
+  document.head.appendChild(script);
+
+  gtag('js', new Date());
+  if (hasGA4) gtag('config', PIXEL_CONFIG.google, { anonymize_ip: true });
+  if (hasAds) gtag('config', PIXEL_CONFIG.googleAds);
+
+  // Expose the events API immediately — events queue in dataLayer
+  // until gtag.js finishes loading.
+  window.gaTrack = {
+    event:        (name, params) => gtag('event', name, params),
+    purchase:     (data) => gtag('event', 'purchase', data),
+    addToCart:    (data) => gtag('event', 'add_to_cart', data),
+    viewItem:     (data) => gtag('event', 'view_item', data),
+    beginCheckout:(data) => gtag('event', 'begin_checkout', data)
+  };
+
+  console.log('[Cadomalo] Google Consent Mode v2 initialized (' + (hasGA4 ? 'GA4 + Ads' : 'Ads only') + ', default: denied)');
+})();
+
+/* ----------------------------------------------------------
+   updateGoogleConsent — call when consent state changes.
+   Called from main.js CookieConsent.apply().
+   ---------------------------------------------------------- */
+window.updateGoogleConsent = function (prefs) {
+  if (typeof window.gtag !== 'function') return;
+  const update = {
+    'analytics_storage': prefs?.analytics ? 'granted' : 'denied',
+    'ad_storage':        prefs?.marketing ? 'granted' : 'denied',
+    'ad_user_data':      prefs?.marketing ? 'granted' : 'denied',
+    'ad_personalization':prefs?.marketing ? 'granted' : 'denied'
+  };
+  window.gtag('consent', 'update', update);
+  console.log('[Cadomalo] Google consent updated:', update);
+};
+
+/* ----------------------------------------------------------
    FACEBOOK / META PIXEL
    ---------------------------------------------------------- */
 function loadFacebookPixel() {
   if (window._fbPixelLoaded) return;
+  if (!PIXEL_CONFIG.facebook || PIXEL_CONFIG.facebook === 'YOUR_FB_PIXEL_ID') return;
   window._fbPixelLoaded = true;
 
   !function(f,b,e,v,n,t,s){
@@ -35,7 +103,6 @@ function loadFacebookPixel() {
   fbq('init', PIXEL_CONFIG.facebook);
   fbq('track', 'PageView');
 
-  // Standard e-commerce events — call these from product/cart pages
   window.fbTrack = {
     viewContent:    (data) => fbq('track', 'ViewContent', data),
     addToCart:      (data) => fbq('track', 'AddToCart', data),
@@ -53,6 +120,7 @@ function loadFacebookPixel() {
    ---------------------------------------------------------- */
 function loadTikTokPixel() {
   if (window._ttPixelLoaded) return;
+  if (!PIXEL_CONFIG.tiktok || PIXEL_CONFIG.tiktok === 'YOUR_TIKTOK_PIXEL_ID') return;
   window._ttPixelLoaded = true;
 
   !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
@@ -82,6 +150,7 @@ function loadTikTokPixel() {
    ---------------------------------------------------------- */
 function loadPinterestPixel() {
   if (window._pinPixelLoaded) return;
+  if (!PIXEL_CONFIG.pinterest || PIXEL_CONFIG.pinterest === 'YOUR_PINTEREST_TAG_ID') return;
   window._pinPixelLoaded = true;
 
   !function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(
@@ -104,59 +173,33 @@ function loadPinterestPixel() {
 }
 
 /* ----------------------------------------------------------
-   GOOGLE ANALYTICS 4 + GOOGLE ADS
-   ---------------------------------------------------------- */
-function loadGoogleTag() {
-  if (window._gaLoaded) return;
-
-  const hasGA4 = PIXEL_CONFIG.google && PIXEL_CONFIG.google !== 'G-XXXXXXXXXX';
-  const hasAds = PIXEL_CONFIG.googleAds && PIXEL_CONFIG.googleAds !== 'AW-XXXXXXXXXX';
-  if (!hasGA4 && !hasAds) return; // nothing real to load
-
-  window._gaLoaded = true;
-
-  // Load gtag.js using whichever ID we have (GA4 preferred; falls back to Ads).
-  const loaderId = hasGA4 ? PIXEL_CONFIG.google : PIXEL_CONFIG.googleAds;
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${loaderId}`;
-  document.head.appendChild(script);
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  window.gtag = gtag;
-  gtag('js', new Date());
-
-  if (hasGA4) gtag('config', PIXEL_CONFIG.google, { anonymize_ip: true });
-  if (hasAds) gtag('config', PIXEL_CONFIG.googleAds);
-
-  window.gaTrack = {
-    event:       (name, params) => gtag('event', name, params),
-    purchase:    (data) => gtag('event', 'purchase', data),
-    addToCart:   (data) => gtag('event', 'add_to_cart', data),
-    viewItem:    (data) => gtag('event', 'view_item', data),
-    beginCheckout:(data) => gtag('event', 'begin_checkout', data)
-  };
-
-  console.log('[Cadomalo] Google Tag loaded (' + (hasGA4 ? 'GA4 + Ads' : hasAds ? 'Ads only' : 'none') + ')');
-}
-
-/* ----------------------------------------------------------
-   ANALYTICS (non-marketing — fires on analytics consent)
+   ANALYTICS (fires on analytics consent)
+   Promotes Google consent for analytics_storage.
    ---------------------------------------------------------- */
 window.loadAnalytics = function () {
-  // Analytics-tier tracking (no ad targeting) — extend as needed
-  loadGoogleTag();
+  window.updateGoogleConsent?.({ analytics: true, marketing: window._marketingGranted === true });
 };
 
 /* ----------------------------------------------------------
-   MARKETING PIXELS — fires only on marketing consent
+   MARKETING PIXELS — fires only on marketing consent.
+   Promotes Google ad consent + loads FB/TT/Pin (no Consent Mode support).
    ---------------------------------------------------------- */
 window.loadMarketingPixels = function () {
+  window._marketingGranted = true;
+  window.updateGoogleConsent?.({ analytics: window._analyticsGranted === true, marketing: true });
   loadFacebookPixel();
   loadTikTokPixel();
   loadPinterestPixel();
-  loadGoogleTag();
+};
+
+/* ----------------------------------------------------------
+   REJECT — explicitly signal denied (already default, but
+   clean to call when user clicks Reject All).
+   ---------------------------------------------------------- */
+window.rejectAllConsent = function () {
+  window._marketingGranted = false;
+  window._analyticsGranted = false;
+  window.updateGoogleConsent?.({ analytics: false, marketing: false });
 };
 
 /* ----------------------------------------------------------
