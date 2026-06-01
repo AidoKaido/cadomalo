@@ -48,6 +48,9 @@ const CookieConsent = {
     if (prefs?.analytics) {
       if (typeof window.loadAnalytics === 'function') window.loadAnalytics();
     }
+    if (!prefs?.marketing && !prefs?.analytics) {
+      if (typeof window.rejectAllConsent === 'function') window.rejectAllConsent();
+    }
     // Dispatch event so other modules can react
     window.dispatchEvent(new CustomEvent('consentUpdated', { detail: prefs }));
   },
@@ -72,7 +75,13 @@ const CookieConsent = {
 
   show() {
     const banner = $('#cookie-banner');
-    if (banner) banner.style.display = '';
+    if (banner) {
+      banner.style.display = 'block';
+      banner.removeAttribute('hidden');
+      console.log('[Cadomalo] Cookie banner shown');
+    } else {
+      console.warn('[Cadomalo] #cookie-banner element not found in DOM');
+    }
   },
 
   hide() {
@@ -92,6 +101,7 @@ const CookieConsent = {
 
   init() {
     const existing = this.get();
+    console.log('[Cadomalo] CookieConsent.init — existing prefs:', existing);
     if (!existing) {
       // Show banner after short delay for better UX
       setTimeout(() => this.show(), 800);
