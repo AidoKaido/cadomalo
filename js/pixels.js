@@ -12,8 +12,8 @@ const PIXEL_CONFIG = {
   facebook:  'YOUR_FB_PIXEL_ID',         // Meta Events Manager
   tiktok:    'YOUR_TIKTOK_PIXEL_ID',     // TikTok Ads Manager
   pinterest: 'YOUR_PINTEREST_TAG_ID',    // Pinterest Ads
-  google:    'G-XXXXXXXXXX',             // Google Analytics 4 / Ads
-  googleAds: 'AW-XXXXXXXXXX'             // Google Ads conversion ID (optional)
+  google:    'G-XXXXXXXXXX',             // Google Analytics 4 (placeholder until GA4 is set up)
+  googleAds: 'AW-18203955415'            // Google Ads conversion ID
 };
 
 /* ----------------------------------------------------------
@@ -108,24 +108,27 @@ function loadPinterestPixel() {
    ---------------------------------------------------------- */
 function loadGoogleTag() {
   if (window._gaLoaded) return;
+
+  const hasGA4 = PIXEL_CONFIG.google && PIXEL_CONFIG.google !== 'G-XXXXXXXXXX';
+  const hasAds = PIXEL_CONFIG.googleAds && PIXEL_CONFIG.googleAds !== 'AW-XXXXXXXXXX';
+  if (!hasGA4 && !hasAds) return; // nothing real to load
+
   window._gaLoaded = true;
 
+  // Load gtag.js using whichever ID we have (GA4 preferred; falls back to Ads).
+  const loaderId = hasGA4 ? PIXEL_CONFIG.google : PIXEL_CONFIG.googleAds;
   const script = document.createElement('script');
   script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${PIXEL_CONFIG.google}`;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${loaderId}`;
   document.head.appendChild(script);
 
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   window.gtag = gtag;
-
   gtag('js', new Date());
-  gtag('config', PIXEL_CONFIG.google, { anonymize_ip: true });
 
-  // Optional: also load Google Ads
-  if (PIXEL_CONFIG.googleAds && PIXEL_CONFIG.googleAds !== 'AW-XXXXXXXXXX') {
-    gtag('config', PIXEL_CONFIG.googleAds);
-  }
+  if (hasGA4) gtag('config', PIXEL_CONFIG.google, { anonymize_ip: true });
+  if (hasAds) gtag('config', PIXEL_CONFIG.googleAds);
 
   window.gaTrack = {
     event:       (name, params) => gtag('event', name, params),
@@ -135,7 +138,7 @@ function loadGoogleTag() {
     beginCheckout:(data) => gtag('event', 'begin_checkout', data)
   };
 
-  console.log('[Cadomalo] Google Tag loaded');
+  console.log('[Cadomalo] Google Tag loaded (' + (hasGA4 ? 'GA4 + Ads' : hasAds ? 'Ads only' : 'none') + ')');
 }
 
 /* ----------------------------------------------------------
