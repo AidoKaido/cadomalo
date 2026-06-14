@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders – Cadomalo Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body{background:var(--bg);}
+    .admin-wrap{max-width:1080px;margin:0 auto;padding:32px 20px;}
+    .admin-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+    .admin-hd h1{font-size:1.4rem;font-weight:800;letter-spacing:-.02em;}
+    .ord-table{width:100%;background:#fff;border:1px solid var(--border);border-radius:var(--r12);overflow:hidden;border-collapse:collapse;}
+    .ord-table th, .ord-table td{padding:12px 14px;font-size:.84rem;text-align:left;border-bottom:1px solid var(--border);vertical-align:top;}
+    .ord-table th{background:var(--bg);font-weight:700;color:var(--mid);font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;}
+    .ord-table tr:last-child td{border-bottom:none;}
+    .ord-id{font-family:monospace;font-size:.74rem;color:var(--mid);}
+    .ord-amt{font-weight:700;}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:600;}
+    .pill-paid{background:#dcfce7;color:#166534;}
+    .pill-unpaid{background:#fee2e2;color:#991b1b;}
+    .pill-pending{background:#fef3c7;color:#92400e;}
+    .empty{padding:40px;text-align:center;color:var(--mid);background:#fff;border:1px solid var(--border);border-radius:var(--r12);}
+    .err{padding:16px;background:var(--cr-xl);border:1px solid rgba(156,2,2,.2);border-radius:var(--r8);color:var(--cr);font-size:.9rem;}
+  </style>
+</head>
+<body>
+<div class="admin-wrap">
+  <div class="admin-hd">
+    <h1>Recent Orders</h1>
+    <a href="index.html" style="font-size:.85rem;color:var(--cr);">← Back to site</a>
+  </div>
+
+  <div id="ord-loading" class="empty">Loading orders…</div>
+  <div id="ord-error" class="err" style="display:none;"></div>
+  <div id="ord-content" style="display:none;">
+    <table class="ord-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Customer</th>
+          <th>Items</th>
+          <th style="text-align:right;">Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="ord-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+(async function(){
+  const esc = (s) => { const d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; };
+  const fmtDate = (sec) => new Date(sec * 1000).toLocaleString('en-US', {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'});
+
+  try {
+    const res = await fetch('/api/admin-orders?limit=25');
+    if (res.status === 401) {
+      document.getElementById('ord-loading').style.display = 'none';
+      document.getElementById('ord-error').style.display = 'block';
+      document.getElementById('ord-error').textContent = 'Authentication required. Refresh and enter your admin password.';
+      return;
+    }
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed');
+
+    document.getElementById('ord-loading').style.display = 'none';
+    const body = document.getElementById('ord-body');
+    if (!data.orders.length) {
+      body.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--mid);padding:32px;">No orders yet.</td></tr>';
+    } else {
+      data.orders.forEach((o) => {
+        const tr = document.createElement('tr');
+        const items = (o.items || []).map((it) => `${it.quantity}× ${esc(it.description || '')}`).join('<br>');
+        const status = o.paymentStatus === 'paid'
+          ? '<span class="pill pill-paid">Paid</span>'
+          : o.paymentStatus === 'unpaid'
+            ? '<span class="pill pill-unpaid">Unpaid</span>'
+            : `<span class="pill pill-pending">${esc(o.paymentStatus || o.status)}</span>`;
+        tr.innerHTML = `
+          <td>${esc(fmtDate(o.created))}<div class="ord-id">${esc(o.id.slice(-12).toUpperCase())}</div></td>
+          <td>${esc(o.name || '—')}<div style="color:var(--mid);font-size:.78rem;">${esc(o.email || '')}${o.country ? ' · ' + esc(o.country) : ''}</div></td>
+          <td style="font-size:.78rem;">${items || '—'}</td>
+          <td style="text-align:right;" class="ord-amt">${esc(o.currency)} ${o.amountTotal.toFixed(2)}</td>
+          <td>${status}</td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+    document.getElementById('ord-content').style.display = 'block';
+  } catch (err) {
+    document.getElementById('ord-loading').style.display = 'none';
+    document.getElementById('ord-error').style.display = 'block';
+    document.getElementById('ord-error').textContent = err.message;
+  }
+})();
+</script>
+</body>
+</html>

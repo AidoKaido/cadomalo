@@ -8,7 +8,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "node scripts/sync-products.js && node scripts/register-printify-webhooks.js && node scripts/alias-to-prod-domain.js",
+    "build": "node scripts/sync-products.js && node scripts/inject-pixel-ids.js && node scripts/generate-sitemap.js && node scripts/register-printify-webhooks.js && node scripts/alias-to-prod-domain.js",
     "sync": "node scripts/sync-products.js"
   },
   "dependencies": {

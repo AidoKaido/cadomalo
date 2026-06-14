@@ -193,34 +193,8 @@
       </div>
       <h2 class="sec-h">Your perfect matches are ready! 🎉</h2>
       <p style="color:var(--mid);margin-bottom:8px;">Based on your answers, here are our top picks for you:</p>
-      <div class="result-grid">
-        <div class="prod-card">
-          <div class="prod-thumb"><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=400&q=80" alt="Custom Name Necklace"></div>
-          <div class="prod-body">
-            <p class="prod-cat">Top Match ⭐</p>
-            <h3 class="prod-name">Custom Name Necklace</h3>
-            <div class="prod-price"><span class="p-now">$49.99</span></div>
-            <a href="product.html" class="btn btn-primary btn-sm btn-full" style="margin-top:10px;">View Gift →</a>
-          </div>
-        </div>
-        <div class="prod-card">
-          <div class="prod-thumb"><img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=400&q=80" alt="Custom Star Map"></div>
-          <div class="prod-body">
-            <p class="prod-cat">Great Match 💕</p>
-            <h3 class="prod-name">Custom Star Map Print</h3>
-            <div class="prod-price"><span class="p-now">$59.99</span><span class="p-was">$74.99</span></div>
-            <a href="product.html" class="btn btn-outline btn-sm btn-full" style="margin-top:10px;">View Gift →</a>
-          </div>
-        </div>
-        <div class="prod-card">
-          <div class="prod-thumb"><img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=400&q=80" alt="Custom Photo Mug"></div>
-          <div class="prod-body">
-            <p class="prod-cat">Also Great 💝</p>
-            <h3 class="prod-name">Custom Photo Mug</h3>
-            <div class="prod-price"><span class="p-now">$34.99</span></div>
-            <a href="product.html" class="btn btn-ghost btn-sm btn-full" style="margin-top:10px;">View Gift →</a>
-          </div>
-        </div>
+      <div class="result-grid" id="result-grid">
+        <div style="grid-column:1/-1;text-align:center;color:var(--mid);padding:24px;">Loading matches…</div>
       </div>
       <div style="margin-top:32px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <a href="shop.html" class="btn btn-outline">Browse All Gifts →</a>
@@ -255,11 +229,73 @@
     document.getElementById('step-' + n).classList.add('active');
     document.getElementById('dot-' + (n + 1))?.classList.remove('done');
   }
+  const BUDGET_RANGES = {
+    'under-30':  [0, 30],
+    '30-60':     [30, 60],
+    '60-100':    [60, 100],
+    'over-100':  [100, Infinity]
+  };
+  const LABELS = ['Top Match ⭐', 'Great Match 💕', 'Also Great 💝'];
+  const _esc = (s) => { const d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; };
+
+  async function renderMatches() {
+    const grid = document.getElementById('result-grid');
+    try {
+      const res = await fetch('/data/products.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('catalog ' + res.status);
+      const data = await res.json();
+      const all = data.products || [];
+      const occ = answers.occasion;
+      const [min, max] = BUDGET_RANGES[answers.budget] || [0, Infinity];
+
+      const scored = all.map(p => {
+        let score = 0;
+        const tags = ((p.tags || []).concat([p.category?.slug || ''])).map(t => (t || '').toLowerCase());
+        if (occ && tags.some(t => t.includes(occ))) score += 4;
+        const price = Number(p.price) || 0;
+        if (price >= min && price <= max) score += 3;
+        else if (price < min) score -= 1;
+        else if (price > max) score -= 2;
+        if (answers.personality === 'creative' && p.productType === 'custom') score += 1;
+        if (answers.personality === 'practical' && p.productType !== 'digital') score += 1;
+        if (answers.personality === 'sentimental' && (p.personalization?.allowText || p.personalization?.allowImage)) score += 1;
+        return { p, score };
+      }).sort((a, b) => b.score - a.score);
+
+      const top = scored.slice(0, 3).filter(x => x.p);
+      if (!top.length) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--mid);padding:24px;">No products match yet. <a href="shop.html" style="color:var(--cr);">Browse the full catalog →</a></div>';
+        return;
+      }
+
+      grid.innerHTML = '';
+      top.forEach(({ p }, i) => {
+        const img = p.images?.[0]?.url || '/assets/logo.png';
+        const price = (Number(p.price) || 0).toFixed(2);
+        const card = document.createElement('div');
+        card.className = 'prod-card';
+        card.innerHTML = `
+          <div class="prod-thumb"><img src="${_esc(img)}" alt="${_esc(p.title)}"></div>
+          <div class="prod-body">
+            <p class="prod-cat">${LABELS[i] || ''}</p>
+            <h3 class="prod-name">${_esc(p.title)}</h3>
+            <div class="prod-price"><span class="p-now">$${price}</span></div>
+            <a href="/products/${encodeURIComponent(p.slug)}" class="btn btn-${i === 0 ? 'primary' : (i === 1 ? 'outline' : 'ghost')} btn-sm btn-full" style="margin-top:10px;">View Gift →</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    } catch (err) {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--mid);padding:24px;">Couldn't load matches. <a href="shop.html" style="color:var(--cr);">Browse the full catalog →</a></div>`;
+    }
+  }
+
   function showResults() {
     document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
     document.getElementById('step-results').classList.add('active');
     document.querySelectorAll('.q-dot').forEach(d => d.classList.add('done'));
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    renderMatches();
   }
   function restartQuiz() {
     document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));

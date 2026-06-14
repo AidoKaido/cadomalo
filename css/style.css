@@ -189,7 +189,7 @@ svg{display:block;}
 @media(max-width:640px){.topbar-social,.topbar-right{display:none;}}
 
 /* Language Switcher */
-.lang-sw{position:relative;}
+.lang-sw{display:none !important;}
 .lang-btn{
   display:flex;align-items:center;gap:5px;
   font-size:.72rem;font-weight:600;color:rgba(255,255,255,.85);

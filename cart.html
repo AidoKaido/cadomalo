@@ -12,7 +12,6 @@
   <style>
     .cart-layout{display:grid;grid-template-columns:1fr 360px;gap:40px;padding:48px 0 80px;align-items:start;}
     @media(max-width:860px){.cart-layout{grid-template-columns:1fr;}}
-    /* Cart items */
     .cart-items-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;border-bottom:2px solid var(--dark);padding-bottom:12px;}
     .cart-items-head h2{font-size:1rem;font-weight:700;}
     .cart-item{display:grid;grid-template-columns:90px 1fr auto;gap:16px;align-items:start;padding:20px 0;border-bottom:1px solid var(--border);}
@@ -32,22 +31,6 @@
     .cart-qty-btn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:#fff;border:none;cursor:pointer;font-size:1rem;color:var(--dark);transition:background .15s;}
     .cart-qty-btn:hover{background:var(--bg);}
     .cart-qty-num{width:36px;text-align:center;font-size:.84rem;font-weight:600;border:none;outline:none;}
-    /* Cart upsell */
-    .cart-upsell{background:var(--cr-xl);border:1px solid rgba(156,2,2,.15);border-radius:var(--r12);padding:16px;margin:20px 0;}
-    .cart-upsell p{font-size:.82rem;color:var(--cr);font-weight:600;margin-bottom:12px;}
-    .cart-upsell-items{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;}
-    .cart-upsell-item{flex-shrink:0;width:80px;text-align:center;cursor:pointer;}
-    .cart-upsell-item img{width:60px;height:60px;border-radius:var(--r8);object-fit:cover;margin:0 auto 4px;border:2px solid transparent;transition:border-color .2s;}
-    .cart-upsell-item:hover img{border-color:var(--cr);}
-    .cart-upsell-item p{font-size:.65rem;color:var(--dark);font-weight:600;line-height:1.3;}
-    .cart-upsell-item span{font-size:.65rem;color:var(--cr);}
-    /* Bundle bar */
-    .bundle-bar{background:var(--dark);border-radius:var(--r8);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap;}
-    .bundle-bar p{font-size:.82rem;color:#fff;}
-    .bundle-bar span{color:var(--cr);font-weight:700;}
-    .bundle-progress{height:4px;background:rgba(255,255,255,.15);border-radius:2px;flex:1;min-width:80px;}
-    .bundle-progress-fill{height:100%;background:var(--cr);border-radius:2px;transition:width .5s;}
-    /* Summary */
     .summary-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--r16);padding:24px;position:sticky;top:90px;}
     .summary-box h3{font-size:.95rem;font-weight:700;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);}
     .summary-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:.88rem;}
@@ -62,8 +45,9 @@
     .trust-icons{display:flex;justify-content:center;gap:16px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);}
     .trust-icon{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.64rem;color:var(--light);}
     .trust-icon svg{width:18px;height:18px;color:var(--mid);}
-    /* Empty cart */
     .cart-empty{text-align:center;padding:60px 0;}
+    .cart-empty h2{font-size:1.2rem;margin-bottom:8px;color:var(--dark);}
+    .cart-empty p{color:var(--mid);margin-bottom:20px;}
   </style>
 </head>
 <body>
@@ -72,11 +56,11 @@
 <div id="cookie-banner" style="display:none;" role="dialog"><div class="cookie-inner"><div class="cookie-text"><strong>We value your privacy 🍪</strong><p>We use cookies for ads and analytics. <a href="cookie-policy.html">Cookie Policy</a></p></div><div class="cookie-btns"><button id="btn-manage-prefs" class="cookie-manage">Manage</button><button id="btn-reject-all" class="btn btn-ghost btn-sm">Reject All</button><button id="btn-accept-all" class="btn btn-primary btn-sm">Accept All</button></div></div></div>
 <div id="cookie-prefs" role="dialog" aria-modal="true"><div class="cookie-panel"><h3>Cookie Preferences</h3><p>Manage consent.</p><div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Strictly Necessary</span><label class="toggle"><input type="checkbox" checked disabled><span class="toggle-track"></span></label></div><p>Required.</p></div><div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Analytics</span><label class="toggle"><input type="checkbox" id="toggle-analytics"><span class="toggle-track"></span></label></div><p>Google Analytics.</p></div><div class="cookie-cat"><div class="cookie-cat-hd"><span class="cookie-cat-name">Marketing</span><label class="toggle"><input type="checkbox" id="toggle-marketing"><span class="toggle-track"></span></label></div><p>Facebook, TikTok, Pinterest, Google Ads.</p></div><div class="cookie-panel-btns"><button id="btn-close-panel" class="btn btn-ghost btn-sm">Cancel</button><button id="btn-accept-panel" class="btn btn-outline btn-sm">Accept All</button><button id="btn-save-prefs" class="btn btn-primary btn-sm">Save</button></div></div></div>
 
-<!-- Top Bar -->
-<div class="topbar"><div class="topbar-inner"><p class="topbar-msg">🎁 Free shipping on orders over $50 · You're <strong>$0.02 away</strong> from free shipping!</p></div></div>
+<!-- Top Bar (dynamically updated from cart subtotal) -->
+<div class="topbar"><div class="topbar-inner"><p class="topbar-msg" id="ship-banner">🎁 Free shipping on orders over $50</p></div></div>
 
 <!-- Header -->
-<header id="site-header"><div class="wrap"><div class="hdr"><a href="index.html" class="logo-wrap"><img src="assets/logo.png" alt="Cadomalo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-text" style="display:none">cado<span>malo</span></span></a><nav class="nav-desktop"><ul class="nav-ul"><li><a href="index.html">Home</a></li><li class="nav-active"><a href="shop.html">Shop</a></li><li><a href="gift-finder.html">Gift Finder ✨</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li></ul></nav><div class="hdr-icons"><a href="cart.html" class="ico-btn" style="position:relative"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count">2</span></a><button class="ico-btn mob-toggle" id="nav-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button></div></div></div></header>
+<header id="site-header"><div class="wrap"><div class="hdr"><a href="index.html" class="logo-wrap"><img src="assets/logo.png" alt="Cadomalo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-text" style="display:none">cado<span>malo</span></span></a><nav class="nav-desktop"><ul class="nav-ul"><li><a href="index.html">Home</a></li><li class="nav-active"><a href="shop.html">Shop</a></li><li><a href="gift-finder.html">Gift Finder ✨</a></li><li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li></ul></nav><div class="hdr-icons"><a href="cart.html" class="ico-btn" style="position:relative"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-count">0</span></a><button class="ico-btn mob-toggle" id="nav-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button></div></div></div></header>
 <div id="nav-overlay" class="nav-drawer-overlay"></div>
 <nav id="nav-drawer" class="nav-drawer"><div class="drawer-head"><span class="drawer-logo">cado<span>malo</span></span><button class="ico-btn drawer-close" id="nav-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div class="drawer-nav"><a href="index.html">Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="shop.html" class="active">Shop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="gift-finder.html">Gift Finder ✨ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a><a href="blog.html">Blog <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a></div></nav>
 
@@ -85,137 +69,48 @@
     <nav class="breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg><span>Shopping Cart</span></nav>
   </div>
 
-  <div class="cart-layout">
+  <!-- Empty state (shown when cart is empty) -->
+  <div id="cart-empty" class="cart-empty" style="display:none;">
+    <h2>Your cart is empty</h2>
+    <p>Browse our shop to find a thoughtful gift.</p>
+    <a href="shop.html" class="btn btn-primary">Continue shopping</a>
+  </div>
 
-    <!-- Cart Items -->
+  <!-- Cart layout (hidden when cart is empty) -->
+  <div class="cart-layout" id="cart-layout" style="display:none;">
+
     <div>
       <div class="cart-items-head">
-        <h2>Your Cart <span style="font-weight:400;color:var(--mid);">(2 items)</span></h2>
+        <h2>Your Cart <span id="cart-item-count" style="font-weight:400;color:var(--mid);">(0 items)</span></h2>
         <a href="shop.html" style="font-size:.8rem;color:var(--cr);">← Continue Shopping</a>
       </div>
 
-      <!-- Bundle progress bar -->
-      <div class="bundle-bar">
-        <div>
-          <p>🎁 Add <span>1 more item</span> to unlock <span>10% bundle discount</span></p>
-        </div>
-        <div class="bundle-progress">
-          <div class="bundle-progress-fill" style="width:66%"></div>
-        </div>
-        <a href="shop.html" class="btn btn-primary btn-sm">Add Item</a>
-      </div>
-
-      <!-- Item 1 -->
-      <div class="cart-item" id="cart-item-1">
-        <div class="cart-item-img">
-          <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=180&q=80" alt="Custom Name Necklace">
-        </div>
-        <div>
-          <p class="cart-item-cat">Personalized Jewelry</p>
-          <p class="cart-item-name">Custom Name Necklace</p>
-          <div class="cart-item-opts">
-            <span>Metal: Gold Plated</span>
-            <span>Chain: 16 inches</span>
-          </div>
-          <span class="cart-item-personal">✍️ "Sophie"</span>
-          <div class="cart-qty" aria-label="Quantity">
-            <button class="cart-qty-btn" onclick="adjustCartQty('item1-qty', -1, 49.99, 'item1-total')">−</button>
-            <input class="cart-qty-num" type="number" id="item1-qty" value="1" min="1" max="10">
-            <button class="cart-qty-btn" onclick="adjustCartQty('item1-qty', 1, 49.99, 'item1-total')">+</button>
-          </div>
-        </div>
-        <div class="cart-item-price-wrap">
-          <span class="cart-item-was">$64.99</span>
-          <span class="cart-item-price" id="item1-total">$49.99</span>
-          <div><button class="cart-item-remove" onclick="removeItem('cart-item-1')">Remove</button></div>
-        </div>
-      </div>
-
-      <!-- Item 2 -->
-      <div class="cart-item" id="cart-item-2">
-        <div class="cart-item-img">
-          <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=180&q=80" alt="Birthday Printable Bundle">
-        </div>
-        <div>
-          <p class="cart-item-cat">Digital · Instant Download</p>
-          <p class="cart-item-name">Birthday Printable Bundle</p>
-          <div class="cart-item-opts">
-            <span>📥 Delivered instantly to your email</span>
-          </div>
-          <div class="cart-qty" aria-label="Quantity">
-            <button class="cart-qty-btn" onclick="adjustCartQty('item2-qty', -1, 14.99, 'item2-total')">−</button>
-            <input class="cart-qty-num" type="number" id="item2-qty" value="1" min="1" max="10">
-            <button class="cart-qty-btn" onclick="adjustCartQty('item2-qty', 1, 14.99, 'item2-total')">+</button>
-          </div>
-        </div>
-        <div class="cart-item-price-wrap">
-          <span class="cart-item-was">$24.99</span>
-          <span class="cart-item-price" id="item2-total">$14.99</span>
-          <div><button class="cart-item-remove" onclick="removeItem('cart-item-2')">Remove</button></div>
-        </div>
-      </div>
-
-      <!-- Upsell strip -->
-      <div class="cart-upsell">
-        <p>💡 Customers who bought these also added:</p>
-        <div class="cart-upsell-items">
-          <div class="cart-upsell-item" onclick="addUpsell('Personalized Jewelry Box', 54.99)">
-            <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=120&q=80" alt="Jewelry Box">
-            <p>Jewelry Box</p>
-            <span>$54.99</span>
-          </div>
-          <div class="cart-upsell-item" onclick="addUpsell('Custom Star Map', 59.99)">
-            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=120&q=80" alt="Star Map">
-            <p>Star Map</p>
-            <span>$59.99</span>
-          </div>
-          <div class="cart-upsell-item" onclick="addUpsell('Custom Photo Mug', 34.99)">
-            <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=120&q=80" alt="Photo Mug">
-            <p>Photo Mug</p>
-            <span>$34.99</span>
-          </div>
-          <div class="cart-upsell-item" onclick="addUpsell('Gift Card Pack', 9.99)">
-            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=120&q=80" alt="Gift Cards">
-            <p>Gift Cards</p>
-            <span>$9.99</span>
-          </div>
-        </div>
-      </div>
-
+      <div id="cart-items-list"></div>
     </div>
 
-    <!-- Order Summary -->
     <aside>
       <div class="summary-box">
         <h3>Order Summary</h3>
 
-        <div class="summary-row"><span>Subtotal (2 items)</span><span class="val">$64.98</span></div>
-        <div class="summary-row"><span>Discount (Sale)</span><span class="val green">−$25.00</span></div>
-        <div class="summary-row"><span>Shipping</span><span class="val green">FREE</span></div>
-        <div class="summary-row"><span>Estimated Tax</span><span class="val">$5.20</span></div>
-        <div class="summary-row total"><span>Total</span><span>$70.18</span></div>
+        <div class="summary-row"><span id="subtotal-label">Subtotal</span><span class="val" id="subtotal-val">$0.00</span></div>
+        <div class="summary-row" id="discount-row" style="display:none;"><span>Discount</span><span class="val green" id="discount-val">−$0.00</span></div>
+        <div class="summary-row"><span>Shipping</span><span class="val" id="shipping-val">Calculated at checkout</span></div>
+        <div class="summary-row total"><span>Total</span><span id="total-val">$0.00</span></div>
 
-        <div style="margin:16px 0;background:var(--cr-xl);border:1px solid rgba(156,2,2,.15);border-radius:var(--r8);padding:10px 12px;font-size:.78rem;color:var(--cr);">
-          🎉 You're saving <strong>$25.00</strong> on this order!
-        </div>
+        <div id="savings-callout" style="display:none;margin:16px 0;background:var(--cr-xl);border:1px solid rgba(156,2,2,.15);border-radius:var(--r8);padding:10px 12px;font-size:.78rem;color:var(--cr);"></div>
 
-        <!-- Promo code -->
-        <div class="promo-row">
-          <input class="promo-input" type="text" placeholder="Promo code" id="promo-input">
-          <button class="btn btn-dark btn-sm" onclick="applyPromo()">Apply</button>
-        </div>
+        <p style="font-size:.78rem;color:var(--mid);margin-bottom:14px;">Have a promo code? Enter it at checkout.</p>
 
         <!-- Checkout -->
-        <a href="checkout.html" class="btn btn-primary btn-xl btn-full" style="font-size:.95rem;">
+        <button class="btn btn-primary btn-xl btn-full" id="checkout-btn" type="button" style="font-size:.95rem;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-          Secure Checkout →
-        </a>
+          <span id="checkout-btn-label">Secure Checkout →</span>
+        </button>
 
         <!-- Payment logos -->
         <div style="display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap;">
           <span class="pay-badge" style="background:var(--border);color:var(--mid);">VISA</span>
           <span class="pay-badge" style="background:var(--border);color:var(--mid);">Mastercard</span>
-          <span class="pay-badge" style="background:var(--border);color:var(--mid);">PayPal</span>
           <span class="pay-badge" style="background:var(--border);color:var(--mid);">Apple Pay</span>
           <span class="pay-badge" style="background:var(--border);color:var(--mid);">Stripe</span>
         </div>
@@ -227,7 +122,6 @@
           <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Quality Guarantee</div>
         </div>
 
-        <!-- Need help — inside sticky box so it never scrolls away -->
         <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:16px;text-align:center;">
           <p style="font-size:.82rem;color:var(--mid);">Questions about your order?</p>
           <a href="contact.html" style="font-size:.82rem;color:var(--cr);font-weight:600;">Contact us →</a>
@@ -243,46 +137,198 @@
 <script src="js/pixels.js"></script>
 <script src="js/main.js"></script>
 <script>
-  function adjustCartQty(inputId, delta, unitPrice, totalId) {
-    const input = document.getElementById(inputId);
-    const qty   = Math.max(1, Math.min(10, parseInt(input.value || 1) + delta));
-    input.value = qty;
-    document.getElementById(totalId).textContent = '$' + (qty * unitPrice).toFixed(2);
-    recalcTotal();
+(function(){
+  'use strict';
+  const FREE_SHIP_THRESHOLD = 50;
+
+  const $ = (sel) => document.querySelector(sel);
+  const esc = (s) => { const d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; };
+  const money = (n) => '$' + (Number(n) || 0).toFixed(2);
+
+  function readCart() {
+    try { return JSON.parse(localStorage.getItem('cadomalo_cart') || '[]'); }
+    catch (e) { return []; }
+  }
+  function writeCart(cart) {
+    localStorage.setItem('cadomalo_cart', JSON.stringify(cart));
+    if (typeof syncCartCount === 'function') syncCartCount();
   }
 
-  function recalcTotal() {
-    const q1 = parseInt(document.getElementById('item1-qty')?.value || 0);
-    const q2 = parseInt(document.getElementById('item2-qty')?.value || 0);
-    // Simplified total update — full implementation in Round 3 with Snipcart
+  function itemKey(item) {
+    return [item.slug, item.variantId || '', (item.personalization && item.personalization.text) || ''].join('|');
   }
 
-  function removeItem(id) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.style.opacity = '0';
-    el.style.transform = 'translateX(20px)';
-    el.style.transition = 'all .3s';
-    setTimeout(() => { el.remove(); recalcTotal(); }, 300);
-    const count = document.querySelector('.cart-count');
-    if (count && parseInt(count.textContent) > 0) count.textContent = parseInt(count.textContent) - 1;
-    showToast('Item removed from cart');
+  function renderItem(item, idx) {
+    const row = document.createElement('div');
+    row.className = 'cart-item';
+    const subtotal = (Number(item.unitPrice) || 0) * (Number(item.quantity) || 1);
+    const personalText = item.personalization && item.personalization.text;
+    const personalImage = item.personalization && (item.personalization.imageName || item.personalization.imageUrl);
+    row.innerHTML = `
+      <div class="cart-item-img">
+        ${item.image ? `<img src="${esc(item.image)}" alt="${esc(item.title)}">` : ''}
+      </div>
+      <div>
+        <p class="cart-item-name">${esc(item.title)}</p>
+        <div class="cart-item-opts">
+          ${item.variantLabel ? `<span>${esc(item.variantLabel)}</span>` : ''}
+        </div>
+        ${personalText ? `<span class="cart-item-personal">✍️ "${esc(personalText)}"</span>` : ''}
+        ${personalImage ? `<span class="cart-item-personal">🖼️ ${esc(personalImage)}</span>` : ''}
+        <div class="cart-qty" aria-label="Quantity">
+          <button class="cart-qty-btn" data-act="dec" data-idx="${idx}" type="button">−</button>
+          <input class="cart-qty-num" type="number" value="${item.quantity}" min="1" max="10" data-act="set" data-idx="${idx}">
+          <button class="cart-qty-btn" data-act="inc" data-idx="${idx}" type="button">+</button>
+        </div>
+      </div>
+      <div class="cart-item-price-wrap">
+        <span class="cart-item-price">${money(subtotal)}</span>
+        <div><button class="cart-item-remove" data-act="remove" data-idx="${idx}" type="button">Remove</button></div>
+      </div>
+    `;
+    return row;
   }
 
-  function addUpsell(name, price) {
-    const count = document.querySelector('.cart-count');
-    if (count) count.textContent = parseInt(count.textContent || 0) + 1;
-    showToast(`🎁 "${name}" added — $${price.toFixed(2)}`);
+  function render() {
+    const cart = readCart();
+    const empty = $('#cart-empty');
+    const layout = $('#cart-layout');
+    if (!cart.length) {
+      empty.style.display = '';
+      layout.style.display = 'none';
+      $('#ship-banner').textContent = '🎁 Free shipping on orders over $50';
+      return;
+    }
+    empty.style.display = 'none';
+    layout.style.display = '';
+
+    const list = $('#cart-items-list');
+    list.innerHTML = '';
+    cart.forEach((it, idx) => list.appendChild(renderItem(it, idx)));
+
+    const itemCount = cart.reduce((a, x) => a + (Number(x.quantity) || 0), 0);
+    $('#cart-item-count').textContent = `(${itemCount} item${itemCount === 1 ? '' : 's'})`;
+    $('#subtotal-label').textContent = `Subtotal (${itemCount} item${itemCount === 1 ? '' : 's'})`;
+
+    const subtotal = cart.reduce((a, x) => a + (Number(x.unitPrice) || 0) * (Number(x.quantity) || 0), 0);
+    $('#subtotal-val').textContent = money(subtotal);
+
+    $('#discount-row').style.display = 'none';
+    $('#total-val').textContent = money(subtotal);
+
+    // Shipping banner — dynamic
+    const banner = $('#ship-banner');
+    if (subtotal >= FREE_SHIP_THRESHOLD) {
+      banner.textContent = '✓ You qualify for free shipping';
+    } else {
+      const away = (FREE_SHIP_THRESHOLD - subtotal).toFixed(2);
+      banner.textContent = `🎁 Free shipping on orders over $50 — you're $${away} away`;
+    }
+
+    // Shipping value in summary
+    const hasPhysical = cart.some((x) => x.productType !== 'digital');
+    $('#shipping-val').textContent = hasPhysical
+      ? (subtotal >= FREE_SHIP_THRESHOLD ? 'FREE' : 'Calculated at checkout')
+      : 'Digital — no shipping';
+    if (hasPhysical && subtotal >= FREE_SHIP_THRESHOLD) {
+      $('#shipping-val').classList.add('green');
+    } else {
+      $('#shipping-val').classList.remove('green');
+    }
+
+    // Savings callout (real savings only — from compareAtPrice if present)
+    const savedFromList = cart.reduce((a, x) => {
+      const was = Number(x.compareAtPrice) || 0;
+      const now = Number(x.unitPrice) || 0;
+      if (was > now) return a + (was - now) * (Number(x.quantity) || 0);
+      return a;
+    }, 0);
+    const callout = $('#savings-callout');
+    if (savedFromList > 0) {
+      callout.style.display = '';
+      callout.innerHTML = `🎉 You're saving <strong>${money(savedFromList)}</strong> on this order`;
+    } else {
+      callout.style.display = 'none';
+    }
   }
 
-  function applyPromo() {
-    const code = document.getElementById('promo-input')?.value?.trim().toUpperCase();
-    if (!code) return;
-    if (code === 'WELCOME10') showToast('✓ Code applied: 10% off your order!');
-    else if (code === 'GIFT20') showToast('✓ Code applied: 20% off!');
-    else showToast('⚠️ Invalid promo code. Try WELCOME10');
-  }
+  // Event delegation for qty / remove
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-act]');
+    if (!btn) return;
+    const act = btn.dataset.act;
+    const idx = parseInt(btn.dataset.idx, 10);
+    if (isNaN(idx)) return;
+    const cart = readCart();
+    if (!cart[idx]) return;
+    if (act === 'inc') {
+      cart[idx].quantity = Math.min(10, (Number(cart[idx].quantity) || 1) + 1);
+      writeCart(cart); render();
+    } else if (act === 'dec') {
+      const next = (Number(cart[idx].quantity) || 1) - 1;
+      if (next < 1) { cart.splice(idx, 1); }
+      else cart[idx].quantity = next;
+      writeCart(cart); render();
+    } else if (act === 'remove') {
+      cart.splice(idx, 1);
+      writeCart(cart); render();
+      if (typeof showToast === 'function') showToast('Item removed from cart');
+    }
+  });
+  document.addEventListener('change', (e) => {
+    const inp = e.target.closest('input[data-act="set"]');
+    if (!inp) return;
+    const idx = parseInt(inp.dataset.idx, 10);
+    if (isNaN(idx)) return;
+    const cart = readCart();
+    if (!cart[idx]) return;
+    const v = Math.max(1, Math.min(10, parseInt(inp.value, 10) || 1));
+    cart[idx].quantity = v;
+    writeCart(cart); render();
+  });
 
+  // Checkout — POSTs full cart to the multi-item API
+  document.getElementById('checkout-btn').addEventListener('click', async () => {
+    const cart = readCart();
+    if (!cart.length) return;
+    const btn = document.getElementById('checkout-btn');
+    const lbl = document.getElementById('checkout-btn-label');
+    const original = lbl.textContent;
+    btn.disabled = true;
+    lbl.textContent = 'Redirecting to checkout…';
+    try {
+      const body = {
+        cart: cart.map((x) => ({
+          slug: x.slug,
+          quantity: x.quantity,
+          variantId: x.variantId || null,
+          personalization: x.personalization || null
+        }))
+      };
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.url) throw new Error(data.error || `Checkout error (${res.status})`);
+      if (typeof window.fbTrack?.initiateCheckout === 'function') {
+        const subtotal = cart.reduce((a, x) => a + (Number(x.unitPrice) || 0) * (Number(x.quantity) || 0), 0);
+        window.fbTrack.initiateCheckout({ value: subtotal, currency: 'USD' });
+      }
+      window.location.href = data.url;
+    } catch (err) {
+      console.error('[checkout]', err);
+      btn.disabled = false;
+      lbl.textContent = original;
+      if (typeof showToast === 'function') showToast(`⚠️ ${err.message}`);
+      else alert(err.message);
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', render);
+  if (document.readyState !== 'loading') render();
+})();
 </script>
 </body>
 </html>

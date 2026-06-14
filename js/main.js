@@ -124,47 +124,8 @@ const CookieConsent = {
   }
 };
 
-/* ----------------------------------------------------------
-   LANGUAGE SWITCHER
-   ---------------------------------------------------------- */
-const LangSwitcher = {
-  langs: {
-    en: { label: 'English',    flag: '🇺🇸' },
-    fr: { label: 'Français',   flag: '🇫🇷' },
-    de: { label: 'Deutsch',    flag: '🇩🇪' },
-    nl: { label: 'Nederlands', flag: '🇳🇱' }
-  },
-  current: 'en',
-
-  init() {
-    const btn  = $('.lang-btn');
-    const drop = $('.lang-drop');
-    if (!btn || !drop) return;
-
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      btn.classList.toggle('open');
-      drop.classList.toggle('open');
-    });
-
-    document.addEventListener('click', () => {
-      btn.classList.remove('open');
-      drop.classList.remove('open');
-    });
-
-    $$('.lang-drop a').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const lang = a.dataset.lang;
-        if (lang && lang !== 'en') {
-          e.preventDefault();
-          showToast(`${this.langs[lang].flag} ${this.langs[lang].label} – coming soon in Round 4.`);
-        }
-        btn.classList.remove('open');
-        drop.classList.remove('open');
-      });
-    });
-  }
-};
+/* Language switcher disabled — EN only at launch. */
+const LangSwitcher = { init() {} };
 
 /* ----------------------------------------------------------
    HEADER – scroll shadow
@@ -278,27 +239,38 @@ function initCounters() {
 }
 
 /* ----------------------------------------------------------
-   NEWSLETTER FORM  (Klaviyo placeholder)
+   NEWSLETTER FORM — posts to /api/klaviyo-subscribe
    ---------------------------------------------------------- */
 function initNewsletter() {
   $$('.nl-form, .newsletter-form').forEach(form => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = form.querySelector('input[type="email"]')?.value;
-      const btn   = form.querySelector('button[type="submit"]');
+      const emailEl = form.querySelector('input[type="email"]');
+      const email = emailEl?.value?.trim();
+      const btn = form.querySelector('button[type="submit"]');
       if (!email || !btn) return;
 
       const original = btn.textContent;
       btn.textContent = 'Subscribing…';
       btn.disabled = true;
 
-      // TODO Round 3: Replace with real Klaviyo list subscribe API call
-      // POST to https://a.klaviyo.com/api/v2/list/LIST_ID/members
-      await new Promise(r => setTimeout(r, 900));
-
-      btn.textContent = '✓ You\'re in!';
-      btn.style.background = '#059669';
-      form.querySelector('input[type="email"]').value = '';
+      try {
+        const res = await fetch('/api/klaviyo-subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || `Subscribe failed (${res.status})`);
+        btn.textContent = '✓ Check your email';
+        btn.style.background = '#059669';
+        if (emailEl) emailEl.value = '';
+      } catch (err) {
+        console.error('[newsletter]', err);
+        btn.textContent = '⚠️ Try again';
+        btn.style.background = '';
+        showToast(err.message || 'Subscribe failed. Try again.');
+      }
 
       setTimeout(() => {
         btn.textContent = original;

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave a Review – Cadomalo</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .review-wrap{max-width:540px;margin:0 auto;padding:64px 20px 80px;}
+    .rev-card{background:#fff;border:1px solid var(--border);border-radius:var(--r16);padding:32px;}
+    .rev-stars{display:flex;gap:6px;margin:10px 0 24px;}
+    .rev-star{width:34px;height:34px;background:none;border:none;cursor:pointer;color:var(--border);transition:color .15s;padding:0;}
+    .rev-star svg{width:30px;height:30px;}
+    .rev-star.on, .rev-star:hover, .rev-star:hover ~ .rev-star{color:var(--cr);}
+    .rev-stars:hover .rev-star{color:var(--cr);}
+    .rev-stars .rev-star:hover ~ .rev-star{color:var(--border);}
+    .rev-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+    .rev-group label{font-size:.82rem;font-weight:600;color:var(--dark);}
+    .rev-group input, .rev-group textarea{
+      padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r8);
+      font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s;
+    }
+    .rev-group input:focus, .rev-group textarea:focus{border-color:var(--cr);}
+    .rev-group textarea{min-height:120px;resize:vertical;}
+    .rev-done{display:none;text-align:center;padding:24px 0;}
+  </style>
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-inner"><p class="topbar-msg">🎁 Free shipping on orders over $50</p></div></div>
+<header id="site-header"><div class="wrap"><div class="hdr"><a href="index.html" class="logo-wrap"><img src="assets/logo.png" alt="Cadomalo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-text" style="display:none">cado<span>malo</span></span></a></div></div></header>
+
+<div class="review-wrap">
+  <div class="rev-card">
+    <h1 style="font-size:1.4rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px;">Leave a review</h1>
+    <p id="rev-prod-name" style="color:var(--mid);font-size:.9rem;margin-bottom:24px;">Tell us about your experience.</p>
+
+    <form id="rev-form">
+      <div class="rev-group">
+        <label>Your rating *</label>
+        <div class="rev-stars" id="rev-stars" role="radiogroup" aria-label="Rating">
+          <button type="button" class="rev-star" data-rating="1" aria-label="1 star"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+          <button type="button" class="rev-star" data-rating="2" aria-label="2 stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+          <button type="button" class="rev-star" data-rating="3" aria-label="3 stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+          <button type="button" class="rev-star" data-rating="4" aria-label="4 stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+          <button type="button" class="rev-star" data-rating="5" aria-label="5 stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+        </div>
+      </div>
+
+      <div class="rev-group">
+        <label for="rev-author">Your name *</label>
+        <input id="rev-author" type="text" required maxlength="80" autocomplete="name">
+      </div>
+      <div class="rev-group">
+        <label for="rev-title">Review title (optional)</label>
+        <input id="rev-title" type="text" maxlength="120">
+      </div>
+      <div class="rev-group">
+        <label for="rev-body">Your review *</label>
+        <textarea id="rev-body" required minlength="20" maxlength="2000" placeholder="Tell others what you loved (or didn't)…"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full" id="rev-submit" style="margin-top:8px;">Submit review</button>
+    </form>
+
+    <div class="rev-done" id="rev-done">
+      <h2 style="font-size:1.2rem;font-weight:800;margin-bottom:8px;">Thanks for the review! 🎉</h2>
+      <p style="color:var(--mid);font-size:.9rem;">Your review is pending moderation and will appear on the product page within a couple of days.</p>
+      <a href="shop.html" class="btn btn-primary" style="margin-top:20px;">Browse more gifts</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/pixels.js"></script>
+<script src="js/main.js"></script>
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const productSlug = params.get('slug');
+  const productId = params.get('pid');
+  const orderId = params.get('order');
+  let rating = 0;
+
+  const stars = document.querySelectorAll('.rev-star');
+  stars.forEach((star) => {
+    star.addEventListener('click', () => {
+      rating = Number(star.dataset.rating);
+      stars.forEach((s) => s.classList.toggle('on', Number(s.dataset.rating) <= rating));
+    });
+  });
+
+  if (productSlug) {
+    fetch('/data/products.json', {cache: 'no-cache'})
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        const p = data?.products?.find((x) => x.slug === productSlug);
+        if (p) document.getElementById('rev-prod-name').textContent = `Reviewing: ${p.title}`;
+      })
+      .catch(() => {});
+  }
+
+  document.getElementById('rev-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!productSlug) { showToast('Missing product reference'); return; }
+    if (!rating) { showToast('Please choose a rating'); return; }
+    const btn = document.getElementById('rev-submit');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    try {
+      const res = await fetch('/api/submit-review', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          productSlug,
+          productId,
+          orderId,
+          rating,
+          author: document.getElementById('rev-author').value.trim(),
+          title: document.getElementById('rev-title').value.trim(),
+          body: document.getElementById('rev-body').value.trim(),
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'Submit failed');
+      document.getElementById('rev-form').style.display = 'none';
+      document.getElementById('rev-done').style.display = 'block';
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Submit review';
+      showToast(`⚠️ ${err.message}`);
+    }
+  });
+})();
+</script>
+</body>
+</html>
