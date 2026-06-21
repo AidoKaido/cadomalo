@@ -47,7 +47,7 @@ function badgeClass(label) {
 }
 
 function productHref(p) {
-  return `product.html?slug=${encodeURIComponent(p.slug)}`
+  return `/products/${encodeURIComponent(p.slug)}`
 }
 
 function thumbUrl(p) {
@@ -172,8 +172,10 @@ function effectivePrice() {
 
 function runModules() {
   const p = state.product
-  document.title = `${p.title} – Cadomalo`
+  const title = `${p.title} – Cadomalo`
+  document.title = title
   setMeta('description', p.seo?.description || p.shortDescription || '')
+  setSeoTags(p, title)
   setBreadcrumb(p)
   renderJsonLd(p)
   modGallery(p)
@@ -193,6 +195,23 @@ function runModules() {
 function setMeta(name, value) {
   const m = document.querySelector(`meta[name="${name}"]`)
   if (m) m.content = value
+}
+
+function setSeoTags(p, title) {
+  const origin = window.location.origin || 'https://cadomalo.com'
+  const url = `${origin}/products/${encodeURIComponent(p.slug)}`
+  const desc = p.seo?.description || p.shortDescription || (p.description || '').slice(0, 200) || ''
+  const image = p.images?.[0]?.url || `${origin}/assets/logo.png`
+  const canonical = document.getElementById('canonical-link')
+  if (canonical) canonical.href = url
+  const ogUrl = document.getElementById('og-url')
+  if (ogUrl) ogUrl.content = url
+  const ogTitle = document.getElementById('og-title')
+  if (ogTitle) ogTitle.content = title
+  const ogDesc = document.getElementById('og-description')
+  if (ogDesc) ogDesc.content = desc
+  const ogImage = document.getElementById('og-image')
+  if (ogImage) ogImage.content = image
 }
 
 function setBreadcrumb(p) {
@@ -544,7 +563,7 @@ function modActions(p) {
   updateActionState()
 }
 
-function addToCart(p, btn) {
+async function addToCart(p, btn) {
   const c = p.personalization || {}
   if (c.allowText && c.textRequired && !state.personalization.text.trim()) {
     if (typeof showToast === 'function') showToast('⚠️ Please add your personalization text.')
@@ -556,8 +575,25 @@ function addToCart(p, btn) {
     document.getElementById('pers-image')?.focus()
     return
   }
-  // Persist cart item to localStorage. Image files aren't serializable; for
-  // now we just keep the filename hint. Real upload happens at checkout.
+
+  // If the user uploaded an image, push it to Sanity first and store the URL.
+  let imageUrl = null
+  let imageName = null
+  if (state.personalization.image) {
+    imageName = state.personalization.image.name || null
+    const lbl = btn?.querySelector('[data-add-label]')
+    const orig = lbl ? lbl.textContent : null
+    if (lbl) lbl.textContent = 'Uploading image…'
+    try {
+      imageUrl = await uploadPersonalizationImage(state.personalization.image)
+    } catch (err) {
+      if (lbl && orig) lbl.textContent = orig
+      if (typeof showToast === 'function') showToast(`⚠️ ${err.message || 'Upload failed'}`)
+      return
+    }
+    if (lbl && orig) lbl.textContent = orig
+  }
+
   const item = {
     slug: p.slug,
     title: p.title,
@@ -568,7 +604,8 @@ function addToCart(p, btn) {
     unitPrice: effectivePrice(),
     personalization: {
       text: state.personalization.text || null,
-      imageName: state.personalization.image?.name || null,
+      imageName,
+      imageUrl,
     },
     addedAt: Date.now(),
   }
@@ -606,6 +643,20 @@ function addToCart(p, btn) {
   }
 }
 
+async function uploadPersonalizationImage(file) {
+  const res = await fetch('/api/upload-personalization-image', {
+    method: 'POST',
+    headers: {
+      'Content-Type': file.type || 'application/octet-stream',
+      'X-Filename': file.name || 'upload',
+    },
+    body: file,
+  })
+  const data = await res.json().catch(() => ({}))
+  if (!res.ok || !data.url) throw new Error(data.error || `Upload failed (${res.status})`)
+  return data.url
+}
+
 function actionLabelFor(p) {
   if (p.productType === 'digital') return 'Buy Now — Instant Download'
   if (p.productType === 'custom') return 'Order This Custom Piece'
@@ -641,6 +692,20 @@ async function buyNow(p, btn) {
   const originalLabel = lbl ? lbl.textContent : btn.textContent
   btn.disabled = true
   if (lbl) lbl.textContent = 'Redirecting to checkout…'
+
+  let imageUrl = null
+  if (state.personalization.image) {
+    if (lbl) lbl.textContent = 'Uploading image…'
+    try {
+      imageUrl = await uploadPersonalizationImage(state.personalization.image)
+    } catch (err) {
+      btn.disabled = false
+      if (lbl) lbl.textContent = originalLabel
+      if (typeof showToast === 'function') showToast(`⚠️ ${err.message || 'Upload failed'}`)
+      return
+    }
+    if (lbl) lbl.textContent = 'Redirecting to checkout…'
+  }
   try {
     const body = {
       slug: p.slug,
@@ -648,7 +713,8 @@ async function buyNow(p, btn) {
       variantId: state.selectedVariant?.id || null,
       personalization: {
         text: state.personalization.text || null,
-        // Image upload not yet wired through Stripe metadata (Phase 4)
+        imageUrl,
+        imageName: state.personalization.image?.name || null,
       },
     }
     const res = await fetch('/api/create-checkout-session', {

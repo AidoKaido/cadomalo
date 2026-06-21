@@ -1,5 +1,11 @@
-// Stripe webhook: on checkout.session.completed, look up the purchased product
-// and — if it's digital — fetch its file from Sanity and email it to the buyer.
+// Stripe webhook: handles checkout completion (digital delivery + Klaviyo
+// purchase event) and abandoned-checkout signals (Klaviyo "Started Checkout").
+//
+// Events handled:
+//   - checkout.session.completed         → digital delivery emails + Klaviyo purchase event
+//   - checkout.session.expired           → Klaviyo "Started Checkout" event for abandoned-cart flow
+//   - checkout.session.async_payment_failed → Klaviyo abandoned-cart event too
+//
 // Idempotency: relies on the Stripe event id; if Stripe retries, we re-send.
 // (Acceptable for a small store; can switch to a dedupe table later.)
 
@@ -12,6 +18,7 @@ const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET
 const RESEND_KEY = process.env.RESEND_API_KEY
 const FROM_EMAIL = process.env.RESEND_FROM || 'Cadomalo <support@cadomalo.com>'
 const REPLY_TO = process.env.RESEND_REPLY_TO || 'support@cadomalo.com'
+const KLAVIYO_KEY = process.env.KLAVIYO_PRIVATE_KEY
 
 export const config = {
   api: {bodyParser: false}, // Stripe needs the raw body for signature verification
@@ -37,16 +44,17 @@ export default async function handler(req, res) {
     return res.status(400).send(`Webhook Error: ${err.message}`)
   }
 
-  if (event.type !== 'checkout.session.completed') {
-    return res.status(200).json({received: true, ignored: event.type})
-  }
-
   try {
-    await handleCheckoutCompleted(event.data.object)
+    if (event.type === 'checkout.session.completed') {
+      await handleCheckoutCompleted(event.data.object)
+    } else if (event.type === 'checkout.session.expired' || event.type === 'checkout.session.async_payment_failed') {
+      await handleAbandonedCheckout(event.data.object, event.type)
+    } else {
+      return res.status(200).json({received: true, ignored: event.type})
+    }
   } catch (err) {
     console.error('[stripe-webhook] handler error:', err)
     // Return 200 anyway so Stripe doesn't keep retrying — we've logged the failure.
-    // Switch to 500 once we have proper alerting on the logs.
     return res.status(200).json({received: true, handlerError: err.message})
   }
 
@@ -59,53 +67,111 @@ async function handleCheckoutCompleted(session) {
     return
   }
 
-  const slug = session.metadata?.product_slug
   const email = session.customer_details?.email || session.customer_email
   const name = session.customer_details?.name || ''
-
-  if (!slug) {
-    console.warn(`[stripe-webhook] session ${session.id} has no product_slug metadata, skipping`)
-    return
-  }
   if (!email) {
     console.warn(`[stripe-webhook] session ${session.id} has no customer email, skipping`)
     return
   }
 
-  const product = await loadProduct(slug)
-  if (!product) {
-    console.warn(`[stripe-webhook] product not found for slug=${slug}`)
+  const slugs = resolveSlugsFromSession(session)
+  if (!slugs.length) {
+    console.warn(`[stripe-webhook] session ${session.id} has no resolvable product slugs, skipping`)
     return
   }
 
-  if (product.productType !== 'digital') {
-    console.log(`[stripe-webhook] product ${slug} is not digital (${product.productType}), skipping email`)
-    return
+  const catalog = await loadCatalog()
+  let digitalCount = 0
+  for (const slug of slugs) {
+    const product = catalog.find((p) => p.slug === slug)
+    if (!product) {
+      console.warn(`[stripe-webhook] product not found for slug=${slug}`)
+      continue
+    }
+    if (product.productType !== 'digital') continue
+
+    digitalCount++
+    const fileUrl = product.digitalFile?.url
+    const fileName = product.digitalFile?.originalFilename || `${slug}.pdf`
+    if (!fileUrl) {
+      console.error(`[stripe-webhook] digital product ${slug} has no digitalFile.url — sending fallback`)
+      await sendFallbackEmail({email, name, productTitle: product.title})
+      continue
+    }
+    try {
+      await sendDigitalDeliveryEmail({email, name, product, fileUrl, fileName, orderId: session.id})
+      console.log(`[stripe-webhook] delivered ${slug} → ${email} (session ${session.id})`)
+    } catch (err) {
+      console.error(`[stripe-webhook] delivery failed for ${slug}:`, err.message)
+    }
   }
 
-  const fileUrl = product.digitalFile?.url
-  const fileName = product.digitalFile?.originalFilename || `${slug}.pdf`
-  if (!fileUrl) {
-    console.error(`[stripe-webhook] digital product ${slug} has no digitalFile.url — cannot deliver`)
-    await sendFallbackEmail({email, name, productTitle: product.title})
-    return
-  }
-
-  await sendDigitalDeliveryEmail({
+  // Fire Klaviyo "Placed Order" event for the purchase (any product type).
+  await trackKlaviyoEvent({
+    eventName: 'Placed Order',
     email,
-    name,
-    product,
-    fileUrl,
-    fileName,
-    orderId: session.id,
+    properties: {
+      $event_id: session.id,
+      $value: (session.amount_total || 0) / 100,
+      Currency: (session.currency || 'usd').toUpperCase(),
+      Items: slugs,
+      DigitalCount: digitalCount,
+      OrderId: session.id,
+    },
   })
-  console.log(`[stripe-webhook] delivered ${slug} → ${email} (session ${session.id})`)
 }
 
-async function loadProduct(slug) {
+async function handleAbandonedCheckout(session, eventType) {
+  const email = session.customer_details?.email || session.customer_email
+  if (!email) {
+    console.log(`[stripe-webhook] abandoned ${session.id} (${eventType}) has no email, can't track`)
+    return
+  }
+  const slugs = resolveSlugsFromSession(session)
+  if (!slugs.length) return
+
+  const catalog = await loadCatalog()
+  const items = slugs
+    .map((slug) => catalog.find((p) => p.slug === slug))
+    .filter(Boolean)
+    .map((p) => ({Slug: p.slug, Title: p.title, Price: p.price, Image: p.images?.[0]?.url || null}))
+
+  await trackKlaviyoEvent({
+    eventName: 'Started Checkout',
+    email,
+    properties: {
+      $event_id: session.id,
+      $value: (session.amount_total || session.amount_subtotal || 0) / 100,
+      Currency: (session.currency || 'usd').toUpperCase(),
+      CheckoutUrl: session.url || null,
+      Items: items,
+      ItemCount: items.length,
+      Reason: eventType,
+    },
+  })
+  console.log(`[stripe-webhook] abandoned-checkout tracked: ${email} (${session.id}, ${eventType})`)
+}
+
+// Pull the list of product slugs in a session from either the new cart_summary
+// metadata (multi-item) or the legacy product_slug metadata (single-item).
+function resolveSlugsFromSession(session) {
+  const m = session.metadata || {}
+  if (m.cart_summary) {
+    try {
+      const arr = JSON.parse(m.cart_summary)
+      if (Array.isArray(arr)) return arr.map((x) => x.slug).filter(Boolean)
+    } catch (e) {
+      console.warn('[stripe-webhook] failed to parse cart_summary:', e.message)
+    }
+  }
+  if (m.product_slug) return [m.product_slug]
+  return []
+}
+
+async function loadCatalog() {
   const raw = await readFile(join(process.cwd(), 'data', 'products.json'), 'utf8')
   const data = JSON.parse(raw)
-  return data.products.find((p) => p.slug === slug) || null
+  return data.products || []
 }
 
 async function sendDigitalDeliveryEmail({email, name, product, fileUrl, fileName, orderId}) {
@@ -161,6 +227,40 @@ async function sendFallbackEmail({email, name, productTitle}) {
       html: `<p>Hi ${escapeHtml(firstName)},</p><p>Thank you for purchasing <strong>${escapeHtml(productTitle)}</strong>. Your download is being prepared and we'll send it within a few hours. If you don't receive it, reply to this email.</p><p>— Cadomalo</p>`,
     }),
   }).catch(() => {})
+}
+
+async function trackKlaviyoEvent({eventName, email, properties}) {
+  if (!KLAVIYO_KEY) {
+    console.log(`[stripe-webhook] KLAVIYO_PRIVATE_KEY not set — skipping ${eventName} event`)
+    return
+  }
+  try {
+    const r = await fetch('https://a.klaviyo.com/api/events/', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/vnd.api+json',
+        'content-type': 'application/vnd.api+json',
+        'revision': '2024-10-15',
+        'Authorization': `Klaviyo-API-Key ${KLAVIYO_KEY}`,
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'event',
+          attributes: {
+            properties,
+            metric: {data: {type: 'metric', attributes: {name: eventName}}},
+            profile: {data: {type: 'profile', attributes: {email}}},
+          },
+        },
+      }),
+    })
+    if (!r.ok) {
+      const text = await r.text().catch(() => '')
+      console.error(`[stripe-webhook] Klaviyo ${eventName} ${r.status}: ${text.slice(0, 300)}`)
+    }
+  } catch (err) {
+    console.error(`[stripe-webhook] Klaviyo ${eventName} fetch error:`, err.message)
+  }
 }
 
 function renderEmailHtml({firstName, product, fileUrl, orderId}) {
