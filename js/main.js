@@ -240,7 +240,7 @@ function initCounters() {
 }
 
 /* ----------------------------------------------------------
-   NEWSLETTER FORM — posts to /api/klaviyo-subscribe
+   NEWSLETTER FORM — posts to /api/newsletter-subscribe (Resend Audiences)
    ---------------------------------------------------------- */
 function initNewsletter() {
   $$('.nl-form, .newsletter-form').forEach(form => {
@@ -256,7 +256,7 @@ function initNewsletter() {
       btn.disabled = true;
 
       try {
-        const res = await fetch('/api/klaviyo-subscribe', {
+        const res = await fetch('/api/newsletter-subscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email })

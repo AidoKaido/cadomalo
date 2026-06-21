@@ -4,6 +4,16 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us – Cadomalo</title>
   <meta name="description" content="Get in touch with Cadomalo. We typically reply within a few hours. Questions about orders, returns, custom gifts or partnerships — we're here to help.">
+  <link rel="canonical" href="https://cadomalo.com/contact.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://cadomalo.com/contact.html">
+  <meta property="og:title"       content="Contact Us – Cadomalo">
+  <meta property="og:description" content="Reach the Cadomalo team. Reply within 2–4 hours, Monday to Friday. Email support@cadomalo.com.">
+  <meta property="og:image"       content="https://cdn.sanity.io/images/8ue8kmgn/production/47ca944a938f4fdbd9a17400993ea8100d3cfbdc-1254x1254.png">
+  <meta name="twitter:card"       content="summary_large_image">
+
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -46,7 +56,7 @@
         <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <div>
           <p class="c-label">Email</p>
-          <p class="c-val">hello@cadomalo.com</p>
+          <p class="c-val"><a href="mailto:support@cadomalo.com" style="color:inherit">support@cadomalo.com</a></p>
           <p class="c-sub">We reply within 2–4 hours, Mon–Fri</p>
         </div>
       </div>
@@ -85,8 +95,9 @@
       <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:6px;">Send us a message</h3>
       <p style="font-size:.84rem;color:var(--mid);margin-bottom:24px;line-height:1.55;">Fill in the form below and we'll get back to you as quickly as possible.</p>
 
-      <!-- Replace YOUR_FORM_ID with your Formspree form ID after signing up at formspree.io -->
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="newsletter-form" id="contact-form">
+      <form action="/api/contact" method="POST" class="contact-form" id="contact-form" novalidate>
+        <!-- Honeypot: bots fill this; humans don't see it -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;" aria-hidden="true">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
           <div class="form-group">
             <label class="form-label" for="c-name">First Name *</label>
@@ -132,14 +143,41 @@
 <footer aria-label="Site footer"><div class="wrap"><div class="foot-grid"><div class="foot-brand"><span class="logo-text">cado<span>malo</span></span><p>Personalized gifts for every occasion.</p></div><div class="foot-col"><h5>Shop</h5><ul class="foot-links"><li><a href="shop.html">All Gifts</a></li><li><a href="gift-finder.html">Gift Finder ✨</a></li><li><a href="blog.html">Blog</a></li></ul></div><div class="foot-col"><h5>Legal</h5><ul class="foot-links"><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="cookie-policy.html">Cookie Policy</a></li><li><a href="returns.html">Return Policy</a></li></ul></div><div class="foot-col"><h5>Company</h5><ul class="foot-links"><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div></div><div class="foot-bottom"><p class="foot-copy">© 2026 Cadomalo · Fokebo LLC · All rights reserved.</p><div class="pay-row"><span class="pay-badge">VISA</span><span class="pay-badge">Mastercard</span><span class="pay-badge">PayPal</span><span class="pay-badge">Stripe</span></div></div></div></footer>
 <script src="js/pixels.js"></script><script src="js/main.js"></script>
 <script>
-  document.getElementById('contact-form')?.addEventListener('submit', function(e) {
+  document.getElementById('contact-form')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
     const btn = document.getElementById('contact-submit');
-    btn.textContent = 'Sending…'; btn.disabled = true;
-    // Formspree handles the actual submission — this just updates UI
-    setTimeout(() => {
+    const originalLabel = btn.textContent;
+    btn.textContent = 'Sending…'; btn.disabled = true; btn.style.background = '';
+    const data = {
+      name: [form.first_name?.value, form.last_name?.value].filter(Boolean).join(' ').trim(),
+      email: form.email?.value || '',
+      topic: form.topic?.value || '',
+      orderNumber: form.order_number?.value || '',
+      message: form.message?.value || '',
+      website: form.website?.value || '',
+    };
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.ok) {
+        btn.textContent = json.error || 'Something went wrong — try emailing support@cadomalo.com';
+        btn.style.background = '#b00020';
+        btn.disabled = false;
+        return;
+      }
       btn.textContent = '✓ Message Sent! We\'ll reply shortly.';
       btn.style.background = '#059669';
-    }, 1200);
+      form.reset();
+    } catch (err) {
+      btn.textContent = 'Network error — please email support@cadomalo.com';
+      btn.style.background = '#b00020';
+      btn.disabled = false;
+    }
   });
 </script>
 </body></html>

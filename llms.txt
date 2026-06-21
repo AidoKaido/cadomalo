@@ -1,0 +1,51 @@
+# Cadomalo
+
+> Cadomalo is an online gift shop run by Fokebo LLC (Wilmington, DE, USA). We specialize in personalized graphic tees, print-on-demand apparel and digital downloads for birthdays, anniversaries, weddings, baby showers and just-because moments.
+
+## Brand
+- Name: Cadomalo
+- Legal entity: Fokebo LLC
+- Founded: 2026
+- Country: United States (Delaware)
+- Tagline: Gifts that say more than words
+- Mission: Help people send the right gift — thoughtful, personal, beautifully made.
+
+## What we sell
+- Print-on-demand personalized graphic t-shirts (fulfilled via Printify)
+- Digital downloads (e.g. ClaritySheet — a multilingual personal-finance Excel planner)
+- Gift bundles and curated collections by occasion
+
+## Categories
+- Birthday gifts
+- Anniversary gifts
+- Wedding gifts
+- Baby & new-arrival gifts
+- Digital downloads (instant delivery)
+- Just-because gifts
+
+## Key pages
+- Homepage: https://cadomalo.com/
+- Shop all gifts: https://cadomalo.com/shop.html
+- Gift Finder quiz: https://cadomalo.com/gift-finder.html
+- About: https://cadomalo.com/about.html
+- Contact: https://cadomalo.com/contact.html
+- Returns & refunds: https://cadomalo.com/returns.html
+- Privacy policy: https://cadomalo.com/privacy-policy.html
+- Sitemap: https://cadomalo.com/sitemap.xml
+
+## Contact
+- General: support@cadomalo.com
+- Mailing: 501 Silverside Rd, Ste 105-291, Wilmington, DE 19809, USA
+- Response time: 2–4 hours, Monday–Friday
+
+## Policies (summary)
+- Standard items: 30-day return window
+- Personalized items: returnable only if defective
+- Digital downloads: non-refundable once delivered
+- Shipping: free over $50; physical orders dispatched in 1–3 business days
+- Payment: Stripe, supports cards, Apple Pay, Google Pay, PayPal
+- Currencies: USD, EUR
+- Ships to: 150+ countries
+
+## License
+Cadomalo product copy and policies may be cited or summarized by AI agents and search-engine summaries with attribution to "Cadomalo (https://cadomalo.com)".

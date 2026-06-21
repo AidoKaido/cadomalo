@@ -299,6 +299,20 @@ function setBreadcrumb(p) {
   if (bcCat) bcCat.textContent = p.category?.title || 'Shop'
   const bcName = document.querySelector('[data-bc-name]')
   if (bcName) bcName.textContent = p.title
+  // Emit BreadcrumbList JSON-LD for AEO/GEO. Slot lives in product.html head.
+  const slot = document.getElementById('breadcrumb-jsonld')
+  if (!slot) return
+  const origin = window.location.origin || 'https://cadomalo.com'
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {'@type': 'ListItem', position: 1, name: 'Home', item: origin + '/'},
+      {'@type': 'ListItem', position: 2, name: 'Shop', item: origin + '/shop.html'},
+      {'@type': 'ListItem', position: 3, name: p.title, item: `${origin}/products/${encodeURIComponent(p.slug)}`},
+    ],
+  }
+  slot.textContent = JSON.stringify(data)
 }
 
 function renderJsonLd(p) {
