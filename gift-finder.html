@@ -78,6 +78,16 @@
           <span class="quiz-opt-label">Wedding</span>
           <span class="quiz-opt-sub">A gift they'll keep forever</span>
         </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'occasion','baby')" aria-label="Baby">
+          <span class="quiz-opt-emoji">👶</span>
+          <span class="quiz-opt-label">Baby</span>
+          <span class="quiz-opt-sub">New arrival or baby shower</span>
+        </button>
+        <button class="quiz-opt" onclick="selectOpt(this,'occasion','digital')" aria-label="Digital">
+          <span class="quiz-opt-emoji">✨</span>
+          <span class="quiz-opt-label">Digital</span>
+          <span class="quiz-opt-sub">Instant download — no wait</span>
+        </button>
         <button class="quiz-opt" onclick="selectOpt(this,'occasion','justbecause')" aria-label="Just Because">
           <span class="quiz-opt-emoji">💝</span>
           <span class="quiz-opt-label">Just Because</span>
@@ -85,7 +95,7 @@
         </button>
       </div>
       <div class="quiz-nav">
-        <span style="font-size:.8rem;color:var(--light);">Question 1 of 4</span>
+        <span style="font-size:.8rem;color:var(--light);">Question 1 of 4 — pick one</span>
         <button class="btn btn-primary" onclick="nextStep(2)" id="next-1" disabled>Next →</button>
       </div>
     </div>

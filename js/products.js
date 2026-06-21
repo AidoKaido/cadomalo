@@ -55,15 +55,12 @@ function thumbUrl(p) {
 }
 
 function inferOccasions(p) {
-  const t = (p.title || '').toLowerCase()
-  const tags = new Set(['justbecause'])
-  if (p.productType === 'digital') tags.add('digital')
-  if (p.category?.slug) tags.add(p.category.slug.replace(/^\//, ''))
+  // Tags now come from data/products.json (assignOccasionTags in scripts/sync-products.js).
+  // Fall back to productType + category so older data still filters reasonably.
+  const tags = new Set(p.tags || [])
   if (p.productType) tags.add(p.productType)
-  if (/\bbirthday|\bbday\b|\bbirth\b/.test(t)) tags.add('birthday')
-  if (/\banniversary/.test(t)) tags.add('anniversary')
-  if (/\bwedding|\bbride|\bgroom|\bbridesmaid|\bmarriage/.test(t)) tags.add('wedding')
-  if (/\bbaby|\bnewborn|\bnursery|\binfant/.test(t)) tags.add('baby')
+  if (p.category?.slug) tags.add(p.category.slug.replace(/^\//, ''))
+  if (tags.size === 0) tags.add('justbecause')
   return Array.from(tags).join(' ')
 }
 
@@ -102,6 +99,47 @@ function renderStarsHtml(rating) {
   let html = ''
   for (let i = 0; i < 5; i++) html += i < full ? STAR_SVG : STAR_EMPTY_SVG
   return html
+}
+
+function renderUpsell(currentProduct, allProducts) {
+  const grid = document.querySelector('[data-upsell-grid]')
+  if (!grid) return
+  const limit = parseInt(grid.getAttribute('data-limit') || '4', 10)
+  const pool = (allProducts || []).filter((p) => p && p.slug && p.slug !== currentProduct?.slug)
+  // Prefer products sharing at least one tag with the current product; fall back to the rest.
+  const currentTags = new Set(currentProduct?.tags || [])
+  const matched = pool.filter((p) => (p.tags || []).some((t) => currentTags.has(t)))
+  const rest = pool.filter((p) => !matched.includes(p))
+  const picks = [...shuffle(matched), ...shuffle(rest)].slice(0, limit)
+  grid.innerHTML = ''
+  picks.forEach((p) => grid.appendChild(renderShopCard(p)))
+}
+
+async function renderBlogRelated() {
+  const wraps = document.querySelectorAll('[data-blog-related]')
+  if (!wraps.length) return
+  const all = await loadProducts()
+  wraps.forEach((wrap) => {
+    const occasion = (wrap.getAttribute('data-occasion') || '').trim()
+    const limit = parseInt(wrap.getAttribute('data-limit') || '4', 10)
+    let pool = all.slice()
+    if (occasion) {
+      const matches = pool.filter((p) => (p.tags || []).includes(occasion))
+      if (matches.length) pool = matches
+    }
+    const picks = shuffle(pool).slice(0, limit)
+    wrap.innerHTML = ''
+    picks.forEach((p) => wrap.appendChild(renderShopCard(p)))
+  })
+}
+
+function shuffle(arr) {
+  const a = arr.slice()
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
 }
 
 async function renderHomeFeatured() {
@@ -187,6 +225,7 @@ async function renderProductPage() {
     state.product = p
     initSelections(p)
     runModules()
+    renderUpsell(p, products)
   } catch (err) {
     root.innerHTML = `<div style="padding:80px;text-align:center;color:#b00;">Couldn't load product: ${esc(err.message)}</div>`
   }
@@ -921,6 +960,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderHomeFeatured()
     renderShopGrid()
     renderProductPage()
+    renderBlogRelated()
   } catch (err) {
     showBootError(err.message)
   }

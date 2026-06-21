@@ -242,7 +242,7 @@
     <!-- Gallery -->
     <div class="gallery" aria-label="Product images">
       <div class="gallery-main" id="gallery-main">
-        <img id="main-img" src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80" alt="Custom Name Necklace — main view">
+        <img id="main-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="Product image loading">
         <button class="gallery-zoom" aria-label="Zoom image">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
         </button>
@@ -337,24 +337,7 @@
       <span class="sec-tag">Customers Also Loved</span>
       <h2 class="sec-h">Complete the gift</h2>
     </div>
-    <div class="upsell-grid">
-      <div class="prod-card">
-        <div class="prod-thumb"><img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=400&q=80" alt="Personalized Jewelry Box" loading="lazy"><div class="prod-quick" role="button">+ Quick Add</div></div>
-        <div class="prod-body"><p class="prod-cat">Jewelry & Accessories</p><h3 class="prod-name"><a href="/product.html" style="color:inherit">Personalized Jewelry Box</a></h3><div class="prod-price"><span class="p-now">$54.99</span></div></div>
-      </div>
-      <div class="prod-card">
-        <div class="prod-thumb"><img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=400&q=80" alt="Gift Card Pack" loading="lazy"><span class="prod-bdg bdg-digital">Digital</span><div class="prod-quick" role="button">+ Download Now</div></div>
-        <div class="prod-body"><p class="prod-cat">Digital · Instant</p><h3 class="prod-name"><a href="/product.html" style="color:inherit">Printable Gift Card Pack</a></h3><div class="prod-price"><span class="p-now">$9.99</span></div></div>
-      </div>
-      <div class="prod-card">
-        <div class="prod-thumb"><img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=400&q=80" alt="Star Map" loading="lazy"><div class="prod-quick" role="button">+ Quick Add</div></div>
-        <div class="prod-body"><p class="prod-cat">Wall Art · Personalized</p><h3 class="prod-name"><a href="/product.html" style="color:inherit">Custom Star Map Print</a></h3><div class="prod-price"><span class="p-now">$59.99</span><span class="p-was">$74.99</span></div></div>
-      </div>
-      <div class="prod-card">
-        <div class="prod-thumb"><img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=400&q=80" alt="Custom Mug" loading="lazy"><div class="prod-quick" role="button">+ Quick Add</div></div>
-        <div class="prod-body"><p class="prod-cat">Home & Living</p><h3 class="prod-name"><a href="/product.html" style="color:inherit">Custom Photo Mug</a></h3><div class="prod-price"><span class="p-now">$34.99</span></div></div>
-      </div>
-    </div>
+    <div class="prod-grid upsell-grid" data-upsell-grid data-limit="4"></div>
   </div>
 </section>
 

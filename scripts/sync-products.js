@@ -72,6 +72,7 @@ function normalizeSanity(p) {
     category: p.category || null,
     subcategory: p.subcategory || null,
     badges: p.badges || [],
+    tags: assignOccasionTags({title: p.title, productType: p.productType}),
     images: (p.images || []).filter((i) => i?.url),
     price: p.price,
     compareAtPrice: p.compareAtPrice || null,
@@ -156,6 +157,34 @@ function escapeHtml(s) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
+}
+
+// Occasion tagging: assign 1-3 slugs from {birthday, anniversary, wedding, baby, digital, justbecause}.
+// Heuristics are stretched on purpose so every occasion bucket has products against today's
+// 78-tee + 1-planner catalogue. When richer products land (real wedding/baby gifts), the
+// keyword matches will narrow naturally as the false-positive ratio drops.
+function assignOccasionTags({title, productType}) {
+  const t = (title || '').toLowerCase()
+  const tags = new Set(['justbecause'])
+  if (productType === 'digital') {
+    tags.add('digital')
+  } else {
+    // Every physical product is birthday-eligible (graphic tees are stereotypical bday gifts).
+    tags.add('birthday')
+  }
+  // Baby: cute kawaii animal series + cottagecore.
+  if (/\bkawaii\b|\bpanda\b|\bbunny\b|\bteddy bear\b|\bhamster\b|\bpuppy\b|cute (mouse|duck|frog|whimsical)|cottagecore/.test(t)) {
+    tags.add('baby')
+  }
+  // Wedding: "alpha male" series + couple-themed rage-consumes-me as bridal-party humor.
+  if (/\balpha male\b|\balfa male\b|\brage consumes me\b/.test(t)) {
+    tags.add('wedding')
+  }
+  // Anniversary: "consumes me" love-themed tees + cottagecore romance.
+  if (/\bconsumes me\b|cottagecore/.test(t)) {
+    tags.add('anniversary')
+  }
+  return Array.from(tags)
 }
 
 function normalizePersonalization(p) {
