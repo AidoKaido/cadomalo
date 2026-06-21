@@ -22,7 +22,17 @@ export default async function handler(req, res) {
     return res.status(405).json({error: 'Method not allowed'})
   }
   if (!RESEND_KEY || !AUDIENCE_ID) {
-    return res.status(503).json({error: 'Newsletter is not configured yet'})
+    // Diagnostic — surface which env var is missing so we can tell whether
+    // RESEND_AUDIENCE_ID isn't set vs has a typo'd name. Remove after fix.
+    return res.status(503).json({
+      error: 'Newsletter is not configured yet',
+      _debug: {
+        hasResendKey: !!RESEND_KEY,
+        hasAudienceId: !!AUDIENCE_ID,
+        audienceIdLength: AUDIENCE_ID ? AUDIENCE_ID.length : 0,
+        envKeysWithResend: Object.keys(process.env).filter(k => k.toLowerCase().includes('resend') || k.toLowerCase().includes('audience')),
+      },
+    })
   }
 
   const body = req.body || (await readJson(req))
