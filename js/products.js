@@ -164,7 +164,13 @@ async function renderProductPage() {
   const root = document.querySelector('[data-product-page]')
   if (!root) return
   const params = new URLSearchParams(window.location.search)
-  const slug = params.get('slug')
+  let slug = params.get('slug')
+  // Vercel's /products/:slug rewrite keeps the original path in the URL bar — the rewritten
+  // ?slug= is not visible to the browser. Fall back to parsing the slug out of the pathname.
+  if (!slug) {
+    const m = window.location.pathname.match(/^\/products\/([^/?#]+)/)
+    if (m) slug = decodeURIComponent(m[1])
+  }
   const legacyId = parseInt(params.get('id'))
 
   try {
