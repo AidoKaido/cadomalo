@@ -4,7 +4,7 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "rewrites": [
-    {"source": "/products/:slug", "destination": "/product.html?slug=:slug"}
+    {"source": "/products/:slug", "destination": "/product?slug=:slug"}
   ],
   "headers": [
     {
