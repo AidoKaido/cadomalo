@@ -174,13 +174,14 @@ function initTabs() {
   $$('[data-tab-group]').forEach(group => {
     const groupId = group.dataset.tabGroup;
     const tabs    = $$(`[data-tab-group="${groupId}"] .tab-btn`);
-    const items   = $$(`[data-tab-items="${groupId}"] [data-cat]`);
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         const filter = tab.dataset.filter;
+        // Re-query items each click so async-rendered cards (e.g. from Sanity) are picked up.
+        const items = $$(`[data-tab-items="${groupId}"] [data-cat]`);
         items.forEach(item => {
           const cats = (item.dataset.cat || '').split(' ');
           item.classList.toggle('hidden', filter !== 'all' && !cats.includes(filter));

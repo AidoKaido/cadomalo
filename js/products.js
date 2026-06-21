@@ -54,13 +54,25 @@ function thumbUrl(p) {
   return p.images?.[0]?.url || ''
 }
 
+function inferOccasions(p) {
+  const t = (p.title || '').toLowerCase()
+  const tags = new Set(['justbecause'])
+  if (p.productType === 'digital') tags.add('digital')
+  if (p.category?.slug) tags.add(p.category.slug.replace(/^\//, ''))
+  if (p.productType) tags.add(p.productType)
+  if (/\bbirthday|\bbday\b|\bbirth\b/.test(t)) tags.add('birthday')
+  if (/\banniversary/.test(t)) tags.add('anniversary')
+  if (/\bwedding|\bbride|\bgroom|\bbridesmaid|\bmarriage/.test(t)) tags.add('wedding')
+  if (/\bbaby|\bnewborn|\bnursery|\binfant/.test(t)) tags.add('baby')
+  return Array.from(tags).join(' ')
+}
+
 function renderShopCard(p) {
   const cat = p.category?.title || ''
-  const catCls = (p.category?.slug || '') + ' ' + (p.productType || '')
   const badge = p.badges?.[0]
   const item = document.createElement('div')
   item.className = 'prod-item'
-  item.setAttribute('data-cat', catCls.trim())
+  item.setAttribute('data-cat', inferOccasions(p))
   item.setAttribute('data-price', String(p.price || 0))
 
   item.innerHTML = `
@@ -90,6 +102,29 @@ function renderStarsHtml(rating) {
   let html = ''
   for (let i = 0; i < 5; i++) html += i < full ? STAR_SVG : STAR_EMPTY_SVG
   return html
+}
+
+async function renderHomeFeatured() {
+  const grid = document.querySelector('[data-home-grid]')
+  if (!grid) return
+  const limit = parseInt(grid.getAttribute('data-limit') || '8', 10)
+  try {
+    const all = await loadProducts()
+    if (!all.length) {
+      grid.innerHTML =
+        '<div style="grid-column:1/-1;padding:48px;text-align:center;color:var(--mid);">No products yet.</div>'
+      return
+    }
+    // Surface ClaritySheet first (it has the spotlight section below, but also belongs in the grid),
+    // then fill with the remaining products in source order.
+    const clarity = all.find((p) => p.slug && p.slug.includes('claritysheet'))
+    const rest = all.filter((p) => p !== clarity)
+    const picks = (clarity ? [clarity, ...rest] : rest).slice(0, limit)
+    grid.innerHTML = ''
+    picks.forEach((p) => grid.appendChild(renderShopCard(p)))
+  } catch (err) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:48px;text-align:center;color:#b00;">Couldn't load gifts: ${esc(err.message)}</div>`
+  }
 }
 
 async function renderShopGrid() {
@@ -877,6 +912,7 @@ function syncCartCount() {
 document.addEventListener('DOMContentLoaded', () => {
   try {
     syncCartCount()
+    renderHomeFeatured()
     renderShopGrid()
     renderProductPage()
   } catch (err) {
