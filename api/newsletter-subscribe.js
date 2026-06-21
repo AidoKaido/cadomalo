@@ -56,7 +56,16 @@ export default async function handler(req, res) {
     }
     const text = await r.text().catch(() => '')
     console.error('[newsletter-subscribe] non-2xx:', r.status, text.slice(0, 400))
-    return res.status(502).json({error: 'Newsletter signup is temporarily unavailable. Please try again later.'})
+    // Diagnostic — surface Resend's actual error. Remove after fix.
+    return res.status(502).json({
+      error: 'Newsletter signup is temporarily unavailable. Please try again later.',
+      _debug: {
+        resendStatus: r.status,
+        resendBody: text.slice(0, 400),
+        audienceIdLength: AUDIENCE_ID.length,
+        audienceIdLooksLikeUuid: /^[0-9a-f-]{32,40}$/i.test(AUDIENCE_ID),
+      },
+    })
   } catch (err) {
     console.error('[newsletter-subscribe] fetch error:', err.message)
     return res.status(502).json({error: 'Could not reach newsletter service. Please try again later.'})
