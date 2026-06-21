@@ -24,9 +24,17 @@ const PIXEL_CONFIG = {
    relevant signals. This lets Google still receive cookieless
    pings + model conversions for declined users (DMA-compliant).
    ---------------------------------------------------------- */
+// Build-safe placeholder check: scripts/inject-pixel-ids.js replaces every
+// occurrence of the literal placeholder strings, including ones inside
+// comparison guards. We check by regex against the X-run/YOUR_ shape
+// instead of equating to the literal — regex source survives the build.
+function _isPlaceholder(v) {
+  return !v || /X{4,}|YOUR_[A-Z_]+/.test(v);
+}
+
 (function initGoogleConsentMode() {
-  const hasGA4 = PIXEL_CONFIG.google && PIXEL_CONFIG.google !== 'G-XXXXXXXXXX';
-  const hasAds = PIXEL_CONFIG.googleAds && PIXEL_CONFIG.googleAds !== 'AW-XXXXXXXXXX';
+  const hasGA4 = !_isPlaceholder(PIXEL_CONFIG.google);
+  const hasAds = !_isPlaceholder(PIXEL_CONFIG.googleAds);
   if (!hasGA4 && !hasAds) return; // nothing real to load
 
   window.dataLayer = window.dataLayer || [];
@@ -88,7 +96,7 @@ window.updateGoogleConsent = function (prefs) {
    ---------------------------------------------------------- */
 function loadFacebookPixel() {
   if (window._fbPixelLoaded) return;
-  if (!PIXEL_CONFIG.facebook || PIXEL_CONFIG.facebook === 'YOUR_FB_PIXEL_ID') return;
+  if (_isPlaceholder(PIXEL_CONFIG.facebook)) return;
   window._fbPixelLoaded = true;
 
   !function(f,b,e,v,n,t,s){
@@ -120,7 +128,7 @@ function loadFacebookPixel() {
    ---------------------------------------------------------- */
 function loadTikTokPixel() {
   if (window._ttPixelLoaded) return;
-  if (!PIXEL_CONFIG.tiktok || PIXEL_CONFIG.tiktok === 'YOUR_TIKTOK_PIXEL_ID') return;
+  if (_isPlaceholder(PIXEL_CONFIG.tiktok)) return;
   window._ttPixelLoaded = true;
 
   !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
@@ -150,7 +158,7 @@ function loadTikTokPixel() {
    ---------------------------------------------------------- */
 function loadPinterestPixel() {
   if (window._pinPixelLoaded) return;
-  if (!PIXEL_CONFIG.pinterest || PIXEL_CONFIG.pinterest === 'YOUR_PINTEREST_TAG_ID') return;
+  if (_isPlaceholder(PIXEL_CONFIG.pinterest)) return;
   window._pinPixelLoaded = true;
 
   !function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(
