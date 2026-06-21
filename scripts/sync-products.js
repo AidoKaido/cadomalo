@@ -208,10 +208,15 @@ async function fetchPrintifyProducts() {
     return []
   }
 
+  // Only pull from the Etsy-connected Printify shop. Other shops (e.g. the
+  // custom_integration channel) are excluded so their products don't duplicate
+  // or compete with the Etsy lineup we're surfacing through Sanity.
+  const SHOP_CHANNEL = (process.env.PRINTIFY_SHOP_CHANNEL || 'etsy').toLowerCase()
   const all = []
   for (const shop of shops) {
-    if (shop.sales_channel === 'disconnected') {
-      log(`Printify "${shop.title}": disconnected channel — skipping`)
+    const channel = (shop.sales_channel || '').toLowerCase()
+    if (channel !== SHOP_CHANNEL) {
+      log(`Printify "${shop.title}" [${shop.sales_channel}]: not target channel '${SHOP_CHANNEL}' — skipping`)
       continue
     }
     let page = 1

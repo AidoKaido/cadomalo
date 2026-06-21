@@ -9,7 +9,12 @@
   },
   "scripts": {
     "build": "node scripts/sync-products.js && node scripts/inject-pixel-ids.js && node scripts/generate-sitemap.js && node scripts/register-printify-webhooks.js && node scripts/alias-to-prod-domain.js",
-    "sync": "node scripts/sync-products.js"
+    "sync": "node scripts/sync-products.js",
+    "import-etsy": "node scripts/import-printify-to-sanity.js",
+    "import-etsy:dry": "node scripts/import-printify-to-sanity.js --dry-run",
+    "import-etsy:undo": "node scripts/import-printify-to-sanity.js --undo",
+    "import-etsy:images": "node scripts/import-printify-to-sanity.js --images",
+    "import-etsy:images-dry": "node scripts/import-printify-to-sanity.js --images --dry-run"
   },
   "dependencies": {
     "stripe": "^19"
