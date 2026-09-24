@@ -141,7 +141,8 @@ export default async function handler(req, res) {
         tax_behavior: 'exclusive',
       },
       quantity,
-      adjustable_quantity: {enabled: lines.length === 1, minimum: 1, maximum: 10},
+      // Stripe rejects min/max when adjustment is disabled, so multi-item carts omit them
+      adjustable_quantity: lines.length === 1 ? {enabled: true, minimum: 1, maximum: 10} : {enabled: false},
     })
 
     resolved.push({
