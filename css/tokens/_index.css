@@ -1,0 +1,9 @@
+/* Cadomalo Design System — global entry point. Consumers link this one file. */
+@import url("./fonts.css");
+@import url("./colors.css");
+@import url("./typography.css");
+@import url("./spacing.css");
+@import url("./radius.css");
+@import url("./elevation.css");
+@import url("./motion.css");
+@import url("./base.css");

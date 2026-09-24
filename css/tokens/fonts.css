@@ -1,0 +1,11 @@
+/* Cadomalo webfonts.
+   Fredoka (display / headlines) + Nunito Sans (body / UI) — both Google Fonts.
+   NOTE: no vendor font binaries were supplied with the brand assets, so these are
+   served from Google Fonts rather than bundled .woff2 files. See readme.md > Typography. */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..900;1,6..12,400..700&display=swap");
+
+:root{
+  --font-display:"Fredoka","Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito Sans","DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-hand:"Fredoka","Baloo 2",system-ui,sans-serif; /* stand-in for hand-lettered accents */
+}

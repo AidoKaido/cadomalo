@@ -1,0 +1,1325 @@
+[
+  {
+    "type": "book",
+    "series": {
+      "en": "Human Body Wonders",
+      "fr": "Merveilles du corps"
+    },
+    "price": 7.99,
+    "rating": 4.9,
+    "langs": "EN · FR · ES · DE",
+    "attrs": [
+      {
+        "key": "pages",
+        "label": {
+          "en": "Edition",
+          "fr": "Édition"
+        },
+        "options": [
+          {
+            "en": "Story + coloring · 32 pages",
+            "fr": "Histoire + coloriages · 32 pages",
+            "delta": 0
+          },
+          {
+            "en": "With activity pack · 48 pages",
+            "fr": "Avec cahier d’activités · 48 pages",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "key": "paper",
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ],
+    "objections": {
+      "en": [
+        {
+          "q": "Will my 3-year-old actually understand it?",
+          "a": "Yes — that is the whole point. One idea per page, sentences a toddler can repeat, and a friendly organ character who explains things the way a child would. Older children (6–8) get a “Did you know?” fact on every spread, so the book grows with them."
+        },
+        {
+          "q": "Isn’t this just another printable?",
+          "a": "It is a story first. Each book follows a child and their new “body friend” from beginning to end, then invites your child to color the pages they just read. That is why kids ask for it again — and why they remember it."
+        },
+        {
+          "q": "Four languages — won’t that confuse my child?",
+          "a": "Children love spotting the same word in different languages. Every language sits in its own color, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+        },
+        {
+          "q": "Is the science accurate?",
+          "a": "Every book is written by a midwife and checked for accuracy and gentleness — simplified, never wrong."
+        },
+        {
+          "q": "What if we don’t love it?",
+          "a": "Our 30-day happiness promise: if the file doesn’t work or the book isn’t what you expected, write to us and we’ll make it right or refund you."
+        }
+      ],
+      "fr": [
+        {
+          "q": "Mon enfant de 3 ans va-t-il vraiment comprendre ?",
+          "a": "Oui — c’est tout le principe. Une idée par page, des phrases qu’un tout-petit peut répéter, et un organe-personnage qui explique les choses comme un enfant le ferait. Les plus grands (6–8 ans) trouvent un « Le savais-tu ? » sur chaque double page : le livre grandit avec eux."
+        },
+        {
+          "q": "Ce n’est pas juste un printable de plus ?",
+          "a": "C’est d’abord une histoire. Chaque livre suit un enfant et son nouvel « ami du corps » du début à la fin, puis invite votre enfant à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+        },
+        {
+          "q": "Quatre langues — ça ne va pas l’embrouiller ?",
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+        },
+        {
+          "q": "Les informations sont-elles exactes ?",
+          "a": "Chaque livre est écrit par une sage-femme et relu pour son exactitude et sa douceur — simplifié, jamais faux."
+        },
+        {
+          "q": "Et si on n’aime pas ?",
+          "a": "Notre promesse bonheur de 30 jours : si le fichier ne fonctionne pas ou si le livre ne correspond pas à vos attentes, écrivez-nous et nous trouvons une solution ou vous remboursons."
+        }
+      ]
+    },
+    "specs": {
+      "en": [
+        "Digital PDF — instant download after checkout",
+        "32 illustrated pages (48 with activity pack)",
+        "English · French · Spanish · German",
+        "Print at home or at any copy shop, as often as you like",
+        "Ages 3–8"
+      ],
+      "fr": [
+        "PDF numérique — téléchargement immédiat après paiement",
+        "32 pages illustrées (48 avec le cahier d’activités)",
+        "Français · anglais · espagnol · allemand",
+        "À imprimer chez vous ou en boutique, autant de fois que vous voulez",
+        "3–8 ans"
+      ]
+    },
+    "reviewType": "book",
+    "id": "muscles",
+    "amazon": "https://www.amazon.com/dp/B0HKGSW1PN",
+    "img": "img/book-muscles.png",
+    "color": "#F06B4F",
+    "reviewCount": 142,
+    "badge": {
+      "en": "Bestseller",
+      "fr": "Best-seller"
+    },
+    "title": {
+      "en": "My Muscles Make Me Move",
+      "fr": "Mes muscles me font bouger"
+    },
+    "topic": {
+      "en": "Strength, motion and play",
+      "fr": "Force, mouvement et jeu"
+    },
+    "desc": {
+      "en": "Jumping, hugging and smiling all need muscles. This book shows children how their body moves — and invites them to try every move themselves.",
+      "fr": "Sauter, faire un câlin, sourire : tout ça demande des muscles. Ce livre montre aux enfants comment leur corps bouge — et les invite à essayer chaque mouvement."
+    },
+    "lead": {
+      "en": "Get-up-and-move prompts on every spread — reading becomes play",
+      "fr": "Des défis « bouge ton corps » à chaque page — la lecture devient un jeu"
+    },
+    "trust": {
+      "en": "Bought by 340 parents",
+      "fr": "Acheté par 340 parents"
+    },
+    "cartProof": {
+      "en": "241 kids are already moving with this book",
+      "fr": "241 enfants bougent déjà avec ce livre"
+    },
+    "basket": {
+      "en": "18 people have this in their basket right now",
+      "fr": "18 personnes l’ont dans leur panier en ce moment"
+    },
+    "gallery": [
+      "img/book-muscles.png",
+      "img/hero-reading.png",
+      "img/multilingual-book.png",
+      "img/kids-lying.png"
+    ],
+    "benefits": {
+      "en": [
+        "Get-up-and-move prompts on every spread — reading becomes play",
+        "4 languages on every page: English, French, Spanish and German",
+        "Story + coloring pages — learning by hand, not by screen",
+        "Written by a midwife, made for ages 3–8"
+      ],
+      "fr": [
+        "Des défis « bouge ton corps » à chaque page — la lecture devient un jeu",
+        "4 langues sur chaque page : français, anglais, espagnol et allemand",
+        "Histoire + coloriages — apprendre avec les mains, pas avec un écran",
+        "Écrit par une sage-femme, pensé pour les 3–8 ans"
+      ]
+    }
+  },
+  {
+    "type": "book",
+    "series": {
+      "en": "Human Body Wonders",
+      "fr": "Merveilles du corps"
+    },
+    "price": 7.99,
+    "rating": 4.9,
+    "langs": "EN · FR · ES · DE",
+    "attrs": [
+      {
+        "key": "pages",
+        "label": {
+          "en": "Edition",
+          "fr": "Édition"
+        },
+        "options": [
+          {
+            "en": "Story + coloring · 32 pages",
+            "fr": "Histoire + coloriages · 32 pages",
+            "delta": 0
+          },
+          {
+            "en": "With activity pack · 48 pages",
+            "fr": "Avec cahier d’activités · 48 pages",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "key": "paper",
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ],
+    "objections": {
+      "en": [
+        {
+          "q": "Will my 3-year-old actually understand it?",
+          "a": "Yes — that is the whole point. One idea per page, sentences a toddler can repeat, and a friendly organ character who explains things the way a child would. Older children (6–8) get a “Did you know?” fact on every spread, so the book grows with them."
+        },
+        {
+          "q": "Isn’t this just another printable?",
+          "a": "It is a story first. Each book follows a child and their new “body friend” from beginning to end, then invites your child to color the pages they just read. That is why kids ask for it again — and why they remember it."
+        },
+        {
+          "q": "Four languages — won’t that confuse my child?",
+          "a": "Children love spotting the same word in different languages. Every language sits in its own color, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+        },
+        {
+          "q": "Is the science accurate?",
+          "a": "Every book is written by a midwife and checked for accuracy and gentleness — simplified, never wrong."
+        },
+        {
+          "q": "What if we don’t love it?",
+          "a": "Our 30-day happiness promise: if the file doesn’t work or the book isn’t what you expected, write to us and we’ll make it right or refund you."
+        }
+      ],
+      "fr": [
+        {
+          "q": "Mon enfant de 3 ans va-t-il vraiment comprendre ?",
+          "a": "Oui — c’est tout le principe. Une idée par page, des phrases qu’un tout-petit peut répéter, et un organe-personnage qui explique les choses comme un enfant le ferait. Les plus grands (6–8 ans) trouvent un « Le savais-tu ? » sur chaque double page : le livre grandit avec eux."
+        },
+        {
+          "q": "Ce n’est pas juste un printable de plus ?",
+          "a": "C’est d’abord une histoire. Chaque livre suit un enfant et son nouvel « ami du corps » du début à la fin, puis invite votre enfant à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+        },
+        {
+          "q": "Quatre langues — ça ne va pas l’embrouiller ?",
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+        },
+        {
+          "q": "Les informations sont-elles exactes ?",
+          "a": "Chaque livre est écrit par une sage-femme et relu pour son exactitude et sa douceur — simplifié, jamais faux."
+        },
+        {
+          "q": "Et si on n’aime pas ?",
+          "a": "Notre promesse bonheur de 30 jours : si le fichier ne fonctionne pas ou si le livre ne correspond pas à vos attentes, écrivez-nous et nous trouvons une solution ou vous remboursons."
+        }
+      ]
+    },
+    "specs": {
+      "en": [
+        "Digital PDF — instant download after checkout",
+        "32 illustrated pages (48 with activity pack)",
+        "English · French · Spanish · German",
+        "Print at home or at any copy shop, as often as you like",
+        "Ages 3–8"
+      ],
+      "fr": [
+        "PDF numérique — téléchargement immédiat après paiement",
+        "32 pages illustrées (48 avec le cahier d’activités)",
+        "Français · anglais · espagnol · allemand",
+        "À imprimer chez vous ou en boutique, autant de fois que vous voulez",
+        "3–8 ans"
+      ]
+    },
+    "reviewType": "book",
+    "id": "lungs",
+    "amazon": "https://www.amazon.com/dp/B0HJFQMN4S",
+    "img": "img/book-lungs.png",
+    "color": "#65B9D1",
+    "reviewCount": 128,
+    "compareAt": 9.99,
+    "badge": {
+      "en": "Sale",
+      "fr": "Promo"
+    },
+    "badgeTone": "solid",
+    "title": {
+      "en": "My Busy Breathing Lungs",
+      "fr": "Mes poumons respirent sans arrêt"
+    },
+    "topic": {
+      "en": "Breathing, air and energy",
+      "fr": "Respiration, air et énergie"
+    },
+    "desc": {
+      "en": "A story-and-coloring book that follows one breath from nose to lungs — so little ones can feel, name and color the air that keeps them going.",
+      "fr": "Un livre-histoire à colorier qui suit une respiration du nez jusqu’aux poumons — pour que les petits puissent sentir, nommer et colorier l’air qui les fait avancer."
+    },
+    "lead": {
+      "en": "Turns “why do I breathe?” into a story they’ll ask for again",
+      "fr": "Transforme « pourquoi je respire ? » en une histoire qu’ils redemandent"
+    },
+    "trust": {
+      "en": "Bought by 250 parents",
+      "fr": "Acheté par 250 parents"
+    },
+    "cartProof": {
+      "en": "150 kids are already coloring this book",
+      "fr": "150 enfants colorient déjà ce livre"
+    },
+    "basket": {
+      "en": "11 people have this in their basket right now",
+      "fr": "11 personnes l’ont dans leur panier en ce moment"
+    },
+    "gallery": [
+      "img/book-lungs.png",
+      "img/hero-reading.png",
+      "img/multilingual-book.png",
+      "img/kids-lying.png"
+    ],
+    "benefits": {
+      "en": [
+        "Turns “why do I breathe?” into a story they’ll ask for again",
+        "4 languages on every page: English, French, Spanish and German",
+        "Story + coloring pages — learning by hand, not by screen",
+        "Written by a midwife, made for ages 3–8"
+      ],
+      "fr": [
+        "Transforme « pourquoi je respire ? » en une histoire qu’ils redemandent",
+        "4 langues sur chaque page : français, anglais, espagnol et allemand",
+        "Histoire + coloriages — apprendre avec les mains, pas avec un écran",
+        "Écrit par une sage-femme, pensé pour les 3–8 ans"
+      ]
+    }
+  },
+  {
+    "type": "book",
+    "series": {
+      "en": "Human Body Wonders",
+      "fr": "Merveilles du corps"
+    },
+    "price": 7.99,
+    "rating": 4.9,
+    "langs": "EN · FR · ES · DE",
+    "attrs": [
+      {
+        "key": "pages",
+        "label": {
+          "en": "Edition",
+          "fr": "Édition"
+        },
+        "options": [
+          {
+            "en": "Story + coloring · 32 pages",
+            "fr": "Histoire + coloriages · 32 pages",
+            "delta": 0
+          },
+          {
+            "en": "With activity pack · 48 pages",
+            "fr": "Avec cahier d’activités · 48 pages",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "key": "paper",
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ],
+    "objections": {
+      "en": [
+        {
+          "q": "Will my 3-year-old actually understand it?",
+          "a": "Yes — that is the whole point. One idea per page, sentences a toddler can repeat, and a friendly organ character who explains things the way a child would. Older children (6–8) get a “Did you know?” fact on every spread, so the book grows with them."
+        },
+        {
+          "q": "Isn’t this just another printable?",
+          "a": "It is a story first. Each book follows a child and their new “body friend” from beginning to end, then invites your child to color the pages they just read. That is why kids ask for it again — and why they remember it."
+        },
+        {
+          "q": "Four languages — won’t that confuse my child?",
+          "a": "Children love spotting the same word in different languages. Every language sits in its own color, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+        },
+        {
+          "q": "Is the science accurate?",
+          "a": "Every book is written by a midwife and checked for accuracy and gentleness — simplified, never wrong."
+        },
+        {
+          "q": "What if we don’t love it?",
+          "a": "Our 30-day happiness promise: if the file doesn’t work or the book isn’t what you expected, write to us and we’ll make it right or refund you."
+        }
+      ],
+      "fr": [
+        {
+          "q": "Mon enfant de 3 ans va-t-il vraiment comprendre ?",
+          "a": "Oui — c’est tout le principe. Une idée par page, des phrases qu’un tout-petit peut répéter, et un organe-personnage qui explique les choses comme un enfant le ferait. Les plus grands (6–8 ans) trouvent un « Le savais-tu ? » sur chaque double page : le livre grandit avec eux."
+        },
+        {
+          "q": "Ce n’est pas juste un printable de plus ?",
+          "a": "C’est d’abord une histoire. Chaque livre suit un enfant et son nouvel « ami du corps » du début à la fin, puis invite votre enfant à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+        },
+        {
+          "q": "Quatre langues — ça ne va pas l’embrouiller ?",
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+        },
+        {
+          "q": "Les informations sont-elles exactes ?",
+          "a": "Chaque livre est écrit par une sage-femme et relu pour son exactitude et sa douceur — simplifié, jamais faux."
+        },
+        {
+          "q": "Et si on n’aime pas ?",
+          "a": "Notre promesse bonheur de 30 jours : si le fichier ne fonctionne pas ou si le livre ne correspond pas à vos attentes, écrivez-nous et nous trouvons une solution ou vous remboursons."
+        }
+      ]
+    },
+    "specs": {
+      "en": [
+        "Digital PDF — instant download after checkout",
+        "32 illustrated pages (48 with activity pack)",
+        "English · French · Spanish · German",
+        "Print at home or at any copy shop, as often as you like",
+        "Ages 3–8"
+      ],
+      "fr": [
+        "PDF numérique — téléchargement immédiat après paiement",
+        "32 pages illustrées (48 avec le cahier d’activités)",
+        "Français · anglais · espagnol · allemand",
+        "À imprimer chez vous ou en boutique, autant de fois que vous voulez",
+        "3–8 ans"
+      ]
+    },
+    "reviewType": "book",
+    "id": "head",
+    "amazon": "https://www.amazon.com/dp/B0HJMZGT6L",
+    "img": "img/book-head.png",
+    "color": "#8E7BE0",
+    "reviewCount": 96,
+    "badge": {
+      "en": "New",
+      "fr": "Nouveau"
+    },
+    "badgeTone": "sky",
+    "title": {
+      "en": "Inside My Amazing Head",
+      "fr": "Dans ma tête extraordinaire"
+    },
+    "topic": {
+      "en": "Brain, senses and memory",
+      "fr": "Cerveau, sens et mémoire"
+    },
+    "desc": {
+      "en": "Meet the brain, eyes, ears and nose as friendly characters — a gentle first look at how we see, hear, think and remember.",
+      "fr": "Le cerveau, les yeux, les oreilles et le nez deviennent des personnages amis — une première découverte tout en douceur de comment on voit, entend, pense et se souvient."
+    },
+    "lead": {
+      "en": "Explains the five senses with one friendly character per page",
+      "fr": "Explique les cinq sens avec un personnage ami par page"
+    },
+    "trust": {
+      "en": "Bought by 310 parents",
+      "fr": "Acheté par 310 parents"
+    },
+    "cartProof": {
+      "en": "212 little brains are already coloring this book",
+      "fr": "212 petits cerveaux colorient déjà ce livre"
+    },
+    "basket": {
+      "en": "9 people have this in their basket right now",
+      "fr": "9 personnes l’ont dans leur panier en ce moment"
+    },
+    "gallery": [
+      "img/book-head.png",
+      "img/hero-reading.png",
+      "img/multilingual-book.png",
+      "img/kids-lying.png"
+    ],
+    "benefits": {
+      "en": [
+        "Explains the five senses with one friendly character per page",
+        "4 languages on every page: English, French, Spanish and German",
+        "Story + coloring pages — learning by hand, not by screen",
+        "Written by a midwife, made for ages 3–8"
+      ],
+      "fr": [
+        "Explique les cinq sens avec un personnage ami par page",
+        "4 langues sur chaque page : français, anglais, espagnol et allemand",
+        "Histoire + coloriages — apprendre avec les mains, pas avec un écran",
+        "Écrit par une sage-femme, pensé pour les 3–8 ans"
+      ]
+    }
+  },
+  {
+    "type": "book",
+    "series": {
+      "en": "Human Body Wonders",
+      "fr": "Merveilles du corps"
+    },
+    "price": 7.99,
+    "rating": 4.9,
+    "langs": "EN · FR · ES · DE",
+    "attrs": [
+      {
+        "key": "pages",
+        "label": {
+          "en": "Edition",
+          "fr": "Édition"
+        },
+        "options": [
+          {
+            "en": "Story + coloring · 32 pages",
+            "fr": "Histoire + coloriages · 32 pages",
+            "delta": 0
+          },
+          {
+            "en": "With activity pack · 48 pages",
+            "fr": "Avec cahier d’activités · 48 pages",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "key": "paper",
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ],
+    "objections": {
+      "en": [
+        {
+          "q": "Will my 3-year-old actually understand it?",
+          "a": "Yes — that is the whole point. One idea per page, sentences a toddler can repeat, and a friendly organ character who explains things the way a child would. Older children (6–8) get a “Did you know?” fact on every spread, so the book grows with them."
+        },
+        {
+          "q": "Isn’t this just another printable?",
+          "a": "It is a story first. Each book follows a child and their new “body friend” from beginning to end, then invites your child to color the pages they just read. That is why kids ask for it again — and why they remember it."
+        },
+        {
+          "q": "Four languages — won’t that confuse my child?",
+          "a": "Children love spotting the same word in different languages. Every language sits in its own color, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+        },
+        {
+          "q": "Is the science accurate?",
+          "a": "Every book is written by a midwife and checked for accuracy and gentleness — simplified, never wrong."
+        },
+        {
+          "q": "What if we don’t love it?",
+          "a": "Our 30-day happiness promise: if the file doesn’t work or the book isn’t what you expected, write to us and we’ll make it right or refund you."
+        }
+      ],
+      "fr": [
+        {
+          "q": "Mon enfant de 3 ans va-t-il vraiment comprendre ?",
+          "a": "Oui — c’est tout le principe. Une idée par page, des phrases qu’un tout-petit peut répéter, et un organe-personnage qui explique les choses comme un enfant le ferait. Les plus grands (6–8 ans) trouvent un « Le savais-tu ? » sur chaque double page : le livre grandit avec eux."
+        },
+        {
+          "q": "Ce n’est pas juste un printable de plus ?",
+          "a": "C’est d’abord une histoire. Chaque livre suit un enfant et son nouvel « ami du corps » du début à la fin, puis invite votre enfant à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+        },
+        {
+          "q": "Quatre langues — ça ne va pas l’embrouiller ?",
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+        },
+        {
+          "q": "Les informations sont-elles exactes ?",
+          "a": "Chaque livre est écrit par une sage-femme et relu pour son exactitude et sa douceur — simplifié, jamais faux."
+        },
+        {
+          "q": "Et si on n’aime pas ?",
+          "a": "Notre promesse bonheur de 30 jours : si le fichier ne fonctionne pas ou si le livre ne correspond pas à vos attentes, écrivez-nous et nous trouvons une solution ou vous remboursons."
+        }
+      ]
+    },
+    "specs": {
+      "en": [
+        "Digital PDF — instant download after checkout",
+        "32 illustrated pages (48 with activity pack)",
+        "English · French · Spanish · German",
+        "Print at home or at any copy shop, as often as you like",
+        "Ages 3–8"
+      ],
+      "fr": [
+        "PDF numérique — téléchargement immédiat après paiement",
+        "32 pages illustrées (48 avec le cahier d’activités)",
+        "Français · anglais · espagnol · allemand",
+        "À imprimer chez vous ou en boutique, autant de fois que vous voulez",
+        "3–8 ans"
+      ]
+    },
+    "reviewType": "book",
+    "id": "stomach",
+    "amazon": "https://www.amazon.com/dp/B0HK4XBF7F",
+    "img": "img/book-stomach.png",
+    "color": "#E0A93A",
+    "reviewCount": 74,
+    "title": {
+      "en": "My Stomach Mixing Machine",
+      "fr": "Mon estomac mélangeur"
+    },
+    "topic": {
+      "en": "Food, digestion and energy",
+      "fr": "Aliments, digestion et énergie"
+    },
+    "desc": {
+      "en": "Follow a snack on its journey from the first crunch to the energy that makes us run — perfect for picky eaters and curious tummies.",
+      "fr": "Suivez un goûter de la première bouchée jusqu’à l’énergie qui nous fait courir — idéal pour les petits difficiles et les ventres curieux."
+    },
+    "lead": {
+      "en": "Makes mealtime talks about healthy food easy and fun",
+      "fr": "Rend les discussions sur l’alimentation faciles et amusantes"
+    },
+    "trust": {
+      "en": "Bought by 190 parents",
+      "fr": "Acheté par 190 parents"
+    },
+    "cartProof": {
+      "en": "134 kids are already coloring their stomach machine",
+      "fr": "134 enfants colorient déjà leur estomac mélangeur"
+    },
+    "basket": {
+      "en": "7 people have this in their basket right now",
+      "fr": "7 personnes l’ont dans leur panier en ce moment"
+    },
+    "gallery": [
+      "img/book-stomach.png",
+      "img/hero-reading.png",
+      "img/multilingual-book.png",
+      "img/kids-lying.png"
+    ],
+    "benefits": {
+      "en": [
+        "Makes mealtime talks about healthy food easy and fun",
+        "4 languages on every page: English, French, Spanish and German",
+        "Story + coloring pages — learning by hand, not by screen",
+        "Written by a midwife, made for ages 3–8"
+      ],
+      "fr": [
+        "Rend les discussions sur l’alimentation faciles et amusantes",
+        "4 langues sur chaque page : français, anglais, espagnol et allemand",
+        "Histoire + coloriages — apprendre avec les mains, pas avec un écran",
+        "Écrit par une sage-femme, pensé pour les 3–8 ans"
+      ]
+    }
+  },
+  {
+    "type": "book",
+    "series": {
+      "en": "Human Body Wonders",
+      "fr": "Merveilles du corps"
+    },
+    "price": 7.99,
+    "rating": 4.9,
+    "langs": "EN · FR · ES · DE",
+    "attrs": [
+      {
+        "key": "pages",
+        "label": {
+          "en": "Edition",
+          "fr": "Édition"
+        },
+        "options": [
+          {
+            "en": "Story + coloring · 32 pages",
+            "fr": "Histoire + coloriages · 32 pages",
+            "delta": 0
+          },
+          {
+            "en": "With activity pack · 48 pages",
+            "fr": "Avec cahier d’activités · 48 pages",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "key": "paper",
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ],
+    "objections": {
+      "en": [
+        {
+          "q": "Will my 3-year-old actually understand it?",
+          "a": "Yes — that is the whole point. One idea per page, sentences a toddler can repeat, and a friendly organ character who explains things the way a child would. Older children (6–8) get a “Did you know?” fact on every spread, so the book grows with them."
+        },
+        {
+          "q": "Isn’t this just another printable?",
+          "a": "It is a story first. Each book follows a child and their new “body friend” from beginning to end, then invites your child to color the pages they just read. That is why kids ask for it again — and why they remember it."
+        },
+        {
+          "q": "Four languages — won’t that confuse my child?",
+          "a": "Children love spotting the same word in different languages. Every language sits in its own color, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+        },
+        {
+          "q": "Is the science accurate?",
+          "a": "Every book is written by a midwife and checked for accuracy and gentleness — simplified, never wrong."
+        },
+        {
+          "q": "What if we don’t love it?",
+          "a": "Our 30-day happiness promise: if the file doesn’t work or the book isn’t what you expected, write to us and we’ll make it right or refund you."
+        }
+      ],
+      "fr": [
+        {
+          "q": "Mon enfant de 3 ans va-t-il vraiment comprendre ?",
+          "a": "Oui — c’est tout le principe. Une idée par page, des phrases qu’un tout-petit peut répéter, et un organe-personnage qui explique les choses comme un enfant le ferait. Les plus grands (6–8 ans) trouvent un « Le savais-tu ? » sur chaque double page : le livre grandit avec eux."
+        },
+        {
+          "q": "Ce n’est pas juste un printable de plus ?",
+          "a": "C’est d’abord une histoire. Chaque livre suit un enfant et son nouvel « ami du corps » du début à la fin, puis invite votre enfant à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+        },
+        {
+          "q": "Quatre langues — ça ne va pas l’embrouiller ?",
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+        },
+        {
+          "q": "Les informations sont-elles exactes ?",
+          "a": "Chaque livre est écrit par une sage-femme et relu pour son exactitude et sa douceur — simplifié, jamais faux."
+        },
+        {
+          "q": "Et si on n’aime pas ?",
+          "a": "Notre promesse bonheur de 30 jours : si le fichier ne fonctionne pas ou si le livre ne correspond pas à vos attentes, écrivez-nous et nous trouvons une solution ou vous remboursons."
+        }
+      ]
+    },
+    "specs": {
+      "en": [
+        "Digital PDF — instant download after checkout",
+        "32 illustrated pages (48 with activity pack)",
+        "English · French · Spanish · German",
+        "Print at home or at any copy shop, as often as you like",
+        "Ages 3–8"
+      ],
+      "fr": [
+        "PDF numérique — téléchargement immédiat après paiement",
+        "32 pages illustrées (48 avec le cahier d’activités)",
+        "Français · anglais · espagnol · allemand",
+        "À imprimer chez vous ou en boutique, autant de fois que vous voulez",
+        "3–8 ans"
+      ]
+    },
+    "reviewType": "book",
+    "id": "bones",
+    "img": "img/book-bones.png",
+    "color": "#4A9DB6",
+    "reviewCount": 88,
+    "title": {
+      "en": "My Strong Body Bones",
+      "fr": "Mes os super solides"
+    },
+    "topic": {
+      "en": "Support, protection and growth",
+      "fr": "Soutien, protection et croissance"
+    },
+    "desc": {
+      "en": "Your child meets the bones that hold them up — from tiny ear bones to the mighty thigh bone — through a playful friendship with a smiling skeleton.",
+      "fr": "Votre enfant découvre les os qui le portent — des minuscules os de l’oreille au puissant fémur — grâce à l’amitié d’un squelette tout sourire."
+    },
+    "lead": {
+      "en": "Takes the spookiness out of skeletons and replaces it with wonder",
+      "fr": "Enlève la peur du squelette et la remplace par l’émerveillement"
+    },
+    "trust": {
+      "en": "Bought by 275 parents",
+      "fr": "Acheté par 275 parents"
+    },
+    "cartProof": {
+      "en": "168 kids are already building their skeleton",
+      "fr": "168 enfants construisent déjà leur squelette"
+    },
+    "basket": {
+      "en": "12 people have this in their basket right now",
+      "fr": "12 personnes l’ont dans leur panier en ce moment"
+    },
+    "gallery": [
+      "img/book-bones.png",
+      "img/hero-reading.png",
+      "img/multilingual-book.png",
+      "img/kids-lying.png"
+    ],
+    "benefits": {
+      "en": [
+        "Takes the spookiness out of skeletons and replaces it with wonder",
+        "4 languages on every page: English, French, Spanish and German",
+        "Story + coloring pages — learning by hand, not by screen",
+        "Written by a midwife, made for ages 3–8"
+      ],
+      "fr": [
+        "Enlève la peur du squelette et la remplace par l’émerveillement",
+        "4 langues sur chaque page : français, anglais, espagnol et allemand",
+        "Histoire + coloriages — apprendre avec les mains, pas avec un écran",
+        "Écrit par une sage-femme, pensé pour les 3–8 ans"
+      ]
+    }
+  },
+  {
+    "id": "bundle",
+    "type": "bundle",
+    "img": "img/bundle-cover.png",
+    "gallery": [
+      "img/bundle-cover.png",
+      "img/hero-reading.png",
+      "img/book-muscles.png",
+      "img/book-lungs.png",
+      "img/book-head.png",
+      "img/book-stomach.png",
+      "img/book-bones.png"
+    ],
+    "series": {
+      "en": "Complete collection",
+      "fr": "Collection complète"
+    },
+    "price": 29.99,
+    "compareAt": 39.95,
+    "rating": 5,
+    "reviewCount": 53,
+    "color": "#F06B4F",
+    "badge": {
+      "en": "Save 25%",
+      "fr": "-25 %"
+    },
+    "badgeTone": "solid",
+    "langs": "EN · FR · ES · DE",
+    "attrs": [
+      {
+        "key": "paper",
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ],
+    "objections": {
+      "en": [
+        {
+          "q": "Will my 3-year-old actually understand it?",
+          "a": "Yes — that is the whole point. One idea per page, sentences a toddler can repeat, and a friendly organ character who explains things the way a child would. Older children (6–8) get a “Did you know?” fact on every spread, so the book grows with them."
+        },
+        {
+          "q": "Isn’t this just another printable?",
+          "a": "It is a story first. Each book follows a child and their new “body friend” from beginning to end, then invites your child to color the pages they just read. That is why kids ask for it again — and why they remember it."
+        },
+        {
+          "q": "Four languages — won’t that confuse my child?",
+          "a": "Children love spotting the same word in different languages. Every language sits in its own color, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+        },
+        {
+          "q": "Is the science accurate?",
+          "a": "Every book is written by a midwife and checked for accuracy and gentleness — simplified, never wrong."
+        },
+        {
+          "q": "What if we don’t love it?",
+          "a": "Our 30-day happiness promise: if the file doesn’t work or the book isn’t what you expected, write to us and we’ll make it right or refund you."
+        }
+      ],
+      "fr": [
+        {
+          "q": "Mon enfant de 3 ans va-t-il vraiment comprendre ?",
+          "a": "Oui — c’est tout le principe. Une idée par page, des phrases qu’un tout-petit peut répéter, et un organe-personnage qui explique les choses comme un enfant le ferait. Les plus grands (6–8 ans) trouvent un « Le savais-tu ? » sur chaque double page : le livre grandit avec eux."
+        },
+        {
+          "q": "Ce n’est pas juste un printable de plus ?",
+          "a": "C’est d’abord une histoire. Chaque livre suit un enfant et son nouvel « ami du corps » du début à la fin, puis invite votre enfant à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+        },
+        {
+          "q": "Quatre langues — ça ne va pas l’embrouiller ?",
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+        },
+        {
+          "q": "Les informations sont-elles exactes ?",
+          "a": "Chaque livre est écrit par une sage-femme et relu pour son exactitude et sa douceur — simplifié, jamais faux."
+        },
+        {
+          "q": "Et si on n’aime pas ?",
+          "a": "Notre promesse bonheur de 30 jours : si le fichier ne fonctionne pas ou si le livre ne correspond pas à vos attentes, écrivez-nous et nous trouvons une solution ou vous remboursons."
+        }
+      ]
+    },
+    "specs": {
+      "en": [
+        "Digital PDF — instant download after checkout",
+        "32 illustrated pages (48 with activity pack)",
+        "English · French · Spanish · German",
+        "Print at home or at any copy shop, as often as you like",
+        "Ages 3–8"
+      ],
+      "fr": [
+        "PDF numérique — téléchargement immédiat après paiement",
+        "32 pages illustrées (48 avec le cahier d’activités)",
+        "Français · anglais · espagnol · allemand",
+        "À imprimer chez vous ou en boutique, autant de fois que vous voulez",
+        "3–8 ans"
+      ]
+    },
+    "reviewType": "book",
+    "title": {
+      "en": "Human Body Wonders — all 5 books",
+      "fr": "Merveilles du corps — les 5 livres"
+    },
+    "topic": {
+      "en": "Lungs, brain, stomach, bones and muscles",
+      "fr": "Poumons, cerveau, estomac, os et muscles"
+    },
+    "desc": {
+      "en": "All five books in one download: a complete first tour of the human body, in four languages. Five evenings, five new discoveries.",
+      "fr": "Les cinq livres en un seul téléchargement : un premier tour complet du corps humain, en quatre langues. Cinq soirées, cinq découvertes."
+    },
+    "benefits": {
+      "en": [
+        "All 5 titles — 160+ story and coloring pages",
+        "Save 25% compared to buying each book",
+        "4 languages on every page",
+        "Written by a midwife, made for ages 3–8"
+      ],
+      "fr": [
+        "Les 5 titres — plus de 160 pages d’histoires et de coloriages",
+        "25 % d’économie par rapport à l’achat à l’unité",
+        "4 langues sur chaque page",
+        "Écrit par une sage-femme, pour les 3–8 ans"
+      ]
+    },
+    "trust": {
+      "en": "Chosen by 120 families",
+      "fr": "Choisi par 120 familles"
+    },
+    "cartProof": {
+      "en": "87 families are exploring the full collection this week",
+      "fr": "87 familles explorent la collection complète cette semaine"
+    },
+    "basket": {
+      "en": "14 people have this in their basket right now",
+      "fr": "14 personnes l’ont dans leur panier en ce moment"
+    }
+  },
+  {
+    "id": "goose",
+    "type": "wrap",
+    "img": "img/tumbler-goose-card.png",
+    "gallery": [
+      "img/tumbler-goose.png"
+    ],
+    "series": {
+      "en": "Tumbler wrap",
+      "fr": "Wrap tumbler"
+    },
+    "price": 2.89,
+    "compareAt": 4.49,
+    "rating": 5,
+    "reviewCount": 61,
+    "color": "#83B59B",
+    "badge": {
+      "en": "Sale",
+      "fr": "Promo"
+    },
+    "badgeTone": "solid",
+    "langs": "PNG · 300 dpi",
+    "attrs": [
+      {
+        "key": "size",
+        "label": {
+          "en": "Tumbler size",
+          "fr": "Taille du tumbler"
+        },
+        "options": [
+          {
+            "en": "20oz skinny",
+            "fr": "20oz skinny",
+            "delta": 0
+          },
+          {
+            "en": "30oz skinny",
+            "fr": "30oz skinny",
+            "delta": 0
+          },
+          {
+            "en": "16oz",
+            "fr": "16oz",
+            "delta": 0
+          },
+          {
+            "en": "2oz shot",
+            "fr": "2oz shot",
+            "delta": 0
+          }
+        ]
+      },
+      {
+        "key": "licence",
+        "label": {
+          "en": "Licence",
+          "fr": "Licence"
+        },
+        "options": [
+          {
+            "en": "Personal use",
+            "fr": "Usage personnel",
+            "delta": 0
+          },
+          {
+            "en": "Small business · 200 items",
+            "fr": "Petite entreprise · 200 pièces",
+            "delta": 2
+          }
+        ]
+      }
+    ],
+    "objections": {
+      "en": [
+        {
+          "q": "Will it fit my tumbler?",
+          "a": "The file is sized for 20oz skinny straight tumblers (9.3 × 8.2 in) and includes 16oz, 30oz and 2oz versions. Pick your size above — all sizes are in the download."
+        },
+        {
+          "q": "Will the print look blurry?",
+          "a": "No. Every wrap is a 300 dpi PNG, drawn to be seamless, so there is no visible join where the ends meet."
+        },
+        {
+          "q": "Do I receive a physical tumbler?",
+          "a": "No — this is a digital design file. You download it instantly and print it on sublimation paper or waterslide."
+        },
+        {
+          "q": "Can I sell the tumblers I make?",
+          "a": "Choose the small-business licence to sell up to 200 finished items. Reselling the file itself is not allowed."
+        }
+      ],
+      "fr": [
+        {
+          "q": "Est-ce que ça ira sur mon tumbler ?",
+          "a": "Le fichier est dimensionné pour les tumblers 20oz skinny droits (23,6 × 20,8 cm) et inclut les versions 16oz, 30oz et 2oz. Toutes les tailles sont dans le téléchargement."
+        },
+        {
+          "q": "L’impression sera-t-elle floue ?",
+          "a": "Non. Chaque wrap est un PNG 300 dpi, dessiné pour être sans raccord visible."
+        },
+        {
+          "q": "Est-ce que je reçois un tumbler ?",
+          "a": "Non — il s’agit d’un fichier numérique. Vous le téléchargez immédiatement et l’imprimez sur papier sublimation ou waterslide."
+        },
+        {
+          "q": "Puis-je vendre les tumblers que je fabrique ?",
+          "a": "Choisissez la licence petite entreprise pour vendre jusqu’à 200 pièces finies. La revente du fichier lui-même est interdite."
+        }
+      ]
+    },
+    "specs": {
+      "en": [
+        "Seamless 300 dpi PNG",
+        "20oz skinny + 16oz, 30oz and 2oz versions",
+        "Instant download after checkout",
+        "For sublimation and waterslide"
+      ],
+      "fr": [
+        "PNG 300 dpi sans raccord",
+        "20oz skinny + versions 16oz, 30oz et 2oz",
+        "Téléchargement immédiat après paiement",
+        "Pour sublimation et waterslide"
+      ]
+    },
+    "reviewType": "wrap",
+    "title": {
+      "en": "Silly Goose tumbler wrap",
+      "fr": "Wrap tumbler Silly Goose"
+    },
+    "topic": {
+      "en": "Seamless sublimation design",
+      "fr": "Design sublimation sans raccord"
+    },
+    "desc": {
+      "en": "A hand-drawn wrap full of silly geese, daisies and “everything is fine” energy. Seamless PNG, ready for sublimation.",
+      "fr": "Un wrap dessiné à la main, plein d’oies farfelues, de pâquerettes et d’énergie « tout va bien ». PNG sans raccord, prêt pour la sublimation."
+    },
+    "benefits": {
+      "en": [
+        "Makes everyone laugh — the tumbler people ask about",
+        "Seamless 300 dpi PNG — no visible join",
+        "Fits 20oz skinny, plus 16oz, 30oz and 2oz",
+        "Instant download — press it today"
+      ],
+      "fr": [
+        "Fait rire tout le monde — le tumbler qu’on vous demande",
+        "PNG 300 dpi sans raccord visible",
+        "Pour 20oz skinny, plus 16oz, 30oz et 2oz",
+        "Téléchargement immédiat — pressez-le aujourd’hui"
+      ]
+    },
+    "trust": {
+      "en": "Downloaded by 410 makers",
+      "fr": "Téléchargé par 410 créatrices"
+    },
+    "cartProof": {
+      "en": "96 tumblers were pressed with this design this month",
+      "fr": "96 tumblers ont été pressés avec ce design ce mois-ci"
+    },
+    "basket": {
+      "en": "16 people have this in their basket right now",
+      "fr": "16 personnes l’ont dans leur panier en ce moment"
+    }
+  },
+  {
+    "id": "girl",
+    "type": "wrap",
+    "img": "img/tumbler-girl-card.png",
+    "gallery": [
+      "img/tumbler-girl.png"
+    ],
+    "series": {
+      "en": "Tumbler wrap",
+      "fr": "Wrap tumbler"
+    },
+    "price": 2.89,
+    "compareAt": 4.49,
+    "rating": 4.9,
+    "reviewCount": 47,
+    "color": "#E86A9A",
+    "badge": {
+      "en": "Sale",
+      "fr": "Promo"
+    },
+    "badgeTone": "solid",
+    "langs": "PNG · 300 dpi",
+    "attrs": [
+      {
+        "key": "size",
+        "label": {
+          "en": "Tumbler size",
+          "fr": "Taille du tumbler"
+        },
+        "options": [
+          {
+            "en": "20oz skinny",
+            "fr": "20oz skinny",
+            "delta": 0
+          },
+          {
+            "en": "30oz skinny",
+            "fr": "30oz skinny",
+            "delta": 0
+          },
+          {
+            "en": "16oz",
+            "fr": "16oz",
+            "delta": 0
+          },
+          {
+            "en": "2oz shot",
+            "fr": "2oz shot",
+            "delta": 0
+          }
+        ]
+      },
+      {
+        "key": "licence",
+        "label": {
+          "en": "Licence",
+          "fr": "Licence"
+        },
+        "options": [
+          {
+            "en": "Personal use",
+            "fr": "Usage personnel",
+            "delta": 0
+          },
+          {
+            "en": "Small business · 200 items",
+            "fr": "Petite entreprise · 200 pièces",
+            "delta": 2
+          }
+        ]
+      }
+    ],
+    "objections": {
+      "en": [
+        {
+          "q": "Will it fit my tumbler?",
+          "a": "The file is sized for 20oz skinny straight tumblers (9.3 × 8.2 in) and includes 16oz, 30oz and 2oz versions. Pick your size above — all sizes are in the download."
+        },
+        {
+          "q": "Will the print look blurry?",
+          "a": "No. Every wrap is a 300 dpi PNG, drawn to be seamless, so there is no visible join where the ends meet."
+        },
+        {
+          "q": "Do I receive a physical tumbler?",
+          "a": "No — this is a digital design file. You download it instantly and print it on sublimation paper or waterslide."
+        },
+        {
+          "q": "Can I sell the tumblers I make?",
+          "a": "Choose the small-business licence to sell up to 200 finished items. Reselling the file itself is not allowed."
+        }
+      ],
+      "fr": [
+        {
+          "q": "Est-ce que ça ira sur mon tumbler ?",
+          "a": "Le fichier est dimensionné pour les tumblers 20oz skinny droits (23,6 × 20,8 cm) et inclut les versions 16oz, 30oz et 2oz. Toutes les tailles sont dans le téléchargement."
+        },
+        {
+          "q": "L’impression sera-t-elle floue ?",
+          "a": "Non. Chaque wrap est un PNG 300 dpi, dessiné pour être sans raccord visible."
+        },
+        {
+          "q": "Est-ce que je reçois un tumbler ?",
+          "a": "Non — il s’agit d’un fichier numérique. Vous le téléchargez immédiatement et l’imprimez sur papier sublimation ou waterslide."
+        },
+        {
+          "q": "Puis-je vendre les tumblers que je fabrique ?",
+          "a": "Choisissez la licence petite entreprise pour vendre jusqu’à 200 pièces finies. La revente du fichier lui-même est interdite."
+        }
+      ]
+    },
+    "specs": {
+      "en": [
+        "Seamless 300 dpi PNG",
+        "20oz skinny + 16oz, 30oz and 2oz versions",
+        "Instant download after checkout",
+        "For sublimation and waterslide"
+      ],
+      "fr": [
+        "PNG 300 dpi sans raccord",
+        "20oz skinny + versions 16oz, 30oz et 2oz",
+        "Téléchargement immédiat après paiement",
+        "Pour sublimation et waterslide"
+      ]
+    },
+    "reviewType": "wrap",
+    "title": {
+      "en": "Just a Girl pink tumbler wrap",
+      "fr": "Wrap tumbler Just a Girl rose"
+    },
+    "topic": {
+      "en": "Seamless sublimation design",
+      "fr": "Design sublimation sans raccord"
+    },
+    "desc": {
+      "en": "Pink glam, glitter hearts and “dream big, glow bright” — a bold, seamless design for birthdays and girls’ days out.",
+      "fr": "Glamour rose, cœurs pailletés et « dream big, glow bright » — un design audacieux et sans raccord pour les anniversaires et les journées entre filles."
+    },
+    "benefits": {
+      "en": [
+        "A birthday tumbler she’ll carry everywhere",
+        "Seamless 300 dpi PNG — vibrant pinks, no visible join",
+        "Fits 20oz skinny, plus 16oz, 30oz and 2oz",
+        "Pairs with our matching birthday invitation"
+      ],
+      "fr": [
+        "Un tumbler d’anniversaire qu’elle emportera partout",
+        "PNG 300 dpi sans raccord — des roses éclatants",
+        "Pour 20oz skinny, plus 16oz, 30oz et 2oz",
+        "Assorti à notre invitation d’anniversaire"
+      ]
+    },
+    "trust": {
+      "en": "Downloaded by 380 makers",
+      "fr": "Téléchargé par 380 créatrices"
+    },
+    "cartProof": {
+      "en": "112 makers added this wrap this week",
+      "fr": "112 créatrices ont ajouté ce wrap cette semaine"
+    },
+    "basket": {
+      "en": "16 people have this in their basket right now",
+      "fr": "16 personnes l’ont dans leur panier en ce moment"
+    }
+  }
+]

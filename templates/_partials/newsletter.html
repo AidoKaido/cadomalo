@@ -1,0 +1,18 @@
+<section class="section">
+  <div class="wrap">
+    <div class="newsletter">
+      <div class="eyebrow">{{ t.news.kicker }}</div>
+      <h2>{{ t.news.h }}</h2>
+      <p class="lead" style="margin:var(--space-3) auto 0">{{ t.news.p }}</p>
+
+      <form class="nl-form newsletter-form" novalidate>
+        <label class="visually-hidden" for="nl-email">{{ t.news.ph }}</label>
+        <input type="email" id="nl-email" name="email" required
+               autocomplete="email" placeholder="{{ t.news.ph }}">
+        <button type="submit" class="btn btn-primary">{{ t.news.cta }}</button>
+      </form>
+
+      <p class="nl-note" data-nl-note>{{ t.news.consent }}</p>
+    </div>
+  </div>
+</section>

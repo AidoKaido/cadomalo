@@ -1,23 +1,15 @@
-import {readFile, writeFile} from 'node:fs/promises'
+import {readFile, writeFile, readdir} from 'node:fs/promises'
 import {join} from 'node:path'
 
 const SITE_URL = (process.env.SITE_URL || 'https://cadomalo.com').replace(/\/$/, '')
 
-const STATIC_PAGES = [
-  {loc: '/', priority: '1.0', changefreq: 'weekly'},
-  {loc: '/shop', priority: '0.9', changefreq: 'daily'},
-  {loc: '/gift-finder', priority: '0.8', changefreq: 'monthly'},
-  {loc: '/blog', priority: '0.7', changefreq: 'weekly'},
-  {loc: '/about', priority: '0.5', changefreq: 'monthly'},
-  {loc: '/contact', priority: '0.5', changefreq: 'monthly'},
-  {loc: '/returns', priority: '0.4', changefreq: 'yearly'},
-  {loc: '/privacy-policy', priority: '0.3', changefreq: 'yearly'},
-  {loc: '/terms', priority: '0.3', changefreq: 'yearly'},
-  {loc: '/cookie-policy', priority: '0.3', changefreq: 'yearly'},
-  {loc: '/accessibility', priority: '0.3', changefreq: 'yearly'},
-]
+// Pages written by scripts/build-pages.js live as <dir>/index.html. Walk them
+// and list every page that isn't marked noindex (cart, order confirmation).
+const SKIP_DIRS = new Set(['node_modules', 'templates', 'api', 'scripts', 'content', 'data', 'css', 'js', 'assets', '.git', '.vercel', '.github'])
 
-const BLOG_PAGES = [
+// Pre-redesign pages still served as flat .html files.
+const LEGACY_PAGES = [
+  '/accessibility',
   '/blog-anniversary',
   '/blog-personalized',
   '/blog-wedding',
@@ -31,31 +23,36 @@ const BLOG_PAGES = [
 
 const today = new Date().toISOString().split('T')[0]
 
-async function main() {
-  let products = []
-  try {
-    const raw = await readFile(join(process.cwd(), 'data', 'products.json'), 'utf8')
-    products = JSON.parse(raw).products || []
-  } catch (err) {
-    console.warn('[sitemap] could not read products.json:', err.message)
+async function collectPages(dir, rel = '') {
+  const found = []
+  const entries = await readdir(dir, {withFileTypes: true})
+  for (const e of entries) {
+    if (!e.isDirectory() || SKIP_DIRS.has(e.name) || e.name.startsWith('.')) continue
+    found.push(...(await collectPages(join(dir, e.name), rel + '/' + e.name)))
   }
+  if (entries.some((e) => e.isFile() && e.name === 'index.html')) {
+    const html = await readFile(join(dir, 'index.html'), 'utf8')
+    if (!/<meta name="robots" content="noindex/.test(html)) found.push(rel || '/')
+  }
+  return found
+}
 
-  const urls = []
-  for (const p of STATIC_PAGES) {
-    urls.push({loc: SITE_URL + p.loc, priority: p.priority, changefreq: p.changefreq, lastmod: today})
-  }
-  for (const b of BLOG_PAGES) {
-    urls.push({loc: SITE_URL + b, priority: '0.6', changefreq: 'monthly', lastmod: today})
-  }
-  for (const prod of products) {
-    if (!prod.slug) continue
-    urls.push({
-      loc: `${SITE_URL}/products/${encodeURIComponent(prod.slug)}`,
-      priority: '0.8',
-      changefreq: 'weekly',
-      lastmod: today,
-    })
-  }
+function priorityFor(loc) {
+  if (loc === '/' || loc === '/fr') return '1.0'
+  if (/^(\/fr)?\/(shop|boutique)$/.test(loc)) return '0.9'
+  if (/\/(products|produits)\//.test(loc)) return '0.8'
+  if (/\/blog/.test(loc)) return '0.6'
+  return '0.5'
+}
+
+async function main() {
+  const pages = await collectPages(process.cwd())
+  const urls = [...pages.sort(), ...LEGACY_PAGES].map((loc) => ({
+    loc: SITE_URL + (loc === '/' ? '/' : loc),
+    priority: priorityFor(loc),
+    changefreq: 'weekly',
+    lastmod: today,
+  }))
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',

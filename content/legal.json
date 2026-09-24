@@ -1,0 +1,357 @@
+[
+  {
+    "id": "legal-notice",
+    "title": {
+      "en": "Legal notice",
+      "fr": "Mentions légales"
+    },
+    "sections": {
+      "en": [
+        {
+          "h": "Publisher",
+          "p": [
+            "This website, cadomalo.com, is published by Fokebo LLC, 501 Silverside Rd, Ste 105-291, Wilmington, DE 19809, USA.",
+            "Publication director: Aidora. Contact: support@cadomalo.com."
+          ]
+        },
+        {
+          "h": "Hosting",
+          "p": [
+            "The website is hosted by Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA."
+          ]
+        },
+        {
+          "h": "Intellectual property",
+          "p": [
+            "All texts, illustrations, book covers, logos and designs on this website are the property of Cadomalo or its partners and are protected by copyright. Any reproduction without prior written permission is prohibited, except for the private use granted when you buy a product."
+          ]
+        },
+        {
+          "h": "Etsy",
+          "p": [
+            "Some Cadomalo products are also sold through our Etsy shop, CadomaloShop. Purchases made on Etsy are governed by Etsy’s own terms and policies."
+          ]
+        }
+      ],
+      "fr": [
+        {
+          "h": "Éditeur",
+          "p": [
+            "Le site cadomalo.com est édité par Fokebo LLC, 501 Silverside Rd, Ste 105-291, Wilmington, DE 19809, USA.",
+            "Directrice de la publication : Aidora. Contact : support@cadomalo.com."
+          ]
+        },
+        {
+          "h": "Hébergement",
+          "p": [
+            "Le site est hébergé par Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA."
+          ]
+        },
+        {
+          "h": "Propriété intellectuelle",
+          "p": [
+            "Les textes, illustrations, couvertures, logos et designs présents sur ce site sont la propriété de Cadomalo ou de ses partenaires et sont protégés par le droit d’auteur. Toute reproduction sans autorisation écrite préalable est interdite, sauf l’usage privé accordé lors de l’achat d’un produit."
+          ]
+        },
+        {
+          "h": "Etsy",
+          "p": [
+            "Certains produits Cadomalo sont également vendus sur notre boutique Etsy, CadomaloShop. Les achats effectués sur Etsy sont régis par les conditions et politiques d’Etsy."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "terms",
+    "title": {
+      "en": "Terms of sale",
+      "fr": "Conditions générales de vente"
+    },
+    "sections": {
+      "en": [
+        {
+          "h": "1. Scope",
+          "p": [
+            "These terms apply to all purchases made on cadomalo.com from Fokebo LLC (“Cadomalo”). By placing an order you accept them."
+          ]
+        },
+        {
+          "h": "2. Products",
+          "p": [
+            "Cadomalo sells digital products: illustrated PDF books, printable activities and digital design files (such as tumbler wraps). No physical item is shipped. Product pages describe file formats, sizes and languages."
+          ]
+        },
+        {
+          "h": "3. Prices and payment",
+          "p": [
+            "Prices are shown in US dollars on the English site and in euros on the French site, including applicable taxes. Payment is taken at checkout by card, PayPal, Apple Pay or Klarna through our secure payment provider."
+          ]
+        },
+        {
+          "h": "4. Delivery",
+          "p": [
+            "Your download links are displayed right after payment and sent to your email address. Links stay active for 12 months; write to us if you need them resent."
+          ]
+        },
+        {
+          "h": "5. Licence",
+          "p": [
+            "Books and printables are licensed for personal and household use, and for use within one classroom. Tumbler wraps are licensed for personal use, or for up to 200 finished items with the small-business licence. Reselling, sharing or redistributing the files themselves is not allowed."
+          ]
+        },
+        {
+          "h": "6. Right of withdrawal",
+          "p": [
+            "For digital content, you agree at checkout that delivery begins immediately and acknowledge that you lose your right of withdrawal once the download is available. Our 30-day happiness promise still applies — see the Refunds page."
+          ]
+        },
+        {
+          "h": "7. Discount codes",
+          "p": [
+            "One discount code per order. Codes cannot be exchanged for cash and may have an expiry date."
+          ]
+        },
+        {
+          "h": "8. Governing law",
+          "p": [
+            "These terms are governed by the law of the State of Delaware, USA. If you are a consumer, you also keep the protection of the mandatory rules of your country of residence."
+          ]
+        }
+      ],
+      "fr": [
+        {
+          "h": "1. Champ d’application",
+          "p": [
+            "Les présentes conditions s’appliquent à tous les achats effectués sur cadomalo.com auprès de Fokebo LLC (« Cadomalo »). Passer commande vaut acceptation de ces conditions."
+          ]
+        },
+        {
+          "h": "2. Produits",
+          "p": [
+            "Cadomalo vend des produits numériques : livres illustrés en PDF, activités à imprimer et fichiers de design (comme des wraps tumbler). Aucun article physique n’est expédié. Les fiches produits précisent formats, tailles et langues."
+          ]
+        },
+        {
+          "h": "3. Prix et paiement",
+          "p": [
+            "Les prix sont indiqués en euros TTC sur le site français et en dollars américains sur le site anglais. Le paiement s’effectue lors de la commande par carte, PayPal, Apple Pay ou Klarna via notre prestataire de paiement sécurisé."
+          ]
+        },
+        {
+          "h": "4. Livraison",
+          "p": [
+            "Vos liens de téléchargement s’affichent juste après le paiement et vous sont envoyés par e-mail. Ils restent actifs 12 mois ; écrivez-nous si vous souhaitez les recevoir à nouveau."
+          ]
+        },
+        {
+          "h": "5. Licence",
+          "p": [
+            "Les livres et printables sont concédés pour un usage personnel et familial, et pour une utilisation dans une classe. Les wraps tumbler sont concédés pour un usage personnel, ou jusqu’à 200 pièces finies avec la licence petite entreprise. La revente, le partage ou la redistribution des fichiers eux-mêmes sont interdits."
+          ]
+        },
+        {
+          "h": "6. Droit de rétractation",
+          "p": [
+            "Conformément à l’article L221-28 du Code de la consommation, pour les contenus numériques, vous acceptez lors du paiement que l’exécution commence immédiatement et reconnaissez perdre votre droit de rétractation dès que le téléchargement est disponible. Notre promesse bonheur de 30 jours reste valable — voir la page Remboursements."
+          ]
+        },
+        {
+          "h": "7. Codes promo",
+          "p": [
+            "Un seul code promo par commande. Les codes ne sont pas échangeables contre de l’argent et peuvent avoir une date d’expiration."
+          ]
+        },
+        {
+          "h": "8. Droit applicable et médiation",
+          "p": [
+            "Les présentes conditions sont soumises au droit de l'État du Delaware (États-Unis)."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "privacy",
+    "title": {
+      "en": "Privacy policy",
+      "fr": "Politique de confidentialité"
+    },
+    "sections": {
+      "en": [
+        {
+          "h": "What we collect",
+          "p": [
+            "When you order or subscribe, we collect your name, email address, billing country and order details. Payment details are handled by our payment provider and never stored by us."
+          ]
+        },
+        {
+          "h": "Why we use it",
+          "p": [
+            "To deliver your downloads, answer your messages, prevent fraud, meet our accounting obligations and — only if you opt in — send our newsletter."
+          ]
+        },
+        {
+          "h": "Who we share it with",
+          "p": [
+            "Only with the providers who help us run the shop: hosting, payment, email delivery and analytics. We never sell your data."
+          ]
+        },
+        {
+          "h": "How long we keep it",
+          "p": [
+            "Order data is kept for as long as the law requires for accounting (usually 10 years). Newsletter data is kept until you unsubscribe."
+          ]
+        },
+        {
+          "h": "Your rights",
+          "p": [
+            "You can ask to access, correct, delete or export your data, or object to its use, by writing to support@cadomalo.com. You may also contact your local data-protection authority."
+          ]
+        },
+        {
+          "h": "Children",
+          "p": [
+            "Our products are for children, but our shop is for adults. We do not knowingly collect data from children under 16."
+          ]
+        }
+      ],
+      "fr": [
+        {
+          "h": "Données collectées",
+          "p": [
+            "Lors d’une commande ou d’une inscription, nous collectons vos nom, adresse e-mail, pays de facturation et détails de commande. Les données de paiement sont traitées par notre prestataire et ne sont jamais conservées par nous."
+          ]
+        },
+        {
+          "h": "Finalités",
+          "p": [
+            "Livrer vos téléchargements, répondre à vos messages, prévenir la fraude, respecter nos obligations comptables et — uniquement avec votre accord — vous envoyer notre newsletter."
+          ]
+        },
+        {
+          "h": "Destinataires",
+          "p": [
+            "Uniquement les prestataires qui nous aident à faire fonctionner la boutique : hébergement, paiement, envoi d’e-mails et mesure d’audience. Nous ne vendons jamais vos données."
+          ]
+        },
+        {
+          "h": "Durée de conservation",
+          "p": [
+            "Les données de commande sont conservées pendant la durée légale comptable (10 ans). Les données newsletter sont conservées jusqu’à votre désinscription."
+          ]
+        },
+        {
+          "h": "Vos droits (RGPD)",
+          "p": [
+            "Vous pouvez demander l’accès, la rectification, l’effacement ou la portabilité de vos données, ou vous opposer à leur traitement, en écrivant à support@cadomalo.com. Vous pouvez également saisir la CNIL."
+          ]
+        },
+        {
+          "h": "Enfants",
+          "p": [
+            "Nos produits sont destinés aux enfants, mais notre boutique s’adresse aux adultes. Nous ne collectons pas sciemment de données d’enfants de moins de 15 ans."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "refunds",
+    "title": {
+      "en": "Refunds & happiness promise",
+      "fr": "Remboursements & promesse bonheur"
+    },
+    "sections": {
+      "en": [
+        {
+          "h": "Our 30-day happiness promise",
+          "p": [
+            "Digital files can’t be returned, but we want every family to be happy. If a file doesn’t open, prints incorrectly, or the product is clearly not what the page described, write to support@cadomalo.com within 30 days of purchase."
+          ]
+        },
+        {
+          "h": "What we’ll do",
+          "p": [
+            "First we’ll try to fix it — a new file, a different paper size or help with printing. If we can’t, we’ll refund you in full to your original payment method within 14 days."
+          ]
+        },
+        {
+          "h": "What isn’t covered",
+          "p": [
+            "Change of mind after downloading, printing issues caused by your printer settings once we’ve helped you, or files bought on Etsy (please contact us through Etsy for those)."
+          ]
+        }
+      ],
+      "fr": [
+        {
+          "h": "Notre promesse bonheur de 30 jours",
+          "p": [
+            "Les fichiers numériques ne peuvent pas être retournés, mais nous voulons que chaque famille soit satisfaite. Si un fichier ne s’ouvre pas, s’imprime mal ou ne correspond clairement pas à la description, écrivez à support@cadomalo.com dans les 30 jours suivant l’achat."
+          ]
+        },
+        {
+          "h": "Ce que nous faisons",
+          "p": [
+            "Nous cherchons d’abord une solution — nouveau fichier, autre format de papier ou aide à l’impression. Si ce n’est pas possible, nous vous remboursons intégralement sur votre moyen de paiement d’origine sous 14 jours."
+          ]
+        },
+        {
+          "h": "Ce qui n’est pas couvert",
+          "p": [
+            "Un changement d’avis après téléchargement, des problèmes liés aux réglages de votre imprimante une fois que nous vous avons aidé, ou les fichiers achetés sur Etsy (contactez-nous via Etsy dans ce cas)."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "cookies",
+    "title": {
+      "en": "Cookie policy",
+      "fr": "Politique cookies"
+    },
+    "sections": {
+      "en": [
+        {
+          "h": "What cookies are",
+          "p": [
+            "Cookies are small files stored on your device. They help the site remember your basket and language, and — with your consent — measure how the site is used."
+          ]
+        },
+        {
+          "h": "Cookies we use",
+          "p": [
+            "Essential: basket, language, checkout security (always on). Analytics: anonymous visit statistics (only with consent). Marketing: none by default."
+          ]
+        },
+        {
+          "h": "Your choice",
+          "p": [
+            "You can change your choice at any time via the “Cookie settings” link in the footer, or block cookies in your browser settings."
+          ]
+        }
+      ],
+      "fr": [
+        {
+          "h": "Qu’est-ce qu’un cookie ?",
+          "p": [
+            "Un cookie est un petit fichier enregistré sur votre appareil. Il permet au site de mémoriser votre panier et votre langue, et — avec votre accord — de mesurer son utilisation."
+          ]
+        },
+        {
+          "h": "Cookies utilisés",
+          "p": [
+            "Essentiels : panier, langue, sécurité du paiement (toujours actifs). Mesure d’audience : statistiques de visite anonymes (uniquement avec votre accord). Marketing : aucun par défaut."
+          ]
+        },
+        {
+          "h": "Votre choix",
+          "p": [
+            "Vous pouvez modifier votre choix à tout moment via le lien « Paramètres cookies » en pied de page, ou bloquer les cookies dans les réglages de votre navigateur."
+          ]
+        }
+      ]
+    }
+  }
+]

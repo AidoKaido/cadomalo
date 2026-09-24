@@ -1,0 +1,105 @@
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">{{ t.hero.eyebrow }}</p>
+          <h1 class="hero-title"><span>{{ t.hero.t1 }}</span><span class="accent">{{ t.hero.t2 }}</span></h1>
+          <p class="lead">{{ t.hero.text }}</p>
+          <p class="hero-ctas">
+            <a class="btn btn-primary" href="{{ url.collections }}">{{ t.hero.cta1 }} <span aria-hidden="true">&rarr;</span></a>
+            <a class="btn btn-quiet" href="{{ url.shop }}">{{ t.hero.cta2 }}</a>
+          </p>
+          <ul class="trust-row">{{{ heroTrust }}}</ul>
+        </div>
+        <div class="hero-art">
+          <img src="/assets/hero-reading.png" alt="" width="720" height="720" fetchpriority="high">
+        </div>
+      </div>
+    </section>
+
+    <section class="section band-sky">
+      <div class="wrap center">
+        <p class="eyebrow">{{ t.topics.kicker }}</p>
+        <h2>{{ t.topics.h }}</h2>
+        <p class="lead" style="margin-inline:auto">{{ t.topics.p }}</p>
+        <ul class="topic-row">{{{ topicCards }}}</ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="center">
+          <p class="eyebrow">{{ t.collection.kicker }}</p>
+          <h2>{{ t.collection.h }}</h2>
+          <p class="lead" style="margin-inline:auto">{{ t.collection.p }}</p>
+        </div>
+        <div class="grid-products" style="margin-top:var(--space-8)">{{{ bookCards }}}</div>
+
+        <div class="bundle-band">
+          <img src="/assets/bundle-cover.png" alt="" width="520" height="390" loading="lazy">
+          <div>
+            <p class="eyebrow">{{ t.collection.bundleEyebrow }}</p>
+            <h3>{{ t.collection.bundleH }}</h3>
+            <p>{{ t.collection.bundleP }}</p>
+            <a class="btn btn-primary" href="{{ bundleUrl }}">{{ t.collection.bundleCta }} <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band-mint">
+      <div class="wrap center">
+        <p class="eyebrow">{{ t.method.kicker }}</p>
+        <h2>{{ t.method.h }}</h2>
+        <ol class="method-row">{{{ methodSteps }}}</ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap multi-band">
+        <img src="/assets/multilingual-book.png" alt="" width="560" height="420" loading="lazy">
+        <div>
+          <p class="eyebrow">{{ t.multi.kicker }}</p>
+          <h2>{{ t.multi.h }}</h2>
+          <p class="lead">{{ t.multi.p }}</p>
+          <p><a class="btn btn-secondary" href="{{ url.collections }}">{{ t.multi.cta }} <span aria-hidden="true">&rarr;</span></a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band-blush">
+      <div class="wrap">
+        <div class="center">
+          <p class="eyebrow">{{ t.celebrate.kicker }}</p>
+          <h2>{{ t.celebrate.h }}</h2>
+          <p class="lead" style="margin-inline:auto">{{ t.celebrate.p }}</p>
+        </div>
+        <div class="grid-products" style="margin-top:var(--space-8)">{{{ wrapCards }}}</div>
+        <p class="center" style="margin-top:var(--space-7)">
+          <a class="btn btn-quiet" href="{{ shopWrapsUrl }}">{{ t.celebrate.cta }}</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap center">
+        <p class="eyebrow">{{ t.reviews.kicker }}</p>
+        <h2>{{ t.reviews.h }}</h2>
+        <p class="lead" style="margin-inline:auto">{{ t.reviews.p }}</p>
+        <div class="review-row">{{{ reviewCards }}}</div>
+      </div>
+    </section>
+
+    <section class="section band-butter">
+      <div class="wrap">
+        <div class="center">
+          <p class="eyebrow">{{ t.blog.kicker }}</p>
+          <h2>{{ t.blog.h }}</h2>
+        </div>
+        <div class="grid-products" style="margin-top:var(--space-8)">{{{ blogCards }}}</div>
+        <p class="center" style="margin-top:var(--space-7)">
+          <a class="btn btn-quiet" href="{{ url.blog }}">{{ t.blog.cta }}</a>
+        </p>
+      </div>
+    </section>
+
+    {{> newsletter }}

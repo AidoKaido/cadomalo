@@ -1,0 +1,11 @@
+/* Cadomalo corners are never sharp. Pills for actions, big soft radii for containers. */
+:root{
+  --radius-xs:6px;
+  --radius-sm:10px;
+  --radius-md:16px;
+  --radius-lg:22px;
+  --radius-xl:32px;
+  --radius-2xl:44px;
+  --radius-pill:999px;
+  --radius-blob:48% 52% 56% 44% / 52% 46% 54% 48%; /* @kind radius */
+}

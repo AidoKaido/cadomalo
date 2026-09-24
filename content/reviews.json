@@ -1,0 +1,82 @@
+[
+  {
+    "type": "book",
+    "name": "Sophie M.",
+    "place": "Lyon",
+    "rating": 5,
+    "en": "My daughter (4) asks for the lungs book every night. We read it in French, then she tries the English page. Magic.",
+    "fr": "Ma fille (4 ans) réclame le livre des poumons tous les soirs. On le lit en français, puis elle tente la page en anglais. Magique."
+  },
+  {
+    "type": "book",
+    "name": "Daniel R.",
+    "place": "Austin",
+    "rating": 5,
+    "en": "Printed it on a Sunday morning, colored it all afternoon. My son now explains digestion to his grandma.",
+    "fr": "Imprimé un dimanche matin, colorié tout l’après-midi. Mon fils explique maintenant la digestion à sa grand-mère."
+  },
+  {
+    "type": "book",
+    "name": "Priya K.",
+    "place": "London",
+    "rating": 5,
+    "en": "Finally a science book that isn’t too much for a 3-year-old. Short sentences, big pictures, lots of giggles.",
+    "fr": "Enfin un livre de sciences qui n’est pas trop pour un enfant de 3 ans. Des phrases courtes, de grandes images, beaucoup de rires."
+  },
+  {
+    "type": "book",
+    "name": "Nadia B.",
+    "place": "Genève",
+    "rating": 5,
+    "en": "We are a trilingual family and this is the first book where every language feels equal. Beautiful work.",
+    "fr": "Nous sommes une famille trilingue et c’est le premier livre où chaque langue a vraiment sa place. Un très beau travail."
+  },
+  {
+    "type": "book",
+    "name": "Claire D.",
+    "place": "Bordeaux",
+    "rating": 5,
+    "en": "I use the pages in my preschool class. The children love coloring the smiling skeleton.",
+    "fr": "J’utilise les pages en classe de maternelle. Les enfants adorent colorier le squelette qui sourit."
+  },
+  {
+    "type": "book",
+    "name": "Marc-Antoine L.",
+    "place": "Montréal",
+    "rating": 4,
+    "en": "The bundle is great value. Five evenings, five new topics and zero screens.",
+    "fr": "Le pack vaut vraiment le coup. Cinq soirées, cinq nouveaux sujets et zéro écran."
+  },
+  {
+    "type": "wrap",
+    "name": "Kayla S.",
+    "place": "Georgia",
+    "rating": 5,
+    "en": "Crisp print, no visible seam on my 20oz skinny. Customers keep asking for it.",
+    "fr": "Impression nette, aucun raccord visible sur mon 20oz skinny. Mes clientes le redemandent."
+  },
+  {
+    "type": "wrap",
+    "name": "Brianna T.",
+    "place": "Texas",
+    "rating": 5,
+    "en": "The colors came out so vibrant. I pressed six tumblers for my niece’s party.",
+    "fr": "Les couleurs sont tellement éclatantes. J’ai pressé six tumblers pour la fête de ma nièce."
+  },
+  {
+    "type": "wrap",
+    "name": "Léa P.",
+    "place": "Nantes",
+    "rating": 5,
+    "en": "Perfect file — the colors look great in sublimation.",
+    "fr": "Fichier impeccable, les couleurs rendent super bien en sublimation."
+  },
+  {
+    "type": "wrap",
+    "name": "Megan W.",
+    "place": "Florida",
+    "rating": 5,
+    "en": "The silly goose one makes everyone at work laugh. Downloaded and printed in ten minutes.",
+    "fr": "Celui avec l’oie fait rire tout le bureau. Téléchargé et imprimé en dix minutes."
+  }
+]

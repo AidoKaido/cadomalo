@@ -1,0 +1,79 @@
+<div class="drawer-scrim" data-cart-scrim hidden></div>
+
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true"
+       aria-labelledby="cart-drawer-title" hidden>
+
+  <div class="cart-drawer-head">
+    <h2 id="cart-drawer-title">{{ t.cart.title }} <span class="cart-head-count" data-drawer-count></span></h2>
+    <button type="button" class="icon-btn" data-cart-close aria-label="{{ t.cart.close }}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <!-- empty state -->
+  <div class="cart-drawer-empty" data-drawer-empty>
+    <img class="cart-empty-art" src="/assets/kids-lying.png" alt="" width="320" height="213" loading="lazy">
+    <h3>{{ t.cart.empty }}</h3>
+    <p>{{ t.cart.emptyP }}</p>
+    <a class="btn btn-primary" href="{{ url.collections }}">{{ t.cart.emptyCta }} <span aria-hidden="true">&rarr;</span></a>
+  </div>
+
+  <!-- urgency strip: presentational countdown, seeded on first add -->
+  <div class="cart-urgency" data-drawer-urgency hidden>
+    <svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>
+    </svg>
+    <span>{{ t.cart.reserved }} <span class="clock" data-reserve-clock>10:00</span> {{ t.cart.reservedAfter }}</span>
+  </div>
+
+  <div class="cart-drawer-body" data-drawer-body hidden>
+    <!-- per-product social proof, set from the last added item -->
+    <p class="cart-proof" data-drawer-proof hidden>
+      <span class="avatar-stack">
+        <span class="avatar" style="background:var(--coral-500);color:#fff">S</span>
+        <span class="avatar" style="background:var(--sky-500);color:#fff">D</span>
+        <span class="avatar" style="background:var(--yellow-500);color:var(--blue-700)">N</span>
+      </span>
+      <span data-drawer-proof-text></span>
+    </p>
+
+    <div class="cart-lines" data-drawer-lines data-remove-label="{{ t.cart.remove }}"></div>
+
+    <div class="cart-trust-card">
+      <img src="/assets/logo-mark.png" alt="" width="52" height="52" loading="lazy">
+      <div>
+        <strong>{{ t.cart.trustH }}</strong>
+        <span>{{ t.cart.trustP }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-drawer-foot" data-drawer-foot hidden>
+    <form class="code-form" data-code-form data-applied="{{ t.cart.applied }}" data-bad="{{ t.cart.bad }}" novalidate>
+      <label class="visually-hidden" for="cart-code">{{ t.cart.code }}</label>
+      <input id="cart-code" name="code" placeholder="{{ t.cart.codePh }}"
+             autocomplete="off" spellcheck="false" data-code-input>
+      <button type="submit" class="btn btn-secondary btn-sm">{{ t.cart.apply }}</button>
+    </form>
+    <p class="code-msg" data-code-msg hidden></p>
+
+    <p class="cart-row"><span>{{ t.cart.subtotal }}</span><span data-drawer-subtotal>$0.00</span></p>
+    <p class="cart-row cart-discount" data-drawer-discount-row hidden>
+      <span>{{ t.cart.discount }} (<span data-drawer-code></span>)</span><span data-drawer-discount>-$0.00</span>
+    </p>
+    <p class="cart-row cart-total"><span>{{ t.cart.total }}</span><span data-drawer-total>$0.00</span></p>
+
+    <button type="button" class="btn btn-primary btn-full btn-lg" data-checkout>
+      <svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+      </svg>
+      {{ t.cart.checkout }}
+    </button>
+
+    <div class="cart-trust-row">{{{ cartTrustRow }}}</div>
+  </div>
+</aside>
+
+<div class="toast" data-toast hidden role="status"></div>

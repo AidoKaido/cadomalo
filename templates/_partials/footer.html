@@ -1,0 +1,42 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/assets/logo-wide.png" alt="Cadomalo" width="220" height="32" loading="lazy">
+        <p>{{ t.footer.intro }}</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>{{ t.footer.shop }}</h3>
+        <ul>
+          <li><a href="{{ url.shop }}">{{ t.nav.shop }}</a></li>
+          <li><a href="{{ url.collections }}">{{ t.nav.collections }}</a></li>
+          <li><a href="{{ url.sale }}">{{ t.nav.sale }}</a></li>
+          <li><a href="{{ url.blog }}">{{ t.nav.blog }}</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>{{ t.footer.help }}</h3>
+        <ul>
+          <li><a href="{{ url.contact }}">{{ t.footer.contact }}</a></li>
+          <li><a href="{{ url.legalRefunds }}">{{ t.footer.faq }}</a></li>
+          <li><a href="https://www.etsy.com/shop/CadomaloShop" rel="noopener" target="_blank">{{ t.footer.etsy }}</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>{{ t.footer.legal }}</h3>
+        <ul>
+          {{{ legalLinks }}}
+          <li><a href="#" data-cookie-settings>{{ t.a11y.cookieSettings }}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>{{ t.footer.rights }}</span>
+      <span>{{ t.footer.pay }}</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,15 @@
+/* Shadows are warm and low-contrast — tinted with ink, never pure black. */
+:root{
+  --shadow-none:none;
+  --shadow-xs:0 1px 2px rgba(41,51,58,.06);
+  --shadow-sm:0 2px 6px rgba(41,51,58,.07);
+  --shadow-md:0 6px 18px rgba(41,51,58,.09);
+  --shadow-lg:0 14px 34px rgba(41,51,58,.11);
+  --shadow-xl:0 24px 60px rgba(41,51,58,.14);
+  --shadow-card:0 4px 14px rgba(57,80,111,.10);
+  --shadow-card-hover:0 12px 28px rgba(57,80,111,.16);
+  --shadow-button:0 3px 0 rgba(198,74,49,.35);
+  --shadow-button-secondary:0 3px 0 rgba(34,51,74,.28);
+  --shadow-inset-soft:inset 0 1px 0 rgba(255,255,255,.65);
+  --ring-focus:0 0 0 3px rgba(101,185,209,.55);
+}
