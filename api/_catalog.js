@@ -15,16 +15,17 @@ import {join} from 'node:path'
 
 const SITE_URL = (process.env.SITE_URL || 'https://cadomalo.com').replace(/\/$/, '')
 
-async function readJson(file) {
-  const raw = await readFile(join(process.cwd(), 'data', file), 'utf8')
-  return JSON.parse(raw)
-}
+// Literal paths so Vercel's file tracing bundles both files with the
+// functions (vercel.json also lists data/** under includeFiles).
+const SITE_FILE = join(process.cwd(), 'data', 'catalog-client.json')
+const LEGACY_FILE = join(process.cwd(), 'data', 'products.json')
+const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'))
 
 export async function loadCatalog() {
   let site = []
   let legacy = []
   try {
-    site = (await readJson('catalog-client.json')).map((p) => ({
+    site = (await readJson(SITE_FILE)).map((p) => ({
       slug: p.slug,
       title: p.title.en,
       titleFr: p.title.fr,
@@ -39,7 +40,7 @@ export async function loadCatalog() {
     console.error('[catalog] failed to load catalog-client.json:', err.message)
   }
   try {
-    legacy = (await readJson('products.json')).products || []
+    legacy = (await readJson(LEGACY_FILE)).products || []
   } catch (err) {
     console.error('[catalog] failed to load products.json:', err.message)
   }

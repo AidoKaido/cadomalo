@@ -3,6 +3,9 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".",
   "cleanUrls": true,
+  "functions": {
+    "api/*.js": {"includeFiles": "data/**"}
+  },
   "redirects": [
     {"source": "/gift-finder", "destination": "/collections", "permanent": true},
     {"source": "/product", "destination": "/shop", "permanent": true},
@@ -85,6 +88,9 @@
     {"source": "/products/some-things-are-better-left-unsaid-shirt-funny-sarcastic-tee-introvert-humor-shi-6a3297", "destination": "/shop", "permanent": true},
     {"source": "/products/before-coffee-shirt-funny-coffee-lover-tee-some-things-are-better-left-alone-cof-6a33c5", "destination": "/shop", "permanent": true},
     {"source": "/products/funny-monday-shirt-some-things-are-better-left-alone-like-me-on-a-monday-tee-wor-6a352e", "destination": "/shop", "permanent": true}
+  ],
+  "rewrites": [
+    {"source": "/products/:slug", "destination": "/shop"}
   ],
   "headers": [
     {
