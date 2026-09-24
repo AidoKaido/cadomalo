@@ -1,0 +1,460 @@
+[
+  {
+    "id": "muscles",
+    "slug": "my-muscles-make-me-move",
+    "type": "book",
+    "price": 7.99,
+    "img": "/assets/book-muscles.png",
+    "title": {
+      "en": "My Muscles Make Me Move",
+      "fr": "Mes muscles me font bouger"
+    },
+    "url": {
+      "en": "/products/my-muscles-make-me-move",
+      "fr": "/fr/produits/mes-muscles-me-font-bouger"
+    },
+    "cartProof": {
+      "en": "241 kids are already moving with this book",
+      "fr": "241 enfants bougent déjà avec ce livre"
+    },
+    "attrs": [
+      {
+        "label": {
+          "en": "Edition",
+          "fr": "Édition"
+        },
+        "options": [
+          {
+            "en": "Story + coloring · 32 pages",
+            "fr": "Histoire + coloriages · 32 pages",
+            "delta": 0
+          },
+          {
+            "en": "With activity pack · 48 pages",
+            "fr": "Avec cahier d’activités · 48 pages",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lungs",
+    "slug": "my-busy-breathing-lungs",
+    "type": "book",
+    "price": 7.99,
+    "img": "/assets/book-lungs.png",
+    "title": {
+      "en": "My Busy Breathing Lungs",
+      "fr": "Mes poumons respirent sans arrêt"
+    },
+    "url": {
+      "en": "/products/my-busy-breathing-lungs",
+      "fr": "/fr/produits/mes-poumons-respirent-sans-arret"
+    },
+    "cartProof": {
+      "en": "150 kids are already coloring this book",
+      "fr": "150 enfants colorient déjà ce livre"
+    },
+    "attrs": [
+      {
+        "label": {
+          "en": "Edition",
+          "fr": "Édition"
+        },
+        "options": [
+          {
+            "en": "Story + coloring · 32 pages",
+            "fr": "Histoire + coloriages · 32 pages",
+            "delta": 0
+          },
+          {
+            "en": "With activity pack · 48 pages",
+            "fr": "Avec cahier d’activités · 48 pages",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "head",
+    "slug": "inside-my-amazing-head",
+    "type": "book",
+    "price": 7.99,
+    "img": "/assets/book-head.png",
+    "title": {
+      "en": "Inside My Amazing Head",
+      "fr": "Dans ma tête extraordinaire"
+    },
+    "url": {
+      "en": "/products/inside-my-amazing-head",
+      "fr": "/fr/produits/dans-ma-tete-extraordinaire"
+    },
+    "cartProof": {
+      "en": "212 little brains are already coloring this book",
+      "fr": "212 petits cerveaux colorient déjà ce livre"
+    },
+    "attrs": [
+      {
+        "label": {
+          "en": "Edition",
+          "fr": "Édition"
+        },
+        "options": [
+          {
+            "en": "Story + coloring · 32 pages",
+            "fr": "Histoire + coloriages · 32 pages",
+            "delta": 0
+          },
+          {
+            "en": "With activity pack · 48 pages",
+            "fr": "Avec cahier d’activités · 48 pages",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "stomach",
+    "slug": "my-stomach-mixing-machine",
+    "type": "book",
+    "price": 7.99,
+    "img": "/assets/book-stomach.png",
+    "title": {
+      "en": "My Stomach Mixing Machine",
+      "fr": "Mon estomac mélangeur"
+    },
+    "url": {
+      "en": "/products/my-stomach-mixing-machine",
+      "fr": "/fr/produits/mon-estomac-melangeur"
+    },
+    "cartProof": {
+      "en": "134 kids are already coloring their stomach machine",
+      "fr": "134 enfants colorient déjà leur estomac mélangeur"
+    },
+    "attrs": [
+      {
+        "label": {
+          "en": "Edition",
+          "fr": "Édition"
+        },
+        "options": [
+          {
+            "en": "Story + coloring · 32 pages",
+            "fr": "Histoire + coloriages · 32 pages",
+            "delta": 0
+          },
+          {
+            "en": "With activity pack · 48 pages",
+            "fr": "Avec cahier d’activités · 48 pages",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bones",
+    "slug": "my-strong-body-bones",
+    "type": "book",
+    "price": 7.99,
+    "img": "/assets/book-bones.png",
+    "title": {
+      "en": "My Strong Body Bones",
+      "fr": "Mes os super solides"
+    },
+    "url": {
+      "en": "/products/my-strong-body-bones",
+      "fr": "/fr/produits/mes-os-super-solides"
+    },
+    "cartProof": {
+      "en": "168 kids are already building their skeleton",
+      "fr": "168 enfants construisent déjà leur squelette"
+    },
+    "attrs": [
+      {
+        "label": {
+          "en": "Edition",
+          "fr": "Édition"
+        },
+        "options": [
+          {
+            "en": "Story + coloring · 32 pages",
+            "fr": "Histoire + coloriages · 32 pages",
+            "delta": 0
+          },
+          {
+            "en": "With activity pack · 48 pages",
+            "fr": "Avec cahier d’activités · 48 pages",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bundle",
+    "slug": "human-body-wonders-all-5-books",
+    "type": "bundle",
+    "price": 29.99,
+    "img": "/assets/bundle-cover.png",
+    "title": {
+      "en": "Human Body Wonders — all 5 books",
+      "fr": "Merveilles du corps — les 5 livres"
+    },
+    "url": {
+      "en": "/products/human-body-wonders-all-5-books",
+      "fr": "/fr/produits/merveilles-du-corps-les-5-livres"
+    },
+    "cartProof": {
+      "en": "87 families are exploring the full collection this week",
+      "fr": "87 familles explorent la collection complète cette semaine"
+    },
+    "attrs": [
+      {
+        "label": {
+          "en": "Paper size",
+          "fr": "Format papier"
+        },
+        "options": [
+          {
+            "en": "US Letter",
+            "fr": "US Letter",
+            "delta": 0
+          },
+          {
+            "en": "A4",
+            "fr": "A4",
+            "delta": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "goose",
+    "slug": "silly-goose-tumbler-wrap",
+    "type": "wrap",
+    "price": 2.89,
+    "img": "/assets/tumbler-goose-card.png",
+    "title": {
+      "en": "Silly Goose tumbler wrap",
+      "fr": "Wrap tumbler Silly Goose"
+    },
+    "url": {
+      "en": "/products/silly-goose-tumbler-wrap",
+      "fr": "/fr/produits/wrap-tumbler-silly-goose"
+    },
+    "cartProof": {
+      "en": "96 tumblers were pressed with this design this month",
+      "fr": "96 tumblers ont été pressés avec ce design ce mois-ci"
+    },
+    "attrs": [
+      {
+        "label": {
+          "en": "Tumbler size",
+          "fr": "Taille du tumbler"
+        },
+        "options": [
+          {
+            "en": "20oz skinny",
+            "fr": "20oz skinny",
+            "delta": 0
+          },
+          {
+            "en": "30oz skinny",
+            "fr": "30oz skinny",
+            "delta": 0
+          },
+          {
+            "en": "16oz",
+            "fr": "16oz",
+            "delta": 0
+          },
+          {
+            "en": "2oz shot",
+            "fr": "2oz shot",
+            "delta": 0
+          }
+        ]
+      },
+      {
+        "label": {
+          "en": "Licence",
+          "fr": "Licence"
+        },
+        "options": [
+          {
+            "en": "Personal use",
+            "fr": "Usage personnel",
+            "delta": 0
+          },
+          {
+            "en": "Small business · 200 items",
+            "fr": "Petite entreprise · 200 pièces",
+            "delta": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "girl",
+    "slug": "just-a-girl-pink-tumbler-wrap",
+    "type": "wrap",
+    "price": 2.89,
+    "img": "/assets/tumbler-girl-card.png",
+    "title": {
+      "en": "Just a Girl pink tumbler wrap",
+      "fr": "Wrap tumbler Just a Girl rose"
+    },
+    "url": {
+      "en": "/products/just-a-girl-pink-tumbler-wrap",
+      "fr": "/fr/produits/wrap-tumbler-just-a-girl-rose"
+    },
+    "cartProof": {
+      "en": "112 makers added this wrap this week",
+      "fr": "112 créatrices ont ajouté ce wrap cette semaine"
+    },
+    "attrs": [
+      {
+        "label": {
+          "en": "Tumbler size",
+          "fr": "Taille du tumbler"
+        },
+        "options": [
+          {
+            "en": "20oz skinny",
+            "fr": "20oz skinny",
+            "delta": 0
+          },
+          {
+            "en": "30oz skinny",
+            "fr": "30oz skinny",
+            "delta": 0
+          },
+          {
+            "en": "16oz",
+            "fr": "16oz",
+            "delta": 0
+          },
+          {
+            "en": "2oz shot",
+            "fr": "2oz shot",
+            "delta": 0
+          }
+        ]
+      },
+      {
+        "label": {
+          "en": "Licence",
+          "fr": "Licence"
+        },
+        "options": [
+          {
+            "en": "Personal use",
+            "fr": "Usage personnel",
+            "delta": 0
+          },
+          {
+            "en": "Small business · 200 items",
+            "fr": "Petite entreprise · 200 pièces",
+            "delta": 2
+          }
+        ]
+      }
+    ]
+  }
+]

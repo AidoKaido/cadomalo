@@ -1,0 +1,31 @@
+<!-- Element IDs below are a hard contract with js/main.js CookieConsent.
+     Do not rename them without updating js/main.js and js/pixels.js. -->
+<div id="cookie-banner" role="region" aria-label="{{ t.cookie.title }}">
+  <p>{{ t.cookie.body }} <a href="{{ url.legalCookies }}">{{ t.cookie.more }}</a></p>
+
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-primary" id="btn-accept-all">{{ t.cookie.acceptAll }}</button>
+    <button type="button" class="btn btn-quiet" id="btn-reject-all">{{ t.cookie.rejectAll }}</button>
+    <button type="button" class="btn btn-quiet" id="btn-manage-prefs">{{ t.cookie.manage }}</button>
+  </div>
+
+  <div id="cookie-prefs">
+    <div class="cookie-row">
+      <span>{{ t.cookie.necessary }}</span>
+      <input type="checkbox" checked disabled aria-label="{{ t.cookie.necessary }}">
+    </div>
+    <div class="cookie-row">
+      <label for="toggle-analytics">{{ t.cookie.analytics }}</label>
+      <input type="checkbox" id="toggle-analytics">
+    </div>
+    <div class="cookie-row">
+      <label for="toggle-marketing">{{ t.cookie.marketing }}</label>
+      <input type="checkbox" id="toggle-marketing">
+    </div>
+    <div class="cookie-actions">
+      <button type="button" class="btn btn-primary" id="btn-save-prefs">{{ t.cookie.save }}</button>
+      <button type="button" class="btn btn-quiet" id="btn-accept-panel">{{ t.cookie.acceptAll }}</button>
+      <button type="button" class="btn btn-quiet" id="btn-close-panel">{{ t.cookie.close }}</button>
+    </div>
+  </div>
+</div>

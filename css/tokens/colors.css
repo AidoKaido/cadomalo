@@ -1,0 +1,111 @@
+/* Cadomalo colour system.
+   Base ramps first, semantic aliases second. Cream — not white — is the default page ground. */
+:root{
+  /* --- Brand base ------------------------------------------------------- */
+  --blue-900:#22334A;
+  --blue-800:#2C3F58;
+  --blue-700:#334865;
+  --blue-600:#39506F;   /* Deep Blue — primary brand colour */
+  --blue-400:#6A7E9B;
+  --blue-200:#B7C3D5;
+  --blue-100:#E5EDFE;   /* soft periwinkle section band */
+  --blue-50:#EFF3FE;
+
+  --coral-700:#C64A31;
+  --coral-600:#D9563B;
+  --coral-500:#F06B4F;  /* Coral — primary action / accent */
+  --coral-300:#F7A794;
+  --coral-100:#FBE7E6;
+  --coral-50:#FDF0EC;
+
+  --yellow-700:#C9932B;
+  --yellow-600:#E0AE40;
+  --yellow-500:#F6C85F;  /* Sunny Yellow */
+  --yellow-300:#FADFA1;
+  --yellow-100:#FEF4E3;
+  --yellow-50:#FFF9EF;
+
+  --sage-700:#4F7F67;
+  --sage-600:#6A9D83;
+  --sage-500:#83B59B;   /* Sage Green */
+  --sage-300:#B3D3C2;
+  --sage-100:#DCF1E6;
+  --sage-50:#EBF3E0;
+
+  --sky-700:#3C88A1;
+  --sky-600:#4A9DB6;
+  --sky-500:#65B9D1;    /* Sky Blue */
+  --sky-300:#A6D8E6;
+  --sky-100:#E3ECF9;
+  --sky-50:#F0F7FB;
+
+  /* --- Neutrals --------------------------------------------------------- */
+  --ink-900:#29333A;    /* Dark Ink — body copy */
+  --ink-700:#4A565F;
+  --ink-500:#6E7A84;
+  --ink-300:#A8B2BA;
+  --ink-200:#D8DEE3;
+  --ink-100:#ECEFF1;
+
+  --cream:#FFF8ED;      /* Soft Cream — default page ground */
+  --cream-raised:#FFFBF4;
+  --cream-deep:#FDEEDC;
+  --white:#FFFFFF;
+
+  /* --- Semantic: surfaces ---------------------------------------------- */
+  --surface-page:var(--cream);
+  --surface-card:var(--white);
+  --surface-card-warm:var(--cream-raised);
+  --surface-sunken:var(--cream-deep);
+  --surface-invert:var(--blue-600);
+  --surface-band-blue:var(--blue-100);
+  --surface-band-mint:var(--sage-100);
+  --surface-band-peach:var(--cream-deep);
+  --surface-band-blush:var(--coral-100);
+  --surface-band-butter:var(--yellow-100);
+  --surface-overlay:rgba(41,51,58,.45);
+
+  /* --- Semantic: text --------------------------------------------------- */
+  --text-heading:var(--blue-600);
+  --text-body:var(--ink-900);
+  --text-muted:var(--ink-500);
+  --text-accent:var(--coral-500);
+  --text-on-dark:var(--cream);
+  --text-on-accent:var(--white);
+  --text-link:var(--coral-600);
+  --text-link-hover:var(--coral-700);
+
+  /* --- Semantic: lines -------------------------------------------------- */
+  --border-soft:#EFE3D2;
+  --border-strong:var(--blue-200);
+  --border-focus:var(--sky-600);
+
+  /* --- Semantic: actions ------------------------------------------------ */
+  --action-primary:var(--coral-500);
+  --action-primary-hover:var(--coral-600);
+  --action-primary-press:var(--coral-700);
+  --action-secondary:var(--blue-600);
+  --action-secondary-hover:var(--blue-700);
+  --action-quiet-bg:var(--white);
+  --action-quiet-border:var(--coral-300);
+
+  /* --- Semantic: status ------------------------------------------------- */
+  --status-success:var(--sage-600);
+  --status-success-bg:var(--sage-100);
+  --status-info:var(--sky-600);
+  --status-info-bg:var(--sky-100);
+  --status-warning:var(--yellow-600);
+  --status-warning-bg:var(--yellow-100);
+  --status-danger:var(--coral-600);
+  --status-danger-bg:var(--coral-100);
+
+  /* --- Topic accents (one per book/toy collection) ---------------------- */
+  --topic-body:var(--coral-500);      --topic-body-bg:var(--coral-100);
+  --topic-space:var(--blue-600);      --topic-space-bg:var(--blue-100);
+  --topic-animals:var(--sage-600);    --topic-animals-bg:var(--sage-100);
+  --topic-feelings:var(--yellow-600); --topic-feelings-bg:var(--yellow-100);
+  --topic-science:var(--sky-600);     --topic-science-bg:var(--sky-100);
+  --topic-world:var(--sky-700);       --topic-world-bg:var(--sky-50);
+  --topic-language:var(--coral-600);  --topic-language-bg:var(--coral-50);
+  --topic-arts:var(--yellow-700);     --topic-arts-bg:var(--yellow-50);
+}

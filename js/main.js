@@ -401,11 +401,88 @@ function initBlogFilter() {
 /* ----------------------------------------------------------
    INIT ALL (reading bar called per-page on articles)
    ---------------------------------------------------------- */
+
+/* ----------------------------------------------------------
+   MOBILE MENU (new site chrome)
+   Full-screen overlay behind the hamburger. Unlike the design
+   prototype this traps focus, closes on Escape and restores
+   focus to the trigger, so it behaves as a real dialog.
+   No-ops on pages that do not have the markup.
+   ---------------------------------------------------------- */
+function initMobileMenu() {
+  const toggle = document.getElementById('menu-toggle');
+  const menu   = document.getElementById('mobile-menu');
+  const close  = document.getElementById('menu-close');
+  if (!toggle || !menu) return;
+
+  let lastFocused = null;
+  const FOCUSABLE = 'a[href], button:not([disabled]), input, select, textarea';
+
+  const openMenu = () => {
+    lastFocused = document.activeElement;
+    menu.hidden = false;
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    const first = menu.querySelector(FOCUSABLE);
+    if (first) first.focus();
+  };
+
+  const closeMenu = () => {
+    menu.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  };
+
+  toggle.addEventListener('click', openMenu);
+  if (close) close.addEventListener('click', closeMenu);
+  menu.querySelectorAll('nav a').forEach(a => a.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (menu.hidden) return;
+
+    if (e.key === 'Escape') { closeMenu(); return; }
+
+    if (e.key === 'Tab') {
+      const items = Array.from(menu.querySelectorAll(FOCUSABLE))
+        .filter(el => el.offsetParent !== null);
+      if (!items.length) return;
+      const first = items[0];
+      const last  = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    }
+  });
+
+  /* Desktop resize while open would strand the overlay over the page. */
+  window.addEventListener('resize', () => {
+    if (!menu.hidden && window.innerWidth >= 760) closeMenu();
+  });
+}
+
+/* Footer "Cookie settings" link reopens the consent panel. */
+function initCookieSettingsLink() {
+  document.querySelectorAll('[data-cookie-settings]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const banner = document.getElementById('cookie-banner');
+      const prefs  = document.getElementById('cookie-prefs');
+      if (banner) banner.classList.add('is-visible');
+      if (prefs)  prefs.classList.add('is-open');
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   CookieConsent.init();
   LangSwitcher.init();
   initHeader();
   initMobileNav();
+  initMobileMenu();
+  initCookieSettingsLink();
   initReveal();
   initTabs();
   initFaq();
@@ -415,5 +492,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initQuickAdd();
   initBlogFilter();
+  initReadingBar();
   Cart.syncBadge();
 });

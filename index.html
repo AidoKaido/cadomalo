@@ -1,592 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadomalo – Gifts That Say More Than Words</title>
-  <meta name="description" content="Personalized gifts, print-on-demand treasures, and digital delights for every occasion. Birthday, anniversary, wedding and more — crafted to make them smile.">
-  <meta name="keywords" content="personalized gifts, custom gifts, gift ideas, birthday gifts, anniversary gifts, print on demand gifts">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadomalo — Little minds. Big discoveries.</title>
+  <meta name="description" content="Beautiful multilingual books that turn everyday curiosity into knowledge children carry with them — for curious minds ages 3–8.">
+  
   <link rel="canonical" href="https://cadomalo.com/">
-
-  <!-- Open Graph -->
-  <meta property="og:type"        content="website">
-  <meta property="og:url"         content="https://cadomalo.com/">
-  <meta property="og:title"       content="Cadomalo – Gifts That Say More Than Words">
-  <meta property="og:description" content="Personalized gifts for every occasion. Find the perfect gift in 60 seconds with our Gift Finder.">
-  <meta property="og:image"       content="https://cadomalo.com/assets/images/og-home.jpg">
-  <meta name="twitter:card"       content="summary_large_image">
-
-  <!-- Fonts -->
+  <link rel="alternate" hreflang="en" href="https://cadomalo.com/">
+  <link rel="alternate" hreflang="fr" href="https://cadomalo.com/fr">
+  <link rel="alternate" hreflang="x-default" href="https://cadomalo.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cadomalo.com/">
+  <meta property="og:title" content="Cadomalo — Little minds. Big discoveries.">
+  <meta property="og:description" content="Beautiful multilingual books that turn everyday curiosity into knowledge children carry with them — for curious minds ages 3–8.">
+  <meta property="og:image" content="https://cadomalo.com/assets/hero-reading.png">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#FFF8ED">
+  <link rel="icon" href="/assets/logo-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- Structured Data (GEO / AI Search) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "OnlineStore",
-    "name": "Cadomalo",
-    "url": "https://cadomalo.com",
-    "description": "Personalized gifts, print-on-demand products and digital gifts for every occasion.",
-    "currenciesAccepted": "USD, EUR",
-    "paymentAccepted": "Credit Card, PayPal",
-    "areaServed": "Worldwide",
-    "sameAs": [
-      "https://www.facebook.com/cadomalo",
-      "https://www.instagram.com/cadomalo",
-      "https://www.tiktok.com/@cadomalo",
-      "https://www.pinterest.com/cadomalo"
-    ]
-  }
-  </script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Cadomalo","url":"https://cadomalo.com","logo":"https://cadomalo.com/assets/logo-square.png","description":"Beautiful multilingual books that turn everyday curiosity into knowledge children carry with them — for curious minds ages 3–8.","email":"support@cadomalo.com"}</script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- ============================================================
-     COOKIE CONSENT BANNER
-     ============================================================ -->
-<div id="cookie-banner" style="display:none;" aria-live="polite" role="dialog" aria-label="Cookie preferences">
-  <div class="cookie-inner">
-    <div class="cookie-text">
-      <strong>We value your privacy 🍪</strong>
-      <p>We use cookies to personalize content and ads, analyze traffic, and improve your experience. By clicking "Accept All" you consent to our use of cookies. <a href="cookie-policy.html">Cookie Policy</a> · <a href="privacy-policy.html">Privacy Policy</a></p>
-    </div>
-    <div class="cookie-btns">
-      <button id="btn-manage-prefs" class="cookie-manage">Manage Preferences</button>
-      <button id="btn-reject-all" class="btn btn-ghost btn-sm">Reject All</button>
-      <button id="btn-accept-all" class="btn btn-primary btn-sm">Accept All</button>
-    </div>
-  </div>
+<div class="announce">
+  <span class="announce-short">Instant download · Ages 3–8</span>
+  <span class="announce-long">Instant download · Books for curious minds, ages 3–8 · Created by a midwife</span>
+  <span class="lang-pills">
+    <a class="lang-pill" href="/" hreflang="en" aria-current="true">EN</a>
+    <a class="lang-pill" href="/fr" hreflang="fr" aria-current="false">FR</a>
+  </span>
 </div>
 
-<!-- Cookie Preferences Panel -->
-<div id="cookie-prefs" role="dialog" aria-modal="true" aria-label="Manage cookie preferences">
-  <div class="cookie-panel">
-    <h3>Cookie Preferences</h3>
-    <p>Choose which cookies you allow. You can update your preferences at any time via the Cookie Policy page.</p>
+<header class="site-header">
+  <div class="header-inner">
+    <button type="button" class="icon-btn menu-toggle" id="menu-toggle"
+            aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
 
-    <div class="cookie-cat">
-      <div class="cookie-cat-hd">
-        <span class="cookie-cat-name">Strictly Necessary</span>
-        <label class="toggle">
-          <input type="checkbox" checked disabled>
-          <span class="toggle-track"></span>
-        </label>
-      </div>
-      <p>Required for the website to function. Cannot be disabled.</p>
-    </div>
+    <a class="logo" href="/" aria-label="Cadomalo">
+      <img src="/assets/logo-horizontal.png" alt="Cadomalo" width="200" height="34">
+    </a>
 
-    <div class="cookie-cat">
-      <div class="cookie-cat-hd">
-        <span class="cookie-cat-name">Analytics</span>
-        <label class="toggle">
-          <input type="checkbox" id="toggle-analytics">
-          <span class="toggle-track"></span>
-        </label>
-      </div>
-      <p>Help us understand how visitors interact with our site (Google Analytics).</p>
-    </div>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/" aria-current="page">Home</a>
+      <a href="/shop">Shop</a>
+      <a href="/collections">Book collections</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+      <a href="/sale">Sale 🔥</a>
+    </nav>
 
-    <div class="cookie-cat">
-      <div class="cookie-cat-hd">
-        <span class="cookie-cat-name">Marketing</span>
-        <label class="toggle">
-          <input type="checkbox" id="toggle-marketing">
-          <span class="toggle-track"></span>
-        </label>
-      </div>
-      <p>Used to show you relevant ads on Facebook, TikTok, Pinterest and Google.</p>
-    </div>
-
-    <div class="cookie-panel-btns">
-      <button id="btn-close-panel" class="btn btn-ghost btn-sm">Cancel</button>
-      <button id="btn-accept-panel" class="btn btn-outline btn-sm">Accept All</button>
-      <button id="btn-save-prefs" class="btn btn-primary btn-sm">Save Preferences</button>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
-     TOP BAR
-     ============================================================ -->
-<div class="topbar" aria-label="Promotions and social links">
-  <div class="topbar-inner">
-    <div class="topbar-social">
-      <a href="https://facebook.com/cadomalo" aria-label="Facebook" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+    <div class="header-actions">
+      <a class="icon-btn cart-btn" href="/cart" aria-label="Basket">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" data-cart-count hidden>0</span>
       </a>
-      <a href="https://instagram.com/cadomalo" aria-label="Instagram" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-      </a>
-      <a href="https://tiktok.com/@cadomalo" aria-label="TikTok" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77.22 2.89 2.89 0 012.89-3.11c.28 0 .54.04.79.1V9.01a6.34 6.34 0 106.33 6.34V8.69a8.16 8.16 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg>
-      </a>
-      <a href="https://pinterest.com/cadomalo" aria-label="Pinterest" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-      </a>
-    </div>
-
-    <p class="topbar-msg">🎁 Free shipping on orders over $50 · <a href="shop.html">Shop Now →</a></p>
-
-    <div class="topbar-right"></div>
-  </div>
-</div>
-
-<!-- ============================================================
-     HEADER
-     ============================================================ -->
-<header id="site-header" role="banner">
-  <div class="wrap">
-    <div class="hdr">
-      <!-- Logo -->
-      <a href="index.html" class="logo-wrap" aria-label="Cadomalo – Home">
-        <img src="assets/logo.png" alt="Cadomalo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-        <span class="logo-text" style="display:none">cado<span>malo</span></span>
-      </a>
-
-      <!-- Desktop Nav -->
-      <nav class="nav-desktop" aria-label="Main navigation">
-        <ul class="nav-ul">
-          <li class="nav-active"><a href="index.html">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="gift-finder.html">Gift Finder ✨</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="about.html">About</a></li>
-          <li class="nav-sale"><a href="shop.html#sale">Sale 🔥</a></li>
-        </ul>
-      </nav>
-
-      <!-- Icons -->
-      <div class="hdr-icons">
-        <button class="ico-btn" aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        </button>
-        <a href="cart.html" class="ico-btn" aria-label="Shopping cart" style="position:relative">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          <span class="cart-count" aria-label="0 items in cart">0</span>
-        </a>
-        <a href="#" class="ico-btn" aria-label="My account">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </a>
-        <button class="ico-btn mob-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-        </button>
-      </div>
     </div>
   </div>
 </header>
 
-<!-- Mobile Nav Drawer -->
-<div id="nav-overlay" class="nav-drawer-overlay" aria-hidden="true"></div>
-<nav id="nav-drawer" class="nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
-  <div class="drawer-head">
-    <span class="drawer-logo">cado<span>malo</span></span>
-    <button class="ico-btn drawer-close" id="nav-close" aria-label="Close menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Primary" hidden>
+  <div class="mobile-menu-head">
+    <img src="/assets/logo-horizontal.png" alt="Cadomalo" width="165" height="28">
+    <button type="button" class="icon-btn" id="menu-close" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
   </div>
-  <div class="drawer-nav">
-    <a href="index.html" class="active">Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-    <a href="shop.html">Shop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-    <a href="gift-finder.html">Gift Finder ✨ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-    <a href="blog.html">Blog <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-    <a href="about.html">About <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-    <a href="contact.html">Contact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-    <a href="shop.html#sale">Sale 🔥 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-  </div>
-  <div class="drawer-foot">
-    <a href="gift-finder.html" class="btn btn-primary btn-full">Find the Perfect Gift →</a>
-    <div class="drawer-social">
-      <a href="https://facebook.com/cadomalo" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-      <a href="https://instagram.com/cadomalo" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-      <a href="https://tiktok.com/@cadomalo" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77.22 2.89 2.89 0 012.89-3.11c.28 0 .54.04.79.1V9.01a6.34 6.34 0 106.33 6.34V8.69a8.16 8.16 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg></a>
-      <a href="https://pinterest.com/cadomalo" aria-label="Pinterest" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
-    </div>
-  </div>
-</nav>
 
-<!-- ============================================================
-     HERO
-     ============================================================ -->
-<section class="hero" aria-labelledby="hero-h1">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div class="rev">
-        <div class="hero-eyebrow">
-          <span class="hero-eyebrow-line"></span>
-          <span class="hero-eyebrow-txt">Personalized gifts crafted for every occasion</span>
-        </div>
-        <h1 id="hero-h1">Gifts that say<br><em>more than words.</em></h1>
-        <p class="hero-sub">Personalized gifts, print-on-demand treasures, and instant-download digital surprises — crafted for every occasion and every person you love.</p>
-        <div class="hero-ctas">
-          <a href="gift-finder.html" class="btn btn-primary btn-lg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-            Find Their Gift
-          </a>
-          <a href="shop.html" class="btn btn-ghost btn-lg">Browse All Gifts</a>
-        </div>
-        <div class="hero-proof">
-          <p class="hero-proof-txt">Handpicked digital downloads &amp; print-on-demand pieces. Thoughtful gifts that feel personal.</p>
-        </div>
-      </div>
+  <nav aria-label="Primary">
+    <a href="/">Home<span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <a href="/shop">Shop<span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <a href="/collections">Book collections<span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <a href="/blog">Blog<span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <a href="/about">About<span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <a href="/sale">Sale 🔥<span class="arrow" aria-hidden="true">&rarr;</span></a>
+  </nav>
 
-      <div class="hero-visual rev d2">
-        <div class="hero-img-wrap">
-          <a href="/products/rage-consumes-me-cat-shirt-funny-black-cat-tee-sarcastic-cat-lover-gift-cute-flo-6a27eb" style="display:block;width:100%;height:100%;">
-            <img src="https://cdn.sanity.io/images/8ue8kmgn/production/47ca944a938f4fdbd9a17400993ea8100d3cfbdc-1254x1254.png" alt="Rage Consumes Me cat shirt — Cadomalo bestseller">
-          </a>
-        </div>
-        <div class="hero-badge2">
-          <div class="hero-badge2-num">79+</div>
-          <div class="hero-badge2-lbl">Gifts</div>
-        </div>
-        <div class="hero-badge">
-          <div class="hero-badge-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div>
-            <div class="hero-badge-title">Happiness Guaranteed</div>
-            <div class="hero-badge-sub">30-day returns · Secure checkout</div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="mobile-menu-langs">
+    <a href="/" hreflang="en" aria-current="true">English</a>
+    <a href="/fr" hreflang="fr" aria-current="false">Français</a>
   </div>
-</section>
 
-<!-- ============================================================
-     TRUST BAR
-     ============================================================ -->
-<div class="trust" aria-label="Key benefits">
-  <div class="wrap">
-    <div class="trust-row">
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-        <span>Free shipping over $50</span>
-      </div>
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        <span>Secure checkout</span>
-      </div>
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
-        <span>30-day easy returns</span>
-      </div>
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span>Instant digital delivery</span>
-      </div>
-      <div class="trust-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <span>Hand-picked, gift-ready every time</span>
-      </div>
-    </div>
+  <div class="mobile-menu-coupon">
+    <div class="eyebrow">Your welcome code</div>
+    <strong>10% off your first order · CURIOUS10</strong>
   </div>
+
+  <img class="mobile-menu-art" src="/assets/kids-lying.png" alt="" width="320" height="213" loading="lazy">
 </div>
 
-<!-- ============================================================
-     SHOP BY OCCASION (auto-populated from Sanity)
-     ============================================================ -->
-<section class="occasions section" id="occasions" aria-labelledby="occ-h">
-  <div class="wrap">
-    <div class="sec-hd rev">
-      <span class="sec-tag">Every moment matters</span>
-      <h2 class="sec-h" id="occ-h">Shop by Occasion</h2>
-      <p class="sec-sub">Find the perfect gift for any celebration, big or small.</p>
-    </div>
-
-    <div class="occ-tabs" data-tab-group="occasions">
-      <button class="tab-btn occ-tab active" data-filter="all">All Gifts</button>
-      <button class="tab-btn occ-tab" data-filter="birthday">🎂 Birthday</button>
-      <button class="tab-btn occ-tab" data-filter="anniversary">💕 Anniversary</button>
-      <button class="tab-btn occ-tab" data-filter="wedding">💍 Wedding</button>
-      <button class="tab-btn occ-tab" data-filter="baby">👶 Baby</button>
-      <button class="tab-btn occ-tab" data-filter="digital">✨ Digital</button>
-      <button class="tab-btn occ-tab" data-filter="justbecause">💝 Just Because</button>
-    </div>
-
-    <div class="prod-grid" id="home-product-grid" data-home-grid data-limit="8" data-tab-items="occasions">
-      <div style="grid-column:1/-1;padding:48px;text-align:center;color:var(--mid);">Loading gifts…</div>
-    </div>
-    <div class="text-center mt-40">
-      <a href="shop.html" class="btn btn-outline btn-lg">View All Gifts →</a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     GIFT FINDER BANNER
-     ============================================================ -->
-<section class="gf-banner" aria-labelledby="gf-h">
-  <div class="wrap">
-    <div class="gf-inner">
-      <div class="rev">
-        <div class="gf-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-          Gift Finder
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Books • Printables • Playful learning</p>
+          <h1 class="hero-title"><span>Little minds.</span><span class="accent">Big discoveries.</span></h1>
+          <p class="lead">Beautiful multilingual books that turn everyday curiosity into knowledge children carry with them — for curious minds ages 3–8.</p>
+          <p class="hero-ctas">
+            <a class="btn btn-primary" href="/collections">Explore our books <span aria-hidden="true">&rarr;</span></a>
+            <a class="btn btn-quiet" href="/shop">Shop all</a>
+          </p>
+          <ul class="trust-row"><li>Instant download</li>
+            <li>4 languages in every book</li>
+            <li>Created by a midwife</li></ul>
         </div>
-        <h2 id="gf-h">Not sure what to gift?<br>We'll find it <em>in 60 seconds.</em></h2>
-        <p>Answer 4 quick questions about the recipient and we'll match you with the perfect gift from our catalogue.</p>
-        <div class="gf-steps">
-          <div class="gf-step"><span class="gf-step-num">1</span><span>Pick the occasion</span></div>
-          <div class="gf-step"><span class="gf-step-num">2</span><span>Set your budget</span></div>
-          <div class="gf-step"><span class="gf-step-num">3</span><span>Their personality</span></div>
-          <div class="gf-step"><span class="gf-step-num">4</span><span>Get matched!</span></div>
-        </div>
-        <a href="gift-finder.html" class="btn btn-primary btn-xl mt-32">Start the Gift Finder →</a>
-      </div>
-      <div class="gf-visual rev d3">
-        <div class="gf-card">
-          <div class="gf-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
-          </div>
-          <h4>Perfect Match</h4>
-          <p>Curated just for them, not just for anyone.</p>
+        <div class="hero-art">
+          <img src="/assets/hero-reading.png" alt="" width="720" height="720" fetchpriority="high">
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============================================================
-     WHY CADOMALO
-     ============================================================ -->
-<section class="why section" aria-labelledby="why-h">
-  <div class="wrap">
-    <div class="sec-hd rev">
-      <span class="sec-tag">Why Cadomalo</span>
-      <h2 class="sec-h" id="why-h">Everything they'll love, nothing they won't</h2>
-    </div>
-    <div class="why-grid">
-      <div class="why-card rev d1">
-        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="why-name">Personalized to Perfection</div>
-        <div class="why-desc">Every item is customized with care — names, dates, photos, and messages that make it truly one-of-a-kind.</div>
+    <section class="section band-sky">
+      <div class="wrap center">
+        <p class="eyebrow">Follow their curiosity</p>
+        <h2>What is your little explorer curious about?</h2>
+        <p class="lead" style="margin-inline:auto">A gentle first step into the questions children ask most.</p>
+        <ul class="topic-row"><li class="topic-card"><a href="/shop">
+              <img src="/assets/topic-body.png" alt="" width="96" height="96" loading="lazy">
+              <span>The human body</span></a></li>
+          <li class="topic-card"><a href="/shop">
+              <img src="/assets/topic-world.png" alt="" width="96" height="96" loading="lazy">
+              <span>Our planet</span></a></li>
+          <li class="topic-card"><a href="/shop">
+              <img src="/assets/topic-science.png" alt="" width="96" height="96" loading="lazy">
+              <span>Science</span></a></li>
+          <li class="topic-card"><a href="/shop">
+              <img src="/assets/topic-animals.png" alt="" width="96" height="96" loading="lazy">
+              <span>Animals</span></a></li>
+          <li class="topic-card"><a href="/shop">
+              <img src="/assets/topic-feelings.png" alt="" width="96" height="96" loading="lazy">
+              <span>Feelings</span></a></li>
+          <li class="topic-card"><a href="/shop">
+              <img src="/assets/topic-languages.png" alt="" width="96" height="96" loading="lazy">
+              <span>Languages</span></a></li>
+          <li class="topic-card"><a href="/shop">
+              <img src="/assets/topic-arts.png" alt="" width="96" height="96" loading="lazy">
+              <span>Arts</span></a></li></ul>
       </div>
-      <div class="why-card rev d2">
-        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-        <div class="why-name">Ships Worldwide</div>
-        <div class="why-desc">Fast, reliable delivery to 150+ countries. Physical items dispatched within 1–3 business days via trusted carriers.</div>
-      </div>
-      <div class="why-card rev d3">
-        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-        <div class="why-name">Safe & Secure Checkout</div>
-        <div class="why-desc">256-bit SSL encryption. Pay via Stripe or PayPal. Your data is never stored or shared. Shop with total confidence.</div>
-      </div>
-      <div class="why-card rev d4">
-        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></div>
-        <div class="why-name">Happiness Guaranteed</div>
-        <div class="why-desc">Not delighted? Return within 30 days for a full refund. No forms, no stress, no questions asked.</div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============================================================
-     CLARITYSHEET SPOTLIGHT
-     ============================================================ -->
-<section class="feat section" style="background:var(--bg);" aria-labelledby="feat-h">
-  <div class="wrap">
-    <div class="feat-grid" style="align-items:center;">
-      <div class="feat-img rev" style="align-self:center;">
-        <a href="/products/claritysheet-multilingual-personal-finance-planner-or-excel-budget-spreadsheet-goals-debt-and" style="display:block;width:100%;height:100%;">
-          <img src="https://cdn.sanity.io/images/8ue8kmgn/production/d15e0f8b597d918b6cd04f93c30b7800651ad361-3000x2250.png" alt="ClaritySheet Multilingual Personal Finance Planner">
-        </a>
-        <span class="feat-img-tag">⭐ Bestseller · Digital</span>
-      </div>
-      <div class="rev d2">
-        <p class="feat-eyebrow">Instant Download · Multilingual</p>
-        <h2 class="feat-h" id="feat-h">ClaritySheet<br>Personal Finance Planner</h2>
-        <p class="feat-desc">A complete Excel budget planner to track income, expenses, savings, debt, goals, net worth, and account balances — in one clean spreadsheet. Downloads instantly after checkout.</p>
-        <ul class="feat-list">
-          <li>Monthly income & expense tracker</li>
-          <li>Debt and savings-goal modules</li>
-          <li>Net-worth and account-balance dashboard</li>
-          <li>Available in multiple languages</li>
-          <li>Instant email delivery — no shipping wait</li>
-        </ul>
-        <div class="feat-price-row">
-          <span class="feat-price">$14.99</span>
-          <span class="feat-was">$49.99</span>
-          <span class="feat-save">Save $35</span>
+    <section class="section">
+      <div class="wrap">
+        <div class="center">
+          <p class="eyebrow">Our little library</p>
+          <h2>Meet the Human Body Wonders</h2>
+          <p class="lead" style="margin-inline:auto">Friendly first books that make body science feel simple, colorful and exciting.</p>
         </div>
-        <div class="feat-actions">
-          <a href="/products/claritysheet-multilingual-personal-finance-planner-or-excel-budget-spreadsheet-goals-debt-and" class="btn btn-primary btn-lg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Get ClaritySheet — Instant Download
+        <div class="grid-products" style="margin-top:var(--space-8)"><article class="card" data-type="book">
+          <a class="card-media" href="/products/my-muscles-make-me-move" tabindex="-1" aria-hidden="true">
+            <span class="badge badge-soft">Bestseller</span><img src="/assets/book-muscles.png" alt="" width="600" height="600" loading="lazy">
           </a>
-          <a href="/products/claritysheet-multilingual-personal-finance-planner-or-excel-budget-spreadsheet-goals-debt-and" class="btn btn-ghost btn-lg">View Details</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+          <div class="card-body">
+            <p class="card-series">Human Body Wonders</p>
+            <h3 class="card-title"><a href="/products/my-muscles-make-me-move">My Muscles Make Me Move</a></h3>
+            <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span>
+              <span>4.9 (142)</span></p>
+            <p class="card-price">$7.99 </p>
+            <p class="card-langs">EN · FR · ES · DE</p>
+          </div>
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary btn-full" data-add="muscles">Add to basket</button>
+            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HKGSW1PN" target="_blank" rel="noopener">Order on Amazon</a>
+          </div>
+        </article>
+          <article class="card" data-type="book">
+          <a class="card-media" href="/products/my-busy-breathing-lungs" tabindex="-1" aria-hidden="true">
+            <span class="badge badge-solid">Sale</span><img src="/assets/book-lungs.png" alt="" width="600" height="600" loading="lazy">
+          </a>
+          <div class="card-body">
+            <p class="card-series">Human Body Wonders</p>
+            <h3 class="card-title"><a href="/products/my-busy-breathing-lungs">My Busy Breathing Lungs</a></h3>
+            <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span>
+              <span>4.9 (128)</span></p>
+            <p class="card-price">$7.99 <del>$9.99</del></p>
+            <p class="card-langs">EN · FR · ES · DE</p>
+          </div>
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary btn-full" data-add="lungs">Add to basket</button>
+            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HJFQMN4S" target="_blank" rel="noopener">Order on Amazon</a>
+          </div>
+        </article>
+          <article class="card" data-type="book">
+          <a class="card-media" href="/products/inside-my-amazing-head" tabindex="-1" aria-hidden="true">
+            <span class="badge badge-sky">New</span><img src="/assets/book-head.png" alt="" width="600" height="600" loading="lazy">
+          </a>
+          <div class="card-body">
+            <p class="card-series">Human Body Wonders</p>
+            <h3 class="card-title"><a href="/products/inside-my-amazing-head">Inside My Amazing Head</a></h3>
+            <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span>
+              <span>4.9 (96)</span></p>
+            <p class="card-price">$7.99 </p>
+            <p class="card-langs">EN · FR · ES · DE</p>
+          </div>
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary btn-full" data-add="head">Add to basket</button>
+            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HJMZGT6L" target="_blank" rel="noopener">Order on Amazon</a>
+          </div>
+        </article>
+          <article class="card" data-type="book">
+          <a class="card-media" href="/products/my-stomach-mixing-machine" tabindex="-1" aria-hidden="true">
+            <img src="/assets/book-stomach.png" alt="" width="600" height="600" loading="lazy">
+          </a>
+          <div class="card-body">
+            <p class="card-series">Human Body Wonders</p>
+            <h3 class="card-title"><a href="/products/my-stomach-mixing-machine">My Stomach Mixing Machine</a></h3>
+            <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span>
+              <span>4.9 (74)</span></p>
+            <p class="card-price">$7.99 </p>
+            <p class="card-langs">EN · FR · ES · DE</p>
+          </div>
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary btn-full" data-add="stomach">Add to basket</button>
+            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HK4XBF7F" target="_blank" rel="noopener">Order on Amazon</a>
+          </div>
+        </article>
+          <article class="card" data-type="book">
+          <a class="card-media" href="/products/my-strong-body-bones" tabindex="-1" aria-hidden="true">
+            <img src="/assets/book-bones.png" alt="" width="600" height="600" loading="lazy">
+          </a>
+          <div class="card-body">
+            <p class="card-series">Human Body Wonders</p>
+            <h3 class="card-title"><a href="/products/my-strong-body-bones">My Strong Body Bones</a></h3>
+            <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span>
+              <span>4.9 (88)</span></p>
+            <p class="card-price">$7.99 </p>
+            <p class="card-langs">EN · FR · ES · DE</p>
+          </div>
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary btn-full" data-add="bones">Add to basket</button>
+            <span class="btn btn-full card-slot" aria-hidden="true"></span>
+          </div>
+        </article></div>
 
-<!-- ============================================================
-     TESTIMONIALS
-     ============================================================ -->
-<section class="testi section" aria-labelledby="testi-h">
-  <div class="wrap">
-    <div class="sec-hd rev">
-      <span class="sec-tag">Real Reviews</span>
-      <h2 class="sec-h" id="testi-h">They loved it — and so will you</h2>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card rev d1">
-        <div class="testi-stars">
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <p class="testi-quote">"The custom necklace arrived beautifully packaged and my mum literally cried. I've never seen a gift land so perfectly. Will be ordering again for her birthday!"</p>
-        <div class="testi-author">
-          <img class="testi-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" alt="Sophie K.">
+        <div class="bundle-band">
+          <img src="/assets/bundle-cover.png" alt="" width="520" height="390" loading="lazy">
           <div>
-            <div class="testi-name">Sophie K.</div>
-            <div class="testi-meta">Verified Buyer · Birthday Gift · New York, USA</div>
+            <p class="eyebrow">Complete collection</p>
+            <h3>All five books. One happy bookshelf.</h3>
+            <p>Lungs, brain, stomach, bones and muscles — 160+ pages in four languages, for 25% less.</p>
+            <a class="btn btn-primary" href="/products/human-body-wonders-all-5-books">Get all 5 books <span aria-hidden="true">&rarr;</span></a>
           </div>
         </div>
       </div>
-      <div class="testi-card rev d2">
-        <div class="testi-stars">
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <p class="testi-quote">"Ordered a graphic tee for my partner and it shipped within 2 days. The print quality is stunning — feels far more premium than I expected for the price."</p>
-        <div class="testi-author">
-          <img class="testi-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&q=80" alt="Marie L.">
-          <div>
-            <div class="testi-name">Marie L.</div>
-            <div class="testi-meta">Verified Buyer · Anniversary Gift · London, UK</div>
-          </div>
+    </section>
+
+    <section class="section band-mint">
+      <div class="wrap center">
+        <p class="eyebrow">Learning that feels like play</p>
+        <h2>Made for the way curious children learn.</h2>
+        <ol class="method-row"><li class="method-step"><span class="method-n">1</span>
+            <h3>Read</h3><p>Clear language and joyful stories make unfamiliar ideas feel friendly from the first page.</p></li>
+          <li class="method-step"><span class="method-n">2</span>
+            <h3>Color</h3><p>Coloring the pages they just read helps children process and remember in their own way.</p></li>
+          <li class="method-step"><span class="method-n">3</span>
+            <h3>Discover</h3><p>Gentle prompts turn each new fact into a reason to look closer, ask more and keep exploring.</p></li></ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap multi-band">
+        <img src="/assets/multilingual-book.png" alt="" width="560" height="420" loading="lazy">
+        <div>
+          <p class="eyebrow">Stories without language borders</p>
+          <h2>One discovery. Four ways to say it.</h2>
+          <p class="lead">Every Cadomalo book tells the same story in English, French, Spanish and German — building vocabulary through repetition, context and colorful visual cues.</p>
+          <p><a class="btn btn-secondary" href="/collections">Explore multilingual books <span aria-hidden="true">&rarr;</span></a></p>
         </div>
       </div>
-      <div class="testi-card rev d3">
-        <div class="testi-stars">
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </section>
+
+    <section class="section band-blush">
+      <div class="wrap">
+        <div class="center">
+          <p class="eyebrow">Celebration days</p>
+          <h2>Designs for the days you’ll remember</h2>
+          <p class="lead" style="margin-inline:auto">Seamless tumbler wraps for birthdays, milestones and makers — download today, press today.</p>
         </div>
-        <p class="testi-quote">"Found exactly what I needed last minute — downloaded the digital file instantly after checkout and it looked completely professional. A lifesaver!"</p>
-        <div class="testi-author">
-          <img class="testi-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80" alt="Emma R.">
-          <div>
-            <div class="testi-name">Emma R.</div>
-            <div class="testi-meta">Verified Buyer · Digital Gift · Chicago, USA</div>
+        <div class="grid-products" style="margin-top:var(--space-8)"><article class="card" data-type="wrap">
+          <a class="card-media" href="/products/silly-goose-tumbler-wrap" tabindex="-1" aria-hidden="true">
+            <span class="badge badge-solid">Sale</span><img src="/assets/tumbler-goose-card.png" alt="" width="600" height="600" loading="lazy">
+          </a>
+          <div class="card-body">
+            <p class="card-series">Tumbler wrap</p>
+            <h3 class="card-title"><a href="/products/silly-goose-tumbler-wrap">Silly Goose tumbler wrap</a></h3>
+            <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span>
+              <span>5.0 (61)</span></p>
+            <p class="card-price">$2.89 <del>$4.49</del></p>
+            <p class="card-langs">PNG · 300 dpi</p>
           </div>
-        </div>
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary btn-full" data-add="goose">Add to basket</button>
+            <span class="btn btn-full card-slot" aria-hidden="true"></span>
+          </div>
+        </article>
+          <article class="card" data-type="wrap">
+          <a class="card-media" href="/products/just-a-girl-pink-tumbler-wrap" tabindex="-1" aria-hidden="true">
+            <span class="badge badge-solid">Sale</span><img src="/assets/tumbler-girl-card.png" alt="" width="600" height="600" loading="lazy">
+          </a>
+          <div class="card-body">
+            <p class="card-series">Tumbler wrap</p>
+            <h3 class="card-title"><a href="/products/just-a-girl-pink-tumbler-wrap">Just a Girl pink tumbler wrap</a></h3>
+            <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span>
+              <span>4.9 (47)</span></p>
+            <p class="card-price">$2.89 <del>$4.49</del></p>
+            <p class="card-langs">PNG · 300 dpi</p>
+          </div>
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary btn-full" data-add="girl">Add to basket</button>
+            <span class="btn btn-full card-slot" aria-hidden="true"></span>
+          </div>
+        </article></div>
+        <p class="center" style="margin-top:var(--space-7)">
+          <a class="btn btn-quiet" href="/shop#wraps">Shop tumbler wraps</a>
+        </p>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============================================================
-     MISSION
-     ============================================================ -->
-<section class="mission" aria-labelledby="mission-q">
-  <div class="wrap">
-    <div class="mission-inner rev">
-      <span class="mission-tag">Our Purpose</span>
-      <blockquote id="mission-q">A gift is a message.<br>We help you send the <em>right one.</em></blockquote>
-      <p class="mission-sub">Every person deserves to feel seen and celebrated. We believe the right gift — thoughtful, personal, and beautifully made — can do exactly that. That's why we built Cadomalo.</p>
-      <a href="about.html" class="btn btn-white btn-lg">Read Our Story →</a>
-    </div>
-  </div>
-</section>
+    <section class="section">
+      <div class="wrap center">
+        <p class="eyebrow">Loved by families</p>
+        <h2>Small readers. Big reviews.</h2>
+        <p class="lead" style="margin-inline:auto">4.9 out of 5 from parents, teachers and makers.</p>
+        <div class="review-row"><figure class="review-card">
+            <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span></p>
+            <blockquote>My daughter (4) asks for the lungs book every night. We read it in French, then she tries the English page. Magic.</blockquote>
+            <figcaption>Sophie M. · Lyon</figcaption></figure>
+          <figure class="review-card">
+            <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span></p>
+            <blockquote>Printed it on a Sunday morning, colored it all afternoon. My son now explains digestion to his grandma.</blockquote>
+            <figcaption>Daniel R. · Austin</figcaption></figure>
+          <figure class="review-card">
+            <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span></p>
+            <blockquote>Finally a science book that isn’t too much for a 3-year-old. Short sentences, big pictures, lots of giggles.</blockquote>
+            <figcaption>Priya K. · London</figcaption></figure></div>
+      </div>
+    </section>
 
-<!-- ============================================================
-     NEWSLETTER
-     ============================================================ -->
-<section class="newsletter section" aria-labelledby="nl-h">
+    <section class="section band-butter">
+      <div class="wrap">
+        <div class="center">
+          <p class="eyebrow">From the blog</p>
+          <h2>Ideas for curious families</h2>
+        </div>
+        <div class="grid-products" style="margin-top:var(--space-8)"><article class="card">
+            <a class="card-media" href="/blog/how-to-talk-to-young-children-about-their-body" tabindex="-1" aria-hidden="true">
+              <img src="/assets/hero-reading.png" alt="" width="600" height="600" loading="lazy"></a>
+            <div class="card-body">
+              <p class="card-series">Human body · 6 min read</p>
+              <h3 class="card-title"><a href="/blog/how-to-talk-to-young-children-about-their-body">How to talk to young children about their body</a></h3>
+              <p>Simple words, true facts and a little wonder: a midwife’s approach to the questions children ask about their body.</p></div></article>
+          <article class="card">
+            <a class="card-media" href="/blog/raising-multilingual-kids-5-gentle-habits" tabindex="-1" aria-hidden="true">
+              <img src="/assets/multilingual-book.png" alt="" width="600" height="600" loading="lazy"></a>
+            <div class="card-body">
+              <p class="card-series">Languages · 5 min read</p>
+              <h3 class="card-title"><a href="/blog/raising-multilingual-kids-5-gentle-habits">Raising multilingual kids: 5 gentle habits</a></h3>
+              <p>You don’t need to be fluent in four languages to raise a child who loves them. Here is what actually helps.</p></div></article>
+          <article class="card">
+            <a class="card-media" href="/blog/why-coloring-helps-children-remember-what-they-read" tabindex="-1" aria-hidden="true">
+              <img src="/assets/kids-lying.png" alt="" width="600" height="600" loading="lazy"></a>
+            <div class="card-body">
+              <p class="card-series">Playful learning · 4 min read</p>
+              <h3 class="card-title"><a href="/blog/why-coloring-helps-children-remember-what-they-read">Why coloring helps children remember what they read</a></h3>
+              <p>Coloring isn’t just a quiet activity. When it follows a story, it becomes a way of thinking.</p></div></article></div>
+        <p class="center" style="margin-top:var(--space-7)">
+          <a class="btn btn-quiet" href="/blog">Read the blog</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
   <div class="wrap">
-    <div class="nl-inner rev">
-      <span class="sec-tag">Join the Community</span>
-      <h2 class="sec-h" id="nl-h">Get gift ideas before everyone else</h2>
-      <p class="sec-sub">Get weekly gift inspiration, exclusive discounts, and a free printable gift guide on signup.</p>
-      <form class="nl-form newsletter-form" aria-label="Newsletter signup">
-        <input class="nl-input" type="email" placeholder="Your email address" required aria-label="Email address">
-        <button type="submit" class="btn btn-primary">Subscribe Free →</button>
+    <div class="newsletter">
+      <div class="eyebrow">For curious families</div>
+      <h2>A little discovery in your inbox.</h2>
+      <p class="lead" style="margin:var(--space-3) auto 0">New books, free coloring pages and playful ideas — plus 10% off your first order.</p>
+
+      <form class="nl-form newsletter-form" novalidate>
+        <label class="visually-hidden" for="nl-email">Your email address</label>
+        <input type="email" id="nl-email" name="email" required
+               autocomplete="email" placeholder="Your email address">
+        <button type="submit" class="btn btn-primary">Subscribe</button>
       </form>
-      <p class="nl-note">No spam. Unsubscribe anytime. 🔒 We respect your privacy.</p>
+
+      <p class="nl-note" data-nl-note>One email every few weeks. Unsubscribe any time — see our privacy policy.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
-<footer aria-label="Site footer">
+
+  </main>
+  <footer class="site-footer">
   <div class="wrap">
-    <div class="foot-grid">
-      <!-- Brand -->
-      <div class="foot-brand">
-        <span class="logo-text">cado<span>malo</span></span>
-        <p>Personalized gifts, print-on-demand treasures, and digital delights for every occasion and every person you love.</p>
-        <div class="foot-social">
-          <a href="https://facebook.com/cadomalo" class="foot-soc" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-          <a href="https://instagram.com/cadomalo" class="foot-soc" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-          <a href="https://tiktok.com/@cadomalo" class="foot-soc" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77.22 2.89 2.89 0 012.89-3.11c.28 0 .54.04.79.1V9.01a6.34 6.34 0 106.33 6.34V8.69a8.16 8.16 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg></a>
-          <a href="https://pinterest.com/cadomalo" class="foot-soc" aria-label="Pinterest" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
-        </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/assets/logo-wide.png" alt="Cadomalo" width="220" height="32" loading="lazy">
+        <p>A children’s learning house creating multilingual books and playful resources — from first breath to big discoveries.</p>
       </div>
 
-      <!-- Occasions -->
-      <div class="foot-col">
-        <h5>Shop by Occasion</h5>
-        <ul class="foot-links">
-          <li><a href="shop.html?occ=birthday">Birthday Gifts</a></li>
-          <li><a href="shop.html?occ=anniversary">Anniversary Gifts</a></li>
-          <li><a href="shop.html?occ=wedding">Wedding Gifts</a></li>
-          <li><a href="shop.html?occ=baby">Baby & New Arrival</a></li>
-          <li><a href="shop.html?occ=holiday">Holiday Gifts</a></li>
-          <li><a href="shop.html?occ=justbecause">Just Because</a></li>
-          <li><a href="shop.html#sale">Sale 🔥</a></li>
+      <div class="footer-col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="/collections">Book collections</a></li>
+          <li><a href="/sale">Sale 🔥</a></li>
+          <li><a href="/blog">Blog</a></li>
         </ul>
       </div>
 
-      <!-- Help -->
-      <div class="foot-col">
-        <h5>Help & Info</h5>
-        <ul class="foot-links">
-          <li><a href="gift-finder.html">Gift Finder ✨</a></li>
-          <li><a href="returns.html">Shipping &amp; Returns</a></li>
-          <li><a href="contact.html">Track My Order</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+      <div class="footer-col">
+        <h3>Help</h3>
+        <ul>
+          <li><a href="/contact">Contact us</a></li>
+          <li><a href="/returns">Downloads &amp; printing</a></li>
+          <li><a href="https://www.etsy.com/shop/CadomaloShop" rel="noopener" target="_blank">Find us on Etsy</a></li>
         </ul>
       </div>
 
-      <!-- Legal -->
-      <div class="foot-col">
-        <h5>Legal & Company</h5>
-        <ul class="foot-links">
-          <li><a href="privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="terms.html">Terms of Service</a></li>
-          <li><a href="cookie-policy.html">Cookie Policy</a></li>
-          <li><a href="returns.html">Return Policy</a></li>
-          <li><a href="accessibility.html">Accessibility</a></li>
-          <li><a href="about.html">About Cadomalo</a></li>
-          <li><a href="blog.html">Blog</a></li>
+      <div class="footer-col">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="/legal-notice">Legal notice</a></li>
+          <li><a href="/terms">Terms of sale</a></li>
+          <li><a href="/privacy-policy">Privacy policy</a></li>
+          <li><a href="/returns">Refunds &amp; happiness promise</a></li>
+          <li><a href="/cookie-policy">Cookie policy</a></li>
+          <li><a href="#" data-cookie-settings>Cookie settings</a></li>
         </ul>
       </div>
     </div>
 
-    <div class="foot-bottom">
-      <p class="foot-copy">© 2026 Cadomalo. All rights reserved. · <a href="privacy-policy.html" style="color:inherit">Privacy</a> · <a href="terms.html" style="color:inherit">Terms</a></p>
-      <div class="pay-row" aria-label="Accepted payment methods">
-        <span class="pay-badge">VISA</span>
-        <span class="pay-badge">Mastercard</span>
-        <span class="pay-badge">PayPal</span>
-        <span class="pay-badge">Apple Pay</span>
-        <span class="pay-badge">Google Pay</span>
-        <span class="pay-badge">Stripe</span>
-      </div>
+    <div class="footer-bottom">
+      <span>© 2026 Cadomalo. Little minds. Big discoveries.</span>
+      <span>Secure payment · Visa · Mastercard · PayPal · Apple Pay · Klarna</span>
     </div>
   </div>
 </footer>
 
-<!-- Scripts -->
-<script src="js/pixels.js"></script>
-<script src="js/main.js"></script>
-<script src="js/products.js"></script>
+  <!-- Element IDs below are a hard contract with js/main.js CookieConsent.
+     Do not rename them without updating js/main.js and js/pixels.js. -->
+<div id="cookie-banner" role="region" aria-label="Cookie choices">
+  <p>We use cookies to run the shop, understand what is useful, and — only if you agree — to measure our ads. <a href="/cookie-policy">Read our cookie policy</a></p>
+
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-primary" id="btn-accept-all">Accept all</button>
+    <button type="button" class="btn btn-quiet" id="btn-reject-all">Reject all</button>
+    <button type="button" class="btn btn-quiet" id="btn-manage-prefs">Manage</button>
+  </div>
+
+  <div id="cookie-prefs">
+    <div class="cookie-row">
+      <span>Necessary — always on</span>
+      <input type="checkbox" checked disabled aria-label="Necessary — always on">
+    </div>
+    <div class="cookie-row">
+      <label for="toggle-analytics">Analytics</label>
+      <input type="checkbox" id="toggle-analytics">
+    </div>
+    <div class="cookie-row">
+      <label for="toggle-marketing">Marketing</label>
+      <input type="checkbox" id="toggle-marketing">
+    </div>
+    <div class="cookie-actions">
+      <button type="button" class="btn btn-primary" id="btn-save-prefs">Save choices</button>
+      <button type="button" class="btn btn-quiet" id="btn-accept-panel">Accept all</button>
+      <button type="button" class="btn btn-quiet" id="btn-close-panel">Close</button>
+    </div>
+  </div>
+</div>
+
+  <div class="drawer-scrim" data-cart-scrim hidden></div>
+
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true"
+       aria-labelledby="cart-drawer-title" hidden>
+
+  <div class="cart-drawer-head">
+    <h2 id="cart-drawer-title">Your basket <span class="cart-head-count" data-drawer-count></span></h2>
+    <button type="button" class="icon-btn" data-cart-close aria-label="Close basket">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <!-- empty state -->
+  <div class="cart-drawer-empty" data-drawer-empty>
+    <img class="cart-empty-art" src="/assets/kids-lying.png" alt="" width="320" height="213" loading="lazy">
+    <h3>Your basket is empty</h3>
+    <p>Start with a book they’ll ask for again tonight.</p>
+    <a class="btn btn-primary" href="/collections">Explore our books <span aria-hidden="true">&rarr;</span></a>
+  </div>
+
+  <!-- urgency strip: presentational countdown, seeded on first add -->
+  <div class="cart-urgency" data-drawer-urgency hidden>
+    <svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>
+    </svg>
+    <span>Your basket is reserved for <span class="clock" data-reserve-clock>10:00</span> — launch prices end tonight.</span>
+  </div>
+
+  <div class="cart-drawer-body" data-drawer-body hidden>
+    <!-- per-product social proof, set from the last added item -->
+    <p class="cart-proof" data-drawer-proof hidden>
+      <span class="avatar-stack">
+        <span class="avatar" style="background:var(--coral-500);color:#fff">S</span>
+        <span class="avatar" style="background:var(--sky-500);color:#fff">D</span>
+        <span class="avatar" style="background:var(--yellow-500);color:var(--blue-700)">N</span>
+      </span>
+      <span data-drawer-proof-text></span>
+    </p>
+
+    <div class="cart-lines" data-drawer-lines data-remove-label="Remove"></div>
+
+    <div class="cart-trust-card">
+      <img src="/assets/logo-mark.png" alt="" width="52" height="52" loading="lazy">
+      <div>
+        <strong>Made with care by a midwife</strong>
+        <span>Every book is checked for accuracy and gentleness. If anything isn’t right, we fix it or refund you within 30 days.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-drawer-foot" data-drawer-foot hidden>
+    <form class="code-form" data-code-form data-applied="applied" data-bad="This code isn’t valid" novalidate>
+      <label class="visually-hidden" for="cart-code">Discount code</label>
+      <input id="cart-code" name="code" placeholder="Enter code"
+             autocomplete="off" spellcheck="false" data-code-input>
+      <button type="submit" class="btn btn-secondary btn-sm">Apply</button>
+    </form>
+    <p class="code-msg" data-code-msg hidden></p>
+
+    <p class="cart-row"><span>Subtotal</span><span data-drawer-subtotal>$0.00</span></p>
+    <p class="cart-row cart-discount" data-drawer-discount-row hidden>
+      <span>Discount (<span data-drawer-code></span>)</span><span data-drawer-discount>-$0.00</span>
+    </p>
+    <p class="cart-row cart-total"><span>Total</span><span data-drawer-total>$0.00</span></p>
+
+    <button type="button" class="btn btn-primary btn-full btn-lg" data-checkout>
+      <svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+      </svg>
+      Secure checkout
+    </button>
+
+    <div class="cart-trust-row"><span><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 21h16"/></svg>Instant download</span><span><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Secure payment</span><span><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.6-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.4-7 10-7 10z"/></svg>Happiness promise</span></div>
+  </div>
+</aside>
+
+<div class="toast" data-toast hidden role="status"></div>
+
+  <script src="/js/pixels.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/cart.js"></script>
 </body>
 </html>

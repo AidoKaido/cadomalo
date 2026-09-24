@@ -1,0 +1,59 @@
+<a class="skip-link" href="#main">{{ t.a11y.skip }}</a>
+
+<div class="announce">
+  <span class="announce-short">{{ t.announceShort }}</span>
+  <span class="announce-long">{{ t.announce }}</span>
+  <span class="lang-pills">
+    <a class="lang-pill" href="{{ urlEn }}" hreflang="en" aria-current="{{ isEn }}">EN</a>
+    <a class="lang-pill" href="{{ urlFr }}" hreflang="fr" aria-current="{{ isFr }}">FR</a>
+  </span>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <button type="button" class="icon-btn menu-toggle" id="menu-toggle"
+            aria-label="{{ t.a11y.openMenu }}" aria-expanded="false" aria-controls="mobile-menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+
+    <a class="logo" href="{{ url.home }}" aria-label="Cadomalo">
+      <img src="/assets/logo-horizontal.png" alt="Cadomalo" width="200" height="34">
+    </a>
+
+    <nav class="site-nav" aria-label="{{ t.a11y.primaryNav }}">
+      {{{ navLinks }}}
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn cart-btn" href="{{ url.cart }}" aria-label="{{ t.a11y.basket }}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" data-cart-count hidden>0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="{{ t.a11y.primaryNav }}" hidden>
+  <div class="mobile-menu-head">
+    <img src="/assets/logo-horizontal.png" alt="Cadomalo" width="165" height="28">
+    <button type="button" class="icon-btn" id="menu-close" aria-label="{{ t.a11y.closeMenu }}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <nav aria-label="{{ t.a11y.primaryNav }}">
+    {{{ navLinksMobile }}}
+  </nav>
+
+  <div class="mobile-menu-langs">
+    <a href="{{ urlEn }}" hreflang="en" aria-current="{{ isEn }}">English</a>
+    <a href="{{ urlFr }}" hreflang="fr" aria-current="{{ isFr }}">Français</a>
+  </div>
+
+  <div class="mobile-menu-coupon">
+    <div class="eyebrow">{{ t.product.couponEyebrow }}</div>
+    <strong>{{ t.product.couponText }} · CURIOUS10</strong>
+  </div>
+
+  <img class="mobile-menu-art" src="/assets/kids-lying.png" alt="" width="320" height="213" loading="lazy">
+</div>

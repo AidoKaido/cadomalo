@@ -10,8 +10,7 @@
 // (Acceptable for a small store; can switch to a dedupe table later.)
 
 import Stripe from 'stripe'
-import {readFile} from 'node:fs/promises'
-import {join} from 'node:path'
+import {loadCatalog} from './_catalog.js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET
@@ -19,6 +18,8 @@ const RESEND_KEY = process.env.RESEND_API_KEY
 const FROM_EMAIL = process.env.RESEND_FROM || 'Cadomalo <support@cadomalo.com>'
 const REPLY_TO = process.env.RESEND_REPLY_TO || 'support@cadomalo.com'
 const KLAVIYO_KEY = process.env.KLAVIYO_PRIVATE_KEY
+// Every paid order is copied here so it can be fulfilled by hand.
+const ORDER_NOTIFY_TO = process.env.ORDER_NOTIFY_TO || 'support@cadomalo.com'
 
 export const config = {
   api: {bodyParser: false}, // Stripe needs the raw body for signature verification
@@ -81,11 +82,25 @@ async function handleCheckoutCompleted(session) {
   }
 
   const catalog = await loadCatalog()
+  const lang = session.metadata?.lang === 'fr' ? 'fr' : 'en'
+
+  // Owner copy first — it is the only record the hand-fulfilled products get.
+  try {
+    await sendOrderNotification({session, email, name, lang})
+  } catch (err) {
+    console.error(`[stripe-webhook] order notification failed for ${session.id}:`, err.message)
+  }
+
   let digitalCount = 0
+  let manualCount = 0
   for (const slug of slugs) {
     const product = catalog.find((p) => p.slug === slug)
     if (!product) {
       console.warn(`[stripe-webhook] product not found for slug=${slug}`)
+      continue
+    }
+    if (product.fulfillment === 'manual') {
+      manualCount++
       continue
     }
     if (product.productType !== 'digital') continue
@@ -103,6 +118,14 @@ async function handleCheckoutCompleted(session) {
       console.log(`[stripe-webhook] delivered ${slug} → ${email} (session ${session.id})`)
     } catch (err) {
       console.error(`[stripe-webhook] delivery failed for ${slug}:`, err.message)
+    }
+  }
+
+  if (manualCount) {
+    try {
+      await sendOrderReceivedEmail({email, name, lang, orderId: session.id})
+    } catch (err) {
+      console.error(`[stripe-webhook] order-received email failed for ${session.id}:`, err.message)
     }
   }
 
@@ -168,10 +191,81 @@ function resolveSlugsFromSession(session) {
   return []
 }
 
-async function loadCatalog() {
-  const raw = await readFile(join(process.cwd(), 'data', 'products.json'), 'utf8')
-  const data = JSON.parse(raw)
-  return data.products || []
+async function sendEmail(payload) {
+  if (!RESEND_KEY) throw new Error('RESEND_API_KEY not configured')
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${RESEND_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({from: FROM_EMAIL, ...payload}),
+  })
+  if (!r.ok) {
+    const text = await r.text().catch(() => '')
+    throw new Error(`Resend ${r.status}: ${text.slice(0, 300)}`)
+  }
+}
+
+const money = (cents, currency) =>
+  `${((cents || 0) / 100).toFixed(2)} ${String(currency || 'usd').toUpperCase()}`
+
+async function sendOrderNotification({session, email, name, lang}) {
+  const items = await stripe.checkout.sessions.listLineItems(session.id, {limit: 100})
+  const rows = items.data
+    .map((li) => `<tr><td style="padding:6px 12px 6px 0;">${escapeHtml(li.description || '(item)')}</td>` +
+      `<td style="padding:6px 12px;">× ${li.quantity || 1}</td>` +
+      `<td style="padding:6px 0;text-align:right;">${money(li.amount_total, li.currency)}</td></tr>`)
+    .join('')
+  const phone = session.customer_details?.phone || ''
+  const country = session.customer_details?.address?.country || ''
+  const shortId = session.id.slice(-12).toUpperCase()
+  const html = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2a2522;font-size:15px;line-height:1.6;">
+<h2 style="margin:0 0 12px;">New order — send the files</h2>
+<p style="margin:0 0 12px;"><strong>${escapeHtml(name || '(no name)')}</strong><br>
+<a href="mailto:${escapeAttr(email)}">${escapeHtml(email)}</a>${phone ? '<br>' + escapeHtml(phone) : ''}${country ? '<br>' + escapeHtml(country) : ''}<br>
+Language: ${lang === 'fr' ? 'French' : 'English'}</p>
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:0 0 12px;">${rows}
+<tr><td colspan="3" style="padding:8px 0 0;border-top:1px solid #ddd;text-align:right;"><strong>Paid: ${money(session.amount_total, session.currency)}</strong></td></tr></table>
+<p style="margin:0;color:#8a807a;font-size:13px;">Order ID ${shortId} · Stripe session ${escapeHtml(session.id)}<br>
+Reply to this email to answer the customer directly.</p></div>`
+  await sendEmail({
+    to: [ORDER_NOTIFY_TO],
+    reply_to: email,
+    subject: `New order ${shortId} — ${name || email} — ${money(session.amount_total, session.currency)}`,
+    html,
+  })
+  console.log(`[stripe-webhook] order notification sent for ${session.id}`)
+}
+
+async function sendOrderReceivedEmail({email, name, lang, orderId}) {
+  const firstName = (name || '').split(' ')[0] || (lang === 'fr' ? '' : 'there')
+  const shortId = orderId.slice(-12).toUpperCase()
+  const copy = lang === 'fr'
+    ? {
+        subject: 'Merci pour votre commande Cadomalo',
+        hi: firstName ? `Bonjour ${escapeHtml(firstName)},` : 'Bonjour,',
+        body: 'Merci pour votre commande ! Nous préparons vos fichiers et vous les enverrons par e-mail depuis support@cadomalo.com dans les 24 heures.',
+        help: 'Une question ? Répondez simplement à cet e-mail.',
+        order: 'Commande',
+      }
+    : {
+        subject: 'Thank you for your Cadomalo order',
+        hi: `Hi ${escapeHtml(firstName)},`,
+        body: "Thank you for your order! We're preparing your files and will email them to you from support@cadomalo.com within 24 hours.",
+        help: 'Questions? Just reply to this email.',
+        order: 'Order ID',
+      }
+  await sendEmail({
+    to: [email],
+    reply_to: REPLY_TO,
+    subject: copy.subject,
+    html: `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2a2522;font-size:15px;line-height:1.6;max-width:560px;">
+<p>${copy.hi}</p><p>${copy.body}</p>
+<p style="color:#8a807a;font-size:13px;">${copy.order}: <span style="font-family:monospace;">${shortId}</span><br>${copy.help}</p>
+<p>— Cadomalo</p></div>`,
+  })
+  console.log(`[stripe-webhook] order-received email sent → ${email} (${orderId})`)
 }
 
 async function sendDigitalDeliveryEmail({email, name, product, fileUrl, fileName, orderId}) {

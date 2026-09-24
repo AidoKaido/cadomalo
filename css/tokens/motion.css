@@ -1,0 +1,15 @@
+/* Motion is gentle and slightly springy — things arrive, they never snap. */
+:root{
+  --dur-instant:80ms; /* @kind other */
+  --dur-fast:150ms; /* @kind other */
+  --dur-base:220ms; /* @kind other */
+  --dur-slow:380ms; /* @kind other */
+  --dur-float:6s; /* @kind other */
+
+  --ease-standard:cubic-bezier(.2,.7,.3,1); /* @kind other */
+  --ease-out-soft:cubic-bezier(0,.6,.3,1); /* @kind other */
+  --ease-bounce:cubic-bezier(.34,1.56,.64,1); /* @kind other */
+
+  --lift-hover:translateY(-2px); /* @kind other */
+  --press-scale:scale(.97); /* @kind other */
+}

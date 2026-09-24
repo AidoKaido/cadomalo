@@ -1,0 +1,22 @@
+/* Cadomalo spacing. 4px base; section rhythm is generous — the brand breathes. */
+:root{
+  --space-0:0px;
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-7:32px;
+  --space-8:40px;
+  --space-9:48px;
+  --space-10:64px;
+  --space-11:80px;
+  --space-12:104px;
+
+  --gutter:var(--space-6);
+  --section-y:clamp(48px,6vw,88px); /* @kind spacing */
+  --container-max:1180px; /* @kind spacing */
+  --container-narrow:760px; /* @kind spacing */
+  --measure:64ch; /* @kind other */
+}

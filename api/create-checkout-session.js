@@ -1,6 +1,5 @@
 import Stripe from 'stripe'
-import {readFile} from 'node:fs/promises'
-import {join} from 'node:path'
+import {loadCatalog, resolveSiteVariant} from './_catalog.js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -74,12 +73,12 @@ export default async function handler(req, res) {
 
   let catalog
   try {
-    const raw = await readFile(join(process.cwd(), 'data', 'products.json'), 'utf8')
-    catalog = JSON.parse(raw).products || []
+    catalog = await loadCatalog()
   } catch (err) {
-    console.error('[checkout] failed to load products.json:', err.message)
+    console.error('[checkout] failed to load catalogue:', err.message)
     return res.status(500).json({error: 'Catalogue unavailable'})
   }
+  const lang = body?.lang === 'fr' ? 'fr' : 'en'
 
   const lineItems = []
   const resolved = []
@@ -101,7 +100,12 @@ export default async function handler(req, res) {
 
     let unitPrice = product.price
     let variantLabel = ''
-    if (variantId && Array.isArray(product.variants)) {
+    if (product.source === 'site') {
+      const v = resolveSiteVariant(product, variantId)
+      if (!v) return res.status(400).json({error: `Unknown option for ${slug}`})
+      unitPrice = v.price
+      variantLabel = v.label
+    } else if (variantId && Array.isArray(product.variants)) {
       const v = product.variants.find((x) => x.id === variantId)
       if (v) {
         unitPrice = v.price
@@ -123,6 +127,7 @@ export default async function handler(req, res) {
           images: (product.images || []).slice(0, 8).map((i) => i.url).filter(Boolean),
           metadata: {
             source: product.source || '',
+            fulfillment: product.fulfillment || '',
             source_shop_channel: product.sourceShopChannel || '',
             printify_product_id: product.printifyProductId || '',
             slug: product.slug,
@@ -151,9 +156,12 @@ export default async function handler(req, res) {
     req.headers.origin ||
     (req.headers.host ? `https://${req.headers.host}` : 'https://cadomalo.com')
 
-  const cancelUrl = lines.length === 1
-    ? `${baseUrl}/products/${encodeURIComponent(lines[0].slug)}`
-    : `${baseUrl}/cart`
+  const cancelUrl = lang === 'fr'
+    ? `${baseUrl}/fr/panier`
+    : lines.length === 1
+      ? `${baseUrl}/products/${encodeURIComponent(lines[0].slug)}`
+      : `${baseUrl}/cart`
+  const successPath = lang === 'fr' ? '/fr/confirmation' : '/order-confirmation'
 
   // Compact cart summary for top-level metadata (Stripe limits values to 500 chars).
   const cartSummary = JSON.stringify(resolved).slice(0, 480)
@@ -162,7 +170,7 @@ export default async function handler(req, res) {
     mode: 'payment',
     payment_method_types: ['card'],
     line_items: lineItems,
-    success_url: `${baseUrl}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `${baseUrl}${successPath}?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: cancelUrl,
     billing_address_collection: 'required',
     phone_number_collection: {enabled: true},
@@ -172,7 +180,27 @@ export default async function handler(req, res) {
       cart_summary: cartSummary,
       item_count: String(resolved.reduce((a, x) => a + x.qty, 0)),
       has_physical: hasPhysical ? '1' : '0',
+      lang,
     },
+    locale: lang === 'fr' ? 'fr' : 'auto',
+  }
+
+  // The cart shows a code's discount as a preview; apply the matching Stripe
+  // promotion code so the charged total agrees. Unknown codes fall back to
+  // the promo-code field on the Stripe page.
+  const code = typeof body?.discountCode === 'string' ? body.discountCode.trim().slice(0, 40) : ''
+  if (code) {
+    try {
+      const found = await stripe.promotionCodes.list({code, active: true, limit: 1})
+      if (found.data[0]) {
+        sessionParams.discounts = [{promotion_code: found.data[0].id}]
+        delete sessionParams.allow_promotion_codes
+      } else {
+        console.warn(`[checkout] promotion code not found in Stripe: ${code}`)
+      }
+    } catch (err) {
+      console.error('[checkout] promotion code lookup failed:', err.message)
+    }
   }
 
   if (hasPhysical) {

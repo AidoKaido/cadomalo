@@ -22,3 +22,10 @@ security-review.html
 Cadomalo-Security-Review.pdf
 
 .env*
+
+# Design drops (source material, ~180MB — not part of the site)
+New/
+
+# Build-generated at deploy time
+sitemap.xml
+robots.txt

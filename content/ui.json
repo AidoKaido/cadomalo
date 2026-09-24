@@ -1,0 +1,528 @@
+{
+  "en": {
+    "announce": "Instant download · Books for curious minds, ages 3–8 · Created by a midwife",
+    "nav": {
+      "home": "Home",
+      "shop": "Shop",
+      "collections": "Book collections",
+      "blog": "Blog",
+      "about": "About",
+      "sale": "Sale 🔥"
+    },
+    "basket": "Basket",
+    "hero": {
+      "eyebrow": "Books • Printables • Playful learning",
+      "t1": "Little minds.",
+      "t2": "Big discoveries.",
+      "text": "Beautiful multilingual books that turn everyday curiosity into knowledge children carry with them — for curious minds ages 3–8.",
+      "cta1": "Explore our books",
+      "cta2": "Shop all",
+      "trust": [
+        "Instant download",
+        "4 languages in every book",
+        "Created by a midwife"
+      ]
+    },
+    "topics": {
+      "kicker": "Follow their curiosity",
+      "h": "What is your little explorer curious about?",
+      "p": "A gentle first step into the questions children ask most.",
+      "items": [
+        "The human body",
+        "Our planet",
+        "Science",
+        "Animals",
+        "Feelings",
+        "Languages",
+        "Arts"
+      ]
+    },
+    "collection": {
+      "kicker": "Our little library",
+      "h": "Meet the Human Body Wonders",
+      "p": "Friendly first books that make body science feel simple, colorful and exciting.",
+      "bundleEyebrow": "Complete collection",
+      "bundleH": "All five books. One happy bookshelf.",
+      "bundleP": "Lungs, brain, stomach, bones and muscles — 160+ pages in four languages, for 25% less.",
+      "bundleCta": "Get all 5 books"
+    },
+    "method": {
+      "kicker": "Learning that feels like play",
+      "h": "Made for the way curious children learn.",
+      "items": [
+        {
+          "n": "1",
+          "h": "Read",
+          "p": "Clear language and joyful stories make unfamiliar ideas feel friendly from the first page."
+        },
+        {
+          "n": "2",
+          "h": "Color",
+          "p": "Coloring the pages they just read helps children process and remember in their own way."
+        },
+        {
+          "n": "3",
+          "h": "Discover",
+          "p": "Gentle prompts turn each new fact into a reason to look closer, ask more and keep exploring."
+        }
+      ]
+    },
+    "multi": {
+      "kicker": "Stories without language borders",
+      "h": "One discovery. Four ways to say it.",
+      "p": "Every Cadomalo book tells the same story in English, French, Spanish and German — building vocabulary through repetition, context and colorful visual cues.",
+      "cta": "Explore multilingual books"
+    },
+    "celebrate": {
+      "kicker": "Celebration days",
+      "h": "Designs for the days you’ll remember",
+      "p": "Seamless tumbler wraps for birthdays, milestones and makers — download today, press today.",
+      "cta": "Shop tumbler wraps"
+    },
+    "reviews": {
+      "kicker": "Loved by families",
+      "h": "Small readers. Big reviews.",
+      "p": "4.9 out of 5 from parents, teachers and makers."
+    },
+    "blog": {
+      "kicker": "From the blog",
+      "h": "Ideas for curious families",
+      "cta": "Read the blog",
+      "read": "Read article",
+      "min": "min read",
+      "title": "The Cadomalo blog",
+      "p": "Gentle, practical ideas for raising curious, multilingual little minds.",
+      "back": "All articles",
+      "shopThis": "Read it together",
+      "shopThisP": "The book that goes with this article."
+    },
+    "news": {
+      "kicker": "For curious families",
+      "h": "A little discovery in your inbox.",
+      "p": "New books, free coloring pages and playful ideas — plus 10% off your first order.",
+      "ph": "Your email address",
+      "cta": "Subscribe",
+      "done": "Thank you — check your inbox for your welcome code."
+    },
+    "footer": {
+      "intro": "A children’s learning house creating multilingual books and playful resources — from first breath to big discoveries.",
+      "shop": "Shop",
+      "help": "Help",
+      "legal": "Legal",
+      "contact": "Contact us",
+      "faq": "Downloads & printing",
+      "etsy": "Find us on Etsy",
+      "rights": "© 2026 Cadomalo. Little minds. Big discoveries.",
+      "pay": "Secure payment · Visa · Mastercard · PayPal · Apple Pay · Klarna"
+    },
+    "shop": {
+      "title": "Shop all",
+      "p": "Books for learning days, designs for celebration days.",
+      "filters": [
+        "All",
+        "Books",
+        "Bundles",
+        "Tumbler wraps"
+      ],
+      "count": "products"
+    },
+    "cols": {
+      "eyebrow": "Collection 01 · Available now",
+      "h": "Human Body Wonders",
+      "p": "Five first books that take children on a tour of their own body — breathing, thinking, eating, standing tall and moving. Each title is a story, a coloring book and a language game in one.",
+      "facts": [
+        "5 books",
+        "Ages 3–8",
+        "EN · FR · ES · DE",
+        "160+ pages"
+      ],
+      "cta": "Get all 5 books",
+      "cta2": "Shop single titles",
+      "inside": "Inside the collection",
+      "nextH": "Coming next",
+      "nextP": "We’re writing and illustrating the next collections now. Join the list to hear first — and get the first book at launch price.",
+      "wait": "Join the waitlist",
+      "soon": "Coming 2027",
+      "next": [
+        {
+          "h": "Our Planet Wonders",
+          "p": "Oceans, forests, weather and the creatures we share them with."
+        },
+        {
+          "h": "Feelings Wonders",
+          "p": "Naming big emotions — and finding calm inside them."
+        },
+        {
+          "h": "Animal Wonders",
+          "p": "How animals see, hear, sleep and grow."
+        }
+      ]
+    },
+    "about": {
+      "eyebrow": "Our story",
+      "h1": "From first breath",
+      "h2": "to big discoveries.",
+      "intro": "Cadomalo was created by a midwife who has spent her life around children and families — and never stopped being amazed by how they learn.",
+      "storyH": "Why a midwife writes children’s books",
+      "story": [
+        "I became a midwife because of my love for children and families. Over the years my curiosity grew beyond the first moments of life — into the many ways children learn, imagine and discover the world.",
+        "Children ask the best questions: why do I breathe? where does my food go? what is inside my head? Cadomalo books answer them simply and accurately, with stories and pages to color, so the answer stays with them.",
+        "Our books are multilingual because so many families are. A child should be able to hear the same story in their parents’ language, their school’s language and the language of the grandparents they call on Sundays."
+      ],
+      "sign": "Aidora — midwife & founder",
+      "valuesH": "What we promise",
+      "values": [
+        {
+          "h": "Simplified, never wrong",
+          "p": "Every fact is checked. We make ideas smaller, not less true."
+        },
+        {
+          "h": "Every language is equal",
+          "p": "No language is a footnote. Four languages, one story, one page."
+        },
+        {
+          "h": "Hands before screens",
+          "p": "Our books are made to be printed, colored and held."
+        }
+      ],
+      "etsyH": "Also on Etsy",
+      "etsyP": "Our Etsy shop carries our books, tumbler wraps and editable birthday invitations. This site is our new home — with bundles, the full collection and early access to new titles.",
+      "etsyCta": "Visit our Etsy shop"
+    },
+    "sale": {
+      "eyebrow": "Limited time",
+      "h1": "Launch sale.",
+      "h2": "Up to 35% off.",
+      "p": "To celebrate our new home, the complete collection, single titles and tumbler wraps are reduced — until the timer runs out.",
+      "ends": "Sale ends in",
+      "units": [
+        "days",
+        "hrs",
+        "min",
+        "sec"
+      ],
+      "stack": "Stack it: use CURIOUS10 at checkout for an extra 10% off."
+    },
+    "product": {
+      "home": "Home",
+      "shop": "Shop",
+      "couponEyebrow": "Your welcome code",
+      "couponText": "10% off your first order",
+      "copy": "Copy",
+      "copied": "Copied",
+      "reviews": "reviews",
+      "save": "Save",
+      "reviewsH": "What parents say",
+      "ugcH": "See it in real homes",
+      "qty": "Quantity",
+      "urgency": "Launch price ends in",
+      "add": "Add to basket",
+      "instant": "Instant download",
+      "secure": "Secure payment",
+      "promise": "30-day happiness promise",
+      "descKicker": "Before you buy",
+      "descH": "Your biggest questions, answered first.",
+      "specsH": "What you get",
+      "allReviews": "All reviews",
+      "verified": "Verified buyer",
+      "related": "You might also like",
+      "based": "based on",
+      "added": "Added to your basket",
+      "amazon": "Order on Amazon"
+    },
+    "cart": {
+      "title": "Your basket",
+      "reserved": "Your basket is reserved for",
+      "reservedAfter": "— launch prices end tonight.",
+      "empty": "Your basket is empty",
+      "emptyP": "Start with a book they’ll ask for again tonight.",
+      "emptyCta": "Explore our books",
+      "remove": "Remove",
+      "code": "Discount code",
+      "codePh": "Enter code",
+      "apply": "Apply",
+      "applied": "applied",
+      "bad": "This code isn’t valid",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "total": "Total",
+      "checkout": "Secure checkout",
+      "trustH": "Made with care by a midwife",
+      "trustP": "Every book is checked for accuracy and gentleness. If anything isn’t right, we fix it or refund you within 30 days.",
+      "trustRow": [
+        "Instant download",
+        "Secure payment",
+        "Happiness promise"
+      ],
+      "toast": "Taking you to secure checkout…",
+      "close": "Close basket"
+    },
+    "legal": {
+      "updated": "Last updated 23 September 2026",
+      "nav": "Legal information"
+    }
+  },
+  "fr": {
+    "announce": "Téléchargement immédiat · Livres pour esprits curieux de 3 à 8 ans · Créé par une sage-femme",
+    "nav": {
+      "home": "Accueil",
+      "shop": "Boutique",
+      "collections": "Collections",
+      "blog": "Blog",
+      "about": "À propos",
+      "sale": "Promos 🔥"
+    },
+    "basket": "Panier",
+    "hero": {
+      "eyebrow": "Livres • Printables • Apprendre en jouant",
+      "t1": "Petits esprits.",
+      "t2": "Grandes découvertes.",
+      "text": "De beaux livres multilingues qui transforment la curiosité de tous les jours en savoirs que les enfants gardent avec eux — pour les esprits curieux de 3 à 8 ans.",
+      "cta1": "Découvrir nos livres",
+      "cta2": "Toute la boutique",
+      "trust": [
+        "Téléchargement immédiat",
+        "4 langues dans chaque livre",
+        "Créé par une sage-femme"
+      ]
+    },
+    "topics": {
+      "kicker": "Suivez leur curiosité",
+      "h": "Qu’est-ce qui intrigue votre petit explorateur ?",
+      "p": "Un premier pas tout en douceur vers les questions que les enfants posent le plus.",
+      "items": [
+        "Le corps humain",
+        "Notre planète",
+        "Les sciences",
+        "Les animaux",
+        "Les émotions",
+        "Les langues",
+        "Les arts"
+      ]
+    },
+    "collection": {
+      "kicker": "Notre petite bibliothèque",
+      "h": "Découvrez les Merveilles du corps",
+      "p": "Des premiers livres chaleureux qui rendent la science du corps simple, colorée et passionnante.",
+      "bundleEyebrow": "Collection complète",
+      "bundleH": "Les cinq livres. Une étagère heureuse.",
+      "bundleP": "Poumons, cerveau, estomac, os et muscles — plus de 160 pages en quatre langues, 25 % moins cher.",
+      "bundleCta": "Les 5 livres"
+    },
+    "method": {
+      "kicker": "Apprendre comme on joue",
+      "h": "Pensé pour la façon dont les enfants curieux apprennent.",
+      "items": [
+        {
+          "n": "1",
+          "h": "Lire",
+          "p": "Des mots clairs et des histoires joyeuses rendent les idées nouvelles familières dès la première page."
+        },
+        {
+          "n": "2",
+          "h": "Colorier",
+          "p": "Colorier les pages qu’ils viennent de lire aide les enfants à comprendre et à retenir à leur façon."
+        },
+        {
+          "n": "3",
+          "h": "Découvrir",
+          "p": "De petites questions transforment chaque nouveau savoir en envie de regarder de plus près."
+        }
+      ]
+    },
+    "multi": {
+      "kicker": "Des histoires sans frontières",
+      "h": "Une découverte. Quatre façons de la dire.",
+      "p": "Chaque livre Cadomalo raconte la même histoire en français, anglais, espagnol et allemand — pour enrichir le vocabulaire par la répétition, le contexte et des repères visuels colorés.",
+      "cta": "Voir les livres multilingues"
+    },
+    "celebrate": {
+      "kicker": "Jours de fête",
+      "h": "Des designs pour les jours dont on se souvient",
+      "p": "Des wraps tumbler sans raccord pour les anniversaires, les grandes étapes et les créatrices — téléchargés et pressés le jour même.",
+      "cta": "Voir les wraps tumbler"
+    },
+    "reviews": {
+      "kicker": "Adoré par les familles",
+      "h": "Petits lecteurs. Grands avis.",
+      "p": "4,9 sur 5 selon les parents, enseignants et créatrices."
+    },
+    "blog": {
+      "kicker": "Sur le blog",
+      "h": "Des idées pour les familles curieuses",
+      "cta": "Lire le blog",
+      "read": "Lire l’article",
+      "min": "min de lecture",
+      "title": "Le blog Cadomalo",
+      "p": "Des idées douces et pratiques pour faire grandir des petits esprits curieux et multilingues.",
+      "back": "Tous les articles",
+      "shopThis": "À lire ensemble",
+      "shopThisP": "Le livre qui accompagne cet article."
+    },
+    "news": {
+      "kicker": "Pour les familles curieuses",
+      "h": "Une petite découverte dans votre boîte mail.",
+      "p": "Nouveaux livres, coloriages gratuits et idées ludiques — et 10 % sur votre première commande.",
+      "ph": "Votre adresse e-mail",
+      "cta": "S’inscrire",
+      "done": "Merci — votre code de bienvenue vous attend dans votre boîte mail."
+    },
+    "footer": {
+      "intro": "Une maison d’apprentissage pour enfants qui crée des livres multilingues et des ressources ludiques — du premier souffle aux grandes découvertes.",
+      "shop": "Boutique",
+      "help": "Aide",
+      "legal": "Informations légales",
+      "contact": "Nous contacter",
+      "faq": "Téléchargement & impression",
+      "etsy": "Nous trouver sur Etsy",
+      "rights": "© 2026 Cadomalo. Petits esprits. Grandes découvertes.",
+      "pay": "Paiement sécurisé · Visa · Mastercard · PayPal · Apple Pay · Klarna"
+    },
+    "shop": {
+      "title": "Toute la boutique",
+      "p": "Des livres pour les jours d’apprentissage, des designs pour les jours de fête.",
+      "filters": [
+        "Tout",
+        "Livres",
+        "Packs",
+        "Wraps tumbler"
+      ],
+      "count": "produits"
+    },
+    "cols": {
+      "eyebrow": "Collection 01 · Disponible",
+      "h": "Les Merveilles du corps",
+      "p": "Cinq premiers livres qui emmènent les enfants à la découverte de leur propre corps — respirer, penser, manger, se tenir droit et bouger. Chaque titre est à la fois une histoire, un livre de coloriage et un jeu de langues.",
+      "facts": [
+        "5 livres",
+        "3–8 ans",
+        "FR · EN · ES · DE",
+        "160+ pages"
+      ],
+      "cta": "Les 5 livres",
+      "cta2": "Voir les titres",
+      "inside": "Dans la collection",
+      "nextH": "Bientôt",
+      "nextP": "Nous écrivons et illustrons les prochaines collections. Inscrivez-vous pour être prévenu en premier — et profiter du prix de lancement.",
+      "wait": "Rejoindre la liste",
+      "soon": "En 2027",
+      "next": [
+        {
+          "h": "Merveilles de la planète",
+          "p": "Océans, forêts, météo et les créatures avec qui nous les partageons."
+        },
+        {
+          "h": "Merveilles des émotions",
+          "p": "Nommer les grandes émotions — et trouver le calme à l’intérieur."
+        },
+        {
+          "h": "Merveilles des animaux",
+          "p": "Comment les animaux voient, entendent, dorment et grandissent."
+        }
+      ]
+    },
+    "about": {
+      "eyebrow": "Notre histoire",
+      "h1": "Du premier souffle",
+      "h2": "aux grandes découvertes.",
+      "intro": "Cadomalo a été créé par une sage-femme qui a passé sa vie auprès des enfants et des familles — et qui ne cesse de s’émerveiller de leur façon d’apprendre.",
+      "storyH": "Pourquoi une sage-femme écrit des livres pour enfants",
+      "story": [
+        "Je suis devenue sage-femme par amour des enfants et des familles. Au fil des années, ma curiosité a dépassé les premiers instants de la vie — pour s’intéresser à toutes les façons dont les enfants apprennent, imaginent et découvrent le monde.",
+        "Les enfants posent les meilleures questions : pourquoi je respire ? où va ce que je mange ? qu’y a-t-il dans ma tête ? Les livres Cadomalo y répondent simplement et avec justesse, avec des histoires et des pages à colorier, pour que la réponse reste.",
+        "Nos livres sont multilingues parce que tant de familles le sont. Un enfant devrait pouvoir entendre la même histoire dans la langue de ses parents, celle de son école et celle des grands-parents qu’il appelle le dimanche."
+      ],
+      "sign": "Aidora — sage-femme et fondatrice",
+      "valuesH": "Nos promesses",
+      "values": [
+        {
+          "h": "Simplifié, jamais faux",
+          "p": "Chaque information est vérifiée. Nous rendons les idées plus petites, pas moins vraies."
+        },
+        {
+          "h": "Toutes les langues sont égales",
+          "p": "Aucune langue n’est une note de bas de page. Quatre langues, une histoire, une page."
+        },
+        {
+          "h": "Les mains avant les écrans",
+          "p": "Nos livres sont faits pour être imprimés, coloriés et tenus."
+        }
+      ],
+      "etsyH": "Aussi sur Etsy",
+      "etsyP": "Notre boutique Etsy propose nos livres, wraps tumbler et invitations d’anniversaire modifiables. Ce site est notre nouvelle maison — avec les packs, la collection complète et l’accès en avant-première aux nouveaux titres.",
+      "etsyCta": "Voir notre boutique Etsy"
+    },
+    "sale": {
+      "eyebrow": "Durée limitée",
+      "h1": "Promos de lancement.",
+      "h2": "Jusqu’à -35 %.",
+      "p": "Pour fêter notre nouvelle maison, la collection complète, certains titres et les wraps tumbler sont à prix réduit — jusqu’à la fin du compte à rebours.",
+      "ends": "Fin des promos dans",
+      "units": [
+        "jours",
+        "h",
+        "min",
+        "sec"
+      ],
+      "stack": "Cumulez : utilisez CURIOUS10 au paiement pour 10 % de plus."
+    },
+    "product": {
+      "home": "Accueil",
+      "shop": "Boutique",
+      "couponEyebrow": "Votre code de bienvenue",
+      "couponText": "-10 % sur votre première commande",
+      "copy": "Copier",
+      "copied": "Copié",
+      "reviews": "avis",
+      "save": "Économisez",
+      "reviewsH": "Ce qu’en disent les parents",
+      "ugcH": "Dans de vraies maisons",
+      "qty": "Quantité",
+      "urgency": "Le prix de lancement se termine dans",
+      "add": "Ajouter au panier",
+      "instant": "Téléchargement immédiat",
+      "secure": "Paiement sécurisé",
+      "promise": "Promesse bonheur 30 jours",
+      "descKicker": "Avant d’acheter",
+      "descH": "Vos plus grandes questions, en premier.",
+      "specsH": "Ce que vous recevez",
+      "allReviews": "Tous les avis",
+      "verified": "Achat vérifié",
+      "related": "Vous aimerez aussi",
+      "based": "sur",
+      "added": "Ajouté à votre panier",
+      "amazon": "Commander sur Amazon"
+    },
+    "cart": {
+      "title": "Votre panier",
+      "reserved": "Votre panier est réservé pendant",
+      "reservedAfter": "— les prix de lancement finissent ce soir.",
+      "empty": "Votre panier est vide",
+      "emptyP": "Commencez par un livre qu’ils redemanderont ce soir.",
+      "emptyCta": "Découvrir nos livres",
+      "remove": "Retirer",
+      "code": "Code promo",
+      "codePh": "Saisir un code",
+      "apply": "Appliquer",
+      "applied": "appliqué",
+      "bad": "Ce code n’est pas valide",
+      "subtotal": "Sous-total",
+      "discount": "Remise",
+      "total": "Total",
+      "checkout": "Paiement sécurisé",
+      "trustH": "Fait avec soin par une sage-femme",
+      "trustP": "Chaque livre est vérifié pour son exactitude et sa douceur. Si quelque chose ne va pas, nous corrigeons ou remboursons sous 30 jours.",
+      "trustRow": [
+        "Téléchargement immédiat",
+        "Paiement sécurisé",
+        "Promesse bonheur"
+      ],
+      "toast": "Redirection vers le paiement sécurisé…",
+      "close": "Fermer le panier"
+    },
+    "legal": {
+      "updated": "Dernière mise à jour : 23 septembre 2026",
+      "nav": "Informations légales"
+    }
+  }
+}

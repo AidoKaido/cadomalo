@@ -1,0 +1,59 @@
+{
+  "_comment": "Strings the design drop does not ship: accessibility labels, the cookie-consent banner (the drop has none, though its own cookie policy promises one), the shortened mobile announcement, and newsletter consent wording. Authored here rather than in ui.json so content/ui.json stays a faithful extract of the drop. Deep-merged over ui.json by scripts/build-pages.js.",
+
+  "en": {
+    "announceShort": "Instant download · Ages 3–8",
+    "a11y": {
+      "skip": "Skip to content",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "primaryNav": "Primary",
+      "basket": "Basket",
+      "cookieSettings": "Cookie settings"
+    },
+    "cookie": {
+      "title": "Cookie choices",
+      "body": "We use cookies to run the shop, understand what is useful, and — only if you agree — to measure our ads.",
+      "more": "Read our cookie policy",
+      "acceptAll": "Accept all",
+      "rejectAll": "Reject all",
+      "manage": "Manage",
+      "necessary": "Necessary — always on",
+      "analytics": "Analytics",
+      "marketing": "Marketing",
+      "save": "Save choices",
+      "close": "Close"
+    },
+    "news": {
+      "consent": "One email every few weeks. Unsubscribe any time — see our privacy policy."
+    }
+  },
+
+  "fr": {
+    "announceShort": "Téléchargement immédiat · 3–8 ans",
+    "a11y": {
+      "skip": "Aller au contenu",
+      "openMenu": "Ouvrir le menu",
+      "closeMenu": "Fermer le menu",
+      "primaryNav": "Principale",
+      "basket": "Panier",
+      "cookieSettings": "Paramètres des cookies"
+    },
+    "cookie": {
+      "title": "Choix des cookies",
+      "body": "Nous utilisons des cookies pour faire fonctionner la boutique, comprendre ce qui est utile et — seulement si vous acceptez — mesurer nos publicités.",
+      "more": "Lire notre politique de cookies",
+      "acceptAll": "Tout accepter",
+      "rejectAll": "Tout refuser",
+      "manage": "Gérer",
+      "necessary": "Nécessaires — toujours actifs",
+      "analytics": "Mesure d’audience",
+      "marketing": "Marketing",
+      "save": "Enregistrer",
+      "close": "Fermer"
+    },
+    "news": {
+      "consent": "Un e-mail toutes les quelques semaines. Désinscription à tout moment — voir notre politique de confidentialité."
+    }
+  }
+}

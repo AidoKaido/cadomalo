@@ -1,0 +1,342 @@
+[
+  {
+    "id": "talk-about-the-body",
+    "img": "img/hero-reading.png",
+    "product": "bundle",
+    "min": 6,
+    "date": {
+      "en": "18 September 2026",
+      "fr": "18 septembre 2026"
+    },
+    "cat": {
+      "en": "Human body",
+      "fr": "Corps humain"
+    },
+    "title": {
+      "en": "How to talk to young children about their body",
+      "fr": "Comment parler du corps humain aux jeunes enfants"
+    },
+    "excerpt": {
+      "en": "Simple words, true facts and a little wonder: a midwife’s approach to the questions children ask about their body.",
+      "fr": "Des mots simples, des faits justes et un peu d’émerveillement : l’approche d’une sage-femme face aux questions des enfants sur leur corps."
+    },
+    "body": {
+      "en": [
+        {
+          "p": "Between the ages of three and eight, children discover that their body is not just something that runs and jumps — it is something that works. Suddenly they want to know why their heart beats faster after a race, or where their breakfast went."
+        },
+        {
+          "h": "Use the real words"
+        },
+        {
+          "p": "Lungs, stomach, skeleton, brain. Children handle real words beautifully when they come with a picture and a feeling. “Your lungs are like two balloons that fill up when you breathe in” is simple and true."
+        },
+        {
+          "h": "Start with what they can feel"
+        },
+        {
+          "p": "Put their hand on their chest while they breathe. Let them feel their tummy after a snack. Ask them to squeeze a fist and watch the muscle in their arm. The body is the best science lab they will ever own."
+        },
+        {
+          "h": "Answer the question they asked — not more"
+        },
+        {
+          "p": "A four-year-old asking “why do I have bones?” wants one good answer, not a lecture. “So you can stand up tall — without bones you’d be wobbly like jelly!” is perfect. If they want more, they will ask."
+        },
+        {
+          "h": "Turn it into a ritual"
+        },
+        {
+          "p": "Pick one body part a week. Read about it, color it, look for it in the bath or on a walk. Small, repeated moments build knowledge that lasts much longer than a single big explanation."
+        }
+      ],
+      "fr": [
+        {
+          "p": "Entre trois et huit ans, les enfants découvrent que leur corps n’est pas seulement quelque chose qui court et qui saute — c’est quelque chose qui fonctionne. Tout à coup, ils veulent savoir pourquoi leur cœur bat plus vite après une course, ou où est passé leur petit-déjeuner."
+        },
+        {
+          "h": "Utilisez les vrais mots"
+        },
+        {
+          "p": "Poumons, estomac, squelette, cerveau. Les enfants manient très bien les vrais mots quand ils sont accompagnés d’une image et d’une sensation. « Tes poumons sont comme deux ballons qui se remplissent quand tu inspires » : c’est simple et c’est juste."
+        },
+        {
+          "h": "Partez de ce qu’ils ressentent"
+        },
+        {
+          "p": "Posez leur main sur leur poitrine pendant qu’ils respirent. Laissez-les sentir leur ventre après le goûter. Demandez-leur de serrer le poing et de regarder le muscle de leur bras. Le corps est le meilleur laboratoire qu’ils auront jamais."
+        },
+        {
+          "h": "Répondez à la question posée — pas plus"
+        },
+        {
+          "p": "Un enfant de quatre ans qui demande « pourquoi j’ai des os ? » veut une bonne réponse, pas un cours. « Pour tenir debout — sans os, tu serais tout mou comme de la gelée ! » est parfait. S’il veut en savoir plus, il demandera."
+        },
+        {
+          "h": "Faites-en un rituel"
+        },
+        {
+          "p": "Choisissez une partie du corps par semaine. Lisez, coloriez, cherchez-la dans le bain ou en promenade. De petits moments répétés construisent un savoir bien plus durable qu’une seule grande explication."
+        }
+      ]
+    }
+  },
+  {
+    "id": "multilingual-habits",
+    "img": "img/multilingual-book.png",
+    "product": "head",
+    "min": 5,
+    "date": {
+      "en": "9 September 2026",
+      "fr": "9 septembre 2026"
+    },
+    "cat": {
+      "en": "Languages",
+      "fr": "Langues"
+    },
+    "title": {
+      "en": "Raising multilingual kids: 5 gentle habits",
+      "fr": "Élever des enfants multilingues : 5 habitudes douces"
+    },
+    "excerpt": {
+      "en": "You don’t need to be fluent in four languages to raise a child who loves them. Here is what actually helps.",
+      "fr": "Pas besoin de parler quatre langues couramment pour élever un enfant qui les aime. Voici ce qui aide vraiment."
+    },
+    "body": {
+      "en": [
+        {
+          "p": "Many of the families who read Cadomalo books speak two or three languages at home — or wish they did. The good news: little habits matter more than perfect grammar."
+        },
+        {
+          "h": "1. Read the same story in two languages"
+        },
+        {
+          "p": "Familiar stories make new words easy to guess. Read a page in your home language, then point to the same sentence in another one and read it together."
+        },
+        {
+          "h": "2. Make it a game, not a test"
+        },
+        {
+          "p": "“Can you find the word for ‘heart’ in Spanish?” is a treasure hunt. “Say it in Spanish” is homework. Children learn fastest when they feel clever."
+        },
+        {
+          "h": "3. Give each language a place"
+        },
+        {
+          "p": "One language at breakfast, another at bedtime, a third for calls with grandparents. Routines help children know which language to reach for."
+        },
+        {
+          "h": "4. Let them mix"
+        },
+        {
+          "p": "Mixing languages in one sentence is a normal, healthy stage. Gently repeat the sentence back in one language and carry on."
+        },
+        {
+          "h": "5. Celebrate every word"
+        },
+        {
+          "p": "Keep a little list on the fridge of words your child knows in each language. Watching it grow is motivating — for them and for you."
+        }
+      ],
+      "fr": [
+        {
+          "p": "Beaucoup de familles qui lisent les livres Cadomalo parlent deux ou trois langues à la maison — ou aimeraient le faire. Bonne nouvelle : les petites habitudes comptent plus qu’une grammaire parfaite."
+        },
+        {
+          "h": "1. Lisez la même histoire dans deux langues"
+        },
+        {
+          "p": "Une histoire familière rend les nouveaux mots faciles à deviner. Lisez une page dans votre langue, puis montrez la même phrase dans une autre langue et lisez-la ensemble."
+        },
+        {
+          "h": "2. Un jeu, pas un examen"
+        },
+        {
+          "p": "« Tu trouves le mot “cœur” en espagnol ? » est une chasse au trésor. « Dis-le en espagnol » est un devoir. Les enfants apprennent plus vite quand ils se sentent malins."
+        },
+        {
+          "h": "3. Donnez une place à chaque langue"
+        },
+        {
+          "p": "Une langue au petit-déjeuner, une autre au coucher, une troisième pour appeler les grands-parents. Les routines aident l’enfant à savoir quelle langue choisir."
+        },
+        {
+          "h": "4. Laissez-les mélanger"
+        },
+        {
+          "p": "Mélanger les langues dans une phrase est une étape normale et saine. Reformulez simplement la phrase dans une seule langue et continuez."
+        },
+        {
+          "h": "5. Fêtez chaque mot"
+        },
+        {
+          "p": "Gardez sur le frigo une petite liste des mots que votre enfant connaît dans chaque langue. La voir grandir motive — lui comme vous."
+        }
+      ]
+    }
+  },
+  {
+    "id": "coloring-and-memory",
+    "img": "img/kids-lying.png",
+    "product": "muscles",
+    "min": 4,
+    "date": {
+      "en": "28 August 2026",
+      "fr": "28 août 2026"
+    },
+    "cat": {
+      "en": "Playful learning",
+      "fr": "Apprendre en jouant"
+    },
+    "title": {
+      "en": "Why coloring helps children remember what they read",
+      "fr": "Pourquoi colorier aide les enfants à retenir ce qu’ils lisent"
+    },
+    "excerpt": {
+      "en": "Coloring isn’t just a quiet activity. When it follows a story, it becomes a way of thinking.",
+      "fr": "Colorier n’est pas qu’une activité calme. Après une histoire, cela devient une façon de réfléchir."
+    },
+    "body": {
+      "en": [
+        {
+          "p": "We designed every Cadomalo book so that children read a page, then color it. It’s not decoration — it’s the part of the book that makes learning stick."
+        },
+        {
+          "h": "Slowing down helps"
+        },
+        {
+          "p": "Coloring a picture of the lungs takes ten minutes. That’s ten minutes of looking closely at shapes, colors and details a child would have skipped past on a screen."
+        },
+        {
+          "h": "Hands help heads"
+        },
+        {
+          "p": "When children do something with what they’ve just heard, they tend to remember it better. Choosing a color for a muscle is a tiny decision about what that muscle is."
+        },
+        {
+          "h": "It opens conversations"
+        },
+        {
+          "p": "Coloring side by side is one of the easiest times to talk. “Why did you make the stomach purple?” can lead to a surprisingly good chat about food and energy."
+        },
+        {
+          "h": "Try this tonight"
+        },
+        {
+          "p": "Read one spread, then let your child color it while you ask one question about it. Keep the finished pages in a folder — it becomes their own science book."
+        }
+      ],
+      "fr": [
+        {
+          "p": "Nous avons conçu chaque livre Cadomalo pour que l’enfant lise une page, puis la colorie. Ce n’est pas de la décoration — c’est la partie du livre qui fait que l’apprentissage reste."
+        },
+        {
+          "h": "Ralentir aide"
+        },
+        {
+          "p": "Colorier des poumons prend dix minutes. Dix minutes à observer de près des formes, des couleurs et des détails qu’un enfant aurait survolés sur un écran."
+        },
+        {
+          "h": "Les mains aident la tête"
+        },
+        {
+          "p": "Quand les enfants font quelque chose de ce qu’ils viennent d’entendre, ils s’en souviennent souvent mieux. Choisir une couleur pour un muscle, c’est une petite décision sur ce qu’est ce muscle."
+        },
+        {
+          "h": "Ça ouvre la conversation"
+        },
+        {
+          "p": "Colorier côte à côte est l’un des moments les plus faciles pour discuter. « Pourquoi tu as fait l’estomac violet ? » peut mener à une belle discussion sur l’alimentation et l’énergie."
+        },
+        {
+          "h": "À essayer ce soir"
+        },
+        {
+          "p": "Lisez une double page, puis laissez votre enfant la colorier pendant que vous lui posez une question. Gardez les pages dans une pochette — cela devient son propre livre de sciences."
+        }
+      ]
+    }
+  },
+  {
+    "id": "first-why-questions",
+    "img": "img/book-head.png",
+    "product": "lungs",
+    "min": 5,
+    "date": {
+      "en": "14 August 2026",
+      "fr": "14 août 2026"
+    },
+    "cat": {
+      "en": "From our midwife",
+      "fr": "De notre sage-femme"
+    },
+    "title": {
+      "en": "A midwife’s guide to the “why?” years",
+      "fr": "Le guide d’une sage-femme pour l’âge des « pourquoi ? »"
+    },
+    "excerpt": {
+      "en": "The endless “why?” is a sign of a healthy, curious brain. Here’s how to enjoy it — even on tired days.",
+      "fr": "Les « pourquoi ? » sans fin sont le signe d’un cerveau curieux et en pleine forme. Voici comment en profiter — même les jours de fatigue."
+    },
+    "body": {
+      "en": [
+        {
+          "p": "Somewhere around age three, many children discover the most powerful word in the world: why. It can be wonderful and exhausting in the same afternoon."
+        },
+        {
+          "h": "It’s a good sign"
+        },
+        {
+          "p": "“Why” means your child has noticed that things have causes. That’s the beginning of scientific thinking — and it deserves to be encouraged."
+        },
+        {
+          "h": "Turn the question around"
+        },
+        {
+          "p": "“What do you think?” is a perfectly good answer. Children often have a theory already, and sharing it builds confidence."
+        },
+        {
+          "h": "“Let’s find out” is magic"
+        },
+        {
+          "p": "You don’t need to know everything. Looking it up together in a book shows that not knowing is the start of learning, not a failure."
+        },
+        {
+          "h": "Keep a question jar"
+        },
+        {
+          "p": "On busy days, write the question on a scrap of paper and put it in a jar. At the weekend, pick one and explore it properly. Nothing gets lost, and nobody feels brushed off."
+        }
+      ],
+      "fr": [
+        {
+          "p": "Vers trois ans, beaucoup d’enfants découvrent le mot le plus puissant du monde : pourquoi. Il peut être merveilleux et épuisant dans le même après-midi."
+        },
+        {
+          "h": "C’est bon signe"
+        },
+        {
+          "p": "« Pourquoi » veut dire que votre enfant a compris que les choses ont des causes. C’est le début de la pensée scientifique — et cela mérite d’être encouragé."
+        },
+        {
+          "h": "Retournez la question"
+        },
+        {
+          "p": "« Et toi, qu’est-ce que tu en penses ? » est une très bonne réponse. Les enfants ont souvent déjà une théorie, et la partager les rend confiants."
+        },
+        {
+          "h": "« On va chercher ensemble » est magique"
+        },
+        {
+          "p": "Vous n’avez pas besoin de tout savoir. Chercher ensemble dans un livre montre que ne pas savoir est le début de l’apprentissage, pas un échec."
+        },
+        {
+          "h": "Le bocal à questions"
+        },
+        {
+          "p": "Les jours chargés, écrivez la question sur un petit papier et mettez-la dans un bocal. Le week-end, tirez-en une et explorez-la vraiment. Rien ne se perd, et personne ne se sent ignoré."
+        }
+      ]
+    }
+  }
+]
