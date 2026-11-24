@@ -14,7 +14,7 @@
 //     with the same name are updated with the current HTML + subject)
 // Then prints the ids to set as Vercel env vars.
 //
-// Optional env: BREVO_SENDER_EMAIL (default support@cadomalo.com — must be a
+// Optional env: BREVO_SENDER_EMAIL (default aidora@cadomalo.com — must be a
 // verified sender in Brevo), BREVO_SENDER_NAME (default "Aidora at Cadomalo").
 
 import {readFileSync} from 'node:fs'
@@ -27,7 +27,7 @@ const KEY = process.env.BREVO_API_KEY || process.env.CADOMALO_WEBSITE
 const API = 'https://api.brevo.com/v3'
 const SENDER = {
   name: process.env.BREVO_SENDER_NAME || 'Aidora at Cadomalo',
-  email: process.env.BREVO_SENDER_EMAIL || 'support@cadomalo.com',
+  email: process.env.BREVO_SENDER_EMAIL || 'aidora@cadomalo.com',
 }
 const LISTS = {
   BREVO_LIST_ROUTINE: 'Routine sample',

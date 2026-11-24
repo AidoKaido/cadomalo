@@ -13,7 +13,7 @@ Two automations: the **lead sequence** (7 emails after someone asks for the free
    **OFFER_TOKEN, OFFER_EXP, FUNNEL_EXP, PURCHASED**, and uploads the 12 email templates.
    It prints lines like `BREVO_LIST_ROUTINE=7` — add each of them to Vercel as an environment variable.
    You can run it again any time; it updates the templates instead of duplicating them.
-3. Brevo → **Senders, domains & dedicated IPs**: check that `support@cadomalo.com` is a verified sender
+3. Brevo → **Senders, domains & dedicated IPs**: check that `aidora@cadomalo.com` is a verified sender
    and that the domain `cadomalo.com` is authenticated (DKIM/DMARC). Otherwise emails land in spam.
 4. Add `FUNNEL_SECRET` in Vercel: any long random string (40+ characters). Do not change it later — doing so
    breaks offer and download links already sent.
