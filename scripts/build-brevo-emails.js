@@ -28,10 +28,10 @@ const LINK = {
 
 // Real prices (CONTRACT.md "PRICE UPDATE").
 const PRICE = {
-  lab: {store: 21.99, funnel: 4.99},
-  book: {store: 9.99, funnel: 4.99},
-  collection: {store: 79.0, funnel: 29.99},
-  routine: 17.99,
+  lab: {store: 9.99, funnel: 4.99},
+  book: {store: 7.99, funnel: 4.99},
+  collection: {store: 39.99, funnel: 19.99},
+  routine: 9.99,
 }
 const usd = (n) => '$' + n.toFixed(2)
 const save = ({store, funnel}) => `You save ${usd(store - funnel)} (${Math.round(((store - funnel) / store) * 100)}%)`
@@ -91,7 +91,7 @@ function layout({preheader, body, footer = 'marketing'}) {
 }
 
 const sign = p(`Warmly,<br>Aidora<br><span style="color:${C.muted};font-size:14px;">Founder of Cadomalo</span>`)
-const UNTIL_LAB = 'This price is tied to your email and ends {{ contact.OFFER_EXP }}. After that it is back to $21.99.'
+const UNTIL_LAB = 'This price is tied to your email and ends {{ contact.OFFER_EXP }}. After that it is back to $9.99.'
 const UNTIL_FUNNEL = 'These subscriber prices are tied to your email and last until {{ contact.FUNNEL_EXP }}.'
 
 const templates = [
@@ -154,7 +154,7 @@ ${sign}`,
     file: '03-lead-last-chance.html',
     name: 'Cadomalo Lead 3 — last chance Discovery Lab',
     subject: `Last chance: Discovery Lab for ${usd(PRICE.lab.funnel)}`,
-    preheader: 'Your sign-up price ends soon. After that it goes back to $21.99.',
+    preheader: 'Your sign-up price ends soon. After that it goes back to $9.99.',
     body: `${h1('A quick reminder before it ends')}
 ${p('Hello,')}
 ${p(`When you signed up, we set aside the <strong>My Amazing Body Discovery Lab</strong> for you at ${usd(PRICE.lab.funnel)}. That price is real, it is tied to your email, and it ends {{ contact.OFFER_EXP }}.`)}

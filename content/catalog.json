@@ -7,7 +7,8 @@
     "id": "routine",
     "type": "kit",
     "category": "kit",
-    "price": 17.99,
+    "price": 9.99,
+    "funnelPrice": 4.99,
     "color": "#F6C85F",
     "series": {
       "en": "Printable busy book",
@@ -157,7 +158,7 @@
     "id": "discovery-lab",
     "type": "kit",
     "category": "kit",
-    "price": 21.99,
+    "price": 9.99,
     "funnelPrice": 4.99,
     "color": "#5BA8E0",
     "series": {
@@ -309,7 +310,8 @@
     "id": "party-kit",
     "type": "party",
     "category": "party",
-    "price": 19.99,
+    "price": 9.99,
+    "funnelPrice": 4.99,
     "color": "#F06B4F",
     "series": {
       "en": "Printable party kit",
@@ -459,7 +461,8 @@
     "id": "birthday-wish",
     "type": "party",
     "category": "party",
-    "price": 24.99,
+    "price": 9.99,
+    "funnelPrice": 4.99,
     "color": "#7B6CF6",
     "series": {
       "en": "Personalised storybook",
@@ -613,7 +616,8 @@
     "id": "wonder-island",
     "type": "kit",
     "category": "kit",
-    "price": 14.99,
+    "price": 9.99,
+    "funnelPrice": 4.99,
     "color": "#4FB3A9",
     "series": {
       "en": "Printable escape room",
@@ -774,9 +778,9 @@
       "en": "All ten Human Body Wonders books in one download: head, lungs, stomach, bones, muscles, skin, blood, eyes, ears and teeth — a complete first tour of the human body, in four languages.",
       "fr": "Les dix livres Merveilles du corps en un seul téléchargement : tête, poumons, estomac, os, muscles, peau, sang, yeux, oreilles et dents — un premier tour complet du corps humain, en quatre langues."
     },
-    "price": 79,
-    "compareAt": 99.9,
-    "funnelPrice": 29.99,
+    "price": 39.99,
+    "compareAt": 79.9,
+    "funnelPrice": 19.99,
     "langs": "EN · FR · ES · DE",
     "color": "#F06B4F",
     "badge": {
@@ -850,13 +854,13 @@
       "en": [
         "A complete first tour of the human body",
         "All 10 titles — 580 story and colouring pages",
-        "Save $20.90 compared to buying each book",
+        "Save $39.91 compared to buying each book",
         "4 languages in every book"
       ],
       "fr": [
         "Un premier tour complet du corps humain",
         "Les 10 titres — 580 pages d’histoires et de coloriages",
-        "20,90 $ d’économie par rapport à l’achat à l’unité",
+        "39,91 $ d’économie par rapport à l’achat à l’unité",
         "4 langues dans chaque livre"
       ]
     },
@@ -967,9 +971,9 @@
       "en": "All ten Medical Heroes books in one download: doctors, nurses, pharmacists, paramedics, midwives, physiotherapists, dentists, lab scientists, psychologists and dietitians — so every check-up feels familiar.",
       "fr": "Les dix livres Les héros de la santé en un seul téléchargement : médecins, infirmiers, pharmaciens, secouristes, sages-femmes, kinés, dentistes, biologistes, psychologues et diététiciens — pour que chaque rendez-vous paraisse familier."
     },
-    "price": 79,
-    "compareAt": 99.9,
-    "funnelPrice": 29.99,
+    "price": 39.99,
+    "compareAt": 79.9,
+    "funnelPrice": 19.99,
     "langs": "EN · FR · ES · DE",
     "color": "#39506F",
     "badge": {
@@ -1042,13 +1046,13 @@
       "en": [
         "Meet 10 healthcare heroes before the next check-up",
         "All 10 titles — 580 story and colouring pages",
-        "Save $20.90 compared to buying each book",
+        "Save $39.91 compared to buying each book",
         "4 languages in every book"
       ],
       "fr": [
         "10 héros de la santé à découvrir avant le prochain rendez-vous",
         "Les 10 titres — 580 pages d’histoires et de coloriages",
-        "20,90 $ d’économie par rapport à l’achat à l’unité",
+        "39,91 $ d’économie par rapport à l’achat à l’unité",
         "4 langues dans chaque livre"
       ]
     },
@@ -1151,7 +1155,7 @@
       "en": "Discover the amazing world inside your head! Explore the brain, senses, nerves and memory through simple science, multilingual learning and fun coloring activities made for curious little minds.",
       "fr": "Découvre le monde fascinant qui se cache dans ta tête ! Explore le cerveau, les sens, les nerfs et la mémoire grâce à un livre simple, en plusieurs langues, avec de chouettes coloriages."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#8E7BE0",
@@ -1291,7 +1295,7 @@
       "en": "Discover how your lungs work nonstop to help you breathe, run, play and grow. A simple and colorful adventure to explore the hidden wonders inside your body.",
       "fr": "Découvre comment tes poumons travaillent sans arrêt pour t’aider à respirer, courir, jouer et grandir. Une aventure simple et colorée pour explorer les merveilles cachées dans ton corps."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#65B9D1",
@@ -1431,7 +1435,7 @@
       "en": "Discover how your stomach works nonstop to help you digest, grow and stay healthy. A simple and colorful adventure to explore the hidden wonders inside your body.",
       "fr": "Découvre comment ton estomac travaille sans arrêt pour t’aider à digérer, grandir et rester en bonne santé. Une aventure simple et colorée pour explorer les merveilles cachées dans ton corps."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#E0A93A",
@@ -1571,7 +1575,7 @@
       "en": "Discover how your bones work nonstop to help you stand, run and dance, while protecting your body. A simple and colorful adventure to explore the hidden structure inside your body.",
       "fr": "Découvre comment tes os travaillent sans arrêt pour te faire tenir debout, courir et danser, tout en te protégeant. Une aventure simple et colorée pour explorer la structure cachée dans ton corps."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#4A9DB6",
@@ -1710,7 +1714,7 @@
       "en": "Discover how your muscles work nonstop to help you run, jump, play and stay strong. A simple and colorful adventure to explore the hidden wonders inside your body.",
       "fr": "Découvre comment tes muscles travaillent sans arrêt pour t’aider à courir, sauter, jouer et rester fort. Une aventure simple et colorée pour explorer les merveilles cachées dans ton corps."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#F06B4F",
@@ -1850,7 +1854,7 @@
       "en": "Discover how your skin protects you every day from sun, germs and little bumps. A simple and colorful adventure to explore your very own super suit.",
       "fr": "Découvre comment ta peau te protège chaque jour du soleil, des microbes et des petites bosses. Une aventure simple et colorée pour explorer ton super costume."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#E8A27C",
@@ -1994,7 +1998,7 @@
       "en": "Discover how your blood travels all through your body to deliver oxygen, fight germs and heal little cuts. A simple and colorful adventure into the secret of circulation.",
       "fr": "Découvre comment ton sang voyage dans tout ton corps pour apporter l’oxygène, chasser les microbes et réparer les petites blessures. Une aventure simple et colorée au cœur de la circulation."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#D9534F",
@@ -2138,7 +2142,7 @@
       "en": "Discover how your eyes catch light to show you colors, shapes and the whole wide world. A simple and colorful adventure to explore the secret of sight.",
       "fr": "Découvre comment tes yeux attrapent la lumière pour te montrer les couleurs, les formes et le monde. Une aventure simple et colorée pour explorer le secret de la vue."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#4FB3A9",
@@ -2282,7 +2286,7 @@
       "en": "Discover how your ears catch sounds so you can hear music, voices and the whole wide world. A simple and colorful adventure to explore the secret of hearing.",
       "fr": "Découvre comment tes oreilles attrapent les sons pour te faire entendre la musique, les voix et le monde entier. Une aventure simple et colorée pour explorer le secret de l’ouïe."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#F6C85F",
@@ -2425,7 +2429,7 @@
       "en": "Discover how your teeth bite, chew and help you smile, and how to keep them strong and shiny. A simple and colorful adventure into the secret of your smile.",
       "fr": "Découvre comment tes dents croquent, mâchent et t’aident à sourire, et comment les garder fortes et brillantes. Une aventure simple et colorée au cœur de ton sourire."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#83B59B",
@@ -2568,7 +2572,7 @@
       "en": "Discover how a doctor listens, checks and helps children feel better. A calm, colourful picture book with colouring pages, in English, French, Spanish and German.",
       "fr": "Découvre comment un docteur écoute, examine et aide les enfants à aller mieux. Un album doux et coloré avec des pages à colorier, en français, anglais, espagnol et allemand."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#39506F",
@@ -2704,7 +2708,7 @@
       "en": "Discover how nurses look after patients with gentle hands and kind words. A calm, colourful picture book with colouring pages, in English, French, Spanish and German.",
       "fr": "Découvre comment les infirmiers soignent avec des gestes doux et des mots gentils. Un album doux et coloré avec des pages à colorier, en français, anglais, espagnol et allemand."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#5BA8E0",
@@ -2839,7 +2843,7 @@
       "en": "Discover how pharmacists prepare the right medicine and explain how to take it safely. A calm, colourful picture book with colouring pages, in English, French, Spanish and German.",
       "fr": "Découvre comment les pharmaciens préparent le bon médicament et expliquent comment le prendre. Un album doux et coloré avec des pages à colorier, en français, anglais, espagnol et allemand."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#83B59B",
@@ -2974,7 +2978,7 @@
       "en": "Discover how paramedics rush to help and keep people safe on the way to hospital. A calm, colourful picture book with colouring pages, in English, French, Spanish and German.",
       "fr": "Découvre comment les secouristes foncent pour aider et protéger les gens jusqu’à l’hôpital. Un album doux et coloré avec des pages à colorier, en français, anglais, espagnol et allemand."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#F06B4F",
@@ -3109,7 +3113,7 @@
       "en": "Discover how midwives care for mums and welcome new babies into the world. A calm, colourful picture book with colouring pages, in English, French, Spanish and German.",
       "fr": "Découvre comment les sages-femmes prennent soin des mamans et accueillent les bébés. Un album doux et coloré avec des pages à colorier, en français, anglais, espagnol et allemand."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#E8A27C",
@@ -3244,7 +3248,7 @@
       "en": "Discover how physiotherapists help bodies move, stretch and grow stronger again. A calm, colourful picture book with colouring pages, in English, French, Spanish and German.",
       "fr": "Découvre comment les kinés aident le corps à bouger, s’étirer et redevenir fort. Un album doux et coloré avec des pages à colorier, en français, anglais, espagnol et allemand."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#4FB3A9",
@@ -3379,7 +3383,7 @@
       "en": "Discover how dentists check, clean and protect every smile. A calm, colourful picture book with colouring pages, in English, French, Spanish and German.",
       "fr": "Découvre comment les dentistes examinent, nettoient et protègent chaque sourire. Un album doux et coloré avec des pages à colorier, en français, anglais, espagnol et allemand."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#7FC8E8",
@@ -3515,7 +3519,7 @@
       "en": "Discover how laboratory scientists look for tiny clues that help doctors understand what is wrong. A calm, colourful picture book with colouring pages, in English, French, Spanish and German.",
       "fr": "Découvre comment les biologistes cherchent de minuscules indices qui aident les médecins. Un album doux et coloré avec des pages à colorier, en français, anglais, espagnol et allemand."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#7B6CF6",
@@ -3650,7 +3654,7 @@
       "en": "Discover how psychologists listen and help children understand big feelings. A calm, colourful picture book with colouring pages, in English, French, Spanish and German.",
       "fr": "Découvre comment les psychologues écoutent et aident les enfants à comprendre leurs grosses émotions. Un album doux et coloré avec des pages à colorier, en français, anglais, espagnol et allemand."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#F6A04D",
@@ -3785,7 +3789,7 @@
       "en": "Discover how dietitians help families choose food that helps bodies grow. A calm, colourful picture book with colouring pages, in English, French, Spanish and German.",
       "fr": "Découvre comment les diététiciens aident les familles à choisir les aliments qui font grandir. Un album doux et coloré avec des pages à colorier, en français, anglais, espagnol et allemand."
     },
-    "price": 9.99,
+    "price": 7.99,
     "funnelPrice": 4.99,
     "langs": "EN · FR · ES · DE",
     "color": "#9BC16B",
