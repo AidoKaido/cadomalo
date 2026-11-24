@@ -22,6 +22,7 @@ security-review.html
 Cadomalo-Security-Review.pdf
 
 .env*
+!.env.example
 
 # Design drops (source material, ~180MB — not part of the site)
 New/

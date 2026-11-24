@@ -8,7 +8,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "node scripts/sync-products.js && node scripts/inject-pixel-ids.js && node scripts/generate-sitemap.js && node scripts/register-printify-webhooks.js && node scripts/alias-to-prod-domain.js",
+    "build": "node scripts/sync-products.js && node scripts/build-pages.js && node scripts/inject-pixel-ids.js && node scripts/generate-sitemap.js && node scripts/register-printify-webhooks.js && node scripts/alias-to-prod-domain.js",
     "sync": "node scripts/sync-products.js",
     "import-etsy": "node scripts/import-printify-to-sanity.js",
     "import-etsy:dry": "node scripts/import-printify-to-sanity.js --dry-run",
@@ -17,6 +17,7 @@
     "import-etsy:images-dry": "node scripts/import-printify-to-sanity.js --images --dry-run"
   },
   "dependencies": {
+    "@vercel/blob": "^2.9.0",
     "stripe": "^19"
   }
 }

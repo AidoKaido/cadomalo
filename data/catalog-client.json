@@ -1,124 +1,385 @@
 [
   {
-    "id": "muscles",
-    "slug": "my-muscles-make-me-move",
-    "type": "book",
-    "price": 7.99,
-    "img": "/assets/book-muscles.png",
+    "id": "routine",
+    "slug": "morning-bedtime-routine-busy-book",
+    "type": "kit",
+    "category": "kit",
+    "collection": null,
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 9.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/routine/01.webp",
     "title": {
-      "en": "My Muscles Make Me Move",
-      "fr": "Mes muscles me font bouger"
+      "en": "Morning & Bedtime Routine Busy Book",
+      "fr": "Cahier routine du matin et du soir"
     },
     "url": {
-      "en": "/products/my-muscles-make-me-move",
-      "fr": "/fr/produits/mes-muscles-me-font-bouger"
+      "en": "/products/morning-bedtime-routine-busy-book",
+      "fr": "/fr/produits/cahier-routine-du-matin-et-du-soir"
     },
-    "cartProof": {
-      "en": "241 kids are already moving with this book",
-      "fr": "241 enfants bougent déjà avec ce livre"
-    },
-    "attrs": [
+    "includes": null,
+    "files": [
       {
-        "label": {
-          "en": "Edition",
-          "fr": "Édition"
-        },
-        "options": [
-          {
-            "en": "Story + coloring · 32 pages",
-            "fr": "Histoire + coloriages · 32 pages",
-            "delta": 0
-          },
-          {
-            "en": "With activity pack · 48 pages",
-            "fr": "Avec cahier d’activités · 48 pages",
-            "delta": 3
-          }
-        ]
+        "label": "US Letter · full colour",
+        "key": "products/routine/morning-bedtime-routine-busy-book-ages-5-7-us-letter-full-color.pdf"
       },
       {
-        "label": {
-          "en": "Paper size",
-          "fr": "Format papier"
-        },
-        "options": [
-          {
-            "en": "US Letter",
-            "fr": "US Letter",
-            "delta": 0
-          },
-          {
-            "en": "A4",
-            "fr": "A4",
-            "delta": 0
-          }
-        ]
+        "label": "US Letter · ink-saving",
+        "key": "products/routine/morning-bedtime-routine-busy-book-ages-5-7-us-letter-ink-saving.pdf"
+      },
+      {
+        "label": "A4 · full colour",
+        "key": "products/routine/morning-bedtime-routine-busy-book-ages-5-7-a4-full-color.pdf"
+      },
+      {
+        "label": "A4 · ink-saving",
+        "key": "products/routine/morning-bedtime-routine-busy-book-ages-5-7-a4-ink-saving.pdf"
       }
-    ]
+    ],
+    "attrs": []
   },
   {
-    "id": "lungs",
-    "slug": "my-busy-breathing-lungs",
-    "type": "book",
-    "price": 7.99,
-    "img": "/assets/book-lungs.png",
+    "id": "discovery-lab",
+    "slug": "my-amazing-body-discovery-lab",
+    "type": "kit",
+    "category": "kit",
+    "collection": null,
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 9.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/discovery-lab/01.webp",
     "title": {
-      "en": "My Busy Breathing Lungs",
-      "fr": "Mes poumons respirent sans arrêt"
+      "en": "My Amazing Body Discovery Lab",
+      "fr": "Mon labo de découverte du corps"
     },
     "url": {
-      "en": "/products/my-busy-breathing-lungs",
-      "fr": "/fr/produits/mes-poumons-respirent-sans-arret"
+      "en": "/products/my-amazing-body-discovery-lab",
+      "fr": "/fr/produits/mon-labo-de-decouverte-du-corps"
     },
-    "cartProof": {
-      "en": "150 kids are already coloring this book",
-      "fr": "150 enfants colorient déjà ce livre"
-    },
-    "attrs": [
+    "includes": null,
+    "files": [
       {
-        "label": {
-          "en": "Edition",
-          "fr": "Édition"
-        },
-        "options": [
-          {
-            "en": "Story + coloring · 32 pages",
-            "fr": "Histoire + coloriages · 32 pages",
-            "delta": 0
-          },
-          {
-            "en": "With activity pack · 48 pages",
-            "fr": "Avec cahier d’activités · 48 pages",
-            "delta": 3
-          }
-        ]
+        "label": "US Letter · full colour",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-us-letter-full-color.pdf"
       },
       {
-        "label": {
-          "en": "Paper size",
-          "fr": "Format papier"
-        },
-        "options": [
-          {
-            "en": "US Letter",
-            "fr": "US Letter",
-            "delta": 0
-          },
-          {
-            "en": "A4",
-            "fr": "A4",
-            "delta": 0
-          }
-        ]
+        "label": "US Letter · ink-saving",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-us-letter-ink-saving.pdf"
+      },
+      {
+        "label": "A4 · full colour",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-a4-full-color.pdf"
+      },
+      {
+        "label": "A4 · ink-saving",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-a4-ink-saving.pdf"
       }
-    ]
+    ],
+    "attrs": []
+  },
+  {
+    "id": "party-kit",
+    "slug": "birthday-adventure-party-kit",
+    "type": "party",
+    "category": "party",
+    "collection": null,
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 9.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/party-kit/01.webp",
+    "title": {
+      "en": "Birthday Adventure Party Kit",
+      "fr": "Kit de fête d’anniversaire aventure"
+    },
+    "url": {
+      "en": "/products/birthday-adventure-party-kit",
+      "fr": "/fr/produits/kit-de-fete-d-anniversaire-aventure"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "US Letter · full colour",
+        "key": "products/party-kit/birthday-adventure-party-kit-ages-5-7-us-letter-full-color.pdf"
+      },
+      {
+        "label": "US Letter · ink-saving",
+        "key": "products/party-kit/birthday-adventure-party-kit-ages-5-7-us-letter-ink-saving.pdf"
+      },
+      {
+        "label": "A4 · full colour",
+        "key": "products/party-kit/birthday-adventure-party-kit-ages-5-7-a4-full-color.pdf"
+      },
+      {
+        "label": "A4 · ink-saving",
+        "key": "products/party-kit/birthday-adventure-party-kit-ages-5-7-a4-ink-saving.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "birthday-wish",
+    "slug": "the-magical-birthday-wish",
+    "type": "party",
+    "category": "party",
+    "collection": null,
+    "fulfillment": "canva-links",
+    "hidden": false,
+    "price": 9.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/birthday-wish/01.webp",
+    "title": {
+      "en": "The Magical Birthday Wish",
+      "fr": "Le vœu d’anniversaire magique"
+    },
+    "url": {
+      "en": "/products/the-magical-birthday-wish",
+      "fr": "/fr/produits/le-voeu-d-anniversaire-magique"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "Canva template links + instructions",
+        "key": "products/birthday-wish/magical-birthday-wish-template-links-and-instructions.pdf"
+      },
+      {
+        "label": "Sample preview · look 1 (Mia)",
+        "key": "products/birthday-wish/sample-preview-L1-Mia-letter.pdf"
+      },
+      {
+        "label": "Sample preview · look 3 (Leo)",
+        "key": "products/birthday-wish/sample-preview-L3-Leo-letter.pdf"
+      },
+      {
+        "label": "Sample preview · look 4 (Sofia)",
+        "key": "products/birthday-wish/sample-preview-L4-Sofia-letter.pdf"
+      },
+      {
+        "label": "Sample preview · look 5 (Noah)",
+        "key": "products/birthday-wish/sample-preview-L5-Noah-letter.pdf"
+      },
+      {
+        "label": "Sample preview · look 7 (Jayden)",
+        "key": "products/birthday-wish/sample-preview-L7-Jayden-letter.pdf"
+      },
+      {
+        "label": "Sample preview · look 8 (Hana)",
+        "key": "products/birthday-wish/sample-preview-L8-Hana-letter.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "wonder-island",
+    "slug": "wonder-island-escape-room",
+    "type": "kit",
+    "category": "kit",
+    "collection": null,
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 9.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/wonder-island/01.webp",
+    "title": {
+      "en": "Wonder Island Escape Room",
+      "fr": "L’île aux merveilles — escape game"
+    },
+    "url": {
+      "en": "/products/wonder-island-escape-room",
+      "fr": "/fr/produits/l-ile-aux-merveilles-escape-game"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "US Letter · full colour",
+        "key": "products/wonder-island/wonder-island-printable-escape-room-ages-5-7-us-letter-full-color.pdf"
+      },
+      {
+        "label": "US Letter · ink-saving",
+        "key": "products/wonder-island/wonder-island-printable-escape-room-ages-5-7-us-letter-ink-saving.pdf"
+      },
+      {
+        "label": "A4 · full colour",
+        "key": "products/wonder-island/wonder-island-printable-escape-room-ages-5-7-a4-full-color.pdf"
+      },
+      {
+        "label": "A4 · ink-saving",
+        "key": "products/wonder-island/wonder-island-printable-escape-room-ages-5-7-a4-ink-saving.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "bundle",
+    "slug": "human-body-wonders-all-10-books",
+    "type": "bundle",
+    "category": "bundle",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 39.99,
+    "compareAt": 79.9,
+    "funnelPrice": 19.99,
+    "img": "/images/products/bundle/01.webp",
+    "title": {
+      "en": "Human Body Wonders — all 10 books",
+      "fr": "Merveilles du corps — les 10 livres"
+    },
+    "url": {
+      "en": "/products/human-body-wonders-all-10-books",
+      "fr": "/fr/produits/merveilles-du-corps-les-10-livres"
+    },
+    "includes": [
+      "head",
+      "lungs",
+      "stomach",
+      "bones",
+      "muscles",
+      "skin",
+      "blood",
+      "eyes",
+      "ears",
+      "teeth"
+    ],
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/head/head-inside-my-amazing-head.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/lungs/lungs-my-busy-breathing-lungs.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/stomach/stomach-my-stomach-mixing-machine.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/bones/bones-my-strong-body-bones.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/muscles/muscles-my-muscles-make-me-move.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/skin/skin-my-skin-super-suit.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/blood/blood-bloods-amazing-body-journey.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/eyes/eyes-my-eyes-see-everything.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/ears/ears-my-ears-catch-sounds.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/teeth/teeth-my-super-strong-teeth.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh-bundle",
+    "slug": "medical-heroes-all-10-books",
+    "type": "bundle",
+    "category": "bundle",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 39.99,
+    "compareAt": 79.9,
+    "funnelPrice": 19.99,
+    "img": "/images/products/mh-bundle/01.webp",
+    "title": {
+      "en": "Medical Heroes — all 10 books",
+      "fr": "Les héros de la santé — les 10 livres"
+    },
+    "url": {
+      "en": "/products/medical-heroes-all-10-books",
+      "fr": "/fr/produits/les-heros-de-la-sante-les-10-livres"
+    },
+    "includes": [
+      "mh01",
+      "mh02",
+      "mh03",
+      "mh04",
+      "mh05",
+      "mh06",
+      "mh07",
+      "mh08",
+      "mh09",
+      "mh10"
+    ],
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh01/mh01-the-doctor-listens-closely.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh02/mh02-nurses-make-care-better.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh03/mh03-pharmacists-prepare-helpful-medicines.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh04/mh04-paramedics-race-to-help.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh05/mh05-midwives-welcome-new-babies.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh06/mh06-physiotherapists-make-movement-stronger.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh07/mh07-dentists-protect-every-smile.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh08/mh08-laboratory-scientists-find-clues.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh09/mh09-psychologists-help-big-feelings.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh10/mh10-dietitians-help-bodies-grow.pdf"
+      }
+    ],
+    "attrs": []
   },
   {
     "id": "head",
     "slug": "inside-my-amazing-head",
     "type": "book",
+    "category": "book",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
     "price": 7.99,
-    "img": "/assets/book-head.png",
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/head/01.webp",
     "title": {
       "en": "Inside My Amazing Head",
       "fr": "Dans ma tête extraordinaire"
@@ -127,55 +388,56 @@
       "en": "/products/inside-my-amazing-head",
       "fr": "/fr/produits/dans-ma-tete-extraordinaire"
     },
-    "cartProof": {
-      "en": "212 little brains are already coloring this book",
-      "fr": "212 petits cerveaux colorient déjà ce livre"
-    },
-    "attrs": [
+    "includes": null,
+    "files": [
       {
-        "label": {
-          "en": "Edition",
-          "fr": "Édition"
-        },
-        "options": [
-          {
-            "en": "Story + coloring · 32 pages",
-            "fr": "Histoire + coloriages · 32 pages",
-            "delta": 0
-          },
-          {
-            "en": "With activity pack · 48 pages",
-            "fr": "Avec cahier d’activités · 48 pages",
-            "delta": 3
-          }
-        ]
-      },
-      {
-        "label": {
-          "en": "Paper size",
-          "fr": "Format papier"
-        },
-        "options": [
-          {
-            "en": "US Letter",
-            "fr": "US Letter",
-            "delta": 0
-          },
-          {
-            "en": "A4",
-            "fr": "A4",
-            "delta": 0
-          }
-        ]
+        "label": "PDF book · 58 pages",
+        "key": "products/head/head-inside-my-amazing-head.pdf"
       }
-    ]
+    ],
+    "attrs": []
+  },
+  {
+    "id": "lungs",
+    "slug": "my-busy-breathing-lungs",
+    "type": "book",
+    "category": "book",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/lungs/01.webp",
+    "title": {
+      "en": "My Busy Breathing Lungs",
+      "fr": "Mes poumons respirent sans arrêt"
+    },
+    "url": {
+      "en": "/products/my-busy-breathing-lungs",
+      "fr": "/fr/produits/mes-poumons-respirent-sans-arret"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/lungs/lungs-my-busy-breathing-lungs.pdf"
+      }
+    ],
+    "attrs": []
   },
   {
     "id": "stomach",
     "slug": "my-stomach-mixing-machine",
     "type": "book",
+    "category": "book",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
     "price": 7.99,
-    "img": "/assets/book-stomach.png",
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/stomach/01.webp",
     "title": {
       "en": "My Stomach Mixing Machine",
       "fr": "Mon estomac mélangeur"
@@ -184,55 +446,27 @@
       "en": "/products/my-stomach-mixing-machine",
       "fr": "/fr/produits/mon-estomac-melangeur"
     },
-    "cartProof": {
-      "en": "134 kids are already coloring their stomach machine",
-      "fr": "134 enfants colorient déjà leur estomac mélangeur"
-    },
-    "attrs": [
+    "includes": null,
+    "files": [
       {
-        "label": {
-          "en": "Edition",
-          "fr": "Édition"
-        },
-        "options": [
-          {
-            "en": "Story + coloring · 32 pages",
-            "fr": "Histoire + coloriages · 32 pages",
-            "delta": 0
-          },
-          {
-            "en": "With activity pack · 48 pages",
-            "fr": "Avec cahier d’activités · 48 pages",
-            "delta": 3
-          }
-        ]
-      },
-      {
-        "label": {
-          "en": "Paper size",
-          "fr": "Format papier"
-        },
-        "options": [
-          {
-            "en": "US Letter",
-            "fr": "US Letter",
-            "delta": 0
-          },
-          {
-            "en": "A4",
-            "fr": "A4",
-            "delta": 0
-          }
-        ]
+        "label": "PDF book · 58 pages",
+        "key": "products/stomach/stomach-my-stomach-mixing-machine.pdf"
       }
-    ]
+    ],
+    "attrs": []
   },
   {
     "id": "bones",
     "slug": "my-strong-body-bones",
     "type": "book",
+    "category": "book",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
     "price": 7.99,
-    "img": "/assets/book-bones.png",
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/bones/01.webp",
     "title": {
       "en": "My Strong Body Bones",
       "fr": "Mes os super solides"
@@ -241,220 +475,545 @@
       "en": "/products/my-strong-body-bones",
       "fr": "/fr/produits/mes-os-super-solides"
     },
-    "cartProof": {
-      "en": "168 kids are already building their skeleton",
-      "fr": "168 enfants construisent déjà leur squelette"
-    },
-    "attrs": [
+    "includes": null,
+    "files": [
       {
-        "label": {
-          "en": "Edition",
-          "fr": "Édition"
-        },
-        "options": [
-          {
-            "en": "Story + coloring · 32 pages",
-            "fr": "Histoire + coloriages · 32 pages",
-            "delta": 0
-          },
-          {
-            "en": "With activity pack · 48 pages",
-            "fr": "Avec cahier d’activités · 48 pages",
-            "delta": 3
-          }
-        ]
-      },
-      {
-        "label": {
-          "en": "Paper size",
-          "fr": "Format papier"
-        },
-        "options": [
-          {
-            "en": "US Letter",
-            "fr": "US Letter",
-            "delta": 0
-          },
-          {
-            "en": "A4",
-            "fr": "A4",
-            "delta": 0
-          }
-        ]
+        "label": "PDF book · 58 pages",
+        "key": "products/bones/bones-my-strong-body-bones.pdf"
       }
-    ]
+    ],
+    "attrs": []
   },
   {
-    "id": "bundle",
-    "slug": "human-body-wonders-all-5-books",
-    "type": "bundle",
-    "price": 29.99,
-    "img": "/assets/bundle-cover.png",
+    "id": "muscles",
+    "slug": "my-muscles-make-me-move",
+    "type": "book",
+    "category": "book",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/muscles/01.webp",
     "title": {
-      "en": "Human Body Wonders — all 5 books",
-      "fr": "Merveilles du corps — les 5 livres"
+      "en": "My Muscles Make Me Move",
+      "fr": "Mes muscles me font bouger"
     },
     "url": {
-      "en": "/products/human-body-wonders-all-5-books",
-      "fr": "/fr/produits/merveilles-du-corps-les-5-livres"
+      "en": "/products/my-muscles-make-me-move",
+      "fr": "/fr/produits/mes-muscles-me-font-bouger"
     },
-    "cartProof": {
-      "en": "87 families are exploring the full collection this week",
-      "fr": "87 familles explorent la collection complète cette semaine"
-    },
-    "attrs": [
+    "includes": null,
+    "files": [
       {
-        "label": {
-          "en": "Paper size",
-          "fr": "Format papier"
-        },
-        "options": [
-          {
-            "en": "US Letter",
-            "fr": "US Letter",
-            "delta": 0
-          },
-          {
-            "en": "A4",
-            "fr": "A4",
-            "delta": 0
-          }
-        ]
+        "label": "PDF book · 58 pages",
+        "key": "products/muscles/muscles-my-muscles-make-me-move.pdf"
       }
-    ]
+    ],
+    "attrs": []
+  },
+  {
+    "id": "skin",
+    "slug": "my-skin-super-suit",
+    "type": "book",
+    "category": "book",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/skin/01.webp",
+    "title": {
+      "en": "My Skin Super Suit",
+      "fr": "Ma peau, mon super costume"
+    },
+    "url": {
+      "en": "/products/my-skin-super-suit",
+      "fr": "/fr/produits/ma-peau-mon-super-costume"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/skin/skin-my-skin-super-suit.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "blood",
+    "slug": "blood-s-amazing-body-journey",
+    "type": "book",
+    "category": "book",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/blood/01.webp",
+    "title": {
+      "en": "Blood’s Amazing Body Journey",
+      "fr": "L’incroyable voyage du sang dans le corps"
+    },
+    "url": {
+      "en": "/products/blood-s-amazing-body-journey",
+      "fr": "/fr/produits/l-incroyable-voyage-du-sang-dans-le-corps"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/blood/blood-bloods-amazing-body-journey.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "eyes",
+    "slug": "my-eyes-see-everything",
+    "type": "book",
+    "category": "book",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/eyes/01.webp",
+    "title": {
+      "en": "My Eyes See Everything",
+      "fr": "Mes yeux voient tout"
+    },
+    "url": {
+      "en": "/products/my-eyes-see-everything",
+      "fr": "/fr/produits/mes-yeux-voient-tout"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/eyes/eyes-my-eyes-see-everything.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "ears",
+    "slug": "my-ears-catch-sounds",
+    "type": "book",
+    "category": "book",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/ears/01.webp",
+    "title": {
+      "en": "My Ears Catch Sounds",
+      "fr": "Mes oreilles captent les sons"
+    },
+    "url": {
+      "en": "/products/my-ears-catch-sounds",
+      "fr": "/fr/produits/mes-oreilles-captent-les-sons"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/ears/ears-my-ears-catch-sounds.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "teeth",
+    "slug": "my-super-strong-teeth",
+    "type": "book",
+    "category": "book",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/teeth/01.webp",
+    "title": {
+      "en": "My Super Strong Teeth",
+      "fr": "Mes dents super fortes"
+    },
+    "url": {
+      "en": "/products/my-super-strong-teeth",
+      "fr": "/fr/produits/mes-dents-super-fortes"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/teeth/teeth-my-super-strong-teeth.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh01",
+    "slug": "the-doctor-listens-closely",
+    "type": "book",
+    "category": "book",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/mh01/01.webp",
+    "title": {
+      "en": "The Doctor Listens Closely",
+      "fr": "Le docteur écoute attentivement"
+    },
+    "url": {
+      "en": "/products/the-doctor-listens-closely",
+      "fr": "/fr/produits/le-docteur-ecoute-attentivement"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh01/mh01-the-doctor-listens-closely.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh02",
+    "slug": "nurses-make-care-better",
+    "type": "book",
+    "category": "book",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/mh02/01.webp",
+    "title": {
+      "en": "Nurses Make Care Better",
+      "fr": "Les infirmiers prennent soin de nous"
+    },
+    "url": {
+      "en": "/products/nurses-make-care-better",
+      "fr": "/fr/produits/les-infirmiers-prennent-soin-de-nous"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh02/mh02-nurses-make-care-better.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh03",
+    "slug": "pharmacists-prepare-helpful-medicines",
+    "type": "book",
+    "category": "book",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/mh03/01.webp",
+    "title": {
+      "en": "Pharmacists Prepare Helpful Medicines",
+      "fr": "Les pharmaciens préparent nos médicaments"
+    },
+    "url": {
+      "en": "/products/pharmacists-prepare-helpful-medicines",
+      "fr": "/fr/produits/les-pharmaciens-preparent-nos-medicaments"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh03/mh03-pharmacists-prepare-helpful-medicines.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh04",
+    "slug": "paramedics-race-to-help",
+    "type": "book",
+    "category": "book",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/mh04/01.webp",
+    "title": {
+      "en": "Paramedics Race to Help",
+      "fr": "Les secouristes foncent pour aider"
+    },
+    "url": {
+      "en": "/products/paramedics-race-to-help",
+      "fr": "/fr/produits/les-secouristes-foncent-pour-aider"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh04/mh04-paramedics-race-to-help.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh05",
+    "slug": "midwives-welcome-new-babies",
+    "type": "book",
+    "category": "book",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/mh05/01.webp",
+    "title": {
+      "en": "Midwives Welcome New Babies",
+      "fr": "Les sages-femmes accueillent les bébés"
+    },
+    "url": {
+      "en": "/products/midwives-welcome-new-babies",
+      "fr": "/fr/produits/les-sages-femmes-accueillent-les-bebes"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh05/mh05-midwives-welcome-new-babies.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh06",
+    "slug": "physiotherapists-make-movement-stronger",
+    "type": "book",
+    "category": "book",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/mh06/01.webp",
+    "title": {
+      "en": "Physiotherapists Make Movement Stronger",
+      "fr": "Les kinés renforcent nos mouvements"
+    },
+    "url": {
+      "en": "/products/physiotherapists-make-movement-stronger",
+      "fr": "/fr/produits/les-kines-renforcent-nos-mouvements"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh06/mh06-physiotherapists-make-movement-stronger.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh07",
+    "slug": "dentists-protect-every-smile",
+    "type": "book",
+    "category": "book",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/mh07/01.webp",
+    "title": {
+      "en": "Dentists Protect Every Smile",
+      "fr": "Les dentistes protègent nos sourires"
+    },
+    "url": {
+      "en": "/products/dentists-protect-every-smile",
+      "fr": "/fr/produits/les-dentistes-protegent-nos-sourires"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh07/mh07-dentists-protect-every-smile.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh08",
+    "slug": "laboratory-scientists-find-clues",
+    "type": "book",
+    "category": "book",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/mh08/01.webp",
+    "title": {
+      "en": "Laboratory Scientists Find Clues",
+      "fr": "Les biologistes cherchent des indices"
+    },
+    "url": {
+      "en": "/products/laboratory-scientists-find-clues",
+      "fr": "/fr/produits/les-biologistes-cherchent-des-indices"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh08/mh08-laboratory-scientists-find-clues.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh09",
+    "slug": "psychologists-help-big-feelings",
+    "type": "book",
+    "category": "book",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/mh09/01.webp",
+    "title": {
+      "en": "Psychologists Help Big Feelings",
+      "fr": "Les psychologues apaisent les grosses émotions"
+    },
+    "url": {
+      "en": "/products/psychologists-help-big-feelings",
+      "fr": "/fr/produits/les-psychologues-apaisent-les-grosses-emotions"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh09/mh09-psychologists-help-big-feelings.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "mh10",
+    "slug": "dietitians-help-bodies-grow",
+    "type": "book",
+    "category": "book",
+    "collection": "mh",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 7.99,
+    "compareAt": null,
+    "funnelPrice": 4.99,
+    "img": "/images/products/mh10/01.webp",
+    "title": {
+      "en": "Dietitians Help Bodies Grow",
+      "fr": "Les diététiciens nous aident à grandir"
+    },
+    "url": {
+      "en": "/products/dietitians-help-bodies-grow",
+      "fr": "/fr/produits/les-dieteticiens-nous-aident-a-grandir"
+    },
+    "includes": null,
+    "files": [
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/mh10/mh10-dietitians-help-bodies-grow.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
+    "id": "routine-sample",
+    "slug": "free-morning-bedtime-routine-sample",
+    "type": "kit",
+    "category": "kit",
+    "collection": null,
+    "fulfillment": "auto",
+    "hidden": true,
+    "price": 0,
+    "compareAt": null,
+    "funnelPrice": null,
+    "img": "/images/products/routine-sample/01.webp",
+    "title": {
+      "en": "Free Morning & Bedtime Routine Sample",
+      "fr": "Échantillon gratuit — routine du matin et du soir"
+    },
+    "url": null,
+    "includes": null,
+    "files": [
+      {
+        "label": "Free sample · US Letter",
+        "key": "products/routine-sample/routine-sample-morning-bedtime-free-sample.pdf"
+      }
+    ],
+    "attrs": []
   },
   {
     "id": "goose",
     "slug": "silly-goose-tumbler-wrap",
     "type": "wrap",
+    "category": "wrap",
+    "collection": null,
+    "fulfillment": "manual",
+    "hidden": true,
     "price": 2.89,
+    "compareAt": 4.49,
+    "funnelPrice": null,
     "img": "/assets/tumbler-goose-card.png",
     "title": {
       "en": "Silly Goose tumbler wrap",
       "fr": "Wrap tumbler Silly Goose"
     },
-    "url": {
-      "en": "/products/silly-goose-tumbler-wrap",
-      "fr": "/fr/produits/wrap-tumbler-silly-goose"
-    },
-    "cartProof": {
-      "en": "96 tumblers were pressed with this design this month",
-      "fr": "96 tumblers ont été pressés avec ce design ce mois-ci"
-    },
-    "attrs": [
-      {
-        "label": {
-          "en": "Tumbler size",
-          "fr": "Taille du tumbler"
-        },
-        "options": [
-          {
-            "en": "20oz skinny",
-            "fr": "20oz skinny",
-            "delta": 0
-          },
-          {
-            "en": "30oz skinny",
-            "fr": "30oz skinny",
-            "delta": 0
-          },
-          {
-            "en": "16oz",
-            "fr": "16oz",
-            "delta": 0
-          },
-          {
-            "en": "2oz shot",
-            "fr": "2oz shot",
-            "delta": 0
-          }
-        ]
-      },
-      {
-        "label": {
-          "en": "Licence",
-          "fr": "Licence"
-        },
-        "options": [
-          {
-            "en": "Personal use",
-            "fr": "Usage personnel",
-            "delta": 0
-          },
-          {
-            "en": "Small business · 200 items",
-            "fr": "Petite entreprise · 200 pièces",
-            "delta": 2
-          }
-        ]
-      }
-    ]
+    "url": null,
+    "includes": null,
+    "files": [],
+    "attrs": []
   },
   {
     "id": "girl",
     "slug": "just-a-girl-pink-tumbler-wrap",
     "type": "wrap",
+    "category": "wrap",
+    "collection": null,
+    "fulfillment": "manual",
+    "hidden": true,
     "price": 2.89,
+    "compareAt": 4.49,
+    "funnelPrice": null,
     "img": "/assets/tumbler-girl-card.png",
     "title": {
       "en": "Just a Girl pink tumbler wrap",
       "fr": "Wrap tumbler Just a Girl rose"
     },
-    "url": {
-      "en": "/products/just-a-girl-pink-tumbler-wrap",
-      "fr": "/fr/produits/wrap-tumbler-just-a-girl-rose"
-    },
-    "cartProof": {
-      "en": "112 makers added this wrap this week",
-      "fr": "112 créatrices ont ajouté ce wrap cette semaine"
-    },
-    "attrs": [
-      {
-        "label": {
-          "en": "Tumbler size",
-          "fr": "Taille du tumbler"
-        },
-        "options": [
-          {
-            "en": "20oz skinny",
-            "fr": "20oz skinny",
-            "delta": 0
-          },
-          {
-            "en": "30oz skinny",
-            "fr": "30oz skinny",
-            "delta": 0
-          },
-          {
-            "en": "16oz",
-            "fr": "16oz",
-            "delta": 0
-          },
-          {
-            "en": "2oz shot",
-            "fr": "2oz shot",
-            "delta": 0
-          }
-        ]
-      },
-      {
-        "label": {
-          "en": "Licence",
-          "fr": "Licence"
-        },
-        "options": [
-          {
-            "en": "Personal use",
-            "fr": "Usage personnel",
-            "delta": 0
-          },
-          {
-            "en": "Small business · 200 items",
-            "fr": "Petite entreprise · 200 pièces",
-            "delta": 2
-          }
-        ]
-      }
-    ]
+    "url": null,
+    "includes": null,
+    "files": [],
+    "attrs": []
   }
 ]

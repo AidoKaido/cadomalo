@@ -52,7 +52,7 @@
       <a href="/fr/collections">Collections</a>
       <a href="/fr/blog">Blog</a>
       <a href="/fr/a-propos" aria-current="page">À propos</a>
-      <a href="/fr/promotions">Promos 🔥</a>
+      <a href="/fr/promotions">Coffrets</a>
     </nav>
 
     <div class="header-actions">
@@ -78,7 +78,7 @@
       <a href="/fr/collections">Collections<span class="arrow" aria-hidden="true">&rarr;</span></a>
       <a href="/fr/blog">Blog<span class="arrow" aria-hidden="true">&rarr;</span></a>
       <a href="/fr/a-propos">À propos<span class="arrow" aria-hidden="true">&rarr;</span></a>
-      <a href="/fr/promotions">Promos 🔥<span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <a href="/fr/promotions">Coffrets<span class="arrow" aria-hidden="true">&rarr;</span></a>
   </nav>
 
   <div class="mobile-menu-langs">
@@ -142,7 +142,7 @@
         <ul>
           <li><a href="/fr/boutique">Boutique</a></li>
           <li><a href="/fr/collections">Collections</a></li>
-          <li><a href="/fr/promotions">Promos 🔥</a></li>
+          <li><a href="/fr/promotions">Coffrets</a></li>
           <li><a href="/fr/blog">Blog</a></li>
         </ul>
       </div>
@@ -228,27 +228,33 @@
     <a class="btn btn-primary" href="/fr/collections">Découvrir nos livres <span aria-hidden="true">&rarr;</span></a>
   </div>
 
-  <!-- urgency strip: presentational countdown, seeded on first add -->
-  <div class="cart-urgency" data-drawer-urgency hidden>
-    <svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>
-    </svg>
-    <span>Votre panier est réservé pendant <span class="clock" data-reserve-clock>10:00</span> — les prix de lancement finissent ce soir.</span>
-  </div>
-
   <div class="cart-drawer-body" data-drawer-body hidden>
-    <!-- per-product social proof, set from the last added item -->
-    <p class="cart-proof" data-drawer-proof hidden>
-      <span class="avatar-stack">
-        <span class="avatar" style="background:var(--coral-500);color:#fff">S</span>
-        <span class="avatar" style="background:var(--sky-500);color:#fff">D</span>
-        <span class="avatar" style="background:var(--yellow-500);color:var(--blue-700)">N</span>
-      </span>
-      <span data-drawer-proof-text></span>
-    </p>
-
     <div class="cart-lines" data-drawer-lines data-remove-label="Retirer"></div>
+
+    <!-- order bump: filled by js/cart.js (renderBump) when the cart has a
+         matching collection / kit offer; real catalogue prices only -->
+    <div class="cart-bump" data-drawer-bump hidden>
+      <label class="cart-bump-label">
+        <input type="checkbox" class="cart-bump-check" data-bump-check>
+        <img class="cart-bump-img" data-bump-img alt="" width="56" height="56" loading="lazy" hidden>
+        <span class="cart-bump-text">
+          <strong data-bump-title></strong>
+          <span class="cart-bump-note" data-bump-note></span>
+        </span>
+        <span class="cart-bump-price"><s data-bump-compare hidden></s> <strong data-bump-price></strong></span>
+      </label>
+    </div>
+    <style>
+      .cart-bump{margin:12px 0;border:2px dashed var(--coral-500,#F06B4F);border-radius:16px;background:var(--cream,#FFF8ED);padding:12px 14px}
+      .cart-bump-label{display:flex;align-items:center;gap:12px;cursor:pointer;font-family:var(--font-body,"Nunito Sans",sans-serif);color:var(--ink-900,#29333A)}
+      .cart-bump-check{width:22px;height:22px;flex:0 0 22px;accent-color:var(--coral-500,#F06B4F)}
+      .cart-bump-img{width:56px;height:56px;object-fit:cover;border-radius:10px;flex:0 0 56px}
+      .cart-bump-text{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;font-size:14px;line-height:1.35}
+      .cart-bump-note{font-size:12px;color:var(--ink-700,#5b6670)}
+      .cart-bump-price{white-space:nowrap;text-align:right;font-size:14px}
+      .cart-bump-price s{color:var(--ink-500,#8a949c);font-weight:400;margin-right:2px}
+      .cart-bump-price strong{color:var(--coral-600,#D9553A)}
+    </style>
 
     <div class="cart-trust-card">
       <img src="/assets/logo-mark.png" alt="" width="52" height="52" loading="lazy">

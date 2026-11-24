@@ -1,6 +1,5 @@
 {
   "_comment": "Strings the design drop does not ship: accessibility labels, the cookie-consent banner (the drop has none, though its own cookie policy promises one), the shortened mobile announcement, and newsletter consent wording. Authored here rather than in ui.json so content/ui.json stays a faithful extract of the drop. Deep-merged over ui.json by scripts/build-pages.js.",
-
   "en": {
     "announceShort": "Instant download · Ages 3–8",
     "a11y": {
@@ -26,9 +25,51 @@
     },
     "news": {
       "consent": "One email every few weeks. Unsubscribe any time — see our privacy policy."
+    },
+    "shop2": {
+      "hbwH": "Human Body Wonders",
+      "hbwP": "Ten first books about how the body works — from the brain to the teeth.",
+      "mhH": "Medical Heroes",
+      "mhP": "Ten books about the people who care for us — so every check-up feels familiar.",
+      "kitsH": "Activity kits & party",
+      "kitsP": "Printable busy book, science lab, escape room and a complete birthday party.",
+      "seeCollection": "About this collection",
+      "cover": "Printable PDF"
+    },
+    "pdp2": {
+      "instantBadge": "Instant PDF download",
+      "instantSub": "Download right after checkout — nothing to wait for",
+      "canvaBadge": "Instant Canva template links",
+      "canvaSub": "Personalise right after checkout",
+      "guaranteeH": "30-day happiness promise",
+      "guaranteeP": "If a file doesn’t work or it isn’t what you expected, write to support@cadomalo.com within 30 days and we’ll make it right or refund you.",
+      "insideH": "What’s inside",
+      "previewsH": "Page previews",
+      "faqH": "Questions parents ask",
+      "completeH": "Complete the collection",
+      "completeBundle": "Get all 10 books for",
+      "completeSave": "You save",
+      "relatedKits": "Families also choose",
+      "reviewsEmptyH": "Be one of the first to review",
+      "reviewsEmptyP": "Bought this? Tell other parents how it went — verified buyers get 15% off their next order.",
+      "reviewsEmptyCta": "Write a review",
+      "videoLabel": "Product demo video",
+      "playVideo": "Play video",
+      "bundleOf": "10 books included",
+      "includes": "Included in this collection"
+    },
+    "home2": {
+      "bundlesKicker": "Best value",
+      "bundlesH": "Complete a collection and save",
+      "bundlesP": "Ten picture books for $39.99 instead of $79.90.",
+      "sampleKicker": "Free for parents",
+      "sampleH": "Try the routine busy book free",
+      "sampleP": "Get 10 printable pages from the Morning & Bedtime Routine Busy Book — one routine world, the star chart and the certificate — straight to your inbox.",
+      "sampleCta": "Send me the free sample",
+      "kitsCta": "Shop activity kits",
+      "noReviews": "Our shop is new, so we don’t have reviews to show you yet — and we won’t invent any. Bought from us? Share how it went."
     }
   },
-
   "fr": {
     "announceShort": "Téléchargement immédiat · 3–8 ans",
     "a11y": {
@@ -54,6 +95,49 @@
     },
     "news": {
       "consent": "Un e-mail toutes les quelques semaines. Désinscription à tout moment — voir notre politique de confidentialité."
+    },
+    "shop2": {
+      "hbwH": "Merveilles du corps",
+      "hbwP": "Dix premiers livres sur le fonctionnement du corps — du cerveau aux dents.",
+      "mhH": "Les héros de la santé",
+      "mhP": "Dix livres sur celles et ceux qui prennent soin de nous — pour que chaque rendez-vous paraisse familier.",
+      "kitsH": "Kits d’activités et fête",
+      "kitsP": "Cahier de routine, labo scientifique, escape game et fête d’anniversaire complète.",
+      "seeCollection": "À propos de la collection",
+      "cover": "PDF à imprimer"
+    },
+    "pdp2": {
+      "instantBadge": "PDF à télécharger tout de suite",
+      "instantSub": "Téléchargement juste après le paiement — rien à attendre",
+      "canvaBadge": "Liens Canva immédiats",
+      "canvaSub": "Personnalisez juste après le paiement",
+      "guaranteeH": "Promesse bonheur de 30 jours",
+      "guaranteeP": "Si un fichier ne fonctionne pas ou si le produit ne correspond pas à vos attentes, écrivez à support@cadomalo.com sous 30 jours : nous trouvons une solution ou vous remboursons.",
+      "insideH": "Ce qu’il y a dedans",
+      "previewsH": "Aperçu des pages",
+      "faqH": "Les questions des parents",
+      "completeH": "Complétez la collection",
+      "completeBundle": "Les 10 livres pour",
+      "completeSave": "Vous économisez",
+      "relatedKits": "Les familles choisissent aussi",
+      "reviewsEmptyH": "Soyez parmi les premiers à donner votre avis",
+      "reviewsEmptyP": "Vous l’avez acheté ? Racontez aux autres parents — les acheteurs vérifiés reçoivent 15 % sur leur prochaine commande.",
+      "reviewsEmptyCta": "Donner mon avis",
+      "videoLabel": "Vidéo de démonstration",
+      "playVideo": "Lire la vidéo",
+      "bundleOf": "10 livres inclus",
+      "includes": "Inclus dans cette collection"
+    },
+    "home2": {
+      "bundlesKicker": "Meilleur prix",
+      "bundlesH": "Complétez une collection et économisez",
+      "bundlesP": "Dix albums pour 39,99 $ au lieu de 79,90 $.",
+      "sampleKicker": "Gratuit pour les parents",
+      "sampleH": "Essayez le cahier de routine gratuitement",
+      "sampleP": "Recevez 10 pages à imprimer du cahier routine du matin et du soir — un monde, le tableau d’étoiles et le diplôme — directement par e-mail (pages en anglais).",
+      "sampleCta": "Recevoir l’échantillon gratuit",
+      "kitsCta": "Voir les kits d’activités",
+      "noReviews": "Notre boutique est nouvelle : nous n’avons pas encore d’avis à vous montrer — et nous n’en inventerons pas. Vous avez acheté chez nous ? Racontez-nous."
     }
   }
 }

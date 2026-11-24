@@ -7,20 +7,20 @@
       "collections": "Book collections",
       "blog": "Blog",
       "about": "About",
-      "sale": "Sale 🔥"
+      "sale": "Bundle deals"
     },
     "basket": "Basket",
     "hero": {
-      "eyebrow": "Books • Printables • Playful learning",
-      "t1": "Little minds.",
-      "t2": "Big discoveries.",
-      "text": "Beautiful multilingual books that turn everyday curiosity into knowledge children carry with them — for curious minds ages 3–8.",
-      "cta1": "Explore our books",
+      "eyebrow": "Picture books & printable kits · ages 3–7",
+      "t1": "Calmer mornings.",
+      "t2": "Curious minds.",
+      "text": "Picture books in four languages and printable activity kits that make routines easier and learning playful — instant PDF download.",
+      "cta1": "Get the free routine sample",
       "cta2": "Shop all",
       "trust": [
-        "Instant download",
-        "4 languages in every book",
-        "Created by a midwife"
+        "Instant PDF download",
+        "30-day happiness promise",
+        "Books in 4 languages"
       ]
     },
     "topics": {
@@ -39,12 +39,12 @@
     },
     "collection": {
       "kicker": "Our little library",
-      "h": "Meet the Human Body Wonders",
-      "p": "Friendly first books that make body science feel simple, colorful and exciting.",
+      "h": "Two book collections, ten books each",
+      "p": "Human Body Wonders explains how the body works. Medical Heroes introduces the people who care for it. Every book in English, French, Spanish and German.",
       "bundleEyebrow": "Complete collection",
-      "bundleH": "All five books. One happy bookshelf.",
-      "bundleP": "Lungs, brain, stomach, bones and muscles — 160+ pages in four languages, for 25% less.",
-      "bundleCta": "Get all 5 books"
+      "bundleH": "All ten books. One happy bookshelf.",
+      "bundleP": "Get a whole collection — 10 picture books, 580 pages in four languages — for $39.99 instead of $79.90.",
+      "bundleCta": "Get all 10 books"
     },
     "method": {
       "kicker": "Learning that feels like play",
@@ -74,15 +74,15 @@
       "cta": "Explore multilingual books"
     },
     "celebrate": {
-      "kicker": "Celebration days",
-      "h": "Designs for the days you’ll remember",
-      "p": "Seamless tumbler wraps for birthdays, milestones and makers — download today, press today.",
-      "cta": "Shop tumbler wraps"
+      "kicker": "Activity kits & party",
+      "h": "Printables for busy days and big days",
+      "p": "A routine busy book, a body science lab, an escape room and a complete birthday party — print at home today.",
+      "cta": "Shop activity kits"
     },
     "reviews": {
-      "kicker": "Loved by families",
-      "h": "Small readers. Big reviews.",
-      "p": "4.9 out of 5 from parents, teachers and makers."
+      "kicker": "Reviews",
+      "h": "Real reviews from real families",
+      "p": "We only show reviews from people who bought from us. Verified buyers get 15% off their next order for sharing theirs."
     },
     "blog": {
       "kicker": "From the blog",
@@ -117,26 +117,27 @@
     },
     "shop": {
       "title": "Shop all",
-      "p": "Books for learning days, designs for celebration days.",
+      "p": "Picture books, activity kits and party printables — every one an instant PDF download.",
       "filters": [
         "All",
         "Books",
-        "Bundles",
-        "Tumbler wraps"
+        "Activity kits",
+        "Party",
+        "Bundles"
       ],
       "count": "products"
     },
     "cols": {
-      "eyebrow": "Collection 01 · Available now",
-      "h": "Human Body Wonders",
-      "p": "Five first books that take children on a tour of their own body — breathing, thinking, eating, standing tall and moving. Each title is a story, a coloring book and a language game in one.",
+      "eyebrow": "2 collections · available now",
+      "h": "Our book collections",
+      "p": "Two series of 58-page picture books with colouring pages, each in English, French, Spanish and German — for curious children aged 3 to 7.",
       "facts": [
-        "5 books",
-        "Ages 3–8",
+        "20 books",
+        "Ages 3–7",
         "EN · FR · ES · DE",
-        "160+ pages"
+        "58 pages each"
       ],
-      "cta": "Get all 5 books",
+      "cta": "Get all 10 books",
       "cta2": "Shop single titles",
       "inside": "Inside the collection",
       "nextH": "Coming next",
@@ -190,10 +191,10 @@
       "etsyCta": "Visit our Etsy shop"
     },
     "sale": {
-      "eyebrow": "Limited time",
-      "h1": "Launch sale.",
-      "h2": "Up to 35% off.",
-      "p": "To celebrate our new home, the complete collection, single titles and tumbler wraps are reduced — until the timer runs out.",
+      "eyebrow": "Collection savings",
+      "h1": "Bigger bundles.",
+      "h2": "Better value.",
+      "p": "Every 10-book collection is $39.99 instead of $79.90 when you buy the books one by one.",
       "ends": "Sale ends in",
       "units": [
         "days",
@@ -232,8 +233,6 @@
     },
     "cart": {
       "title": "Your basket",
-      "reserved": "Your basket is reserved for",
-      "reservedAfter": "— launch prices end tonight.",
       "empty": "Your basket is empty",
       "emptyP": "Start with a book they’ll ask for again tonight.",
       "emptyCta": "Explore our books",
@@ -270,20 +269,20 @@
       "collections": "Collections",
       "blog": "Blog",
       "about": "À propos",
-      "sale": "Promos 🔥"
+      "sale": "Coffrets"
     },
     "basket": "Panier",
     "hero": {
-      "eyebrow": "Livres • Printables • Apprendre en jouant",
-      "t1": "Petits esprits.",
-      "t2": "Grandes découvertes.",
-      "text": "De beaux livres multilingues qui transforment la curiosité de tous les jours en savoirs que les enfants gardent avec eux — pour les esprits curieux de 3 à 8 ans.",
-      "cta1": "Découvrir nos livres",
+      "eyebrow": "Albums et kits à imprimer · 3–7 ans",
+      "t1": "Des matins plus calmes.",
+      "t2": "Des esprits curieux.",
+      "text": "Des albums en quatre langues et des kits d’activités à imprimer qui facilitent les routines et rendent l’apprentissage ludique — PDF à télécharger tout de suite.",
+      "cta1": "Recevoir l’échantillon gratuit",
       "cta2": "Toute la boutique",
       "trust": [
-        "Téléchargement immédiat",
-        "4 langues dans chaque livre",
-        "Créé par une sage-femme"
+        "PDF à télécharger tout de suite",
+        "Promesse bonheur 30 jours",
+        "Livres en 4 langues"
       ]
     },
     "topics": {
@@ -302,12 +301,12 @@
     },
     "collection": {
       "kicker": "Notre petite bibliothèque",
-      "h": "Découvrez les Merveilles du corps",
-      "p": "Des premiers livres chaleureux qui rendent la science du corps simple, colorée et passionnante.",
+      "h": "Deux collections, dix livres chacune",
+      "p": "Merveilles du corps explique comment fonctionne le corps. Les héros de la santé présente celles et ceux qui en prennent soin. Chaque livre en français, anglais, espagnol et allemand.",
       "bundleEyebrow": "Collection complète",
-      "bundleH": "Les cinq livres. Une étagère heureuse.",
-      "bundleP": "Poumons, cerveau, estomac, os et muscles — plus de 160 pages en quatre langues, 25 % moins cher.",
-      "bundleCta": "Les 5 livres"
+      "bundleH": "Dix livres. Une étagère heureuse.",
+      "bundleP": "Toute une collection — 10 albums, 580 pages en quatre langues — pour 39,99 $ au lieu de 79,90 $.",
+      "bundleCta": "Les 10 livres"
     },
     "method": {
       "kicker": "Apprendre comme on joue",
@@ -337,15 +336,15 @@
       "cta": "Voir les livres multilingues"
     },
     "celebrate": {
-      "kicker": "Jours de fête",
-      "h": "Des designs pour les jours dont on se souvient",
-      "p": "Des wraps tumbler sans raccord pour les anniversaires, les grandes étapes et les créatrices — téléchargés et pressés le jour même.",
-      "cta": "Voir les wraps tumbler"
+      "kicker": "Kits d’activités et fête",
+      "h": "Des printables pour les jours chargés et les grands jours",
+      "p": "Un cahier de routine, un labo du corps, un escape game et une fête d’anniversaire complète — à imprimer dès aujourd’hui.",
+      "cta": "Voir les kits d’activités"
     },
     "reviews": {
-      "kicker": "Adoré par les familles",
-      "h": "Petits lecteurs. Grands avis.",
-      "p": "4,9 sur 5 selon les parents, enseignants et créatrices."
+      "kicker": "Avis",
+      "h": "De vrais avis de vraies familles",
+      "p": "Nous n’affichons que les avis de personnes qui ont acheté chez nous. Les acheteurs vérifiés reçoivent 15 % sur leur prochaine commande en partageant le leur."
     },
     "blog": {
       "kicker": "Sur le blog",
@@ -380,27 +379,28 @@
     },
     "shop": {
       "title": "Toute la boutique",
-      "p": "Des livres pour les jours d’apprentissage, des designs pour les jours de fête.",
+      "p": "Albums, kits d’activités et printables de fête — tous en PDF à télécharger tout de suite.",
       "filters": [
         "Tout",
         "Livres",
-        "Packs",
-        "Wraps tumbler"
+        "Kits d’activités",
+        "Fête",
+        "Coffrets"
       ],
       "count": "produits"
     },
     "cols": {
-      "eyebrow": "Collection 01 · Disponible",
-      "h": "Les Merveilles du corps",
-      "p": "Cinq premiers livres qui emmènent les enfants à la découverte de leur propre corps — respirer, penser, manger, se tenir droit et bouger. Chaque titre est à la fois une histoire, un livre de coloriage et un jeu de langues.",
+      "eyebrow": "2 collections · disponibles",
+      "h": "Nos collections de livres",
+      "p": "Deux séries d’albums de 58 pages avec coloriages, chacun en français, anglais, espagnol et allemand — pour les enfants curieux de 3 à 7 ans.",
       "facts": [
-        "5 livres",
-        "3–8 ans",
+        "20 livres",
+        "3–7 ans",
         "FR · EN · ES · DE",
-        "160+ pages"
+        "58 pages chacun"
       ],
-      "cta": "Les 5 livres",
-      "cta2": "Voir les titres",
+      "cta": "Les 10 livres",
+      "cta2": "Voir les titres seuls",
       "inside": "Dans la collection",
       "nextH": "Bientôt",
       "nextP": "Nous écrivons et illustrons les prochaines collections. Inscrivez-vous pour être prévenu en premier — et profiter du prix de lancement.",
@@ -453,10 +453,10 @@
       "etsyCta": "Voir notre boutique Etsy"
     },
     "sale": {
-      "eyebrow": "Durée limitée",
-      "h1": "Promos de lancement.",
-      "h2": "Jusqu’à -35 %.",
-      "p": "Pour fêter notre nouvelle maison, la collection complète, certains titres et les wraps tumbler sont à prix réduit — jusqu’à la fin du compte à rebours.",
+      "eyebrow": "Économies sur les collections",
+      "h1": "Plus de livres.",
+      "h2": "Meilleur prix.",
+      "p": "Chaque collection de 10 livres coûte 39,99 $ au lieu de 79,90 $ à l’unité.",
       "ends": "Fin des promos dans",
       "units": [
         "jours",
@@ -464,7 +464,7 @@
         "min",
         "sec"
       ],
-      "stack": "Cumulez : utilisez CURIOUS10 au paiement pour 10 % de plus."
+      "stack": "Cumulez : code CURIOUS10 au paiement pour 10 % de plus."
     },
     "product": {
       "home": "Accueil",
@@ -495,8 +495,6 @@
     },
     "cart": {
       "title": "Votre panier",
-      "reserved": "Votre panier est réservé pendant",
-      "reservedAfter": "— les prix de lancement finissent ce soir.",
       "empty": "Votre panier est vide",
       "emptyP": "Commencez par un livre qu’ils redemanderont ce soir.",
       "emptyCta": "Découvrir nos livres",

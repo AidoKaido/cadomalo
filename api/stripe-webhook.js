@@ -1,24 +1,41 @@
-// Stripe webhook: handles checkout completion (digital delivery + Klaviyo
-// purchase event) and abandoned-checkout signals (Klaviyo "Started Checkout").
+// Stripe webhook: order delivery, owner notification, Brevo + Klaviyo.
 //
 // Events handled:
-//   - checkout.session.completed         → digital delivery emails + Klaviyo purchase event
-//   - checkout.session.expired           → Klaviyo "Started Checkout" event for abandoned-cart flow
-//   - checkout.session.async_payment_failed → Klaviyo abandoned-cart event too
+//   - checkout.session.completed / checkout.session.async_payment_succeeded
+//       → owner copy to ORDER_NOTIFY_TO, branded download email (Resend),
+//         buyer added to the Brevo "Customers" list, Klaviyo "Placed Order"
+//   - payment_intent.succeeded with metadata.items + metadata.upsell_of
+//       → same, for the one-click funnel upsell (charged off-session, so
+//         there is no Checkout Session)
+//   - checkout.session.expired / checkout.session.async_payment_failed
+//       → Klaviyo "Started Checkout" (abandoned-cart flow)
 //
-// Idempotency: relies on the Stripe event id; if Stripe retries, we re-send.
-// (Acceptable for a small store; can switch to a dedupe table later.)
+// Delivery: products with files (and bundles, which expand to their books)
+// get signed 7-day links to /api/download. The storybook (`canva-links`) gets
+// its Canva-links PDF highlighted. Products without files fall back to the
+// "we'll email your files within 24 hours" message and are fulfilled by hand.
+//
+// Idempotency: after delivering, the PaymentIntent gets metadata.delivered;
+// a Stripe retry of the same event finds it and skips. (Sessions with no
+// PaymentIntent — 100% discount — are not deduplicated.)
+//
+// In the Stripe Dashboard the endpoint must subscribe to:
+//   checkout.session.completed, checkout.session.async_payment_succeeded,
+//   checkout.session.expired, checkout.session.async_payment_failed,
+//   payment_intent.succeeded
 
-import Stripe from 'stripe'
-import {loadCatalog} from './_catalog.js'
+import {loadCatalog, FREE_IDS} from './_catalog.js'
+import {getStripe, productsFromSession, productsFromPaymentIntent, buildDownloads} from './_stripe.js'
+import {brevoConfigured, listId, getContact, upsertContact} from './_brevo.js'
+import {escapeHtml, safeBaseUrl, defaultBaseUrl} from './_util.js'
+import {layout, button, h1, p, small, C} from './_email.js'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET
 const RESEND_KEY = process.env.RESEND_API_KEY
 const FROM_EMAIL = process.env.RESEND_FROM || 'Cadomalo <support@cadomalo.com>'
 const REPLY_TO = process.env.RESEND_REPLY_TO || 'support@cadomalo.com'
 const KLAVIYO_KEY = process.env.KLAVIYO_PRIVATE_KEY
-// Every paid order is copied here so it can be fulfilled by hand.
+// Every paid order is copied here.
 const ORDER_NOTIFY_TO = process.env.ORDER_NOTIFY_TO || 'support@cadomalo.com'
 
 export const config = {
@@ -35,6 +52,7 @@ export default async function handler(req, res) {
     return res.status(500).end('Webhook secret missing')
   }
 
+  const stripe = getStripe()
   const rawBody = await readRawBody(req)
   const sig = req.headers['stripe-signature']
   let event
@@ -46,8 +64,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    if (event.type === 'checkout.session.completed') {
+    if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
       await handleCheckoutCompleted(event.data.object)
+    } else if (event.type === 'payment_intent.succeeded') {
+      await handleUpsellPaymentIntent(event.data.object)
     } else if (event.type === 'checkout.session.expired' || event.type === 'checkout.session.async_payment_failed') {
       await handleAbandonedCheckout(event.data.object, event.type)
     } else {
@@ -62,86 +82,192 @@ export default async function handler(req, res) {
   return res.status(200).json({received: true})
 }
 
+const idOf = (x) => (typeof x === 'string' ? x : x?.id || null)
+
 async function handleCheckoutCompleted(session) {
   if (session.payment_status !== 'paid') {
     console.log(`[stripe-webhook] session ${session.id} not paid (status: ${session.payment_status}), skipping`)
     return
   }
-
   const email = session.customer_details?.email || session.customer_email
-  const name = session.customer_details?.name || ''
   if (!email) {
     console.warn(`[stripe-webhook] session ${session.id} has no customer email, skipping`)
     return
   }
-
-  const slugs = resolveSlugsFromSession(session)
-  if (!slugs.length) {
-    console.warn(`[stripe-webhook] session ${session.id} has no resolvable product slugs, skipping`)
+  const catalog = await loadCatalog()
+  const products = productsFromSession(catalog, session)
+  if (!products.length) {
+    console.warn(`[stripe-webhook] session ${session.id} has no resolvable products, skipping`)
     return
   }
+  const stripe = getStripe()
+  const lines = await stripe.checkout.sessions
+    .listLineItems(session.id, {limit: 100})
+    .then((r) => r.data.map((li) => ({description: li.description, quantity: li.quantity, amount: li.amount_total, currency: li.currency})))
+    .catch(() => [])
 
+  await fulfil({
+    orderId: session.id,
+    piId: idOf(session.payment_intent),
+    email,
+    name: session.customer_details?.name || '',
+    phone: session.customer_details?.phone || '',
+    country: session.customer_details?.address?.country || '',
+    lang: session.metadata?.lang === 'fr' ? 'fr' : 'en',
+    amount: session.amount_total,
+    currency: session.currency,
+    base: session.metadata?.site ? safeBaseUrl(session.metadata.site) : defaultBaseUrl(),
+    confirmPath: `/order-confirmation?session_id=${encodeURIComponent(session.id)}`,
+    catalog,
+    products,
+    lines,
+  })
+}
+
+async function handleUpsellPaymentIntent(pi) {
+  // Only the off-session funnel upsell: Checkout PaymentIntents carry no
+  // metadata.items and are handled by checkout.session.completed.
+  if (!pi.metadata?.items || !pi.metadata?.upsell_of) return
+  const stripe = getStripe()
+  let email = pi.receipt_email || ''
+  let name = ''
+  if (!email && pi.customer) {
+    const c = await stripe.customers.retrieve(idOf(pi.customer)).catch(() => null)
+    email = c?.email || ''
+    name = c?.name || ''
+  }
+  if (!email) {
+    const s = await stripe.checkout.sessions.retrieve(pi.metadata.upsell_of).catch(() => null)
+    email = s?.customer_details?.email || ''
+    name = s?.customer_details?.name || ''
+  }
+  if (!email) {
+    console.warn(`[stripe-webhook] upsell ${pi.id} has no email, skipping`)
+    return
+  }
   const catalog = await loadCatalog()
-  const lang = session.metadata?.lang === 'fr' ? 'fr' : 'en'
+  const products = productsFromPaymentIntent(catalog, pi)
+  if (!products.length) return
+  await fulfil({
+    orderId: pi.id,
+    piId: pi.id,
+    email,
+    name,
+    lang: 'en',
+    amount: pi.amount_received || pi.amount,
+    currency: pi.currency,
+    base: pi.metadata?.site ? safeBaseUrl(pi.metadata.site) : defaultBaseUrl(),
+    confirmPath: `/order-confirmation?session_id=${encodeURIComponent(pi.metadata.upsell_of)}&upsell=${encodeURIComponent(pi.id)}`,
+    catalog,
+    products,
+    lines: products.map((p) => ({description: `${p.title} (one-click add-on)`, quantity: 1, amount: pi.amount, currency: pi.currency})),
+  })
+}
 
-  // Owner copy first — it is the only record the hand-fulfilled products get.
+async function fulfil(o) {
+  const stripe = getStripe()
+
+  // Idempotency: skip if this payment was already delivered.
+  let pi = null
+  if (o.piId) {
+    pi = await stripe.paymentIntents.retrieve(o.piId).catch(() => null)
+    if (pi?.metadata?.delivered) {
+      console.log(`[stripe-webhook] ${o.orderId} already delivered at ${pi.metadata.delivered}, skipping`)
+      return
+    }
+  }
+
+  const sold = o.products.filter((p) => !FREE_IDS.has(p.id))
+  const site = sold.filter((p) => p.source === 'site')
+  const legacy = sold.filter((p) => p.source !== 'site')
+  const {downloads, missing} = buildDownloads(o.catalog, site, {sid: o.orderId, baseUrl: o.base})
+  const manualTitles = missing.map((p) => p.title)
+
+  // Owner copy first — it is the only record hand-fulfilled products get.
   try {
-    await sendOrderNotification({session, email, name, lang})
+    await sendOrderNotification({...o, downloads, manualTitles})
   } catch (err) {
-    console.error(`[stripe-webhook] order notification failed for ${session.id}:`, err.message)
+    console.error(`[stripe-webhook] order notification failed for ${o.orderId}:`, err.message)
   }
 
-  let digitalCount = 0
-  let manualCount = 0
-  for (const slug of slugs) {
-    const product = catalog.find((p) => p.slug === slug)
-    if (!product) {
-      console.warn(`[stripe-webhook] product not found for slug=${slug}`)
-      continue
+  let delivered = false
+  if (downloads.length) {
+    try {
+      const canva = site.some((p) => p.fulfillment === 'canva-links')
+      await sendDownloadsEmail({...o, downloads, canva})
+      delivered = true
+      console.log(`[stripe-webhook] ${downloads.length} download link(s) → ${o.email} (${o.orderId})`)
+    } catch (err) {
+      console.error(`[stripe-webhook] download email failed for ${o.orderId}:`, err.message)
     }
-    if (product.fulfillment === 'manual') {
-      manualCount++
-      continue
-    }
-    if (product.productType !== 'digital') continue
+  }
 
-    digitalCount++
+  // Legacy Sanity digital products (data/products.json) keep their old flow.
+  for (const product of legacy) {
+    if (product.fulfillment === 'manual' || product.productType !== 'digital') {
+      manualTitles.push(product.title)
+      continue
+    }
     const fileUrl = product.digitalFile?.url
-    const fileName = product.digitalFile?.originalFilename || `${slug}.pdf`
     if (!fileUrl) {
-      console.error(`[stripe-webhook] digital product ${slug} has no digitalFile.url — sending fallback`)
-      await sendFallbackEmail({email, name, productTitle: product.title})
+      manualTitles.push(product.title)
       continue
     }
     try {
-      await sendDigitalDeliveryEmail({email, name, product, fileUrl, fileName, orderId: session.id})
-      console.log(`[stripe-webhook] delivered ${slug} → ${email} (session ${session.id})`)
+      await sendLegacyDigitalEmail({email: o.email, name: o.name, product, fileUrl, fileName: product.digitalFile?.originalFilename || `${product.slug}.pdf`, orderId: o.orderId})
+      delivered = true
     } catch (err) {
-      console.error(`[stripe-webhook] delivery failed for ${slug}:`, err.message)
+      console.error(`[stripe-webhook] legacy delivery failed for ${product.slug}:`, err.message)
+      manualTitles.push(product.title)
     }
   }
 
-  if (manualCount) {
+  if (manualTitles.length) {
     try {
-      await sendOrderReceivedEmail({email, name, lang, orderId: session.id})
+      await sendOrderReceivedEmail({...o, titles: manualTitles})
+      delivered = true
     } catch (err) {
-      console.error(`[stripe-webhook] order-received email failed for ${session.id}:`, err.message)
+      console.error(`[stripe-webhook] order-received email failed for ${o.orderId}:`, err.message)
     }
   }
 
-  // Fire Klaviyo "Placed Order" event for the purchase (any product type).
+  await addToBrevoCustomers(o.email, o.name, sold.map((p) => p.id || p.slug))
+
   await trackKlaviyoEvent({
     eventName: 'Placed Order',
-    email,
+    email: o.email,
     properties: {
-      $event_id: session.id,
-      $value: (session.amount_total || 0) / 100,
-      Currency: (session.currency || 'usd').toUpperCase(),
-      Items: slugs,
-      DigitalCount: digitalCount,
-      OrderId: session.id,
+      $event_id: o.orderId,
+      $value: (o.amount || 0) / 100,
+      Currency: String(o.currency || 'usd').toUpperCase(),
+      Items: sold.map((p) => p.id || p.slug),
+      DownloadCount: downloads.length,
+      OrderId: o.orderId,
     },
   })
+
+  if (pi && delivered) {
+    await stripe.paymentIntents
+      .update(pi.id, {metadata: {delivered: new Date().toISOString()}})
+      .catch((err) => console.error('[stripe-webhook] could not mark delivered:', err.message))
+  }
+}
+
+async function addToBrevoCustomers(email, name, ids) {
+  const list = listId('BREVO_LIST_CUSTOMERS')
+  if (!brevoConfigured() || !list) return
+  try {
+    const existing = await getContact(email)
+    const prev = String(existing?.attributes?.PURCHASED || '').split(',').filter(Boolean)
+    const merged = [...new Set([...prev, ...ids.filter(Boolean)])].join(',')
+    const attributes = {PURCHASED: merged}
+    const first = (name || '').split(' ')[0]
+    if (first && !existing?.attributes?.FIRSTNAME) attributes.FIRSTNAME = first
+    const r = await upsertContact({email, attributes, listIds: [list]})
+    if (!r.ok && r.status !== 204) console.error('[stripe-webhook] Brevo customer', r.status, JSON.stringify(r.data).slice(0, 300))
+  } catch (err) {
+    console.error('[stripe-webhook] Brevo customer error:', err.message)
+  }
 }
 
 async function handleAbandonedCheckout(session, eventType) {
@@ -150,14 +276,14 @@ async function handleAbandonedCheckout(session, eventType) {
     console.log(`[stripe-webhook] abandoned ${session.id} (${eventType}) has no email, can't track`)
     return
   }
-  const slugs = resolveSlugsFromSession(session)
-  if (!slugs.length) return
-
   const catalog = await loadCatalog()
-  const items = slugs
-    .map((slug) => catalog.find((p) => p.slug === slug))
-    .filter(Boolean)
-    .map((p) => ({Slug: p.slug, Title: p.title, Price: p.price, Image: p.images?.[0]?.url || null}))
+  const items = productsFromSession(catalog, session).map((p) => ({
+    Slug: p.slug,
+    Title: p.title,
+    Price: p.price,
+    Image: p.images?.[0]?.url || null,
+  }))
+  if (!items.length) return
 
   await trackKlaviyoEvent({
     eventName: 'Started Checkout',
@@ -175,30 +301,13 @@ async function handleAbandonedCheckout(session, eventType) {
   console.log(`[stripe-webhook] abandoned-checkout tracked: ${email} (${session.id}, ${eventType})`)
 }
 
-// Pull the list of product slugs in a session from either the new cart_summary
-// metadata (multi-item) or the legacy product_slug metadata (single-item).
-function resolveSlugsFromSession(session) {
-  const m = session.metadata || {}
-  if (m.cart_summary) {
-    try {
-      const arr = JSON.parse(m.cart_summary)
-      if (Array.isArray(arr)) return arr.map((x) => x.slug).filter(Boolean)
-    } catch (e) {
-      console.warn('[stripe-webhook] failed to parse cart_summary:', e.message)
-    }
-  }
-  if (m.product_slug) return [m.product_slug]
-  return []
-}
+/* ---------- email ---------------------------------------------------------- */
 
 async function sendEmail(payload) {
   if (!RESEND_KEY) throw new Error('RESEND_API_KEY not configured')
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: {
-      Authorization: `Bearer ${RESEND_KEY}`,
-      'Content-Type': 'application/json',
-    },
+    headers: {Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json'},
     body: JSON.stringify({from: FROM_EMAIL, ...payload}),
   })
   if (!r.ok) {
@@ -207,135 +316,121 @@ async function sendEmail(payload) {
   }
 }
 
-const money = (cents, currency) =>
-  `${((cents || 0) / 100).toFixed(2)} ${String(currency || 'usd').toUpperCase()}`
+const money = (cents, currency) => `${((cents || 0) / 100).toFixed(2)} ${String(currency || 'usd').toUpperCase()}`
+const shortId = (id) => String(id).slice(-12).toUpperCase()
+const firstNameOf = (name) => (name || '').split(' ')[0] || ''
 
-async function sendOrderNotification({session, email, name, lang}) {
-  const items = await stripe.checkout.sessions.listLineItems(session.id, {limit: 100})
-  const rows = items.data
+async function sendOrderNotification(o) {
+  const rows = (o.lines || [])
     .map((li) => `<tr><td style="padding:6px 12px 6px 0;">${escapeHtml(li.description || '(item)')}</td>` +
       `<td style="padding:6px 12px;">× ${li.quantity || 1}</td>` +
-      `<td style="padding:6px 0;text-align:right;">${money(li.amount_total, li.currency)}</td></tr>`)
+      `<td style="padding:6px 0;text-align:right;">${money(li.amount, li.currency)}</td></tr>`)
     .join('')
-  const phone = session.customer_details?.phone || ''
-  const country = session.customer_details?.address?.country || ''
-  const shortId = session.id.slice(-12).toUpperCase()
-  const html = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2a2522;font-size:15px;line-height:1.6;">
-<h2 style="margin:0 0 12px;">New order — send the files</h2>
-<p style="margin:0 0 12px;"><strong>${escapeHtml(name || '(no name)')}</strong><br>
-<a href="mailto:${escapeAttr(email)}">${escapeHtml(email)}</a>${phone ? '<br>' + escapeHtml(phone) : ''}${country ? '<br>' + escapeHtml(country) : ''}<br>
-Language: ${lang === 'fr' ? 'French' : 'English'}</p>
+  const auto = o.downloads.length
+    ? `<p style="margin:0 0 12px;">Download links were emailed automatically (${o.downloads.length} file${o.downloads.length > 1 ? 's' : ''}).</p>`
+    : ''
+  const manual = o.manualTitles.length
+    ? `<p style="margin:0 0 12px;color:#b4442c;"><strong>Send by hand:</strong> ${o.manualTitles.map(escapeHtml).join(', ')}</p>`
+    : ''
+  const html = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#29333A;font-size:15px;line-height:1.6;">
+<h2 style="margin:0 0 12px;">New order${o.manualTitles.length ? ' — send the files' : ''}</h2>
+<p style="margin:0 0 12px;"><strong>${escapeHtml(o.name || '(no name)')}</strong><br>
+<a href="mailto:${escapeHtml(o.email)}">${escapeHtml(o.email)}</a>${o.phone ? '<br>' + escapeHtml(o.phone) : ''}${o.country ? '<br>' + escapeHtml(o.country) : ''}<br>
+Language: ${o.lang === 'fr' ? 'French' : 'English'}</p>
 <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:0 0 12px;">${rows}
-<tr><td colspan="3" style="padding:8px 0 0;border-top:1px solid #ddd;text-align:right;"><strong>Paid: ${money(session.amount_total, session.currency)}</strong></td></tr></table>
-<p style="margin:0;color:#8a807a;font-size:13px;">Order ID ${shortId} · Stripe session ${escapeHtml(session.id)}<br>
+<tr><td colspan="3" style="padding:8px 0 0;border-top:1px solid #ddd;text-align:right;"><strong>Paid: ${money(o.amount, o.currency)}</strong></td></tr></table>
+${auto}${manual}
+<p style="margin:0;color:#6B7680;font-size:13px;">Order ID ${shortId(o.orderId)} · Stripe ${escapeHtml(o.orderId)}<br>
 Reply to this email to answer the customer directly.</p></div>`
   await sendEmail({
     to: [ORDER_NOTIFY_TO],
-    reply_to: email,
-    subject: `New order ${shortId} — ${name || email} — ${money(session.amount_total, session.currency)}`,
+    reply_to: o.email,
+    subject: `New order ${shortId(o.orderId)} — ${o.name || o.email} — ${money(o.amount, o.currency)}`,
     html,
   })
-  console.log(`[stripe-webhook] order notification sent for ${session.id}`)
 }
 
-async function sendOrderReceivedEmail({email, name, lang, orderId}) {
-  const firstName = (name || '').split(' ')[0] || (lang === 'fr' ? '' : 'there')
-  const shortId = orderId.slice(-12).toUpperCase()
-  const copy = lang === 'fr'
-    ? {
-        subject: 'Merci pour votre commande Cadomalo',
-        hi: firstName ? `Bonjour ${escapeHtml(firstName)},` : 'Bonjour,',
-        body: 'Merci pour votre commande ! Nous préparons vos fichiers et vous les enverrons par e-mail depuis support@cadomalo.com dans les 24 heures.',
-        help: 'Une question ? Répondez simplement à cet e-mail.',
-        order: 'Commande',
-      }
-    : {
-        subject: 'Thank you for your Cadomalo order',
-        hi: `Hi ${escapeHtml(firstName)},`,
-        body: "Thank you for your order! We're preparing your files and will email them to you from support@cadomalo.com within 24 hours.",
-        help: 'Questions? Just reply to this email.',
-        order: 'Order ID',
-      }
+async function sendDownloadsEmail(o) {
+  const fr = o.lang === 'fr'
+  const first = firstNameOf(o.name)
+  const confirmUrl = o.base + o.confirmPath
+  const list = o.downloads
+    .map((d) => `<tr><td style="padding:8px 0;border-bottom:1px solid #F1E6D6;font-family:'Nunito Sans',Arial,sans-serif;font-size:15px;color:${C.ink};">
+<a href="${escapeHtml(d.url)}" style="color:${C.navy};font-weight:700;text-decoration:underline;">${escapeHtml(d.label)}</a></td></tr>`)
+    .join('')
+  const canvaLink = o.canva ? o.downloads.find((d) => /canva/i.test(d.label)) || o.downloads.find((d) => d.product === 'birthday-wish') : null
+  const canvaBlock = canvaLink
+    ? `<div style="background:${C.cream};border-radius:14px;padding:16px 18px;margin:0 0 18px;">
+${p(fr ? '<strong>Votre livre personnalisé :</strong> ouvrez le PDF « liens Canva », cliquez sur le lien du modèle, puis « Utiliser le modèle » pour ajouter le prénom et la photo de votre enfant. Un compte Canva gratuit suffit.'
+        : '<strong>Your personalised storybook:</strong> open the Canva-links PDF, click the template link, then “Use template” to add your child’s name and photo. A free Canva account is all you need.', 'margin:0 0 8px;')}
+<a href="${escapeHtml(canvaLink.url)}" style="color:${C.coral};font-weight:800;font-family:'Nunito Sans',Arial,sans-serif;">${fr ? 'Ouvrir les liens Canva' : 'Open the Canva links PDF'} →</a></div>`
+    : ''
+  const body = `${h1(fr ? 'Vos fichiers sont prêts' : 'Your PDFs are ready')}
+${p(fr ? `Bonjour${first ? ' ' + escapeHtml(first) : ''},` : `Hi${first ? ' ' + escapeHtml(first) : ''},`)}
+${p(fr ? 'Merci pour votre commande ! Tout est prêt à télécharger et à imprimer à la maison.' : 'Thank you for your order! Everything is ready to download and print at home.')}
+${button(confirmUrl, fr ? 'Télécharger vos PDF' : 'Download your PDFs')}
+${canvaBlock}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 18px;">${list}</table>
+${small(fr ? 'Les liens restent valables 7 jours. Enregistrez les fichiers sur votre appareil : vous pourrez les imprimer autant de fois que vous voulez pour votre famille.'
+          : 'Links work for 7 days — save the files to your device and print them as often as you like for your family.')}
+${small(fr ? 'Astuce : imprimez en « taille réelle » (100 %) sur du papier US Letter ou A4.' : 'Tip: print at “actual size” (100%) on US Letter or A4 paper.')}
+${small(`${fr ? 'Commande' : 'Order'}: <span style="font-family:monospace;">${shortId(o.orderId)}</span>`)}`
+  await sendEmail({
+    to: [o.email],
+    reply_to: REPLY_TO,
+    subject: fr ? 'Vos PDF Cadomalo sont prêts à télécharger' : 'Your Cadomalo PDFs are ready to download',
+    html: layout({preheader: fr ? 'Vos fichiers sont prêts.' : 'Your files are ready — print them tonight.', body, siteUrl: o.base, lang: o.lang}),
+  })
+}
+
+async function sendOrderReceivedEmail(o) {
+  const fr = o.lang === 'fr'
+  const first = firstNameOf(o.name)
+  const titles = o.titles.map((t) => `<li>${escapeHtml(t)}</li>`).join('')
+  const body = `${h1(fr ? 'Merci pour votre commande' : 'Thank you for your order')}
+${p(fr ? `Bonjour${first ? ' ' + escapeHtml(first) : ''},` : `Hi${first ? ' ' + escapeHtml(first) : ''},`)}
+${p(fr ? 'Nous préparons ces fichiers et vous les enverrons par e-mail depuis support@cadomalo.com dans les 24 heures :'
+        : "We're preparing these files and will email them to you from support@cadomalo.com within 24 hours:")}
+<ul style="margin:0 0 14px;padding-left:20px;font-family:'Nunito Sans',Arial,sans-serif;color:${C.ink};">${titles}</ul>
+${small(`${fr ? 'Commande' : 'Order'}: <span style="font-family:monospace;">${shortId(o.orderId)}</span>`)}`
+  await sendEmail({
+    to: [o.email],
+    reply_to: REPLY_TO,
+    subject: fr ? 'Merci pour votre commande Cadomalo' : 'Thank you for your Cadomalo order',
+    html: layout({preheader: fr ? 'Vos fichiers arrivent sous 24 h.' : 'Your files are on their way within 24 hours.', body, siteUrl: o.base, lang: o.lang}),
+  })
+}
+
+// Legacy Sanity digital products: PDF attached + link (unchanged behaviour).
+async function sendLegacyDigitalEmail({email, name, product, fileUrl, fileName, orderId}) {
+  const pdfResp = await fetch(fileUrl)
+  if (!pdfResp.ok) throw new Error(`Failed to fetch ${fileUrl}: ${pdfResp.status}`)
+  const pdfBase64 = Buffer.from(await pdfResp.arrayBuffer()).toString('base64')
+  const first = firstNameOf(name)
+  const body = `${h1('Your download is ready')}
+${p(`Hi${first ? ' ' + escapeHtml(first) : ''},`)}
+${p(`Thank you for your order! Your copy of <strong>${escapeHtml(product.title)}</strong> is attached as a PDF. You can also download it again with the button below.`)}
+${button(fileUrl, 'Download your PDF')}
+${small(`Order: <span style="font-family:monospace;">${shortId(orderId)}</span>`)}`
   await sendEmail({
     to: [email],
     reply_to: REPLY_TO,
-    subject: copy.subject,
-    html: `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2a2522;font-size:15px;line-height:1.6;max-width:560px;">
-<p>${copy.hi}</p><p>${copy.body}</p>
-<p style="color:#8a807a;font-size:13px;">${copy.order}: <span style="font-family:monospace;">${shortId}</span><br>${copy.help}</p>
-<p>— Cadomalo</p></div>`,
+    subject: `Your ${product.title} download is ready`,
+    html: layout({preheader: 'Your download is ready.', body}),
+    attachments: [{filename: fileName, content: pdfBase64}],
   })
-  console.log(`[stripe-webhook] order-received email sent → ${email} (${orderId})`)
-}
-
-async function sendDigitalDeliveryEmail({email, name, product, fileUrl, fileName, orderId}) {
-  if (!RESEND_KEY) {
-    throw new Error('RESEND_API_KEY not configured')
-  }
-  const pdfResp = await fetch(fileUrl)
-  if (!pdfResp.ok) {
-    throw new Error(`Failed to fetch ${fileUrl}: ${pdfResp.status}`)
-  }
-  const pdfBuffer = Buffer.from(await pdfResp.arrayBuffer())
-  const pdfBase64 = pdfBuffer.toString('base64')
-
-  const firstName = (name || '').split(' ')[0] || 'there'
-  const subject = `Your ${product.title} download is ready`
-  const html = renderEmailHtml({firstName, product, fileUrl, orderId})
-
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${RESEND_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: FROM_EMAIL,
-      to: [email],
-      reply_to: REPLY_TO,
-      subject,
-      html,
-      attachments: [{filename: fileName, content: pdfBase64}],
-    }),
-  })
-  if (!r.ok) {
-    const text = await r.text().catch(() => '')
-    throw new Error(`Resend ${r.status}: ${text.slice(0, 300)}`)
-  }
-}
-
-async function sendFallbackEmail({email, name, productTitle}) {
-  if (!RESEND_KEY) return
-  const firstName = (name || '').split(' ')[0] || 'there'
-  await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${RESEND_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: FROM_EMAIL,
-      to: [email],
-      reply_to: REPLY_TO,
-      subject: `We're preparing your ${productTitle} download`,
-      html: `<p>Hi ${escapeHtml(firstName)},</p><p>Thank you for purchasing <strong>${escapeHtml(productTitle)}</strong>. Your download is being prepared and we'll send it within a few hours. If you don't receive it, reply to this email.</p><p>— Cadomalo</p>`,
-    }),
-  }).catch(() => {})
 }
 
 async function trackKlaviyoEvent({eventName, email, properties}) {
-  if (!KLAVIYO_KEY) {
-    console.log(`[stripe-webhook] KLAVIYO_PRIVATE_KEY not set — skipping ${eventName} event`)
-    return
-  }
+  if (!KLAVIYO_KEY) return
   try {
     const r = await fetch('https://a.klaviyo.com/api/events/', {
       method: 'POST',
       headers: {
-        'accept': 'application/vnd.api+json',
+        accept: 'application/vnd.api+json',
         'content-type': 'application/vnd.api+json',
-        'revision': '2024-10-15',
-        'Authorization': `Klaviyo-API-Key ${KLAVIYO_KEY}`,
+        revision: '2024-10-15',
+        Authorization: `Klaviyo-API-Key ${KLAVIYO_KEY}`,
       },
       body: JSON.stringify({
         data: {
@@ -355,45 +450,6 @@ async function trackKlaviyoEvent({eventName, email, properties}) {
   } catch (err) {
     console.error(`[stripe-webhook] Klaviyo ${eventName} fetch error:`, err.message)
   }
-}
-
-function renderEmailHtml({firstName, product, fileUrl, orderId}) {
-  const title = escapeHtml(product.title)
-  const shortId = orderId.slice(-12).toUpperCase()
-  return `<!doctype html>
-<html><body style="margin:0;padding:0;background:#f5f4f1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2a2522;">
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f5f4f1;padding:32px 12px;">
-<tr><td align="center">
-<table width="560" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff;border-radius:16px;overflow:hidden;max-width:560px;">
-<tr><td style="padding:32px 32px 0;text-align:center;">
-<div style="font-size:24px;font-weight:800;letter-spacing:-.02em;">cado<span style="color:#9c0202;">malo</span></div>
-</td></tr>
-<tr><td style="padding:24px 32px;">
-<h1 style="font-size:22px;font-weight:800;margin:0 0 12px;color:#2a2522;">Your download is ready 🎉</h1>
-<p style="font-size:15px;line-height:1.6;color:#5a514c;margin:0 0 16px;">Hi ${escapeHtml(firstName)},</p>
-<p style="font-size:15px;line-height:1.6;color:#5a514c;margin:0 0 20px;">Thank you for your order! Your copy of <strong style="color:#2a2522;">${title}</strong> is attached to this email as a PDF. You can also download it again any time using the button below.</p>
-<table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 24px;">
-<tr><td style="background:#9c0202;border-radius:10px;">
-<a href="${escapeAttr(fileUrl)}" style="display:inline-block;padding:14px 28px;color:#ffffff;text-decoration:none;font-weight:700;font-size:15px;">Download your file</a>
-</td></tr>
-</table>
-<p style="font-size:13px;line-height:1.6;color:#8a807a;margin:0 0 8px;">Order ID: <span style="font-family:monospace;color:#2a2522;">${shortId}</span></p>
-<p style="font-size:13px;line-height:1.6;color:#8a807a;margin:0;">Need help? Just reply to this email and we'll get back to you.</p>
-</td></tr>
-<tr><td style="padding:20px 32px 32px;border-top:1px solid #efece8;text-align:center;">
-<p style="font-size:12px;color:#8a807a;margin:0;">© 2026 Cadomalo · Fokebo LLC</p>
-</td></tr>
-</table>
-</td></tr>
-</table>
-</body></html>`
-}
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]))
-}
-function escapeAttr(s) {
-  return escapeHtml(s)
 }
 
 function readRawBody(req) {

@@ -4,8 +4,7 @@
  * api/create-checkout-session.js already expects:
  *   {slug, title, image, quantity, variantId, variantLabel, unitPrice,
  *    personalization, addedAt}
- * Anything else the UI needs (reservation deadline, applied code, last added
- * product) lives in a separate 'cadomalo_cart_meta' key so the array stays
+ * Anything else the UI needs (applied code, last added product) lives in a separate 'cadomalo_cart_meta' key so the array stays
  * API-compatible.
  *
  * Discount codes are DISPLAY ONLY here. The code is handed to the checkout
@@ -20,7 +19,6 @@
   var CART_KEY = 'cadomalo_cart';
   var META_KEY = 'cadomalo_cart_meta';
   var LANG = document.documentElement.lang === 'fr' ? 'fr' : 'en';
-  var RESERVE_MS = 10 * 60 * 1000;
   var CODES = {CURIOUS10: 0.10, WELCOME15: 0.15};
   var catalog = null;
 
@@ -44,13 +42,12 @@
   }
   function write(items) {
     try { localStorage.setItem(CART_KEY, JSON.stringify(items)); } catch (e) {}
-    if (!items.length) setMeta({reserveEnd: 0, code: '', lastAdded: ''});
+    if (!items.length) setMeta({code: '', lastAdded: ''});
     renderAll(items);
   }
 
   var money = function (n) { return '$' + Number(n).toFixed(2); };
   var lineKey = function (i) { return i.slug + '|' + (i.variantId || ''); };
-  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
 
   /* ---------- catalogue -------------------------------------------------- */
   function loadCatalog() {
@@ -91,11 +88,12 @@
     var picks = opts.picks || (p.attrs || []).map(function () { return 0; });
     var qty = Math.max(1, Math.min(10, opts.qty || 1));
 
+    /* One price per product: option picks (old paper/edition pills) only
+       label the line; the server charges the catalogue price regardless. */
     var delta = 0, labels = [];
     (p.attrs || []).forEach(function (a, i) {
       var o = a.options[picks[i]];
       if (!o) return;
-      delta += o.delta || 0;
       labels.push(o[LANG]);
     });
 
@@ -118,20 +116,16 @@
     if (found) found.quantity = Math.min(10, found.quantity + qty);
     else items.push(item);
 
-    var m = meta();
-    setMeta({
-      lastAdded: p.id,
-      reserveEnd: m.reserveEnd && m.reserveEnd > Date.now() ? m.reserveEnd : Date.now() + RESERVE_MS
-    });
+    setMeta({lastAdded: p.id});
 
     write(items);
 
     if (window.trackAddToCart) {
       try {
-        window.trackAddToCart({id: p.slug, name: item.title, value: item.unitPrice * qty, currency: 'USD'});
+        window.trackAddToCart({id: p.slug, name: item.title, price: item.unitPrice, quantity: qty, currency: 'USD'});
       } catch (e) {}
     }
-    openDrawer();
+    if (!opts.silent) openDrawer();
   }
 
   function changeQty(key, d) {
@@ -197,28 +191,17 @@
     var empty = $('[data-drawer-empty]');
     var body = $('[data-drawer-body]');
     var foot = $('[data-drawer-foot]');
-    var urg = $('[data-drawer-urgency]');
     var filled = items.length > 0;
 
     if (empty) empty.hidden = filled;
     if (body) body.hidden = !filled;
     if (foot) foot.hidden = !filled;
-    if (urg) urg.hidden = !filled;
     if (!filled) { lines.innerHTML = ''; return; }
 
     var removeLabel = (lines.getAttribute('data-remove-label')) || 'Remove';
     lines.innerHTML = items.map(function (i) { return lineHtml(i, removeLabel); }).join('');
 
-    /* per-product proof from the last added item */
-    var proof = $('[data-drawer-proof]');
-    var proofText = $('[data-drawer-proof-text]');
-    var last = byId(meta().lastAdded);
-    if (proof && proofText) {
-      if (last && last.cartProof && last.cartProof[LANG]) {
-        proofText.textContent = last.cartProof[LANG];
-        proof.hidden = false;
-      } else proof.hidden = true;
-    }
+    renderBump(items);
 
     var sub = subtotal(items);
     var rate = discountRate();
@@ -276,22 +259,92 @@
     if (lastFocused) lastFocused.focus();
   }
 
-  /* ---------- countdowns -------------------------------------------------------- */
-  /* Presentational only — the basket reserves nothing and the launch price
-     does not actually expire. Kept because the design specifies it. */
-  function tickClocks() {
-    var day = $('[data-day-clock]');
-    if (day) {
-      var end = new Date(); end.setHours(23, 59, 59, 999);
-      var s = Math.max(0, Math.floor((end - Date.now()) / 1000));
-      day.textContent = pad(Math.floor(s / 3600)) + ':' + pad(Math.floor(s / 60) % 60) + ':' + pad(s % 60);
+  /* ---------- order bump ---------------------------------------------------------
+     One honest checkbox line: the matching collection (or the Discovery Lab
+     for kit buyers) at its normal catalogue price. Choosing a collection
+     replaces that collection's single books in the cart, so nobody pays twice. */
+  var HBW = ['head', 'lungs', 'stomach', 'bones', 'muscles', 'skin', 'blood', 'eyes', 'ears', 'teeth'];
+  var KITS = ['routine', 'party-kit', 'birthday-wish', 'wonder-island'];
+  var BUMP_COPY = {
+    en: {
+      bundle: 'Get all 10 Human Body Wonders books instead',
+      'mh-bundle': 'Get all 10 Medical Heroes books instead',
+      'discovery-lab': 'Add the My Amazing Body Discovery Lab',
+      replaces: 'replaces the single books in your cart',
+      save: 'save'
+    },
+    fr: {
+      bundle: 'Prenez plutôt les 10 livres Merveilles du corps',
+      'mh-bundle': 'Prenez plutôt les 10 livres Medical Heroes',
+      'discovery-lab': 'Ajoutez le Discovery Lab « Mon corps extraordinaire »',
+      replaces: 'remplace les livres à l’unité de votre panier',
+      save: 'économisez'
     }
-    var res = $('[data-reserve-clock]');
-    if (res) {
-      var m = meta();
-      var left = m.reserveEnd ? Math.max(0, Math.floor((m.reserveEnd - Date.now()) / 1000)) : RESERVE_MS / 1000;
-      res.textContent = pad(Math.floor(left / 60)) + ':' + pad(left % 60);
+  };
+  function collectionOf(p) {
+    if (!p) return null;
+    if (p.collection) return p.collection;
+    if (HBW.indexOf(p.id) >= 0) return 'hbw';
+    if (/^mh\d\d$/.test(p.id)) return 'mh';
+    return null;
+  }
+  function isBook(p) {
+    if (!p || p.id === 'bundle' || p.id === 'mh-bundle') return false;
+    return p.category ? p.category === 'book' : (p.type === 'book' || collectionOf(p) !== null);
+  }
+  function isKit(p) {
+    if (!p || p.id === 'discovery-lab') return false;
+    return p.category ? (p.category === 'kit' || p.category === 'party') : KITS.indexOf(p.id) >= 0;
+  }
+
+  function bumpFor(items) {
+    var prods = items.map(function (i) { return bySlug(i.slug); }).filter(Boolean);
+    var has = function (id) { return prods.some(function (p) { return p.id === id; }); };
+    var pick = null;
+    if (prods.some(function (p) { return isBook(p) && collectionOf(p) === 'hbw'; }) && !has('bundle')) pick = 'bundle';
+    else if (prods.some(function (p) { return isBook(p) && collectionOf(p) === 'mh'; }) && !has('mh-bundle')) pick = 'mh-bundle';
+    else if (prods.some(isKit) && !has('discovery-lab')) pick = 'discovery-lab';
+    var b = pick && byId(pick);
+    return b && !b.hidden && b.price > 0 ? b : null;
+  }
+
+  function renderBump(items) {
+    var box = $('[data-drawer-bump]');
+    if (!box) return;
+    var b = bumpFor(items);
+    if (!b) { box.hidden = true; box.removeAttribute('data-bump-id'); return; }
+    var copy = BUMP_COPY[LANG];
+    var isCollection = b.id === 'bundle' || b.id === 'mh-bundle';
+    var hasCmp = typeof b.compareAt === 'number' && b.compareAt > b.price;
+    box.setAttribute('data-bump-id', b.id);
+    var set = function (sel, v) { var e = $(sel, box); if (e) e.textContent = v; };
+    set('[data-bump-title]', copy[b.id] || (b.title && b.title[LANG]) || '');
+    set('[data-bump-price]', money(b.price));
+    var cmp = $('[data-bump-compare]', box);
+    if (cmp) { cmp.textContent = hasCmp ? money(b.compareAt) : ''; cmp.hidden = !hasCmp; }
+    var note = isCollection ? copy.replaces : '';
+    if (hasCmp) note = (note ? note + ' · ' : '') + copy.save + ' ' + money(b.compareAt - b.price);
+    set('[data-bump-note]', note);
+    var img = $('[data-bump-img]', box);
+    if (img && b.img) { img.src = b.img; img.hidden = false; }
+    var cb = $('[data-bump-check]', box);
+    if (cb) cb.checked = false;
+    box.hidden = false;
+  }
+
+  function takeBump() {
+    var box = $('[data-drawer-bump]');
+    var id = box && box.getAttribute('data-bump-id');
+    if (!id || !byId(id)) return;
+    if (id === 'bundle' || id === 'mh-bundle') {
+      var col = id === 'bundle' ? 'hbw' : 'mh';
+      var keep = read().filter(function (i) {
+        var p = bySlug(i.slug);
+        return !(isBook(p) && collectionOf(p) === col);
+      });
+      try { localStorage.setItem(CART_KEY, JSON.stringify(keep)); } catch (e) {}
     }
+    addToCart(id, {silent: true});
   }
 
   /* ---------- product page ------------------------------------------------------- */
@@ -463,6 +516,16 @@
       btn.addEventListener('click', function () {
         var items = read();
         if (!items.length) return;
+        if (window.trackInitiateCheckout) {
+          try {
+            window.trackInitiateCheckout({
+              value: subtotal(items),
+              currency: 'USD',
+              num_items: items.reduce(function (a, x) { return a + x.quantity; }, 0),
+              content_ids: items.map(function (x) { var p = bySlug(x.slug); return p ? p.id : x.slug; })
+            });
+          } catch (e) {}
+        }
         btn.disabled = true;
         var original = btn.innerHTML;
         btn.textContent = '…';
@@ -479,7 +542,10 @@
         })
           .then(function (r) { return r.json(); })
           .then(function (d) {
-            if (d && d.url) { window.location.href = d.url; return; }
+            if (d && d.url) {
+              window.location.href = d.url;
+              return;
+            }
             throw new Error((d && d.error) || 'checkout failed');
           })
           .catch(function (err) {
@@ -495,7 +561,9 @@
   function initConfirmation() {
     var root = $('[data-confirmation]');
     if (!root) return;
-    var sessionId = new URLSearchParams(window.location.search).get('session_id') || '';
+    var qs = new URLSearchParams(window.location.search);
+    var sessionId = qs.get('session_id') || '';
+    var upsell = qs.get('upsell') || '';
     var error = $('[data-confirm-error]', root);
     function fail(msg) { error.textContent = msg; error.hidden = false; }
     if (!/^cs_(test|live)_/.test(sessionId)) { fail(root.getAttribute('data-missing')); return; }
@@ -504,7 +572,8 @@
     $('[data-confirm-id]', root).textContent = sessionId.slice(-12).toUpperCase();
 
     var fmt = function (cents) { return money((cents || 0) / 100); };
-    fetch('/api/get-checkout-session?session_id=' + encodeURIComponent(sessionId))
+    fetch('/api/get-checkout-session?session_id=' + encodeURIComponent(sessionId) +
+          (/^pi_/.test(upsell) ? '&upsell=' + encodeURIComponent(upsell) : ''))
       .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
       .then(function (d) {
         if (d.payment_status !== 'paid') fail(root.getAttribute('data-unpaid'));
@@ -526,12 +595,51 @@
           lines.appendChild(row);
         });
         $('[data-confirm-total]', root).textContent = fmt(d.amount_total);
+        renderDownloads(root, d.downloads || []);
         $('[data-confirm-summary]', root).hidden = false;
         if (window.trackPurchase && d.payment_status === 'paid') {
           try { window.trackPurchase({orderId: d.id, value: (d.amount_total || 0) / 100, currency: 'USD'}); } catch (e) {}
         }
       })
       .catch(function () { fail(root.getAttribute('data-missing')); });
+  }
+
+  /* Download buttons on the confirmation page. Uses [data-confirm-downloads]
+     when the template provides it, otherwise adds a block after the summary. */
+  function renderDownloads(root, downloads) {
+    if (!downloads.length) return;
+    var box = $('[data-confirm-downloads]', root);
+    if (!box) {
+      box = document.createElement('div');
+      box.setAttribute('data-confirm-downloads', '');
+      box.className = 'confirm-downloads';
+      var after = $('[data-confirm-summary]', root) || root.lastElementChild;
+      if (after && after.parentNode) after.parentNode.insertBefore(box, after.nextSibling);
+      else root.appendChild(box);
+    }
+    box.innerHTML = '';
+    var h = document.createElement('h2');
+    h.textContent = LANG === 'fr' ? 'Vos téléchargements' : 'Your downloads';
+    box.appendChild(h);
+    var list = document.createElement('div');
+    list.className = 'confirm-download-list';
+    list.style.cssText = 'display:grid;gap:10px;margin:12px 0';
+    downloads.forEach(function (dl) {
+      var a = document.createElement('a');
+      a.className = 'btn btn-primary btn-full';
+      a.href = dl.url;
+      a.rel = 'nofollow';
+      a.textContent = (LANG === 'fr' ? 'Télécharger · ' : 'Download · ') + dl.label;
+      list.appendChild(a);
+    });
+    box.appendChild(list);
+    var note = document.createElement('p');
+    note.className = 'muted';
+    note.textContent = LANG === 'fr'
+      ? 'Les liens restent valables 7 jours et vous ont aussi été envoyés par e-mail.'
+      : 'Links work for 7 days and were also emailed to you.';
+    box.appendChild(note);
+    box.hidden = false;
   }
 
   /* ---------- contact form ------------------------------------------------------------- */
@@ -560,8 +668,6 @@
   /* ---------- wire up --------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', function () {
     renderAll();
-    tickClocks();
-    setInterval(tickClocks, 1000);
 
     loadCatalog().then(function () {
       renderAll();
@@ -586,6 +692,8 @@
       if (inc) { changeQty(inc.getAttribute('data-qty-inc'), 1); return; }
       var dec = e.target.closest('[data-qty-dec]');
       if (dec) { changeQty(dec.getAttribute('data-qty-dec'), -1); return; }
+      var bump = e.target.closest('[data-bump-check]');
+      if (bump) { if (bump.checked) takeBump(); return; }
       var rm = e.target.closest('[data-remove]');
       if (rm) { removeLine(rm.getAttribute('data-remove')); return; }
       if (e.target.closest('[data-cart-close]') || e.target.closest('[data-cart-scrim]')) closeDrawer();

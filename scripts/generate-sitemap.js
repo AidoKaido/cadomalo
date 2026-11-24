@@ -5,7 +5,7 @@ const SITE_URL = (process.env.SITE_URL || 'https://cadomalo.com').replace(/\/$/,
 
 // Pages written by scripts/build-pages.js live as <dir>/index.html. Walk them
 // and list every page that isn't marked noindex (cart, order confirmation).
-const SKIP_DIRS = new Set(['node_modules', 'templates', 'api', 'scripts', 'content', 'data', 'css', 'js', 'assets', '.git', '.vercel', '.github'])
+const SKIP_DIRS = new Set(['node_modules', 'templates', 'api', 'scripts', 'content', 'data', 'css', 'js', 'assets', 'images', 'videos', '.git', '.vercel', '.github'])
 
 // Pre-redesign pages still served as flat .html files.
 const LEGACY_PAGES = [

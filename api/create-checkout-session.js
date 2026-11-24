@@ -1,7 +1,6 @@
-import Stripe from 'stripe'
-import {loadCatalog, resolveSiteVariant} from './_catalog.js'
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+import {loadCatalog, isPurchasable, findProduct} from './_catalog.js'
+import {getStripe, createBrandedSession} from './_stripe.js'
+import {readJson, requestBaseUrl} from './_util.js'
 
 const SHIPPING_COUNTRIES = [
   'US', 'CA', 'MX',
@@ -51,7 +50,8 @@ export default async function handler(req, res) {
     return res.status(500).json({error: 'Stripe not configured on the server'})
   }
 
-  const body = req.body || (await readJson(req))
+  const stripe = getStripe()
+  const body = await readJson(req)
 
   // Normalize input into a `lines` array. Two shapes accepted:
   //   1) Multi-item:   { cart: [{slug, quantity, variantId, personalization}, ...] }
@@ -90,8 +90,12 @@ export default async function handler(req, res) {
     if (PURCHASE_PAUSED_SLUGS.has(slug)) {
       return res.status(409).json({error: `Product "${slug}" is temporarily unavailable.`})
     }
-    const product = catalog.find((p) => p.slug === slug)
+    const product = findProduct(catalog, slug)
     if (!product) return res.status(404).json({error: `Product not found: ${slug}`})
+    // Hidden products (old tumbler wraps) and the free sample are not sold here.
+    if (!isPurchasable(product)) {
+      return res.status(409).json({error: `Product "${product.title || slug}" is no longer available.`})
+    }
 
     const quantity = Math.max(1, Math.min(99, parseInt(raw.quantity) || 1))
     const variantId = raw.variantId || null
@@ -101,10 +105,9 @@ export default async function handler(req, res) {
     let unitPrice = product.price
     let variantLabel = ''
     if (product.source === 'site') {
-      const v = resolveSiteVariant(product, variantId)
-      if (!v) return res.status(400).json({error: `Unknown option for ${slug}`})
-      unitPrice = v.price
-      variantLabel = v.label
+      // One price per product now. Old cart lines may still carry an
+      // edition/paper variantId: it is ignored, never priced.
+      unitPrice = product.price
     } else if (variantId && Array.isArray(product.variants)) {
       const v = product.variants.find((x) => x.id === variantId)
       if (v) {
@@ -146,6 +149,7 @@ export default async function handler(req, res) {
     })
 
     resolved.push({
+      id: product.id || '',
       slug: product.slug,
       qty: quantity,
       variant: variantId,
@@ -153,9 +157,7 @@ export default async function handler(req, res) {
     })
   }
 
-  const baseUrl =
-    req.headers.origin ||
-    (req.headers.host ? `https://${req.headers.host}` : 'https://cadomalo.com')
+  const baseUrl = requestBaseUrl(req)
 
   const cancelUrl = lang === 'fr'
     ? `${baseUrl}/fr/panier`
@@ -165,19 +167,27 @@ export default async function handler(req, res) {
   const successPath = lang === 'fr' ? '/fr/confirmation' : '/order-confirmation'
 
   // Compact cart summary for top-level metadata (Stripe limits values to 500 chars).
-  const cartSummary = JSON.stringify(resolved).slice(0, 480)
+  const cartSummary = JSON.stringify(resolved.map(({id, ...r}) => r)).slice(0, 480)
+  // Site product ids, read by the webhook + confirmation page for delivery.
+  const itemIds = resolved.filter((r) => r.id).map((r) => r.id).join(',').slice(0, 480)
 
+  // No payment_method_types: Stripe shows every method enabled in the
+  // Dashboard (cards, Apple Pay, Google Pay, Link). Digital-only carts skip
+  // the billing-address and phone steps; automatic tax still asks for the
+  // country/postcode it needs.
   const sessionParams = {
     mode: 'payment',
-    payment_method_types: ['card'],
     line_items: lineItems,
     success_url: `${baseUrl}${successPath}?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: cancelUrl,
-    billing_address_collection: 'required',
-    phone_number_collection: {enabled: true},
+    billing_address_collection: hasPhysical ? 'required' : 'auto',
+    ...(hasPhysical ? {phone_number_collection: {enabled: true}} : {}),
+    customer_creation: 'always',
     allow_promotion_codes: true,
     automatic_tax: {enabled: true},
     metadata: {
+      items: itemIds,
+      site: baseUrl,
       cart_summary: cartSummary,
       item_count: String(resolved.reduce((a, x) => a + x.qty, 0)),
       has_physical: hasPhysical ? '1' : '0',
@@ -210,25 +220,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const session = await stripe.checkout.sessions.create(sessionParams)
+    const session = await createBrandedSession(sessionParams)
     return res.status(200).json({url: session.url})
   } catch (err) {
     console.error('[checkout] Stripe error:', err.message)
     return res.status(500).json({error: err.message || 'Checkout error'})
   }
-}
-
-async function readJson(req) {
-  return new Promise((resolve, reject) => {
-    let raw = ''
-    req.on('data', (c) => (raw += c))
-    req.on('end', () => {
-      try {
-        resolve(raw ? JSON.parse(raw) : {})
-      } catch (e) {
-        reject(e)
-      }
-    })
-    req.on('error', reject)
-  })
 }
