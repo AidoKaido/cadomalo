@@ -8,7 +8,7 @@
 //
 // Creates, if missing (matched by name, so re-running is safe):
 //   - contact folder "Cadomalo"
-//   - lists "Routine sample", "Customers", "Newsletter"
+//   - lists "Routine sample", "Customers", "Cadomalo Newsletter"
 //   - contact attributes OFFER_TOKEN, OFFER_EXP, FUNNEL_EXP, PURCHASED (text)
 //   - the 12 email templates in emails/brevo/templates.json (existing ones
 //     with the same name are updated with the current HTML + subject)
@@ -32,7 +32,7 @@ const SENDER = {
 const LISTS = {
   BREVO_LIST_ROUTINE: 'Routine sample',
   BREVO_LIST_CUSTOMERS: 'Customers',
-  BREVO_LIST_NEWSLETTER: 'Newsletter',
+  BREVO_LIST_NEWSLETTER: 'Cadomalo Newsletter',
 }
 const ATTRIBUTES = ['OFFER_TOKEN', 'OFFER_EXP', 'FUNNEL_EXP', 'PURCHASED']
 
