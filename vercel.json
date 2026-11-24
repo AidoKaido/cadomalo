@@ -97,6 +97,7 @@
     {"source": "/products/funny-monday-shirt-some-things-are-better-left-alone-like-me-on-a-monday-tee-wor-6a352e", "destination": "/shop", "permanent": true}
   ],
   "rewrites": [
+    {"source": "/api/go", "destination": "/api/download"},
     {"source": "/products/:slug", "destination": "/shop"}
   ],
   "headers": [

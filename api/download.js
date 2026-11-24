@@ -17,12 +17,29 @@
 
 import {Readable} from 'node:stream'
 import {get, issueSignedToken, presignUrl} from '@vercel/blob'
-import {loadCatalog, findProduct, FREE_IDS} from './_catalog.js'
+import {loadCatalog, findProduct, FREE_IDS, slugify} from './_catalog.js'
 import {verifyToken, clientIp, makeRateLimiter} from './_util.js'
 
 const limited = makeRateLimiter(60, 10 * 60 * 1000)
 
+// Stable product links for emails: /api/go?p=<id>[&lang=fr] is rewritten here
+// (vercel.json) so it doesn't cost a separate function on the Hobby plan.
+async function productRedirect(req, res) {
+  const id = String(req.query?.p || '')
+  const fr = req.query?.lang === 'fr'
+  let to = fr ? '/fr/boutique' : '/shop'
+  try {
+    const p = findProduct(await loadCatalog(), id)
+    if (p && p.source === 'site' && !p.hidden) to = fr ? `/fr/produits/${slugify(p.titleFr || p.title)}` : `/products/${p.slug}`
+  } catch {}
+  res.statusCode = 302
+  res.setHeader('Location', to)
+  res.setHeader('Cache-Control', 'public, max-age=300')
+  res.end()
+}
+
 export default async function handler(req, res) {
+  if (req.query?.p && !req.query?.t && !req.query?.free) return productRedirect(req, res)
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.setHeader('Allow', 'GET')
     return res.status(405).send('Method not allowed')
