@@ -4,9 +4,16 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "functions": {
-    "api/*.js": {"includeFiles": "data/**"}
+    "api/*.js": {"includeFiles": "{data/**,content/catalog.json}"}
   },
   "redirects": [
+    {"source": "/products/human-body-wonders-all-5-books", "destination": "/products/human-body-wonders-all-10-books", "permanent": true},
+    {"source": "/fr/produits/merveilles-du-corps-les-5-livres", "destination": "/fr/produits/merveilles-du-corps-les-10-livres", "permanent": true},
+    {"source": "/products/silly-goose-tumbler-wrap", "destination": "/shop", "permanent": true},
+    {"source": "/products/just-a-girl-pink-tumbler-wrap", "destination": "/shop", "permanent": true},
+    {"source": "/fr/produits/wrap-tumbler-silly-goose", "destination": "/fr/boutique", "permanent": true},
+    {"source": "/fr/produits/wrap-tumbler-just-a-girl-rose", "destination": "/fr/boutique", "permanent": true},
+    {"source": "/offer/discovery-lab", "destination": "/thank-you-sample", "permanent": false},
     {"source": "/gift-finder", "destination": "/collections", "permanent": true},
     {"source": "/product", "destination": "/shop", "permanent": true},
     {"source": "/products/claritysheet-multilingual-personal-finance-planner-or-excel-budget-spreadsheet-goals-debt-and", "destination": "/shop", "permanent": true},

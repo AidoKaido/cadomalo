@@ -495,3 +495,357 @@ document.addEventListener('DOMContentLoaded', () => {
   initReadingBar();
   Cart.syncBadge();
 });
+
+/* ==========================================================
+   SHOP, PRODUCT PAGE + FUNNEL  (restructure, 2026-11)
+   Cart lines / checkout stay in js/cart.js; this block adds the shop
+   filters, the PDP gallery + sticky bar, pixel calls and the funnel pages.
+   API contracts:
+     POST /api/lead              {email, consent}            -> {ok, t}
+     POST /api/funnel-checkout   {offerToken, product}       -> {url}
+     POST /api/one-click-upsell  {session_id}                -> {ok} | {requiresAction, url}
+     GET  /api/get-checkout-session?session_id=              -> {..., downloads:[{label,url}]}
+     POST /api/submit-review     {productId, productSlug, author, rating, body, email, photo?}
+   ========================================================== */
+(function () {
+  var OFFER_KEY = 'cadomalo_offer';
+  var qs = new URLSearchParams(window.location.search);
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+
+  function postJson(url, body) {
+    return fetch(url, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)})
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (d) {
+          if (!r.ok) throw new Error((d && d.error) || ('Request failed (' + r.status + ')'));
+          return d;
+        });
+      });
+  }
+  function setStatus(el, msg) { if (el) el.textContent = msg || ''; }
+
+  /* ---------- offer token (signed by the server; we only read `exp`) ---------- */
+  function tokenExp(token) {
+    if (!token) return 0;
+    var parts = String(token).split('.');
+    for (var i = 0; i < parts.length; i++) {
+      try {
+        var b64 = parts[i].replace(/-/g, '+').replace(/_/g, '/');
+        while (b64.length % 4) b64 += '=';
+        var payload = JSON.parse(atob(b64));
+        if (payload && payload.exp) return payload.exp < 1e12 ? payload.exp * 1000 : payload.exp;
+      } catch (e) { /* not the payload part */ }
+    }
+    return 0;
+  }
+  function saveOffer(token) {
+    var o = {token: token, exp: tokenExp(token)};
+    try { localStorage.setItem(OFFER_KEY, JSON.stringify(o)); } catch (e) {}
+    return o;
+  }
+  function readOffer() {
+    try {
+      var o = JSON.parse(localStorage.getItem(OFFER_KEY));
+      if (o && o.token && (!o.exp || o.exp > Date.now())) return o;
+    } catch (e) {}
+    return null;
+  }
+
+  function funnelBuy(btn, product, status) {
+    var offer = readOffer();
+    if (!offer) { setStatus(status, 'This offer has expired.'); return; }
+    var original = btn.innerHTML;
+    var value = parseFloat((btn.textContent.match(/\$([\d.]+)/) || [])[1]) || 0;
+    btn.disabled = true; btn.textContent = 'Taking you to secure checkout…';
+    try { if (window.trackInitiateCheckout) window.trackInitiateCheckout({value: value, ids: [product]}); } catch (e) {}
+    postJson('/api/funnel-checkout', {offerToken: offer.token, product: product})
+      .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error((d && d.error) || 'Checkout failed'); })
+      .catch(function (err) { btn.disabled = false; btn.innerHTML = original; setStatus(status, err.message); });
+  }
+
+  /* ---------- shop filter chips + collection sections ---------- */
+  function initShopFilter() {
+    var chips = $$('[data-shop-filter]');
+    if (!chips.length) return;
+    var countEl = $('[data-shop-count]');
+    var label = countEl ? countEl.getAttribute('data-label') : '';
+    function apply(f) {
+      var shown = 0;
+      chips.forEach(function (c) {
+        var on = c.getAttribute('data-shop-filter') === f;
+        c.classList.toggle('is-active', on); c.setAttribute('aria-pressed', String(on));
+      });
+      $$('[data-shop-section]').forEach(function (sec) {
+        var visible = 0;
+        $$('.card[data-type]', sec).forEach(function (card) {
+          var match = f === 'all' || card.getAttribute('data-type') === f;
+          card.hidden = !match;
+          if (match) visible++;
+        });
+        sec.hidden = visible === 0;
+        shown += visible;
+      });
+      if (countEl) countEl.textContent = shown + ' ' + label;
+    }
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () { apply(chip.getAttribute('data-shop-filter')); });
+    });
+  }
+
+  /* ---------- PDP gallery: images + optional demo video ---------- */
+  function initGallery() {
+    var frame = $('[data-gallery-frame]');
+    var thumbs = $$('[data-gallery-thumbs] .pdp-thumb');
+    if (!frame || !thumbs.length) return;
+    var alt = (($('.buy-box h1') || {}).textContent || '').trim();
+    thumbs.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var cur = $('[data-gallery-main]', frame);
+        var kind = b.getAttribute('data-kind'), src = b.getAttribute('data-src');
+        var el;
+        if (kind === 'video') {
+          el = document.createElement('video');
+          el.muted = true; el.autoplay = true; el.loop = true; el.playsInline = true;
+          el.setAttribute('muted', ''); el.setAttribute('playsinline', '');
+          if (b.getAttribute('data-poster')) el.poster = b.getAttribute('data-poster');
+        } else {
+          el = document.createElement('img');
+          el.alt = alt; el.width = 800; el.height = 800;
+        }
+        el.setAttribute('data-gallery-main', '');
+        el.src = src;
+        if (cur) cur.replaceWith(el); else frame.appendChild(el);
+        if (kind === 'video' && el.play) { var p = el.play(); if (p && p.catch) p.catch(function () {}); }
+        thumbs.forEach(function (x) { x.classList.remove('is-active'); });
+        b.classList.add('is-active');
+      });
+    });
+  }
+
+  /* ---------- sticky mobile add-to-cart ---------- */
+  function initStickyBuy() {
+    var bar = $('[data-sticky-buy]'), main = $('[data-buy-main]');
+    if (!bar || !main || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { bar.hidden = e.isIntersecting || e.boundingClientRect.top > 0; });
+    }).observe(main);
+  }
+
+  /* ---------- ViewContent on product pages ---------- */
+  function initViewContent() {
+    var box = $('.buy-box[data-product]');
+    if (!box) return;
+    var fired = false;
+    var fire = function () {
+      if (fired || !window.trackViewContent) return;
+      if (!(window.fbTrack || window.ttTrack || window.gaTrack)) return;
+      fired = true;
+      try {
+        window.trackViewContent({
+          id: box.getAttribute('data-product'), name: box.getAttribute('data-name'),
+          price: parseFloat(box.getAttribute('data-value')) || 0, category: box.getAttribute('data-category') || ''
+        });
+      } catch (e) {}
+    };
+    fire();
+    /* pixels load only after consent; fire once they exist */
+    window.addEventListener('consentUpdated', function () { setTimeout(fire, 300); });
+  }
+
+  /* ---------- /free-routine-sample opt-in ---------- */
+  function initOptin() {
+    var form = $('[data-optin-form]');
+    if (!form) return;
+    var status = $('[data-optin-status]', form);
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = (form.email.value || '').trim();
+      if (!email || !form.email.checkValidity()) { setStatus(status, 'Please enter a valid email address.'); form.email.focus(); return; }
+      if (!form.consent.checked) { setStatus(status, 'Please tick the box so we can email you the sample.'); return; }
+      if (form.website && form.website.value) return;
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true; setStatus(status, 'Sending…');
+      postJson('/api/lead', {email: email, consent: true})
+        .then(function (d) {
+          var token = d.t || d.token || d.offerToken || '';
+          if (token) saveOffer(token);
+          try { if (window.trackLead) window.trackLead({source: 'routine-sample'}); } catch (e2) {}
+          window.location.href = '/thank-you-sample' + (token ? '?t=' + encodeURIComponent(token) : '');
+        })
+        .catch(function (err) { btn.disabled = false; setStatus(status, err.message || 'Something went wrong. Please try again.'); });
+    });
+  }
+
+  /* ---------- /thank-you-sample one-time offer ---------- */
+  function initOfferPage() {
+    var page = $('[data-offer-page]');
+    if (!page) return;
+    var t = qs.get('t');
+    if (t) saveOffer(t);
+    var offer = readOffer();
+    var timer = $('[data-offer-timer]', page), left = $('[data-offer-left]', page);
+    var expired = $('[data-offer-expired]', page), status = $('[data-funnel-status]', page);
+    var buyBtns = $$('[data-funnel-buy]', page);
+    var iv = null;
+    function expire() {
+      if (iv) clearInterval(iv);
+      if (timer) timer.hidden = true;
+      if (expired) expired.hidden = false;
+      buyBtns.forEach(function (b) { b.disabled = true; });
+      $$('[data-needs-token]', page).forEach(function (el) { el.hidden = true; });
+    }
+    if (!offer) { expire(); return; }
+    $$('[data-needs-token]', page).forEach(function (el) { el.hidden = false; });
+    if (offer.exp && timer && left) {
+      timer.hidden = false;
+      var tick = function () {
+        var s = Math.floor((offer.exp - Date.now()) / 1000);
+        if (s <= 0) { expire(); return; }
+        left.textContent = pad(Math.floor(s / 3600)) + ':' + pad(Math.floor(s / 60) % 60) + ':' + pad(s % 60);
+      };
+      iv = setInterval(tick, 1000); tick();
+    }
+    buyBtns.forEach(function (b) {
+      b.addEventListener('click', function () { funnelBuy(b, b.getAttribute('data-funnel-buy'), status); });
+    });
+  }
+
+  /* ---------- /offer/medical-heroes one-click upsell ---------- */
+  function initUpsellPage() {
+    var page = $('[data-upsell-page]');
+    if (!page) return;
+    var sid = qs.get('session_id') || '';
+    var confirmUrl = '/order-confirmation' + (sid ? '?session_id=' + encodeURIComponent(sid) : '');
+    var no = $('[data-no-thanks]', page);
+    if (no) no.href = confirmUrl;
+    var status = $('[data-funnel-status]', page);
+    if (readOffer()) $$('[data-needs-token]', page).forEach(function (el) { el.hidden = false; });
+    $$('[data-funnel-buy]', page).forEach(function (b) {
+      b.addEventListener('click', function () { funnelBuy(b, b.getAttribute('data-funnel-buy'), status); });
+    });
+    var btn = $('[data-one-click]', page);
+    if (!btn) return;
+    if (!/^cs_(test|live)_/.test(sid)) { btn.disabled = true; setStatus(status, 'This offer is only available right after checkout.'); return; }
+    btn.addEventListener('click', function () {
+      var original = btn.innerHTML;
+      var value = parseFloat((btn.textContent.match(/\$([\d.]+)/) || [])[1]) || 0;
+      btn.disabled = true; btn.textContent = 'Adding to your order…';
+      try { if (window.trackInitiateCheckout) window.trackInitiateCheckout({value: value, ids: ['mh-bundle']}); } catch (e) {}
+      postJson('/api/one-click-upsell', {session_id: sid})
+        .then(function (d) {
+          if (d && d.requiresAction && d.url) { window.location.href = d.url; return; }
+          if (d && (d.ok || d.success || d.paid)) { window.location.href = d.redirect || (confirmUrl + '&upsell=1'); return; }
+          throw new Error((d && d.error) || 'We could not add it to your order.');
+        })
+        .catch(function (err) { btn.disabled = false; btn.innerHTML = original; setStatus(status, err.message); });
+    });
+  }
+
+  /* ---------- order confirmation: downloads + next-best offer ---------- */
+  function initConfirmationExtras() {
+    var root = $('[data-confirmation]');
+    if (!root) return;
+    var box = $('[data-downloads]', root), list = $('[data-downloads-list]', root), st = $('[data-downloads-status]', root);
+    var sid = qs.get('session_id') || '';
+    function none() { if (st && box) st.textContent = box.getAttribute('data-none'); }
+    if (box && /^cs_(test|live)_/.test(sid)) {
+      var tries = 0;
+      var load = function () {
+        fetch('/api/get-checkout-session?session_id=' + encodeURIComponent(sid))
+          .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+          .then(function (d) {
+            var dl = (d && d.downloads) || [];
+            if (!dl.length) {
+              /* links may still be being prepared — retry briefly */
+              if (d && d.payment_status === 'paid' && ++tries < 4) { setTimeout(load, 2500); return; }
+              none(); return;
+            }
+            list.innerHTML = '';
+            dl.forEach(function (f) {
+              if (!f || !f.url) return;
+              var a = document.createElement('a');
+              a.className = 'btn btn-primary btn-full';
+              a.href = f.url; a.rel = 'noopener';
+              a.textContent = '⬇ ' + (f.label || 'Download');
+              list.appendChild(a);
+            });
+            if (st) st.hidden = true;
+          })
+          .catch(none);
+      };
+      load();
+    } else { none(); }
+
+    var nbo = $('[data-nbo]', root);
+    if (nbo && readOffer()) {
+      var f = $('[data-nbo-funnel]', nbo), s = $('[data-nbo-store]', nbo);
+      if (f) { f.hidden = false; if (s) s.hidden = true; }
+      $$('[data-funnel-buy]', nbo).forEach(function (b) {
+        b.addEventListener('click', function () { funnelBuy(b, b.getAttribute('data-funnel-buy'), null); });
+      });
+    }
+  }
+
+  /* ---------- /review form ---------- */
+  function shrinkPhoto(file) {
+    return new Promise(function (resolve) {
+      if (!file || !/^image\//.test(file.type) || file.size > 15e6) return resolve(null);
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var s = Math.min(1, 1200 / Math.max(img.width, img.height));
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        resolve(c.toDataURL('image/jpeg', 0.82));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); resolve(null); };
+      img.src = url;
+    });
+  }
+  function initReviewForm() {
+    var form = $('[data-review-form]');
+    if (!form) return;
+    var status = $('[data-form-status]', form);
+    var pre = qs.get('product');
+    if (pre) {
+      var match = $$('option', form.productId).filter(function (o) { return o.value === pre; })[0];
+      if (match) form.productId.value = pre;
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (form.website && form.website.value) return;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      var opt = form.productId.options[form.productId.selectedIndex];
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true; setStatus(status, 'Sending…');
+      shrinkPhoto(form.photo.files && form.photo.files[0]).then(function (photo) {
+        return postJson('/api/submit-review', {
+          productId: form.productId.value,
+          productSlug: opt ? opt.getAttribute('data-slug') : '',
+          author: form.author.value.trim(),
+          rating: Number((form.querySelector('input[name="rating"]:checked') || {}).value || 0),
+          body: form.body.value.trim(),
+          email: form.email.value.trim(),
+          photo: photo || undefined
+        });
+      }).then(function () {
+        form.reset();
+        setStatus(status, 'Thank you! Your review will appear once it has been checked. If we can match your order, your 15% code is on its way by email.');
+      }).catch(function (err) {
+        setStatus(status, err.message || 'Something went wrong. Please try again.');
+      }).then(function () { btn.disabled = false; });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    initShopFilter();
+    initGallery();
+    initStickyBuy();
+    initViewContent();
+    initOptin();
+    initOfferPage();
+    initUpsellPage();
+    initConfirmationExtras();
+    initReviewForm();
+  });
+})();

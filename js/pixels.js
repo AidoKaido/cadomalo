@@ -147,7 +147,8 @@ function loadTikTokPixel() {
     viewContent:    (data) => ttq.track('ViewContent', data),
     addToCart:      (data) => ttq.track('AddToCart', data),
     initiateCheckout:(data) => ttq.track('InitiateCheckout', data),
-    completePayment:(data) => ttq.track('CompletePayment', data)
+    completePayment:(data) => ttq.track('CompletePayment', data),
+    submitForm:     (data) => ttq.track('SubmitForm', data)
   };
 
   console.log('[Cadomalo] TikTok Pixel loaded');
@@ -226,4 +227,26 @@ window.trackPurchase = function({ orderId, value, currency = 'USD', items = [] }
   window.ttTrack?.completePayment({ value, currency });
   window.pinTrack?.checkout({ order_id: orderId, value, currency });
   window.gaTrack?.purchase({ transaction_id: orderId, value, currency, items });
+};
+
+/* ViewContent — product pages (called from js/main.js) */
+window.trackViewContent = function({ id, name, price, currency = 'USD', category = '' }) {
+  window.fbTrack?.viewContent({ content_ids: [id], content_name: name, content_type: 'product', value: price, currency });
+  window.ttTrack?.viewContent({ content_id: id, content_name: name, content_type: 'product', price, value: price, currency });
+  window.gaTrack?.viewItem({ currency, value: price, items: [{ item_id: id, item_name: name, item_category: category, price }] });
+};
+
+/* InitiateCheckout — call right before asking the server for a checkout */
+window.trackInitiateCheckout = function({ value, currency = 'USD', ids = [], numItems = 1 }) {
+  window.fbTrack?.initiateCheckout({ content_ids: ids, value, currency, num_items: numItems });
+  window.ttTrack?.initiateCheckout({ content_id: ids[0], value, currency, quantity: numItems });
+  window.pinTrack?.checkout({ value, currency, order_quantity: numItems });
+  window.gaTrack?.beginCheckout({ currency, value, items: ids.map((id) => ({ item_id: id })) });
+};
+
+/* Lead — free sample opt-in success (no PII is passed) */
+window.trackLead = function({ source = 'routine-sample', value = 0, currency = 'USD' } = {}) {
+  window.fbTrack?.lead({ content_name: source, value, currency });
+  window.ttTrack?.submitForm?.({ content_name: source });
+  window.gaTrack?.event('generate_lead', { currency, value, lead_source: source });
 };
