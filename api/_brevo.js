@@ -1,7 +1,7 @@
 // Brevo (Sendinblue) API v3 helpers. (Underscore prefix: not an endpoint.)
 //
 // Env vars:
-//   BREVO_API_KEY          — API key (Brevo → SMTP & API → API keys)
+//   BREVO_API_KEY (or CADOMALO_WEBSITE) — API key (Brevo → SMTP & API → API keys)
 //   BREVO_LIST_ROUTINE     — numeric id of the list "Routine sample" (funnel leads)
 //   BREVO_LIST_CUSTOMERS   — numeric id of the list "Customers"
 //   BREVO_LIST_NEWSLETTER  — numeric id of the list "Newsletter"
@@ -10,7 +10,8 @@
 
 const API = 'https://api.brevo.com/v3'
 
-export const brevoConfigured = () => !!process.env.BREVO_API_KEY
+const brevoKey = () => process.env.BREVO_API_KEY || process.env.CADOMALO_WEBSITE || ""
+export const brevoConfigured = () => !!brevoKey()
 export const listId = (name) => {
   const n = parseInt(process.env[name] || '', 10)
   return Number.isFinite(n) && n > 0 ? n : null
@@ -20,7 +21,7 @@ export async function brevo(method, path, body) {
   const r = await fetch(API + path, {
     method,
     headers: {
-      'api-key': process.env.BREVO_API_KEY || '',
+      'api-key': brevoKey(),
       accept: 'application/json',
       ...(body ? {'content-type': 'application/json'} : {}),
     },

@@ -23,7 +23,7 @@ import {fileURLToPath} from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DRY = process.argv.includes('--dry-run')
-const KEY = process.env.BREVO_API_KEY
+const KEY = process.env.BREVO_API_KEY || process.env.CADOMALO_WEBSITE
 const API = 'https://api.brevo.com/v3'
 const SENDER = {
   name: process.env.BREVO_SENDER_NAME || 'Aidora at Cadomalo',
