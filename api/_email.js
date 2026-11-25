@@ -35,7 +35,7 @@ export function layout({preheader = '', body, siteUrl = 'https://cadomalo.com', 
 <tr><td align="center">
 <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:560px;background:#ffffff;border-radius:20px;">
 <tr><td style="padding:28px 32px 4px;text-align:center;">
-<a href="${siteUrl}"><img src="https://cadomalo.com/assets/logo-horizontal.png" width="200" alt="Cadomalo" style="width:200px;max-width:70%;height:auto;border:0;"></a>
+<a href="${siteUrl}"><img src="https://cadomalo.com/assets/logo-email.png" width="200" alt="Cadomalo" style="width:200px;max-width:70%;height:auto;border:0;"></a>
 </td></tr>
 <tr><td style="padding:18px 32px 26px;">${body}</td></tr>
 <tr><td style="padding:18px 32px 26px;border-top:1px solid #F1E6D6;text-align:center;">
