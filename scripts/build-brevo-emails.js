@@ -79,7 +79,7 @@ function layout({preheader, body, footer = 'marketing'}) {
 <tr><td align="center">
 <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:560px;background:#ffffff;border-radius:20px;">
 <tr><td style="padding:28px 32px 4px;text-align:center;">
-<a href="${SITE}"><img src="${SITE}/assets/logo.png" width="150" alt="Cadomalo" style="width:150px;height:auto;border:0;"></a>
+<a href="${SITE}"><img src="${SITE}/assets/logo-horizontal.png" width="200" alt="Cadomalo" style="width:200px;max-width:70%;height:auto;border:0;"></a>
 </td></tr>
 <tr><td style="padding:18px 32px 26px;">${body}</td></tr>
 <tr><td style="padding:18px 32px 26px;border-top:1px solid ${C.line};text-align:center;">
@@ -91,8 +91,8 @@ function layout({preheader, body, footer = 'marketing'}) {
 }
 
 const sign = p(`Warmly,<br>Aidora<br><span style="color:${C.muted};font-size:14px;">Founder of Cadomalo</span>`)
-const UNTIL_LAB = 'This price is tied to your email and ends {{ contact.OFFER_EXP }}. After that it is back to $9.99.'
-const UNTIL_FUNNEL = 'These subscriber prices are tied to your email and last until {{ contact.FUNNEL_EXP }}.'
+const UNTIL_LAB = 'This price is tied to your email and ends {{ contact.OFFER_EXP | default : "48 hours after you signed up" }}. After that it is back to $9.99.'
+const UNTIL_FUNNEL = 'These subscriber prices are tied to your email and last until {{ contact.FUNNEL_EXP | default : "14 days after you signed up" }}.'
 
 const templates = [
   {
