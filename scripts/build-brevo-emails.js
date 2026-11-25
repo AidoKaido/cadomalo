@@ -79,7 +79,7 @@ function layout({preheader, body, footer = 'marketing'}) {
 <tr><td align="center">
 <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:560px;background:#ffffff;border-radius:20px;">
 <tr><td style="padding:28px 32px 4px;text-align:center;">
-<a href="${SITE}"><img src="${SITE}/assets/logo.png" width="150" alt="Cadomalo" style="width:150px;height:auto;border:0;"></a>
+<a href="${SITE}"><img src="${SITE}/assets/logo-horizontal.png" width="200" alt="Cadomalo" style="width:200px;max-width:70%;height:auto;border:0;"></a>
 </td></tr>
 <tr><td style="padding:18px 32px 26px;">${body}</td></tr>
 <tr><td style="padding:18px 32px 26px;border-top:1px solid ${C.line};text-align:center;">
