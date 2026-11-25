@@ -91,8 +91,8 @@ function layout({preheader, body, footer = 'marketing'}) {
 }
 
 const sign = p(`Warmly,<br>Aidora<br><span style="color:${C.muted};font-size:14px;">Founder of Cadomalo</span>`)
-const UNTIL_LAB = 'This price is tied to your email and ends {{ contact.OFFER_EXP }}. After that it is back to $9.99.'
-const UNTIL_FUNNEL = 'These subscriber prices are tied to your email and last until {{ contact.FUNNEL_EXP }}.'
+const UNTIL_LAB = 'This price is tied to your email and ends {{ contact.OFFER_EXP | default : "48 hours after you signed up" }}. After that it is back to $9.99.'
+const UNTIL_FUNNEL = 'These subscriber prices are tied to your email and last until {{ contact.FUNNEL_EXP | default : "14 days after you signed up" }}.'
 
 const templates = [
   {
