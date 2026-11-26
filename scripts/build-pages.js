@@ -8,7 +8,7 @@
  *
  * English lives at the root (preserving existing URLs); French under /fr/.
  * Product and blog pages are emitted as real directories so they resolve
- * without depending on a rewrite. Funnel pages (free sample opt-in, one-time
+ * without depending on a rewrite. Funnel pages (free Mini Kit opt-in, one-time
  * offers, review form) are English-only and noindex.
  *
  * Honesty rules baked in here: product media is only rendered when the file
@@ -49,6 +49,9 @@ const POSTS = readJson('posts.json')
 const LEGAL = readJson('legal.json')
 const CATEGORIES = readJson('categories.json')
 const ULTIMATE = 'ultimate-human-body'
+/* the free lead magnet: a Mission 1 sample of the Discovery Lab */
+const MINI_KIT = 'body-mini-kit'
+const HERO_KIT_IMG = '/images/home/hero-mini-kit.webp'
 /* real inside pages: {"<id>": [{src, w, h, alt: {en, fr}}]} — optional, partial is fine */
 const PAGE_PREVIEWS = (() => {
   try { return readJson('page-previews.json') } catch { return {} }
@@ -74,7 +77,8 @@ function mediaFor(p) {
   const images = [...new Set([...listed, ...found])]
   /* legacy artwork in /assets (original 5 HBW books + HBW bundle) as a fallback */
   if (!images.length && p.img && onDisk(assetUrl(p.img))) images.push(assetUrl(p.img))
-  const videoIds = p.id === 'routine-sample' ? ['routine'] : [p.id]
+  /* free samples borrow the clips of the product they come from */
+  const videoIds = {'routine-sample': ['routine'], 'body-mini-kit': ['discovery-lab']}[p.id] || [p.id]
   const videos = [
     ...(p.video && onDisk(p.video) ? [p.video] : []),
     ...videoIds.flatMap((id) => listDir('videos', new RegExp(`^${id}-\\d+\\.mp4$`)).map((n) => `/videos/${n}`)),
@@ -88,6 +92,21 @@ function mediaFor(p) {
   return m
 }
 const primaryImage = (p) => mediaFor(p).images[0] || ''
+
+/* intrinsic size of a .webp on disk (VP8 / VP8L / VP8X), for width/height attrs */
+function webpSize(url) {
+  try {
+    const b = readFileSync(join(ROOT, String(url).replace(/^\//, '')))
+    const kind = b.toString('ascii', 12, 16)
+    if (kind === 'VP8X') return {w: 1 + b.readUIntLE(24, 3), h: 1 + b.readUIntLE(27, 3)}
+    if (kind === 'VP8L') {
+      const n = b.readUInt32LE(21)
+      return {w: 1 + (n & 0x3fff), h: 1 + ((n >> 14) & 0x3fff)}
+    }
+    if (kind === 'VP8 ') return {w: b.readUInt16LE(26) & 0x3fff, h: b.readUInt16LE(28) & 0x3fff}
+  } catch {}
+  return null
+}
 
 /* ---------- reviews: real, approved only -------------------------------- */
 /* content/reviews.json: [{product, name, rating, text, verified?, photo?, date?}]
@@ -141,7 +160,8 @@ const catUrl = (id, lang) => pathToUrl(ROUTES[`cat:${id}`][lang])
 const catById = (id) => CATEGORIES.find((c) => c.id === id)
 /* English-only funnel pages (noindex, not in the sitemap) */
 const FUNNEL = {
-  optin: 'free-routine-sample',
+  /* the free Mini Discovery Kit (catalog id MINI_KIT); /free-routine-sample 301s here (vercel.json) */
+  optin: 'free-mini-discovery-kit',
   thankYou: 'thank-you-sample',
   mhOffer: 'offer/medical-heroes',
   review: 'review',
@@ -416,8 +436,8 @@ function reviewsSection(lang, t) {
 const out = []
 const add = (path, html) => out.push({path, html})
 
-/* the free-sample opt-in form: one markup for /free-routine-sample and the
-   home page; js/main.js initOptin() handles both (POST /api/lead) */
+/* the free Mini Kit opt-in form: one markup for /free-mini-discovery-kit and
+   the home page; js/main.js initOptin() handles both (POST /api/lead) */
 function optinForm(lang, id = 'optin-email') {
   const H = UI[lang].home3
   return `<form class="optin-form" data-optin-form novalidate data-msg-invalid="${esc(H.optinInvalid)}" data-msg-tick="${esc(H.optinTick)}" data-msg-sending="${esc(H.optinSending)}" data-msg-error="${esc(H.optinError)}">
@@ -474,9 +494,21 @@ function buildHome(lang) {
     .map(byId).filter((p) => p && !p.hidden)
   const catLabel = (id) => catById(id).label[lang]
 
+  /* hero stage: the Mini Kit mockup on top of two peeking product cards;
+     every image only if it is on disk */
+  const lab = byId('discovery-lab')
+  const heroMainSrc = onDisk(HERO_KIT_IMG) ? HERO_KIT_IMG : primaryImage(lab)
+  const heroDims = (heroMainSrc && webpSize(heroMainSrc)) || {w: 700, h: 700}
+  const peek = (src, cls) => (onDisk(src) ? `<img class="hero-peek ${cls}" src="${src}" alt="" width="300" height="300" loading="lazy">` : '')
+  const kitImgSrc = onDisk(HERO_KIT_IMG) ? HERO_KIT_IMG : primaryImage(byId(MINI_KIT)) || primaryImage(lab)
+  const kitDims = (kitImgSrc && webpSize(kitImgSrc)) || {w: 640, h: 640}
   Object.assign(ctx, {
-    heroImg: '/images/home/hero-sample.webp',
+    heroMain: heroMainSrc ? `<img class="hero-main" src="${heroMainSrc}" alt="" width="${heroDims.w}" height="${heroDims.h}" fetchpriority="high">` : '',
+    heroPeeks: peek('/images/products/discovery-lab/01.webp', 'hero-peek-l') + peek('/images/products/bundle/01.webp', 'hero-peek-r'),
     optinUrl: `/${FUNNEL.optin}`,
+    routinePrice: money(routine.price),
+    kitMedia: kitImgSrc ? `<div class="kit-media"><a href="/${FUNNEL.optin}" tabindex="-1"><img src="${kitImgSrc}" alt="${esc(lang === 'fr' ? 'Le mini kit découverte Mon corps incroyable : la couverture et des pages de la mission des 5 sens' : 'The My Amazing Body Mini Discovery Kit: the cover and pages from the 5 senses mission')}" width="${kitDims.w}" height="${kitDims.h}" loading="lazy"></a></div>` : '',
+    kitNote: H.kitNote ? `<p class="kit-note">${esc(H.kitNote)}</p>` : '',
     trustStrip: H.trust.map((x) => `<li>${icon('check', 16)}<span>${esc(x)}</span></li>`).join(''),
     catTiles: CATEGORIES.map((c) => {
       const img = primaryImage(byId(c.tile))
@@ -1129,30 +1161,36 @@ const videoTag = (v, cls = 'funnel-video') =>
   `<video class="${cls}" src="${v.src}"${v.poster ? ` poster="${v.poster}"` : ''} muted autoplay loop playsinline preload="metadata" aria-label="Product demo video"></video>`
 
 function buildOptin() {
-  const sample = byId('routine-sample')
-  const mock = onDisk('/images/products/routine-sample/01.webp') ? '/images/products/routine-sample/01.webp' : primaryImage(byId('routine'))
-  const vid = mediaFor(sample).videos[0]
+  const kit = byId(MINI_KIT)
+  const lab = byId('discovery-lab')
+  const mock = onDisk(HERO_KIT_IMG) ? HERO_KIT_IMG : primaryImage(kit) || primaryImage(lab)
+  const dims = (mock && webpSize(mock)) || {w: 640, h: 640}
+  const vid = mediaFor(kit).videos[0]
+  const pages = pagesFor(kit).slice(0, 3)
+  const strip = pages.length > 1 ? `<div class="kit-pages">${pages.map((x) => `<img src="${x.src}" alt="${esc((x.alt && x.alt.en) || 'A page from the Mini Discovery Kit')}" width="${x.w || 300}" height="${x.h || 388}" loading="lazy">`).join('')}</div>` : ''
   const body = `    <section class="section funnel-hero">
       <div class="wrap funnel-grid">
         <div class="funnel-copy">
-          <p class="eyebrow">Free printable sample · ages 5–7</p>
-          <h1 class="hero-title"><span>Calmer mornings.</span><span class="accent">Easier bedtimes.</span></h1>
-          <p class="lead">Get 10 free pages from our Morning &amp; Bedtime Routine Busy Book — print them tonight and let your child run their own routine with picture cards.</p>
+          <p class="eyebrow">Free Mini Discovery Kit · ages 5–7</p>
+          <h1 class="hero-title"><span>One real science mission.</span><span class="accent">Free, tonight.</span></h1>
+          <p class="lead">The <strong>My Amazing Body Mini Discovery Kit</strong> is Mission 1 of our Discovery Lab: your child explores the 5 senses with simple experiments, cut-outs and a discovery passport. Print it in minutes.</p>
           <ul class="benefit-list">
-            <li><span class="benefit-check">${icon('check', 14)}</span><span>A visual routine your child follows by themselves — fewer reminders, fewer battles</span></li>
-            <li><span class="benefit-check">${icon('check', 14)}</span><span>One complete routine world, the weekly star chart and a Routine Superstar certificate</span></li>
-            <li><span class="benefit-check">${icon('check', 14)}</span><span>One short PDF to print at home tonight</span></li>
+            <li><span class="benefit-check">${icon('check', 14)}</span><span>All of Mission 1 — the 5 senses — with hands-on experiments and cut-outs</span></li>
+            <li><span class="benefit-check">${icon('check', 14)}</span><span>A grown-up guide, the discovery passport and a certificate to celebrate</span></li>
+            <li><span class="benefit-check">${icon('check', 14)}</span><span>One short PDF (US Letter or A4), straight to your inbox</span></li>
           </ul>
           ${optinForm('en', 'optin-email')}
+          <p class="nl-note">The kit is in English. <span lang="fr">Le kit est en anglais.</span></p>
         </div>
         <div class="funnel-media">
-          ${mock ? `<img src="${mock}" alt="Printed pages from the Morning and Bedtime Routine Busy Book" width="640" height="640" fetchpriority="high">` : ''}
+          ${mock ? `<img class="kit-mock" src="${mock}" alt="The My Amazing Body Mini Discovery Kit: the cover and pages from the 5 senses mission" width="${dims.w}" height="${dims.h}" fetchpriority="high">` : ''}
+          ${strip}
           ${vid ? videoTag(vid) : ''}
         </div>
       </div>
     </section>`
-  funnelShell(FUNNEL.optin, 'Free Morning & Bedtime Routine pages — Cadomalo',
-    'Get 10 free printable pages from the Morning & Bedtime Routine Busy Book.', body, mock || undefined)
+  funnelShell(FUNNEL.optin, 'Free Mini Discovery Kit: a 5 senses science mission — Cadomalo',
+    'Get the free My Amazing Body Mini Discovery Kit: one real science mission about the 5 senses for ages 5–7, ready to print tonight.', body, mock || undefined)
 }
 
 function buildThankYouSample() {
@@ -1167,9 +1205,9 @@ function buildThankYouSample() {
         </details>` : ''
   const body = `    <section class="section funnel-hero" data-offer-page data-expired-url="${productUrl(lab, 'en')}">
       <div class="wrap-narrow center">
-        <p class="funnel-step">${icon('check', 18)} Your free sample is on its way — check your inbox in a few minutes.</p>
-        <h1>Before you go: a one-time offer, just for you</h1>
-        <p class="lead" style="margin-inline:auto">Add <strong>My Amazing Body Discovery Lab</strong> — 38 pages, 5 hands-on science missions — for a fraction of the shop price.</p>
+        <p class="funnel-step">${icon('check', 18)} Your Mini Discovery Kit is on its way — check your inbox in a few minutes.</p>
+        <h1>Unlock all 5 missions: a one-time offer, just for you</h1>
+        <p class="lead" style="margin-inline:auto">Your free kit is Mission 1. Get the full <strong>My Amazing Body Discovery Lab</strong> — 38 pages, all 5 hands-on science missions — for a fraction of the shop price.</p>
       </div>
       <div class="wrap funnel-grid">
         <div class="funnel-media">
@@ -1180,17 +1218,17 @@ function buildThankYouSample() {
           ${priceStack(lab.price, lab.funnelPrice)}
           <p class="offer-timer" data-offer-timer hidden>${icon('check', 16)} This price is reserved for you for <strong data-offer-left>48:00:00</strong></p>
           <ul class="benefit-list">${lab.benefits.en.map((b) => `<li><span class="benefit-check">${icon('check', 14)}</span><span>${esc(b)}</span></li>`).join('')}</ul>
-          <p><button type="button" class="btn btn-primary btn-lg btn-full" data-funnel-buy="discovery-lab">Yes! Add the Discovery Lab for ${money(lab.funnelPrice)}</button></p>
+          <p><button type="button" class="btn btn-primary btn-lg btn-full" data-funnel-buy="discovery-lab">Yes! Unlock all 5 missions for ${money(lab.funnelPrice)}</button></p>
           <p class="nl-note">Instant PDF download · secure Stripe checkout · 30-day happiness promise</p>
           <p class="form-status" data-funnel-status role="status"></p>
           <p class="offer-expired" data-offer-expired hidden>This offer has expired. The Discovery Lab is still available in the shop at ${money(lab.price)}. <a href="${productUrl(lab, 'en')}">See it in the shop</a></p>
           ${singles}
-          <p><a class="funnel-skip" href="/">No thanks, I’ll just wait for my free pages</a></p>
+          <p><a class="funnel-skip" href="/">No thanks, I’ll just wait for my free kit</a></p>
         </div>
       </div>
     </section>`
-  funnelShell(FUNNEL.thankYou, 'Your free sample is on its way — Cadomalo',
-    'Your free routine pages are on their way.', body, img || undefined)
+  funnelShell(FUNNEL.thankYou, 'Your Mini Discovery Kit is on its way — Cadomalo',
+    'Your free Mini Discovery Kit is on its way.', body, img || undefined)
 }
 
 function buildMhOffer() {
@@ -1276,6 +1314,7 @@ function build404() {
           <a class="btn btn-primary" href="${urlFor('shop', 'en')}">${esc(N.shop)}</a>
           <a class="btn btn-quiet" href="${urlFor('home', 'en')}">${esc(N.home)}</a>
         </p>
+        ${N.kit ? `<p>${esc(N.kit)} <a href="/${FUNNEL.optin}">${esc(N.kitLink)}</a></p>` : ''}
         <p lang="fr">${esc(N.fr)} <a href="${urlFor('home', 'fr')}">${esc(N.frLink)}</a> · <a href="${urlFor('shop', 'fr')}">Boutique</a></p>
       </div>
     </section>`

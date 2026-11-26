@@ -1,62 +1,74 @@
 [
   {
     "file": "00-doi-confirm.html",
+    "brevoId": 18,
     "name": "Cadomalo DOI — confirm your email",
-    "subject": "Please confirm: your free routine pages are one click away",
+    "subject": "Please confirm: your free Mini Discovery Kit is one click away",
     "doi": true
   },
   {
     "file": "01-lead-sample.html",
-    "name": "Cadomalo Lead 1 — your free routine pages",
-    "subject": "Your free Morning & Bedtime Routine pages"
+    "brevoId": 19,
+    "name": "Cadomalo Lead 1 — your free Mini Discovery Kit",
+    "subject": "Your free Mini Discovery Kit is here"
   },
   {
     "file": "02-lead-visual-schedule.html",
-    "name": "Cadomalo Lead 2 — the 2-minute trick",
-    "subject": "The 2-minute trick that ends morning battles"
+    "brevoId": 20,
+    "name": "Cadomalo Lead 2 — 5-minute senses game",
+    "subject": "A 5-minute senses game for tonight"
   },
   {
     "file": "03-lead-last-chance.html",
+    "brevoId": 21,
     "name": "Cadomalo Lead 3 — last chance Discovery Lab",
-    "subject": "Last chance: Discovery Lab for $4.99"
+    "subject": "Last chance: the other 4 missions for $4.99"
   },
   {
     "file": "04-lead-doctor.html",
+    "brevoId": 22,
     "name": "Cadomalo Lead 4 — scared of the doctor",
     "subject": "When your child is scared of the doctor"
   },
   {
     "file": "05-lead-inside-mh.html",
+    "brevoId": 23,
     "name": "Cadomalo Lead 5 — inside Medical Heroes",
     "subject": "Inside Medical Heroes (4 languages)"
   },
   {
     "file": "06-lead-next-favourite.html",
+    "brevoId": 24,
     "name": "Cadomalo Lead 6 — next favourite books",
     "subject": "Your child's next favourite books"
   },
   {
     "file": "07-lead-one-question.html",
+    "brevoId": 25,
     "name": "Cadomalo Lead 7 — one question",
     "subject": "One question for you"
   },
   {
     "file": "11-customer-welcome.html",
+    "brevoId": 26,
     "name": "Cadomalo Customer 1 — printing tips",
     "subject": "Your files + how to get the best prints"
   },
   {
     "file": "12-customer-how-is-it-going.html",
+    "brevoId": 27,
     "name": "Cadomalo Customer 2 — how is it going",
     "subject": "How is it going so far?"
   },
   {
     "file": "13-customer-review.html",
+    "brevoId": 28,
     "name": "Cadomalo Customer 3 — review request",
     "subject": "Would you tell other parents what you think?"
   },
   {
     "file": "14-customer-cross-sell.html",
+    "brevoId": 29,
     "name": "Cadomalo Customer 4 — what next",
     "subject": "What to read next"
   }

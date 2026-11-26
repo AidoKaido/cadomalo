@@ -1,6 +1,9 @@
-// Funnel opt-in: POST {email, consent} from /free-routine-sample.
+// Funnel opt-in: POST {email, consent} from /free-mini-discovery-kit (and the
+// inline form on the home page).
 //
-// Adds the contact to the Brevo list "Routine sample" with double opt-in and
+// Adds the contact to the Brevo list "Mini Discovery Kit" (env
+// BREVO_LIST_ROUTINE — same list id as the old routine sample) with double
+// opt-in, sets MAGNET=body-mini-kit, and
 // returns a signed offer token for the one-time Discovery Lab offer shown on
 // /thank-you-sample?t=<token>. The token is also stored on the contact
 // (OFFER_TOKEN, OFFER_EXP, FUNNEL_EXP) so the email sequence can link to it.
@@ -19,6 +22,10 @@ import {readJson, clientIp, makeRateLimiter, isEmail, makeOfferToken, verifyToke
 import {sendCapiEvent, trackingFromRequest} from './_meta.js'
 
 const limited = makeRateLimiter(5, 10 * 60 * 1000)
+
+// The current lead magnet (catalog id) and its opt-in page.
+const MAGNET = 'body-mini-kit'
+const OPTIN_PATH = '/free-mini-discovery-kit'
 
 const fmtDate = (sec) =>
   new Date(sec * 1000).toLocaleString('en-US', {
@@ -43,7 +50,7 @@ export default async function handler(req, res) {
   const email = String(body.email || '').trim().toLowerCase()
   if (!isEmail(email)) return res.status(400).json({ok: false, error: 'Please enter a valid email address'})
   if (body.consent !== true && body.consent !== 'true' && body.consent !== 'on' && body.consent !== 1) {
-    return res.status(400).json({ok: false, error: 'Please tick the box so we can email you the sample'})
+    return res.status(400).json({ok: false, error: 'Please tick the box so we can email you the free kit'})
   }
 
   try {
@@ -55,6 +62,7 @@ export default async function handler(req, res) {
       OFFER_TOKEN: t,
       OFFER_EXP: fmtDate(payload.exp),
       FUNNEL_EXP: fmtDate(payload.fx || payload.exp),
+      MAGNET: MAGNET,
     }
     const base = requestBaseUrl(req)
     const onList = Array.isArray(existing?.listIds) && existing.listIds.includes(list)
@@ -91,9 +99,9 @@ async function sendLeadEvent(req, body, email, base) {
     await sendCapiEvent({
       event_name: 'Lead',
       event_id: eventId,
-      event_source_url: `${base}/free-routine-sample`,
+      event_source_url: `${base}${OPTIN_PATH}`,
       user_data: {em: email, external_id: email, client_ip_address: tr.ip, client_user_agent: tr.ua, fbp: tr.fbp, fbc: tr.fbc},
-      custom_data: {content_name: 'routine-sample', value: 0, currency: 'USD'},
+      custom_data: {content_name: MAGNET, value: 0, currency: 'USD'},
     })
   } catch (err) {
     console.warn('[lead] meta capi:', err.message)

@@ -2,7 +2,8 @@
 //
 // Env vars:
 //   BREVO_API_KEY (or CADOMALO_WEBSITE) — API key (Brevo → SMTP & API → API keys)
-//   BREVO_LIST_ROUTINE     — numeric id of the list "Routine sample" (funnel leads)
+//   BREVO_LIST_ROUTINE     — numeric id of the list "Mini Discovery Kit" (funnel leads;
+//                            the env name is historical — it was the routine sample list)
 //   BREVO_LIST_CUSTOMERS   — numeric id of the list "Customers"
 //   BREVO_LIST_NEWSLETTER  — numeric id of the list "Newsletter"
 //   BREVO_DOI_TEMPLATE_ID  — numeric id of the double opt-in confirmation template

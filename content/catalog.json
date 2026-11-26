@@ -4369,6 +4369,47 @@
     }
   },
   {
+    "id": "body-mini-kit",
+    "type": "kit",
+    "category": "kit",
+    "collection": null,
+    "fulfillment": "auto",
+    "hidden": true,
+    "series": {
+      "en": "Free Mini Discovery Kit",
+      "fr": "Mini kit découverte gratuit"
+    },
+    "title": {
+      "en": "My Amazing Body — Mini Discovery Kit",
+      "fr": "Mon corps incroyable — Mini kit découverte"
+    },
+    "desc": {
+      "en": "A free sample of the My Amazing Body Discovery Lab: the grown-up guide, all of Mission 1 (the 5 senses) with its cut-outs, the discovery passport and the certificate.",
+      "fr": "Un échantillon gratuit du labo de découverte du corps : le guide pour les parents, toute la mission 1 (les 5 sens) avec ses découpages, le passeport de découverte et le diplôme."
+    },
+    "note": {
+      "en": "The kit is in English.",
+      "fr": "Le kit est en anglais."
+    },
+    "price": 0,
+    "langs": "PDF · EN",
+    "color": "#5BA8E0",
+    "images": [
+      "/images/products/body-mini-kit/01.webp"
+    ],
+    "files": [
+      {
+        "label": "US Letter · full colour",
+        "key": "products/body-mini-kit/my-amazing-body-mini-discovery-kit-us-letter.pdf"
+      },
+      {
+        "label": "A4 · full colour",
+        "key": "products/body-mini-kit/my-amazing-body-mini-discovery-kit-a4.pdf"
+      }
+    ],
+    "reviewType": "kit"
+  },
+  {
     "id": "routine-sample",
     "type": "kit",
     "category": "kit",

@@ -1946,5 +1946,61 @@
     "fr": "Extrait de « Mes yeux voient tout » : Liste de mots : « Mes mots des yeux » — les mots clés en français, anglais, espagnol et allemand"
    }
   }
+ ],
+ "body-mini-kit": [
+  {
+   "src": "/images/products/body-mini-kit/p01.webp",
+   "w": 1546,
+   "h": 2000,
+   "alt": {
+    "en": "“What Are My Senses?”: Pico at a picnic; kids match 5 things to the nose, eyes, skin, ears and tongue",
+    "fr": "« Quels sont mes sens ? » : Pico au pique-nique ; l’enfant relie 5 choses au nez, aux yeux, à la peau, aux oreilles et à la langue"
+   }
+  },
+  {
+   "src": "/images/products/body-mini-kit/p02.webp",
+   "w": 1546,
+   "h": 2000,
+   "alt": {
+    "en": "“Mystery Sound Detective”: eyes closed, kids guess 6 everyday sounds a grown-up makes",
+    "fr": "« Détective des sons mystères » : les yeux fermés, l’enfant devine 6 bruits du quotidien faits par un adulte"
+   }
+  },
+  {
+   "src": "/images/products/body-mini-kit/p03.webp",
+   "w": 1546,
+   "h": 2000,
+   "alt": {
+    "en": "“Texture Detective”: kids feel 6 safe objects and sort them into soft, rough, smooth and bumpy",
+    "fr": "« Détective des textures » : l’enfant touche 6 objets et les classe en doux, rugueux, lisse et bosselé"
+   }
+  },
+  {
+   "src": "/images/products/body-mini-kit/p04.webp",
+   "w": 1546,
+   "h": 2000,
+   "alt": {
+    "en": "“Build a Sensory Creature”: kids invent and draw a creature with a super sense",
+    "fr": "« Invente une créature sensorielle » : l’enfant imagine et dessine une créature dotée d’un super sens"
+   }
+  },
+  {
+   "src": "/images/products/body-mini-kit/p05.webp",
+   "w": 1546,
+   "h": 2000,
+   "alt": {
+    "en": "“Senses Superpower Reveal”: the simple science of the 5 senses and the Mission 1 badge",
+    "fr": "« La révélation des super sens » : la science des 5 sens expliquée simplement et le badge de la mission 1"
+   }
+  },
+  {
+   "src": "/images/products/body-mini-kit/p06.webp",
+   "w": 1546,
+   "h": 2000,
+   "alt": {
+    "en": "“My Discovery Passport”: kids color a stamp after each page and glue in their mission badge",
+    "fr": "« Mon passeport de découverte » : l’enfant colorie un tampon après chaque page et colle son badge de mission"
+   }
+  }
  ]
 }

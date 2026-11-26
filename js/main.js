@@ -735,10 +735,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('consentUpdated', function () { setTimeout(fire, 300); });
   }
 
-  /* ---------- /free-routine-sample opt-in ---------- */
+  /* ---------- free Mini Discovery Kit opt-in (/free-mini-discovery-kit + home) ---------- */
   function initOptin() {
-    var form = $('[data-optin-form]');
-    if (!form) return;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-optin-form]'), initOptinForm);
+  }
+  function initOptinForm(form) {
     var status = $('[data-optin-status]', form);
     /* messages come from the form so the French home page speaks French */
     var msg = function (k, fallback) { return form.getAttribute('data-msg-' + k) || fallback; };
@@ -746,7 +747,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       var email = (form.email.value || '').trim();
       if (!email || !form.email.checkValidity()) { setStatus(status, msg('invalid', 'Please enter a valid email address.')); form.email.focus(); return; }
-      if (!form.consent.checked) { setStatus(status, msg('tick', 'Please tick the box so we can email you the sample.')); return; }
+      if (!form.consent.checked) { setStatus(status, msg('tick', 'Please tick the box so we can email you the free kit.')); return; }
       if (form.website && form.website.value) return;
       var btn = form.querySelector('button[type="submit"]');
       btn.disabled = true; setStatus(status, msg('sending', 'Sending…'));
@@ -756,7 +757,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(function (d) {
           var token = d.t || d.token || d.offerToken || '';
           if (token) saveOffer(token);
-          try { if (window.trackLead) window.trackLead({source: 'routine-sample', eventID: eventId}); } catch (e2) {}
+          try { if (window.trackLead) window.trackLead({source: 'body-mini-kit', eventID: eventId}); } catch (e2) {}
           window.location.href = '/thank-you-sample' + (token ? '?t=' + encodeURIComponent(token) : '');
         })
         .catch(function (err) { btn.disabled = false; setStatus(status, err.message || msg('error', 'Something went wrong. Please try again.')); });

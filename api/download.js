@@ -2,8 +2,10 @@
 //
 //   GET /api/download?t=<signed token {k: blob pathname, sid, n, exp}>
 //       Valid for 7 days (signed by api/_stripe.js buildDownloads).
-//   GET /api/download?free=routine-sample
-//       The free lead magnet: public, no token.
+//   GET /api/download?free=body-mini-kit[&f=a4]
+//       The free lead magnet: public, no token. Serves the first file (US
+//       Letter); &f=a4 picks the A4 file, &i=<n> picks file n. The old
+//       ?free=routine-sample links in sent emails keep working.
 //
 // Delivery: a presigned blob URL valid for 5 minutes (302), or — if
 // presigning is not available for the store — the file is streamed through
@@ -55,9 +57,11 @@ export default async function handler(req, res) {
     const catalog = await loadCatalog().catch(() => [])
     const p = findProduct(catalog, String(q.free))
     if (!p || !FREE_IDS.has(p.id) || !p.files?.length) return page(res, 404, 'This free download could not be found.')
-    const f = p.files[Math.min(p.files.length - 1, Math.max(0, parseInt(q.i, 10) || 0))]
+    const want = String(q.f || '').toLowerCase()
+    const byFormat = want ? p.files.find((x) => `${x.label} ${x.key}`.toLowerCase().includes(want)) : null
+    const f = byFormat || p.files[Math.min(p.files.length - 1, Math.max(0, parseInt(q.i, 10) || 0))]
     key = f.key
-    name = `${p.id}.pdf`
+    name = String(f.key.split('/').pop() || `${p.id}.pdf`)
   } else {
     const payload = verifyToken(String(q.t || ''), 'd')
     if (!payload || !payload.k) return page(res, 400, 'This download link is not valid.')

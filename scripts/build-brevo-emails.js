@@ -2,7 +2,7 @@
 // email sequence). Edit the copy here, then run:
 //   node scripts/build-brevo-emails.js      (writes the HTML files)
 //   node scripts/brevo-setup.js             (uploads them to Brevo)
-import {writeFileSync, mkdirSync} from 'node:fs'
+import {writeFileSync, mkdirSync, readFileSync} from 'node:fs'
 import {join, dirname} from 'node:path'
 import {fileURLToPath} from 'node:url'
 
@@ -17,7 +17,10 @@ const HEAD = `Fredoka, 'Nunito Sans', 'Trebuchet MS', Arial, sans-serif`
 
 const T = '{{ contact.OFFER_TOKEN }}'
 const LINK = {
-  sample: `${SITE}/api/download?free=routine-sample`,
+  // the free Mini Discovery Kit (US Letter; &f=a4 for A4). Old emails link to
+  // ?free=routine-sample, which keeps working.
+  kit: `${SITE}/api/download?free=body-mini-kit`,
+  kitA4: `${SITE}/api/download?free=body-mini-kit&f=a4`,
   offerPage: `${SITE}/thank-you-sample?t=${T}`,
   funnel: (product) => `${SITE}/api/funnel-checkout?product=${product}&t=${T}`,
   product: (id) => `${SITE}/api/go?p=${id}`,
@@ -26,13 +29,32 @@ const LINK = {
   contact: `${SITE}/contact`,
 }
 
-// Real prices (CONTRACT.md "PRICE UPDATE").
-const PRICE = {
-  lab: {store: 9.99, funnel: 4.99},
-  book: {store: 7.99, funnel: 4.99},
-  collection: {store: 39.99, funnel: 19.99},
-  routine: 9.99,
+// Real prices, read from content/catalog.json so the emails can never drift
+// from the shop (the build fails if a product is missing or inconsistent).
+const CATALOG = JSON.parse(readFileSync(join(ROOT, 'content', 'catalog.json'), 'utf8'))
+const byId = (id) => {
+  const p = CATALOG.find((x) => x.id === id)
+  if (!p) throw new Error(`catalog: ${id} missing`)
+  return p
 }
+const pair = (id) => {
+  const p = byId(id)
+  if (!(p.price > 0 && p.funnelPrice > 0)) throw new Error(`catalog: ${id} has no store/funnel price`)
+  return {store: p.price, funnel: p.funnelPrice}
+}
+const same = (ids) => {
+  const prices = ids.map(pair)
+  if (prices.some((x) => x.store !== prices[0].store || x.funnel !== prices[0].funnel)) throw new Error(`catalog: prices differ across ${ids.join(', ')}`)
+  return prices[0]
+}
+const PRICE = {
+  lab: pair('discovery-lab'),
+  book: same(['mh01', 'teeth', 'mh07']),
+  collection: same(['bundle', 'mh-bundle']),
+  routine: byId('routine').price,
+}
+const ROUTINE_PAGES = byId('routine').pages
+if (!byId('body-mini-kit').hidden) throw new Error('catalog: body-mini-kit must stay hidden')
 const usd = (n) => '$' + n.toFixed(2)
 const save = ({store, funnel}) => `You save ${usd(store - funnel)} (${Math.round(((store - funnel) / store) * 100)}%)`
 
@@ -66,8 +88,8 @@ ${until ? `<p style="margin:-10px 0 0;font-family:${BODY};font-size:13px;color:$
 function layout({preheader, body, footer = 'marketing'}) {
   const foot =
     footer === 'doi'
-      ? `You are receiving this because someone asked for the free Cadomalo routine pages with this address. If it was not you, simply ignore this email.`
-      : `You are receiving this because you asked for the free routine pages or ordered from Cadomalo.<br><a href="{{ unsubscribe }}" style="color:${C.navy};">Unsubscribe</a> · <a href="${SITE}/privacy-policy" style="color:${C.navy};">Privacy</a>`
+      ? `You are receiving this because someone asked for the free Cadomalo Mini Discovery Kit with this address. If it was not you, simply ignore this email.`
+      : `You are receiving this because you asked for the free Mini Discovery Kit or ordered from Cadomalo.<br><a href="{{ unsubscribe }}" style="color:${C.navy};">Unsubscribe</a> · <a href="${SITE}/privacy-policy" style="color:${C.navy};">Privacy</a>`
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light"><title>Cadomalo</title>
@@ -91,61 +113,63 @@ function layout({preheader, body, footer = 'marketing'}) {
 }
 
 const sign = p(`Warmly,<br>Aidora<br><span style="color:${C.muted};font-size:14px;">Founder of Cadomalo</span>`)
-const UNTIL_LAB = 'This price is tied to your email and ends {{ contact.OFFER_EXP | default : "48 hours after you signed up" }}. After that it is back to $9.99.'
+const UNTIL_LAB = `This price is tied to your email and ends {{ contact.OFFER_EXP | default : "48 hours after you signed up" }}. After that it is back to ${usd(PRICE.lab.store)}.`
 const UNTIL_FUNNEL = 'These subscriber prices are tied to your email and last until {{ contact.FUNNEL_EXP | default : "14 days after you signed up" }}.'
 
 const templates = [
   {
     file: '00-doi-confirm.html',
     name: 'Cadomalo DOI — confirm your email',
-    subject: 'Please confirm: your free routine pages are one click away',
-    preheader: 'Tap the button to confirm and get your free Morning & Bedtime pages.',
+    subject: 'Please confirm: your free Mini Discovery Kit is one click away',
+    preheader: 'Tap the button to confirm and get your free My Amazing Body Mini Discovery Kit.',
     doi: true,
-    body: `${h1('One click and they are yours')}
-${p('Thanks for asking for the free Morning & Bedtime Routine pages! Please confirm your email address so we know it is really you.')}
-${button('{{ doubleoptin }}', 'Yes, send me the pages')}
+    body: `${h1('One click and it is yours')}
+${p('Thanks for asking for the free <strong>My Amazing Body Mini Discovery Kit</strong>! Please confirm your email address so we know it is really you.')}
+${button('{{ doubleoptin }}', 'Yes, send me the free kit')}
 ${small('If you did not ask for this, you can ignore this email — you will not hear from us again.')}`,
   },
   {
     file: '01-lead-sample.html',
-    name: 'Cadomalo Lead 1 — your free routine pages',
-    subject: 'Your free Morning & Bedtime Routine pages',
-    preheader: 'Your download is inside, plus 3 small ways to use it tonight.',
-    body: `${h1('Your free routine pages are here')}
+    name: 'Cadomalo Lead 1 — your free Mini Discovery Kit',
+    subject: 'Your free Mini Discovery Kit is here',
+    preheader: 'Your download is inside, plus how to run Mission 1 tonight in 3 steps.',
+    body: `${h1('Your free Mini Discovery Kit is here')}
 ${p('Hello,')}
-${p('Thank you for joining us! Here are your 10 free pages from the Morning & Bedtime Routine Busy Book: one routine world, the star chart and a certificate to celebrate.')}
-${button(LINK.sample, 'Download your free pages')}
-${h2('3 ways to use them tonight')}
+${p('Thank you for joining us! Your <strong>My Amazing Body Mini Discovery Kit</strong> is ready: the grown-up guide, all of Mission 1 — the 5 senses — with its cut-outs, the discovery passport and a certificate to celebrate.')}
+${button(LINK.kit, 'Download your free kit')}
+${small(`That is the US Letter version. Printing on A4? ${link(LINK.kitA4, 'Download the A4 version')}. The kit is in English.`)}
+${h2('Run Mission 1 tonight in 3 steps')}
 ${ul([
-  '<strong>Let your child choose.</strong> Ask them where the chart should live. Children follow what they helped build.',
-  '<strong>Keep it at their eye level</strong> — on the fridge or the bedroom door, where they can tick it off themselves.',
-  '<strong>Same order, every night.</strong> Celebrate one finished step, not a perfect evening. Small wins add up.',
+  '<strong>Print and cut (5 minutes).</strong> Print the mission pages at 100% and cut out the pieces. Cutting is a grown-up job; colouring is theirs.',
+  '<strong>Gather 5 everyday things.</strong> Something to look at, listen to, smell, touch and taste — a spoon, a lemon, a soft sock will do.',
+  '<strong>Let your child lead.</strong> They test each sense, fill in the mission page and their discovery passport, then you hand over the certificate.',
 ])}
 ${sign}
-${p(`<strong>P.S.</strong> As a thank-you for signing up, the full <strong>My Amazing Body Discovery Lab</strong> is ${usd(PRICE.lab.funnel)} instead of ${usd(PRICE.lab.store)} for the next 48 hours. ${link(LINK.offerPage, 'See what is inside →')}`)}`,
+${p(`<strong>P.S.</strong> Mission 1 is one of five. As a thank-you for signing up, you can unlock all 5 missions — the full <strong>My Amazing Body Discovery Lab</strong> — for ${usd(PRICE.lab.funnel)} instead of ${usd(PRICE.lab.store)} for the next 48 hours. ${link(LINK.offerPage, 'Unlock all 5 missions →')}`)}`,
   },
   {
     file: '02-lead-visual-schedule.html',
-    name: 'Cadomalo Lead 2 — the 2-minute trick',
-    subject: 'The 2-minute trick that ends morning battles',
-    preheader: 'Why pictures work better than reminders — and how to start tomorrow.',
-    body: `${h1('The 2-minute trick that ends morning battles')}
+    name: 'Cadomalo Lead 2 — 5-minute senses game',
+    subject: 'A 5-minute senses game for tonight',
+    preheader: 'One pillowcase, a few everyday things, and a lot of giggles.',
+    body: `${h1('A 5-minute senses game for tonight')}
 ${p('Hello again,')}
-${p('Most morning battles are not about the shoes or the toothbrush. They are about a small child being told what to do, again and again, by a hurried grown-up.')}
-${p('A <strong>visual schedule</strong> moves the “boss” job from you to a picture. Instead of “brush your teeth!”, you ask “what does the chart say comes next?” — and your child gets to be the one who knows.')}
-${h2('Try this tomorrow (2 minutes tonight)')}
+${p('Here is a game that needs nothing you have to buy, and that children ask to play again: the <strong>mystery bag</strong>. It turns the 5 senses from Mission 1 into a guessing game.')}
+${h2('How to play')}
 ${ul([
-  'Lay out the routine pages in order before bed.',
-  'In the morning, point — do not repeat. Let your child say the next step out loud.',
-  'When a step is done, they tick it. When the chart is done, a high five. That is it.',
+  '<strong>Fill a pillowcase</strong> (or a clean sock) with 3 or 4 safe objects your child knows: a spoon, a pine cone, a toy car, a soft scarf.',
+  '<strong>Touch only.</strong> Your child reaches in without looking and describes what they feel — smooth, bumpy, cold, squishy — before guessing.',
+  '<strong>Now smell.</strong> Eyes closed: half a lemon, a little cinnamon, a bar of soap. Which one is it?',
+  '<strong>Then listen.</strong> Shake a jar of rice, then a jar of coins. Can they hear the difference?',
+  '<strong>Swap roles.</strong> Your child fills the bag for you. They will love catching you out.',
 ])}
-${p('It will not be perfect on day one — give it a few days of practice and see how it feels.')}
+${p('While you play, say what is happening: “your fingers sent a message to your brain, and your brain worked it out”. That one sentence is the big idea behind all five missions in the Discovery Lab.')}
 ${offer({
-  title: 'My Amazing Body Discovery Lab',
-  note: 'Hands-on printable activities about how the body works, for curious kids.',
+  title: 'Unlock all 5 missions',
+  note: 'The full My Amazing Body Discovery Lab: senses, brain, heart, bones &amp; muscles and the food journey — real experiments with everyday things.',
   price: PRICE.lab,
   href: LINK.offerPage,
-  cta: `Get it for ${usd(PRICE.lab.funnel)}`,
+  cta: `Unlock all 5 for ${usd(PRICE.lab.funnel)}`,
   until: UNTIL_LAB,
 })}
 ${sign}`,
@@ -153,18 +177,18 @@ ${sign}`,
   {
     file: '03-lead-last-chance.html',
     name: 'Cadomalo Lead 3 — last chance Discovery Lab',
-    subject: `Last chance: Discovery Lab for ${usd(PRICE.lab.funnel)}`,
-    preheader: 'Your sign-up price ends soon. After that it goes back to $9.99.',
+    subject: `Last chance: the other 4 missions for ${usd(PRICE.lab.funnel)}`,
+    preheader: `Your sign-up price ends soon. After that the Discovery Lab is back to ${usd(PRICE.lab.store)}.`,
     body: `${h1('A quick reminder before it ends')}
 ${p('Hello,')}
-${p(`When you signed up, we set aside the <strong>My Amazing Body Discovery Lab</strong> for you at ${usd(PRICE.lab.funnel)}. That price is real, it is tied to your email, and it ends {{ contact.OFFER_EXP }}.`)}
+${p(`Your free kit is Mission 1. When you signed up, we set aside the full <strong>My Amazing Body Discovery Lab</strong> for you at ${usd(PRICE.lab.funnel)} — that is the other 4 missions: the brain, the heart, bones &amp; muscles and the food journey. That price is real, it is tied to your email, and it ends {{ contact.OFFER_EXP | default : "48 hours after you signed up" }}.`)}
 ${p('No pressure at all — if it is not right for your family, just ignore this email. If you were meaning to look, now is the moment.')}
 ${ul([
   'Instant PDF download — print at home, US Letter and A4 included',
   'Print as many copies as your family needs',
   '30-day happiness promise: if it is not what you expected, write to us and we will make it right or refund you',
 ])}
-${offer({title: 'My Amazing Body Discovery Lab', price: PRICE.lab, href: LINK.offerPage, cta: `Yes, get it for ${usd(PRICE.lab.funnel)}`, until: UNTIL_LAB})}
+${offer({title: 'My Amazing Body Discovery Lab — all 5 missions', price: PRICE.lab, href: LINK.offerPage, cta: `Yes, unlock all 5 for ${usd(PRICE.lab.funnel)}`, until: UNTIL_LAB})}
 ${sign}`,
   },
   {
@@ -207,9 +231,9 @@ ${p('<strong>Is it accurate?</strong> Yes — simplified for small children, but
 ${p('<strong>Will four languages confuse my child?</strong> No — you read one. The others become a fun “spot the word” game, and many families use them to keep a grandparent’s language alive.')}
 ${p('<strong>What if we do not love it?</strong> Our 30-day happiness promise: write to us and we will make it right or refund you.')}
 ${offer({title: 'Medical Heroes — all 10 books', price: PRICE.collection, href: LINK.funnel('mh-bundle'), cta: `Get all 10 for ${usd(PRICE.collection.funnel)}`, until: UNTIL_FUNNEL})}
-${h2('Loved the free routine pages?')}
-${p(`The full <strong>Morning & Bedtime Routine Busy Book</strong> has every routine world, more charts and certificates — 34 pages for ${usd(PRICE.routine)}.`)}
-${button(LINK.product('routine'), 'See the full routine book')}
+${h2('Busy mornings at your house?')}
+${p(`The <strong>Morning & Bedtime Routine Busy Book</strong> turns getting ready and winding down into a game your child runs by themselves — picture cards, six routine worlds, a weekly star chart and a certificate. ${ROUTINE_PAGES} pages for ${usd(PRICE.routine)}.`)}
+${button(LINK.product('routine'), 'See the routine busy book')}
 ${sign}`,
   },
   {
@@ -313,10 +337,18 @@ ${sign}`,
   },
 ]
 
+// Brevo template ids already used by the live automations. brevo-setup.js
+// updates these ids in place (names can change freely).
+const BREVO_IDS = {
+  '00-doi-confirm.html': 18, '01-lead-sample.html': 19, '02-lead-visual-schedule.html': 20, '03-lead-last-chance.html': 21,
+  '04-lead-doctor.html': 22, '05-lead-inside-mh.html': 23, '06-lead-next-favourite.html': 24, '07-lead-one-question.html': 25,
+  '11-customer-welcome.html': 26, '12-customer-how-is-it-going.html': 27, '13-customer-review.html': 28, '14-customer-cross-sell.html': 29,
+}
+
 const manifest = []
 for (const t of templates) {
   writeFileSync(join(OUT, t.file), layout({preheader: t.preheader, body: t.body, footer: t.doi ? 'doi' : 'marketing'}))
-  manifest.push({file: t.file, name: t.name, subject: t.subject, ...(t.doi ? {doi: true} : {})})
+  manifest.push({file: t.file, brevoId: BREVO_IDS[t.file] || null, name: t.name, subject: t.subject, ...(t.doi ? {doi: true} : {})})
 }
 writeFileSync(join(OUT, 'templates.json'), JSON.stringify(manifest, null, 2) + '\n')
 console.log(`wrote ${manifest.length} templates to ${OUT}`)
