@@ -14,7 +14,7 @@
  *   {ol: ["…", …]}      numbered list
  *   {note: "…"}         small muted aside (e.g. "ask your doctor" reminders)
  *   {product: "id"}     inline product card (catalog id); skipped if unknown/hidden
- *   {cta: "sample"}     free routine sample opt-in block (/free-routine-sample)
+ *   {cta: "sample"}     free Mini Discovery Kit box (/free-mini-discovery-kit)
  *
  * Products: `products: ["id", …]` lists the cards shown under the article.
  * The legacy single `product` field still works (and is what build-pages.js
@@ -37,17 +37,17 @@ const STR = {
     home: 'Home', blog: 'Blog', shopTitle: 'Read it together',
     shopP1: 'The book that goes with this article.', shopPn: 'The books and printables mentioned in this article.',
     see: 'See details', add: 'Add to basket',
-    sampleH: 'Try it free: our morning & bedtime routine pages',
-    sampleP: 'Get free sample pages from the Morning & Bedtime Routine Busy Book by email and test a visual routine with your child this week.',
-    sampleBtn: 'Get the free sample',
+    sampleH: 'Free: the My Amazing Body Mini Discovery Kit',
+    sampleP: 'One real science mission about the 5 senses, with cut-outs, a discovery passport and a certificate. Print it tonight — it arrives by email.',
+    sampleBtn: 'Get the free Mini Kit',
   },
   fr: {
     home: 'Accueil', blog: 'Blog', shopTitle: 'À lire ensemble',
     shopP1: 'Le livre qui accompagne cet article.', shopPn: 'Les livres et activités à imprimer cités dans cet article.',
     see: 'Voir le produit', add: 'Ajouter au panier',
-    sampleH: 'À tester gratuitement : nos pages routine du matin et du soir',
-    sampleP: 'Recevez par e-mail des pages gratuites du cahier routine du matin et du soir (en anglais) et testez une routine visuelle avec votre enfant dès cette semaine.',
-    sampleBtn: 'Recevoir l’échantillon gratuit',
+    sampleH: 'Gratuit : le mini kit découverte Mon corps incroyable',
+    sampleP: 'Une vraie mission scientifique sur les 5 sens, avec découpages, passeport de découverte et diplôme, à imprimer dès ce soir. Le kit est en anglais ; il arrive par e-mail.',
+    sampleBtn: 'Recevoir le mini kit (en anglais)',
   },
 }
 
@@ -314,13 +314,13 @@ function inlineProduct(id, lang, t, d) {
 function sampleCta(lang, d) {
   const {esc} = d
   const s = STR[lang] || STR.en
-  const img = onDisk('/images/products/routine-sample/01.webp') ? '/images/products/routine-sample/01.webp' : ''
+  const img = onDisk('/images/products/body-mini-kit/01.webp') ? '/images/products/body-mini-kit/01.webp' : ''
   return `<aside class="nbo-card blog-sample" aria-label="${esc(s.sampleH)}">
           ${img ? `<img src="${img}" alt="" width="220" height="220" loading="lazy">` : '<span></span>'}
           <div>
             <h3 style="margin:0 0 var(--space-2)">${esc(s.sampleH)}</h3>
             <p style="margin:0 0 var(--space-3)">${esc(s.sampleP)}</p>
-            <p style="margin:0"><a class="btn btn-primary btn-sm" href="/free-routine-sample">${esc(s.sampleBtn)}</a></p>
+            <p style="margin:0"><a class="btn btn-primary btn-sm" href="/free-mini-discovery-kit">${esc(s.sampleBtn)}</a></p>
           </div>
         </aside>`
 }

@@ -167,7 +167,7 @@
   filter:blur(18px)}
 .hero-stage .hero-main{position:absolute;left:12%;top:4%;width:76%;height:auto;
   filter:drop-shadow(0 26px 34px rgba(57,80,111,.28)) drop-shadow(0 6px 10px rgba(57,80,111,.16));
-  transform:rotate(-3deg);transition:transform .5s var(--ease-out,ease)}
+  transform:rotate(-3deg);transition:transform .5s var(--ease-standard)}
 .hero-stage .hero-peek{position:absolute;width:34%;height:auto;border-radius:10px !important;
   box-shadow:0 14px 28px rgba(57,80,111,.22);transition:transform .5s ease}
 .hero-peek-l{left:0;bottom:8%;transform:rotate(-14deg)}
@@ -316,3 +316,69 @@ a.chip:hover{text-decoration:none}
 .trust-strip{padding-block:var(--space-4)}
 .trust-strip .trust-strip-list{padding-block:0}
 .cat-intro h1{margin-bottom:var(--space-4)}
+
+/* ======================================================================
+   Free Mini Discovery Kit (2026-11): hero CTA, kit hero stage, home kit
+   band, opt-in page media. Tokens only, 760px breakpoint.
+   ====================================================================== */
+/* primary: the free kit — big coral pill with a gift icon and a FREE tag */
+.hero-ctas-free{align-items:center;gap:var(--space-4)}
+.btn-free{position:relative;min-height:60px;padding:var(--space-3) var(--space-6) var(--space-3) var(--space-5);
+  font-size:var(--fs-lead);box-shadow:0 4px 0 rgba(198,74,49,.4),0 14px 28px rgba(240,107,79,.32);text-align:left}
+.btn-free:hover{box-shadow:0 2px 0 rgba(198,74,49,.4),0 18px 34px rgba(240,107,79,.38)}
+.btn-free .ic{flex:none}
+.btn-free-tag{position:absolute;top:-11px;right:18px;background:var(--yellow-500);color:var(--blue-700);
+  font:var(--fw-black) var(--fs-micro)/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;
+  padding:5px 9px;border-radius:var(--radius-pill);box-shadow:0 2px 0 rgba(201,147,43,.55);transform:rotate(4deg)}
+/* secondary: a quiet text link */
+.hero-text-link{font:var(--fw-semibold) var(--fs-body)/1.3 var(--font-display);color:var(--blue-600);
+  text-decoration:underline;text-decoration-color:var(--coral-300);text-underline-offset:4px;text-decoration-thickness:2px}
+.hero-text-link:hover{color:var(--coral-600)}
+.hero-cta-note{margin:var(--space-3) 0 0;font-size:var(--fs-caption);color:var(--ink-700)}
+@media (max-width:759px){
+  .hero-ctas-free{flex-direction:column;align-items:stretch;text-align:center}
+  .btn-free{width:100%;justify-content:center;text-align:center;font-size:var(--fs-body);padding-inline:var(--space-4)}
+  .hero-cta-note{text-align:center}
+}
+
+/* kit hero stage (reuses .hero-stage): mockup + Discovery Lab / HBW cards */
+.hero-stage-kit .hero-main{left:5%;top:9%;width:90%;transform:rotate(-2deg)}
+.hero-stage-kit .hero-peek{width:31%}
+.hero-stage-kit .hero-peek-l{left:1%;top:auto;bottom:3%;transform:rotate(-10deg)}
+.hero-stage-kit .hero-peek-r{right:1%;left:auto;top:auto;bottom:5%;transform:rotate(9deg)}
+.hero-stage-kit .hero-stage-link:hover .hero-peek-l{transform:rotate(-17deg) translate(-10px,6px)}
+.hero-stage-kit .hero-stage-link:hover .hero-peek-r{transform:rotate(16deg) translate(10px,6px)}
+.hero-free-badge{position:absolute;right:1%;top:1%;z-index:2;display:grid;place-items:center;
+  width:19%;aspect-ratio:1/1;border-radius:50%;background:var(--coral-500);color:var(--white);
+  font:var(--fw-bold) clamp(15px,2.2vw,24px)/1 var(--font-display);letter-spacing:.04em;text-transform:uppercase;
+  box-shadow:0 0 0 5px var(--white),0 12px 24px rgba(198,74,49,.35);transform:rotate(-12deg);
+  transition:transform .5s var(--ease-standard)}
+.hero-stage-link:hover .hero-free-badge{transform:rotate(0deg) scale(1.08)}
+:lang(fr) .hero-free-badge{font-size:clamp(11px,1.5vw,17px);letter-spacing:0}
+.hero-stage-kit .hero-float{z-index:3;filter:drop-shadow(0 4px 6px rgba(57,80,111,.18))}
+.hero-stage-kit .hero-heart{left:1%;top:1%;width:11%;animation-delay:-.6s}
+.hero-stage-kit .hero-bone{left:42%;top:0;width:10%;animation-delay:-2s}
+.hero-stage-kit .hero-lens{left:43%;bottom:2%;width:13%;animation-delay:-3.1s}
+.hero-stage-kit .hero-star{left:0;top:44%;width:7%}
+.hero-stage-kit .hero-dots{right:0;top:44%;width:8%;animation-delay:-1.6s}
+.hero-stage-kit .hero-dots2{left:30%;top:80%;width:7%;animation-delay:-4s}
+@media (prefers-reduced-motion:reduce){.hero-free-badge{transition:none}}
+
+/* home: compact "A little discovery for free" band with the inline opt-in */
+.kit-band{display:grid;gap:var(--space-6);align-items:center}
+.kit-media{max-width:440px;margin-inline:auto;width:100%}
+.kit-media img{width:100%;height:auto;filter:drop-shadow(0 18px 24px rgba(57,80,111,.22))}
+.kit-copy{display:flex;flex-direction:column;gap:var(--space-3)}
+.kit-copy>*{margin:0}
+.kit-copy h2{margin:0}
+.kit-note{font-size:var(--fs-body-sm);color:var(--ink-700)}
+.kit-more a{font-weight:var(--fw-semibold)}
+.routine-price{margin:0;font-size:var(--fs-h4)}
+@media (min-width:760px){
+  .kit-band{grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:var(--space-8)}
+}
+
+/* opt-in page: frameless mockup + a strip of real pages */
+.funnel-media img.kit-mock{border-radius:0;box-shadow:none;filter:drop-shadow(0 22px 28px rgba(57,80,111,.24))}
+.kit-pages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-3)}
+.funnel-media .kit-pages img{border-radius:var(--radius-sm)}

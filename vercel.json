@@ -42,6 +42,8 @@
     {"source": "/fr/produits/wrap-tumbler-silly-goose", "destination": "/fr/boutique", "permanent": true},
     {"source": "/fr/produits/wrap-tumbler-just-a-girl-rose", "destination": "/fr/boutique", "permanent": true},
     {"source": "/offer/discovery-lab", "destination": "/thank-you-sample", "permanent": false},
+    {"source": "/free-routine-sample", "destination": "/free-mini-discovery-kit", "statusCode": 301},
+    {"source": "/free-routine-sample/", "destination": "/free-mini-discovery-kit", "statusCode": 301},
     {"source": "/gift-finder", "destination": "/collections", "permanent": true},
     {"source": "/product", "destination": "/shop", "permanent": true},
     {"source": "/products/claritysheet-multilingual-personal-finance-planner-or-excel-budget-spreadsheet-goals-debt-and", "destination": "/shop", "permanent": true},

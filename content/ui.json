@@ -16,9 +16,11 @@
       "eyebrow": "Picture books · busy books · science kits",
       "t1": "Little minds.",
       "t2": "Big discoveries.",
-      "text": "Books and printable adventures for curious children, ages 3–10.",
-      "cta1": "Explore the collection",
-      "cta2": "Free routine sample"
+      "text": "Start with a free Mini Discovery Kit: one real science mission about the 5 senses, ready to print tonight.",
+      "cta1": "Get the free Mini Discovery Kit",
+      "cta2": "or explore the collection",
+      "freeTag": "Free",
+      "ctaNote": "Instant PDF by email · no card needed"
     },
     "topics": {
       "kicker": "Follow their curiosity",
@@ -289,9 +291,11 @@
       "eyebrow": "Albums · cahiers d’activités · kits de sciences",
       "t1": "Petits esprits,",
       "t2": "grandes découvertes.",
-      "text": "Des livres et des aventures à imprimer pour les enfants curieux de 3 à 10 ans.",
-      "cta1": "Découvrir la collection",
-      "cta2": "Échantillon routine gratuit"
+      "text": "Commencez par un mini kit découverte gratuit : une vraie mission scientifique sur les 5 sens, à imprimer dès ce soir (kit en anglais).",
+      "cta1": "Recevoir le mini kit découverte gratuit",
+      "cta2": "ou découvrir la collection",
+      "freeTag": "Gratuit",
+      "ctaNote": "PDF par e-mail · sans carte bancaire · kit en anglais"
     },
     "topics": {
       "kicker": "Suivez leur curiosité",

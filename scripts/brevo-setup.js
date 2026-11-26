@@ -8,10 +8,14 @@
 //
 // Creates, if missing (matched by name, so re-running is safe):
 //   - contact folder "Cadomalo"
-//   - lists "Routine sample", "Customers", "Cadomalo Newsletter"
-//   - contact attributes OFFER_TOKEN, OFFER_EXP, FUNNEL_EXP, PURCHASED (text)
-//   - the 12 email templates in emails/brevo/templates.json (existing ones
-//     with the same name are updated with the current HTML + subject)
+//   - lists "Mini Discovery Kit", "Customers", "Cadomalo Newsletter"
+//     (the funnel list used to be called "Routine sample": it is renamed in
+//     place, so its id — env BREVO_LIST_ROUTINE — and the automation stay)
+//   - contact attributes OFFER_TOKEN, OFFER_EXP, FUNNEL_EXP, PURCHASED, MAGNET (text)
+//   - the 12 email templates in emails/brevo/templates.json. Each entry's
+//     `brevoId` is the live template id: it is updated in place (subject,
+//     name and HTML), so the automations keep pointing at it. Entries without
+//     an id (or whose id is gone) fall back to matching by name, else create.
 // Then prints the ids to set as Vercel env vars.
 //
 // Optional env: BREVO_SENDER_EMAIL (default aidora@cadomalo.com — must be a
@@ -30,11 +34,13 @@ const SENDER = {
   email: process.env.BREVO_SENDER_EMAIL || 'aidora@cadomalo.com',
 }
 const LISTS = {
-  BREVO_LIST_ROUTINE: 'Routine sample',
+  BREVO_LIST_ROUTINE: 'Mini Discovery Kit',
   BREVO_LIST_CUSTOMERS: 'Customers',
   BREVO_LIST_NEWSLETTER: 'Cadomalo Newsletter',
 }
-const ATTRIBUTES = ['OFFER_TOKEN', 'OFFER_EXP', 'FUNNEL_EXP', 'PURCHASED']
+// old list names that are renamed to the current one (same id, same automation)
+const LIST_RENAMES = {'Mini Discovery Kit': ['Routine sample']}
+const ATTRIBUTES = ['OFFER_TOKEN', 'OFFER_EXP', 'FUNNEL_EXP', 'PURCHASED', 'MAGNET']
 
 if (!KEY) {
   console.error('BREVO_API_KEY is not set in this terminal. Set it as an environment variable first (do not paste it anywhere else).')
@@ -85,6 +91,14 @@ async function main() {
   for (const [envName, name] of Object.entries(LISTS)) {
     let list = lists.find((l) => l.name === name)
     if (!list) {
+      const old = lists.find((l) => (LIST_RENAMES[name] || []).includes(l.name))
+      if (old) {
+        console.log(`Renaming list "${old.name}" (#${old.id}) to "${name}"`)
+        await api('PUT', `/contacts/lists/${old.id}`, {name})
+        list = old
+      }
+    }
+    if (!list) {
       console.log(`Creating list "${name}"`)
       list = {id: (await api('POST', '/contacts/lists', {name, folderId: folder.id}))?.id}
     }
@@ -103,7 +117,9 @@ async function main() {
   const manifest = JSON.parse(readFileSync(join(ROOT, 'emails', 'brevo', 'templates.json'), 'utf8'))
   const existing = await all('/smtp/templates?templateStatus=true', 'templates').catch(() => [])
   const inactive = await all('/smtp/templates?templateStatus=false', 'templates').catch(() => [])
-  const byName = new Map([...existing, ...inactive].map((t) => [t.name, t]))
+  const known = [...existing, ...inactive]
+  const byName = new Map(known.map((t) => [t.name, t]))
+  const byId = new Map(known.map((t) => [Number(t.id), t]))
   const ids = []
   for (const t of manifest) {
     const htmlContent = readFileSync(join(ROOT, 'emails', 'brevo', t.file), 'utf8')
@@ -116,10 +132,13 @@ async function main() {
       isActive: true,
       ...(t.doi ? {tag: 'optin'} : {}),
     }
-    const found = byName.get(t.name)
+    const direct = t.brevoId && !byId.has(Number(t.brevoId))
+      ? await api('GET', `/smtp/templates/${t.brevoId}`).catch(() => null)
+      : null
+    const found = (t.brevoId && byId.get(Number(t.brevoId))) || (direct && direct.id ? direct : null) || byName.get(t.name)
     let id
     if (found) {
-      console.log(`Updating template "${t.name}" (#${found.id})`)
+      console.log(`Updating template #${found.id} "${found.name}"${found.name !== t.name ? ` → "${t.name}"` : ''}`)
       await api('PUT', `/smtp/templates/${found.id}`, payload)
       id = found.id
     } else {

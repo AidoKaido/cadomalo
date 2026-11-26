@@ -19,8 +19,9 @@ import {join} from 'node:path'
 
 export const SITE_URL = (process.env.SITE_URL || 'https://cadomalo.com').replace(/\/$/, '')
 
-// The free lead magnet: never sold through Stripe.
-export const FREE_IDS = new Set(['routine-sample'])
+// Free lead magnets: never sold through Stripe. body-mini-kit is the current
+// one; routine-sample stays downloadable for links in emails already sent.
+export const FREE_IDS = new Set(['body-mini-kit', 'routine-sample'])
 
 // Fallbacks used only when catalog.json does not (yet) carry the new fields.
 const HBW_BOOKS = ['head', 'lungs', 'stomach', 'bones', 'muscles', 'skin', 'blood', 'eyes', 'ears', 'teeth']

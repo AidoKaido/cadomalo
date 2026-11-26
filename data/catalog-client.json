@@ -1042,6 +1042,36 @@
     "attrs": []
   },
   {
+    "id": "body-mini-kit",
+    "slug": "my-amazing-body-mini-discovery-kit",
+    "type": "kit",
+    "category": "kit",
+    "collection": null,
+    "fulfillment": "auto",
+    "hidden": true,
+    "price": 0,
+    "compareAt": null,
+    "funnelPrice": null,
+    "img": "/images/products/body-mini-kit/01.webp",
+    "title": {
+      "en": "My Amazing Body — Mini Discovery Kit",
+      "fr": "Mon corps incroyable — Mini kit découverte"
+    },
+    "url": null,
+    "includes": null,
+    "files": [
+      {
+        "label": "US Letter · full colour",
+        "key": "products/body-mini-kit/my-amazing-body-mini-discovery-kit-us-letter.pdf"
+      },
+      {
+        "label": "A4 · full colour",
+        "key": "products/body-mini-kit/my-amazing-body-mini-discovery-kit-a4.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
     "id": "routine-sample",
     "slug": "free-morning-bedtime-routine-sample",
     "type": "kit",

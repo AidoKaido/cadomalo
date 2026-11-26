@@ -389,7 +389,7 @@ window.trackInitiateCheckout = function(opts) {
 
 /* Lead — free sample opt-in success (no PII is passed). eventID is the
    uuid also sent to /api/lead as body.eventId (server Lead dedupe). */
-window.trackLead = function({ source = 'routine-sample', value = 0, currency = 'USD', eventID } = {}) {
+window.trackLead = function({ source = 'body-mini-kit', value = 0, currency = 'USD', eventID } = {}) {
   window.fbTrack?.lead({ content_name: source, content_type: 'product', content_ids: [source], value, currency }, eventID ? { eventID } : undefined);
   window.ttTrack?.submitForm?.({ content_name: source });
   window.gaTrack?.event('generate_lead', { currency, value, lead_source: source });
