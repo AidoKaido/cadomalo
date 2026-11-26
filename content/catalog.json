@@ -148,7 +148,17 @@
         "À imprimer chez vous, autant que nécessaire pour votre famille ou votre classe"
       ]
     },
-    "reviewType": "kit"
+    "reviewType": "kit",
+    "seo": {
+      "title": {
+        "en": "Printable Morning and Bedtime Routine Busy Book",
+        "fr": "Cahier de routine matin et soir à imprimer"
+      },
+      "description": {
+        "en": "A printable visual routine for ages 5–7: 24 activities, 80+ picture cards, a star chart and a certificate. Instant PDF download.",
+        "fr": "Une routine visuelle à imprimer pour les 5–7 ans : 24 activités, plus de 80 cartes, un tableau d’étoiles et un diplôme. PDF immédiat."
+      }
+    }
   },
   {
     "fulfillment": "auto",
@@ -300,7 +310,17 @@
         "À imprimer chez vous, autant que nécessaire pour votre famille ou votre classe"
       ]
     },
-    "reviewType": "kit"
+    "reviewType": "kit",
+    "seo": {
+      "title": {
+        "en": "Printable Human Body Science Activity Kit for Kids",
+        "fr": "Kit de sciences sur le corps humain à imprimer"
+      },
+      "description": {
+        "en": "Five hands-on human body science missions for ages 5–7, with real experiments using things you have at home. 38 printable pages, instant PDF.",
+        "fr": "Cinq missions scientifiques sur le corps humain pour les 5–7 ans, avec de vraies expériences maison. 38 pages à imprimer, PDF immédiat."
+      }
+    }
   },
   {
     "fulfillment": "auto",
@@ -451,7 +471,17 @@
         "À imprimer chez vous, autant que nécessaire pour votre famille ou votre classe"
       ]
     },
-    "reviewType": "party"
+    "reviewType": "party",
+    "seo": {
+      "title": {
+        "en": "Printable Kids Birthday Party Games Kit",
+        "fr": "Kit de jeux d’anniversaire enfant à imprimer"
+      },
+      "description": {
+        "en": "A complete printable birthday adventure for 4–10 kids: 16 games, a treasure quest, badges and a party schedule. About 30 minutes of prep.",
+        "fr": "Une aventure d’anniversaire complète à imprimer pour 4 à 10 enfants : 16 jeux, une chasse au trésor, des badges et un programme."
+      }
+    }
   },
   {
     "fulfillment": "canva-links",
@@ -606,7 +636,17 @@
         "key": "products/birthday-wish/sample-preview-L8-Hana-letter.pdf"
       }
     ],
-    "reviewType": "party"
+    "reviewType": "party",
+    "seo": {
+      "title": {
+        "en": "Personalized Birthday Storybook for Kids",
+        "fr": "Livre d’anniversaire personnalisé pour enfant"
+      },
+      "description": {
+        "en": "A 32-page birthday storybook starring your child: their name on the cover and 15+ pages, 6 hero looks. Personalise in Canva, ages 3–8.",
+        "fr": "Un livre d’anniversaire de 32 pages dont votre enfant est le héros : prénom sur la couverture et 15+ pages. À personnaliser dans Canva."
+      }
+    }
   },
   {
     "fulfillment": "auto",
@@ -757,7 +797,17 @@
         "À imprimer chez vous, autant que nécessaire pour votre famille ou votre classe"
       ]
     },
-    "reviewType": "kit"
+    "reviewType": "kit",
+    "seo": {
+      "title": {
+        "en": "Printable Kids Escape Room & Treasure Hunt",
+        "fr": "Escape game enfant à imprimer — chasse au trésor"
+      },
+      "description": {
+        "en": "A printable escape room for ages 5–7: 20 missions in 5 worlds, self-checking locks, hints and an answer key. Play at home or at a party.",
+        "fr": "Un escape game à imprimer pour les 5–7 ans : 20 missions dans 5 mondes, cadenas auto-corrigés, indices et corrigé. À la maison ou en fête."
+      }
+    }
   },
   {
     "id": "bundle",
@@ -783,11 +833,6 @@
     "funnelPrice": 19.99,
     "langs": "EN · FR · ES · DE",
     "color": "#F06B4F",
-    "badge": {
-      "en": "Save 21%",
-      "fr": "-21 %"
-    },
-    "badgeTone": "solid",
     "img": "img/bundle-cover.png",
     "images": [
       "/images/products/bundle/01.webp",
@@ -881,16 +926,16 @@
     "specs": {
       "en": [
         "Digital PDF — instant download after checkout",
-        "58-page square picture book",
-        "English · French · Spanish · German in one book",
+        "10 square picture books · 580 pages · 4 languages",
+        "English · French · Spanish · German in every book",
         "Story pages + colouring pages",
         "Print at home or at a copy shop, as often as you like",
         "Ages 3–7"
       ],
       "fr": [
         "PDF numérique — téléchargement immédiat après paiement",
-        "Album carré de 58 pages",
-        "Français · anglais · espagnol · allemand dans un seul livre",
+        "10 albums carrés · 580 pages · 4 langues",
+        "Français · anglais · espagnol · allemand dans chaque livre",
         "Pages d’histoire + pages à colorier",
         "À imprimer chez vous ou en boutique, autant de fois que vous voulez",
         "3–7 ans"
@@ -904,11 +949,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -930,11 +975,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -950,7 +995,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Human Body Books for Kids Ages 3–7 — Set of 10",
+        "fr": "Livres sur le corps humain 3–7 ans — les 10"
+      },
+      "description": {
+        "en": "All 10 Human Body Wonders picture books: 580 story and colouring pages in English, French, Spanish and German. Instant PDF download.",
+        "fr": "Les 10 albums Merveilles du corps : 580 pages d’histoires et de coloriages en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "mh-bundle",
@@ -976,11 +1031,6 @@
     "funnelPrice": 19.99,
     "langs": "EN · FR · ES · DE",
     "color": "#39506F",
-    "badge": {
-      "en": "Save 21%",
-      "fr": "-21 %"
-    },
-    "badgeTone": "solid",
     "images": [
       "/images/products/mh-bundle/01.webp",
       "/images/products/mh-bundle/02.webp",
@@ -1073,16 +1123,16 @@
     "specs": {
       "en": [
         "Digital PDF — instant download after checkout",
-        "58-page square picture book",
-        "English · French · Spanish · German in one book",
+        "10 square picture books · 580 pages · 4 languages",
+        "English · French · Spanish · German in every book",
         "Story pages + colouring pages",
         "Print at home or at a copy shop, as often as you like",
         "Ages 3–7"
       ],
       "fr": [
         "PDF numérique — téléchargement immédiat après paiement",
-        "Album carré de 58 pages",
-        "Français · anglais · espagnol · allemand dans un seul livre",
+        "10 albums carrés · 580 pages · 4 langues",
+        "Français · anglais · espagnol · allemand dans chaque livre",
         "Pages d’histoire + pages à colorier",
         "À imprimer chez vous ou en boutique, autant de fois que vous voulez",
         "3–7 ans"
@@ -1100,7 +1150,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -1122,7 +1172,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -1134,7 +1184,219 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Healthcare & Doctor Books for Preschoolers",
+        "fr": "Livres sur les métiers de la santé — les 10"
+      },
+      "description": {
+        "en": "Ten picture books about doctors, nurses, dentists and more, so check-ups feel familiar. 580 pages in 4 languages, instant PDF download.",
+        "fr": "Dix albums sur les médecins, infirmiers, dentistes et autres soignants, pour des rendez-vous plus sereins. 580 pages, 4 langues, PDF."
+      }
+    }
+  },
+  {
+    "id": "ultimate-human-body",
+    "type": "bundle",
+    "category": "bundle",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
+    "series": {
+      "en": "Learning pack",
+      "fr": "Pack découverte"
+    },
+    "title": {
+      "en": "Ultimate Human Body Learning Pack",
+      "fr": "Pack ultime — découvrir le corps humain"
+    },
+    "desc": {
+      "en": "Everything we make about the human body in one download: all ten Human Body Wonders picture books, from head to teeth in four languages, plus the My Amazing Body Discovery Lab with five hands-on science missions. Read the story, then try the experiment.",
+      "fr": "Tout ce que nous avons créé sur le corps humain en un seul téléchargement : les dix livres Merveilles du corps, de la tête aux dents en quatre langues, plus le labo de découverte du corps et ses cinq missions scientifiques. On lit l’histoire, puis on fait l’expérience."
+    },
+    "price": 44.99,
+    "compareAt": 89.89,
+    "langs": "EN · FR · ES · DE",
+    "color": "#5BA8E0",
+    "images": [
+      "/images/products/ultimate-human-body/01.webp",
+      "/images/products/ultimate-human-body/02.webp",
+      "/images/products/ultimate-human-body/03.webp",
+      "/images/products/ultimate-human-body/04.webp"
+    ],
+    "includes": [
+      "discovery-lab",
+      "head",
+      "lungs",
+      "stomach",
+      "bones",
+      "muscles",
+      "skin",
+      "blood",
+      "eyes",
+      "ears",
+      "teeth"
+    ],
+    "files": [
+      {
+        "label": "US Letter · full colour",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-us-letter-full-color.pdf"
+      },
+      {
+        "label": "US Letter · ink-saving",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-us-letter-ink-saving.pdf"
+      },
+      {
+        "label": "A4 · full colour",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-a4-full-color.pdf"
+      },
+      {
+        "label": "A4 · ink-saving",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-a4-ink-saving.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/head/head-inside-my-amazing-head.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/lungs/lungs-my-busy-breathing-lungs.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/stomach/stomach-my-stomach-mixing-machine.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/bones/bones-my-strong-body-bones.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/muscles/muscles-my-muscles-make-me-move.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/skin/skin-my-skin-super-suit.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/blood/blood-bloods-amazing-body-journey.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/eyes/eyes-my-eyes-see-everything.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/ears/ears-my-ears-catch-sounds.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/teeth/teeth-my-super-strong-teeth.pdf"
+      }
+    ],
+    "benefits": {
+      "en": [
+        "All 10 Human Body Wonders books — 580 story and colouring pages",
+        "The Discovery Lab: 5 science missions with real experiments, 38 pages",
+        "Save $44.90 compared to buying all 11 one by one",
+        "Books in 4 languages; Discovery Lab pages in English"
+      ],
+      "fr": [
+        "Les 10 livres Merveilles du corps — 580 pages d’histoires et de coloriages",
+        "Le labo de découverte : 5 missions scientifiques et de vraies expériences, 38 pages",
+        "44,90 $ d’économie par rapport à l’achat des 11 produits à l’unité",
+        "Livres en 4 langues ; pages du labo en anglais"
+      ]
+    },
+    "inside": {
+      "en": [
+        "10 PDF picture books, 58 pages each, every page in English, French, Spanish and German",
+        "My Amazing Body Discovery Lab: 38 pages, US Letter + A4, full colour and ink-saving versions (English)",
+        "Books written for ages 3–7; the Discovery Lab made for ages 5–7",
+        "Instant download of every file after checkout"
+      ],
+      "fr": [
+        "10 albums PDF de 58 pages, chaque page en français, anglais, espagnol et allemand",
+        "Mon labo de découverte du corps : 38 pages, US Letter + A4, en couleur et en version économie d’encre (en anglais)",
+        "Livres pensés pour les 3–7 ans ; labo pour les 5–7 ans",
+        "Tous les fichiers téléchargeables juste après le paiement"
+      ]
+    },
+    "specs": {
+      "en": [
+        "Digital PDFs — instant download after checkout",
+        "10 picture books + 1 science activity kit",
+        "Books: 580 pages in 4 languages",
+        "Discovery Lab: 38 pages in English",
+        "Ages 3–7"
+      ],
+      "fr": [
+        "PDF numériques — téléchargement immédiat après paiement",
+        "10 albums + 1 kit d’activités scientifiques",
+        "Livres : 580 pages en 4 langues",
+        "Labo de découverte : 38 pages en anglais",
+        "3–7 ans"
+      ]
+    },
+    "objections": {
+      "en": [
+        {
+          "q": "What ages is it for?",
+          "a": "The books are written for ages 3–7. The Discovery Lab is made for ages 5–7; younger children enjoy it with a grown-up reading aloud."
+        },
+        {
+          "q": "Which languages are the files in?",
+          "a": "Every Human Body Wonders book has each page in English, French, Spanish and German. The Discovery Lab pages are in English."
+        },
+        {
+          "q": "Is the science accurate?",
+          "a": "The books are written by a midwife and checked for accuracy and gentleness. The Discovery Lab facts were checked against children’s health sources (KidsHealth by Nemours, Frontiers for Young Minds). It is for learning and fun, not medical advice."
+        },
+        {
+          "q": "How do I get it?",
+          "a": "Right after checkout you get a download button on the confirmation page and an email with your PDF. Nothing is shipped — print at home or at any copy shop, as often as you need for your family."
+        },
+        {
+          "q": "What if we don’t love it?",
+          "a": "Our 30-day happiness promise: if a file doesn’t work or the product isn’t what you expected, write to support@cadomalo.com and we’ll make it right or refund you."
+        }
+      ],
+      "fr": [
+        {
+          "q": "Pour quel âge ?",
+          "a": "Les livres sont pensés pour les 3–7 ans. Le labo de découverte est conçu pour les 5–7 ans ; les plus petits en profitent avec un adulte qui lit."
+        },
+        {
+          "q": "En quelles langues sont les fichiers ?",
+          "a": "Chaque livre Merveilles du corps a toutes ses pages en français, anglais, espagnol et allemand. Les pages du labo sont en anglais."
+        },
+        {
+          "q": "Les informations sont-elles exactes ?",
+          "a": "Les livres sont écrits par une sage-femme et relus pour leur exactitude et leur douceur. Les faits du labo ont été vérifiés auprès de sources santé pour enfants (KidsHealth, Frontiers for Young Minds). C’est pour apprendre et s’amuser, pas un avis médical."
+        },
+        {
+          "q": "Comment je le reçois ?",
+          "a": "Juste après le paiement, un bouton de téléchargement s’affiche sur la page de confirmation et vous recevez votre PDF par e-mail. Rien n’est expédié : imprimez chez vous ou en boutique, autant de fois que nécessaire pour votre famille."
+        },
+        {
+          "q": "Et si on n’aime pas ?",
+          "a": "Notre promesse bonheur de 30 jours : si un fichier ne fonctionne pas ou si le produit ne correspond pas à vos attentes, écrivez à support@cadomalo.com et nous trouvons une solution ou vous remboursons."
+        }
+      ]
+    },
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Ultimate Human Body Learning Pack for Kids",
+        "fr": "Pack ultime corps humain pour enfants"
+      },
+      "description": {
+        "en": "All 10 Human Body Wonders books plus the Discovery Lab science kit: stories, colouring pages and real experiments for ages 3–7.",
+        "fr": "Les 10 livres Merveilles du corps et le labo de découverte : histoires, coloriages et vraies expériences pour les 3–7 ans."
+      }
+    }
   },
   {
     "id": "head",
@@ -1229,11 +1491,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -1255,11 +1517,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -1275,7 +1537,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Brain Book for Kids — Inside My Amazing Head",
+        "fr": "Le cerveau pour enfants — Merveilles du corps"
+      },
+      "description": {
+        "en": "A 58-page picture book about the brain and the senses for ages 3–7, with colouring pages, in English, French, Spanish and German. Instant PDF.",
+        "fr": "Un album de 58 pages sur le cerveau et les sens pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "lungs",
@@ -1369,11 +1641,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -1395,11 +1667,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -1415,7 +1687,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Lungs Book for Kids — My Busy Breathing Lungs",
+        "fr": "Les poumons pour enfants — Merveilles du corps"
+      },
+      "description": {
+        "en": "A 58-page picture book about the lungs and breathing for ages 3–7, with colouring pages, in English, French, Spanish and German. Instant PDF.",
+        "fr": "Un album de 58 pages sur les poumons et la respiration pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "stomach",
@@ -1509,11 +1791,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -1535,11 +1817,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -1555,7 +1837,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Digestion Book for Kids — My Stomach Mixing Machine",
+        "fr": "La digestion pour enfants — Mon estomac mélangeur"
+      },
+      "description": {
+        "en": "A 58-page picture book about the stomach and digestion for ages 3–7, with colouring pages, in English, French, Spanish and German. Instant PDF.",
+        "fr": "Un album de 58 pages sur l’estomac et la digestion pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "bones",
@@ -1648,11 +1940,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -1674,11 +1966,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -1694,7 +1986,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Human Skeleton Book for Kids — My Strong Body Bones",
+        "fr": "Le squelette pour enfants — Mes os super solides"
+      },
+      "description": {
+        "en": "A 58-page picture book about bones and the skeleton for ages 3–7, with colouring pages, in English, French, Spanish and German. Instant PDF.",
+        "fr": "Un album de 58 pages sur les os et le squelette pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "muscles",
@@ -1788,11 +2090,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -1814,11 +2116,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -1834,7 +2136,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Muscles Book for Kids — My Muscles Make Me Move",
+        "fr": "Les muscles pour enfants — Merveilles du corps"
+      },
+      "description": {
+        "en": "A 58-page picture book about muscles and movement for ages 3–7, with colouring pages, in English, French, Spanish and German. Instant PDF.",
+        "fr": "Un album de 58 pages sur les muscles et le mouvement pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "skin",
@@ -1932,11 +2244,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -1958,11 +2270,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -1978,7 +2290,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Skin Book for Kids — My Skin Super Suit",
+        "fr": "La peau pour enfants — Ma peau, mon super costume"
+      },
+      "description": {
+        "en": "A 58-page picture book about the skin and how it protects us for ages 3–7, with colouring pages, in English, French, Spanish and German. Instant PDF.",
+        "fr": "Un album de 58 pages sur la peau et comment elle nous protège pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "blood",
@@ -2076,11 +2398,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -2102,11 +2424,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -2122,7 +2444,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Blood Book for Kids — Blood’s Amazing Body Journey",
+        "fr": "Le sang pour enfants — Merveilles du corps"
+      },
+      "description": {
+        "en": "A 58-page picture book about blood, the heart and circulation for ages 3–7, with colouring pages, in English, French, Spanish and German. Instant PDF.",
+        "fr": "Un album de 58 pages sur le sang, le cœur et la circulation pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "eyes",
@@ -2220,11 +2552,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -2246,11 +2578,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -2266,7 +2598,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Eyes and Sight Book for Kids — Human Body Wonders",
+        "fr": "Les yeux pour enfants — Mes yeux voient tout"
+      },
+      "description": {
+        "en": "A 58-page picture book about the eyes and how we see for ages 3–7, with colouring pages, in English, French, Spanish and German. Instant PDF.",
+        "fr": "Un album de 58 pages sur les yeux et la vue pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "ears",
@@ -2363,11 +2705,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -2389,11 +2731,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -2409,7 +2751,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Hearing Book for Kids — My Ears Catch Sounds",
+        "fr": "L’ouïe pour enfants — Mes oreilles captent les sons"
+      },
+      "description": {
+        "en": "A 58-page picture book about the ears and how we hear for ages 3–7, with colouring pages, in English, French, Spanish and German. Instant PDF.",
+        "fr": "Un album de 58 pages sur les oreilles et l’ouïe pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "teeth",
@@ -2506,11 +2858,11 @@
         },
         {
           "q": "Isn’t this just another printable?",
-          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read. That is why kids ask for it again — and why they remember it."
+          "a": "It is a story first. Each book takes your child on a little adventure through one part of the body, then invites them to colour the pages they just read."
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "Is the science accurate?",
@@ -2532,11 +2884,11 @@
         },
         {
           "q": "Ce n’est pas juste un printable de plus ?",
-          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire. C’est pour ça qu’il le redemande — et qu’il s’en souvient."
+          "a": "C’est d’abord une histoire. Chaque livre emmène votre enfant dans une petite aventure à travers une partie du corps, puis l’invite à colorier les pages qu’il vient de lire."
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Les informations sont-elles exactes ?",
@@ -2552,7 +2904,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Tooth Care Book for Kids — My Super Strong Teeth",
+        "fr": "Les dents pour enfants — Mes dents super fortes"
+      },
+      "description": {
+        "en": "A 58-page picture book about teeth and caring for them for ages 3–7, with colouring pages, in English, French, Spanish and German. Instant PDF.",
+        "fr": "Un album de 58 pages sur les dents et comment en prendre soin pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand. PDF immédiat."
+      }
+    }
   },
   {
     "id": "mh01",
@@ -2654,7 +3016,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -2676,7 +3038,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -2688,7 +3050,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Doctor Book for Kids — The Doctor Listens Closely",
+        "fr": "Livre enfant : le médecin — Héros de la santé"
+      },
+      "description": {
+        "en": "A calm 58-page picture book about doctors for ages 3–7, with colouring pages, in English, French, Spanish and German.",
+        "fr": "Un album doux de 58 pages sur les médecins pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand."
+      }
+    }
   },
   {
     "id": "mh02",
@@ -2789,7 +3161,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -2811,7 +3183,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -2823,7 +3195,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Nurse Book for Kids — Nurses Make Care Better",
+        "fr": "Livre enfant : les infirmiers — Héros de la santé"
+      },
+      "description": {
+        "en": "A calm 58-page picture book about nurses for ages 3–7, with colouring pages, in English, French, Spanish and German.",
+        "fr": "Un album doux de 58 pages sur les infirmiers pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand."
+      }
+    }
   },
   {
     "id": "mh03",
@@ -2924,7 +3306,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -2946,7 +3328,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -2958,7 +3340,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Pharmacist Book for Kids — Medical Heroes",
+        "fr": "Livre enfant : le pharmacien — Héros de la santé"
+      },
+      "description": {
+        "en": "A calm 58-page picture book about pharmacists for ages 3–7, with colouring pages, in English, French, Spanish and German.",
+        "fr": "Un album doux de 58 pages sur les pharmaciens pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand."
+      }
+    }
   },
   {
     "id": "mh04",
@@ -3059,7 +3451,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -3081,7 +3473,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -3093,7 +3485,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Paramedic Book for Kids — Paramedics Race to Help",
+        "fr": "Livre enfant : les secouristes — Héros de la santé"
+      },
+      "description": {
+        "en": "A calm 58-page picture book about paramedics for ages 3–7, with colouring pages, in English, French, Spanish and German.",
+        "fr": "Un album doux de 58 pages sur les secouristes pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand."
+      }
+    }
   },
   {
     "id": "mh05",
@@ -3194,7 +3596,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -3216,7 +3618,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -3228,7 +3630,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Midwife Book for Kids — Midwives Welcome New Babies",
+        "fr": "Livre enfant : la sage-femme — Héros de la santé"
+      },
+      "description": {
+        "en": "A calm 58-page picture book about midwives for ages 3–7, with colouring pages, in English, French, Spanish and German.",
+        "fr": "Un album doux de 58 pages sur les sages-femmes pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand."
+      }
+    }
   },
   {
     "id": "mh06",
@@ -3329,7 +3741,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -3351,7 +3763,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -3363,7 +3775,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Physiotherapy Book for Kids — Medical Heroes",
+        "fr": "Livre enfant : le kiné — Héros de la santé"
+      },
+      "description": {
+        "en": "A calm 58-page picture book about physiotherapists for ages 3–7, with colouring pages, in English, French, Spanish and German.",
+        "fr": "Un album doux de 58 pages sur les kinés pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand."
+      }
+    }
   },
   {
     "id": "mh07",
@@ -3465,7 +3887,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -3487,7 +3909,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -3499,7 +3921,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Dentist Book for Kids — Medical Heroes",
+        "fr": "Livre enfant : le dentiste — Héros de la santé"
+      },
+      "description": {
+        "en": "A calm 58-page picture book about dentists for ages 3–7, with colouring pages, in English, French, Spanish and German.",
+        "fr": "Un album doux de 58 pages sur les dentistes pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand."
+      }
+    }
   },
   {
     "id": "mh08",
@@ -3600,7 +4032,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -3622,7 +4054,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -3634,7 +4066,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Lab Scientist Book for Kids — Medical Heroes",
+        "fr": "Livre enfant : le biologiste — Héros de la santé"
+      },
+      "description": {
+        "en": "A calm 58-page picture book about laboratory scientists for ages 3–7, with colouring pages, in English, French, Spanish and German.",
+        "fr": "Un album doux de 58 pages sur les biologistes pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand."
+      }
+    }
   },
   {
     "id": "mh09",
@@ -3735,7 +4177,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -3757,7 +4199,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -3769,7 +4211,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Feelings Book for Kids — Medical Heroes",
+        "fr": "Livre enfant : le psychologue — Héros de la santé"
+      },
+      "description": {
+        "en": "A calm 58-page picture book about psychologists and big feelings for ages 3–7, with colouring pages, in English, French, Spanish and German.",
+        "fr": "Un album doux de 58 pages sur les psychologues et les émotions pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand."
+      }
+    }
   },
   {
     "id": "mh10",
@@ -3870,7 +4322,7 @@
         },
         {
           "q": "Four languages — won’t that confuse my child?",
-          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game. Many families use it to keep a grandparent’s language alive."
+          "a": "Children love spotting the same word in different languages. Every language sits in its own colour, so you read the one you speak at home and let the others become a game."
         },
         {
           "q": "How do I get it?",
@@ -3892,7 +4344,7 @@
         },
         {
           "q": "Quatre langues — ça ne va pas l’embrouiller ?",
-          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Beaucoup de familles s’en servent pour faire vivre la langue d’un grand-parent."
+          "a": "Les enfants adorent repérer le même mot dans plusieurs langues. Chaque langue a sa couleur : vous lisez celle de la maison, les autres deviennent un jeu."
         },
         {
           "q": "Comment je le reçois ?",
@@ -3904,7 +4356,17 @@
         }
       ]
     },
-    "reviewType": "book"
+    "reviewType": "book",
+    "seo": {
+      "title": {
+        "en": "Healthy Eating Book for Kids — Medical Heroes",
+        "fr": "Livre enfant : le diététicien — Héros de la santé"
+      },
+      "description": {
+        "en": "A calm 58-page picture book about dietitians and healthy food for ages 3–7, with colouring pages, in English, French, Spanish and German.",
+        "fr": "Un album doux de 58 pages sur les diététiciens et l’alimentation pour les 3–7 ans, avec coloriages, en français, anglais, espagnol et allemand."
+      }
+    }
   },
   {
     "id": "routine-sample",

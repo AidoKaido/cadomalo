@@ -39,7 +39,7 @@ const SHIPPING_OPTIONS = [
   },
 ]
 
-// Keep in sync with PURCHASE_PAUSED_SLUGS in js/products.js.
+// Slugs temporarily blocked from checkout (empty = everything on sale).
 const PURCHASE_PAUSED_SLUGS = new Set([])
 
 export default async function handler(req, res) {

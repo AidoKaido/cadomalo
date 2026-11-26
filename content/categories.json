@@ -1,0 +1,237 @@
+[
+  {
+    "id": "books",
+    "path": {"en": "books", "fr": "fr/livres"},
+    "label": {"en": "Picture books", "fr": "Albums"},
+    "short": {"en": "Human body & healthcare books in 4 languages, ages 3–7", "fr": "Corps humain et métiers de la santé en 4 langues, 3–7 ans"},
+    "tile": "bundle",
+    "title": {"en": "Human Body & Healthcare Picture Books for Kids", "fr": "Albums sur le corps humain et la santé pour enfants"},
+    "description": {
+      "en": "Picture books about the human body and healthcare jobs for ages 3–7, in English, French, Spanish and German. Written by a midwife. Instant PDF.",
+      "fr": "Des albums sur le corps humain et les métiers de la santé pour les 3–7 ans, en français, anglais, espagnol et allemand. Écrits par une sage-femme."
+    },
+    "h1": {"en": "Picture books for curious kids", "fr": "Des albums pour les enfants curieux"},
+    "intro": {
+      "en": [
+        "Cadomalo picture books answer the questions young children ask about their bodies and about the people who look after them. There are two collections of ten books each. Human Body Wonders gives one part of the body its own book — the brain, lungs, stomach, bones, muscles, skin, blood, eyes, ears and teeth — with friendly characters and one simple idea per page. Medical Heroes introduces ten healthcare jobs, from the doctor and the dentist to the paramedic and the dietitian, so that a check-up or a hospital visit feels familiar before it happens.",
+        "Every book is a 58-page square PDF: story pages first, then colouring pages of the scenes your child has just heard. Each page carries the text in English, French, Spanish and German, every language in its own colour, so you read the one you speak at home and the others become a game. The books are written for ages 3–7 by a midwife and checked for accuracy and gentleness. Buy a single title, a full collection of ten, or the Ultimate Human Body Learning Pack, which adds the Discovery Lab science kit to the ten Human Body Wonders books."
+      ],
+      "fr": [
+        "Les albums Cadomalo répondent aux questions que les jeunes enfants posent sur leur corps et sur les personnes qui en prennent soin. Il existe deux collections de dix livres. Merveilles du corps consacre un livre à chaque partie du corps — le cerveau, les poumons, l’estomac, les os, les muscles, la peau, le sang, les yeux, les oreilles et les dents — avec des personnages attachants et une idée simple par page. Les héros de la santé présente dix métiers du soin, du médecin et du dentiste au secouriste et au diététicien, pour qu’un rendez-vous ou une visite à l’hôpital paraisse familier avant même d’y aller.",
+        "Chaque livre est un PDF carré de 58 pages : d’abord l’histoire, puis des coloriages des scènes que votre enfant vient d’entendre. Chaque page porte le texte en français, anglais, espagnol et allemand, chaque langue dans sa couleur : vous lisez celle de la maison, les autres deviennent un jeu. Les livres sont écrits pour les 3–7 ans par une sage-femme et relus pour leur exactitude et leur douceur. Achetez un titre seul, une collection complète de dix livres, ou le pack ultime corps humain, qui ajoute le labo de découverte aux dix livres Merveilles du corps."
+      ]
+    },
+    "sections": [
+      {"collection": "hbw"},
+      {"collection": "mh"}
+    ],
+    "featured": ["ultimate-human-body"],
+    "how": "book",
+    "faq": {
+      "en": [
+        {"q": "What ages are the books for?", "a": "Ages 3–7. Little ones listen and repeat the short sentences; older children read along and colour the pages on their own."},
+        {"q": "Do I have to read all four languages?", "a": "No. Every language has its own colour, so you simply read the one you speak at home. The other languages are there for curious children, bilingual families and grandparents."},
+        {"q": "Is this a printed book?", "a": "On this site the books are digital PDFs that you print at home or at a copy shop. A few titles are also sold as paperbacks on Amazon (English/French edition); that is a separate product from the four-language PDF."},
+        {"q": "Which should I choose: one book or a collection?", "a": "Start with the topic your child asks about most. A collection of ten costs $39.99 instead of $79.90 for the books one by one."}
+      ],
+      "fr": [
+        {"q": "Pour quel âge sont les livres ?", "a": "De 3 à 7 ans. Les petits écoutent et répètent les phrases courtes ; les plus grands lisent avec vous et colorient seuls."},
+        {"q": "Faut-il lire les quatre langues ?", "a": "Non. Chaque langue a sa couleur : vous lisez simplement celle de la maison. Les autres langues sont là pour les enfants curieux, les familles bilingues et les grands-parents."},
+        {"q": "Est-ce un livre imprimé ?", "a": "Sur ce site, les livres sont des PDF à imprimer chez vous ou en boutique. Quelques titres existent aussi en livre broché sur Amazon (édition anglais/français) ; c’est un produit distinct du PDF en quatre langues."},
+        {"q": "Un livre ou une collection ?", "a": "Commencez par le sujet qui intrigue le plus votre enfant. Une collection de dix livres coûte 39,99 $ au lieu de 79,90 $ à l’unité."}
+      ]
+    },
+    "related": ["discovery-kits", "busy-books", "personalized-books"]
+  },
+  {
+    "id": "busy-books",
+    "path": {"en": "busy-books", "fr": "fr/cahiers-d-activites"},
+    "label": {"en": "Busy books", "fr": "Cahiers d’activités"},
+    "short": {"en": "A visual morning & bedtime routine, ages 5–7", "fr": "Une routine visuelle du matin et du soir, 5–7 ans"},
+    "tile": "routine",
+    "title": {"en": "Printable Busy Book for Kids — Morning & Bedtime", "fr": "Cahier d’activités à imprimer — routine enfant"},
+    "description": {
+      "en": "A printable busy book that turns morning and bedtime routines into a game for ages 5–7: picture cards, a star chart and a certificate. Try 10 pages free.",
+      "fr": "Un cahier d’activités à imprimer qui transforme la routine du matin et du soir en jeu pour les 5–7 ans : cartes, tableau d’étoiles et diplôme."
+    },
+    "h1": {"en": "Printable busy books", "fr": "Cahiers d’activités à imprimer"},
+    "intro": {
+      "en": [
+        "A busy book is a set of printed, usually laminated pages with pieces your child moves, matches and sorts with their own hands. Ours is built around the two moments that are often the hardest in a family day: getting ready in the morning and winding down at night. The Morning & Bedtime Routine Busy Book takes children aged 5–7 through six routine worlds — Rise & Shine, Get Dressed, Breakfast Time, Fresh & Clean, Wind Down and Sweet Dreams — with Lily and her cheeky cat Biscuit as guides.",
+        "Inside are 24 activities, more than 80 cut-out picture cards, a weekly star chart and a Routine Superstar certificate. Because your child moves the cards themselves, the routine becomes something they run rather than a list of reminders. Print it at home, laminate the pieces once, add Velcro dots and it is ready for every day; a grown-up guide explains printing, laminating and the answer key. The pages are in English, as US Letter and A4 PDFs in full colour and ink-saving versions. Not sure yet? Try 10 free pages first."
+      ],
+      "fr": [
+        "Un cahier d’activités (busy book) rassemble des pages imprimées, souvent plastifiées, avec des pièces que l’enfant déplace, associe et trie de ses propres mains. Le nôtre est construit autour des deux moments souvent les plus délicats de la journée : se préparer le matin et se calmer le soir. Le cahier routine du matin et du soir emmène les enfants de 5 à 7 ans à travers six mondes — réveil, habillage, petit-déjeuner, toilette, calme du soir et dodo — avec Lily et son chat Biscuit comme guides.",
+        "À l’intérieur : 24 activités, plus de 80 cartes à découper, un tableau d’étoiles de la semaine et un diplôme de Super-Routine. Comme votre enfant déplace lui-même les cartes, la routine devient sa mission plutôt qu’une liste de rappels. Imprimez-le, plastifiez les pièces une fois, ajoutez des pastilles scratch et il sert tous les jours ; un guide parent explique l’impression, la plastification et le corrigé. Les pages sont en anglais, en PDF US Letter et A4, en couleur et en version économie d’encre. Pas encore sûr ? Essayez d’abord 10 pages gratuites."
+      ]
+    },
+    "products": ["routine"],
+    "how": "kit",
+    "faq": {
+      "en": [
+        {"q": "What age is the routine busy book for?", "a": "Ages 5 to 7. The pieces are small, so it is not for children under 3, and a grown-up should do the cutting."},
+        {"q": "What do I need besides a printer?", "a": "Card stock for the cut-out pages, a laminator or sheet protectors, about 80 pairs of Velcro dots and a dry-erase marker. None of these are included."},
+        {"q": "Can I try it before buying?", "a": "Yes. Leave your email on the free sample page and we send you 10 printable pages: one routine world, the star chart and the certificate."}
+      ],
+      "fr": [
+        {"q": "Pour quel âge est le cahier de routine ?", "a": "De 5 à 7 ans. Les pièces sont petites : pas pour les moins de 3 ans, et un adulte s’occupe du découpage."},
+        {"q": "De quoi ai-je besoin en plus d’une imprimante ?", "a": "Du papier épais pour les pièces, une plastifieuse ou des pochettes, environ 80 paires de pastilles scratch et un feutre effaçable. Rien de tout ça n’est inclus."},
+        {"q": "Peut-on l’essayer avant d’acheter ?", "a": "Oui. Laissez votre e-mail sur la page de l’échantillon gratuit et nous vous envoyons 10 pages à imprimer (en anglais) : un monde, le tableau d’étoiles et le diplôme."}
+      ]
+    },
+    "related": ["discovery-kits", "escape-rooms", "books"]
+  },
+  {
+    "id": "discovery-kits",
+    "path": {"en": "discovery-kits", "fr": "fr/kits-de-decouverte"},
+    "label": {"en": "Discovery kits", "fr": "Kits de découverte"},
+    "short": {"en": "Hands-on human body science missions, ages 5–7", "fr": "Des missions scientifiques sur le corps, 5–7 ans"},
+    "tile": "discovery-lab",
+    "title": {"en": "Printable Human Body Science Kits for Kids", "fr": "Kits de sciences à imprimer pour enfants"},
+    "description": {
+      "en": "Printable human body science kits for ages 5–7: five hands-on missions with real experiments using everyday things you already have at home.",
+      "fr": "Des kits de sciences à imprimer sur le corps humain pour les 5–7 ans : cinq missions et de vraies expériences avec des objets du quotidien."
+    },
+    "h1": {"en": "Printable science discovery kits", "fr": "Kits de découverte scientifique à imprimer"},
+    "intro": {
+      "en": [
+        "Why does my heart beat faster when I dance? Where does my food go? Our discovery kits turn those questions into hands-on science your child can do at the kitchen table. My Amazing Body Discovery Lab follows Pico the little scientist and his buddies Thump, Noodle and Puff through five missions: super senses, the brilliant brain, heart and movement, bones and muscles, and the journey your food takes.",
+        "Each mission mixes a short explanation with a real experiment using everyday things — keys, a cup of water, string, straws, a zip-top bag, crackers, an old sock — then a puzzle, a chart or something to build. Your child collects stamps in a discovery passport, sets up a small home museum and earns a Junior Body Scientist certificate. Facts are written in kid-sized sentences and were checked against children’s health sources, which are listed on the grown-up pages. The kit has 38 pages in English for ages 5–7. Pair it with the ten Human Body Wonders books in the Ultimate Human Body Learning Pack: read the story, then try the experiment."
+      ],
+      "fr": [
+        "Pourquoi mon cœur bat plus vite quand je danse ? Où va ce que je mange ? Nos kits de découverte transforment ces questions en sciences à faire sur la table de la cuisine. Mon labo de découverte du corps suit Pico le petit scientifique et ses amis Thump, Noodle et Puff à travers cinq missions : les super sens, le cerveau génial, le cœur et le mouvement, les os et les muscles, et le voyage des aliments.",
+        "Chaque mission associe une courte explication à une vraie expérience avec des objets du quotidien — des clés, un verre d’eau, de la ficelle, des pailles, un sachet zip, des crackers, une vieille chaussette — puis un puzzle, un graphique ou un objet à fabriquer. Votre enfant collectionne des tampons dans un passeport, monte un petit musée à la maison et reçoit un diplôme de Jeune scientifique du corps. Les faits sont écrits en phrases courtes et vérifiés auprès de sources santé pour enfants, citées dans les pages parents. Le kit compte 38 pages en anglais, pour les 5–7 ans. Associez-le aux dix livres Merveilles du corps avec le pack ultime : on lit l’histoire, puis on fait l’expérience."
+      ]
+    },
+    "products": ["discovery-lab", "ultimate-human-body"],
+    "how": "kit",
+    "faq": {
+      "en": [
+        {"q": "Do I need to buy science equipment?", "a": "No. The experiments use things most homes already have; everything is listed on page 3 of the kit."},
+        {"q": "Can a 4-year-old do it?", "a": "It is made for ages 5–7. Younger children can enjoy many of the missions with a grown-up reading aloud and helping with scissors."},
+        {"q": "Is it medical advice?", "a": "No. It is for learning and fun. The facts are simplified and checked against children’s health sources, but it does not replace advice from a health professional."}
+      ],
+      "fr": [
+        {"q": "Faut-il acheter du matériel scientifique ?", "a": "Non. Les expériences utilisent des objets que la plupart des maisons ont déjà ; tout est listé page 3 du kit."},
+        {"q": "Un enfant de 4 ans peut-il le faire ?", "a": "Il est conçu pour les 5–7 ans. Les plus jeunes profitent de nombreuses missions avec un adulte qui lit et aide pour les ciseaux."},
+        {"q": "Est-ce un avis médical ?", "a": "Non. C’est pour apprendre et s’amuser. Les faits sont simplifiés et vérifiés auprès de sources santé pour enfants, mais ne remplacent pas l’avis d’un professionnel de santé."}
+      ]
+    },
+    "related": ["books", "escape-rooms", "busy-books"]
+  },
+  {
+    "id": "escape-rooms",
+    "path": {"en": "escape-rooms", "fr": "fr/escape-games"},
+    "label": {"en": "Escape rooms", "fr": "Escape games"},
+    "short": {"en": "A printable adventure with secret locks, ages 5–7", "fr": "Une aventure à imprimer avec cadenas secrets, 5–7 ans"},
+    "tile": "wonder-island",
+    "title": {"en": "Printable Escape Room for Kids — Treasure Hunt", "fr": "Escape game à imprimer pour enfants"},
+    "description": {
+      "en": "A printable escape room for kids aged 5–7: 20 missions, self-checking locks, a hint sheet and an answer key. Play at home, with siblings or at a party.",
+      "fr": "Un escape game à imprimer pour les 5–7 ans : 20 missions, des cadenas auto-corrigés, une feuille d’indices et un corrigé. À la maison ou en fête."
+    },
+    "h1": {"en": "Printable escape rooms for kids", "fr": "Escape games à imprimer pour enfants"},
+    "intro": {
+      "en": [
+        "A printable escape room is a story-driven puzzle hunt: children solve challenges to find codes, open locks and reach the finale. It works on a rainy afternoon at home, with siblings, or as the main activity of a small party. In Wonder Island Escape Room the lighthouse has gone dark and the island’s colours are fading. Your child joins Finn and his squirrel friend Pip to solve 20 missions across five worlds — the Enchanted Garden, Whispering Forest, Rainbow River, Clockwork Castle and Starlight Tower — open five secret locks, find the five lost crystals and switch the lighthouse back on.",
+        "The locks are self-checking: the right code spells a real word, so children know when they have it. A hint sheet gives three levels of help and there is a full answer key for grown-ups. One world takes 20 to 30 minutes, or play the whole adventure in an afternoon. It is made for ages 5–7: early readers can play alone, younger children with a grown-up reading the story parts. Print one copy per team. The 33 pages are in English, with cut-out pieces and an Explorer Certificate at the end."
+      ],
+      "fr": [
+        "Un escape game à imprimer est une chasse aux énigmes guidée par une histoire : les enfants relèvent des défis pour trouver des codes, ouvrir des cadenas et atteindre le grand final. Il fonctionne pour un après-midi pluvieux, entre frères et sœurs, ou comme activité principale d’une petite fête. Dans L’île aux merveilles, le phare s’est éteint et les couleurs de l’île disparaissent. Votre enfant rejoint Finn et son ami l’écureuil Pip pour résoudre 20 missions dans cinq mondes — le jardin enchanté, la forêt qui chuchote, la rivière arc-en-ciel, le château à engrenages et la tour des étoiles — ouvrir cinq cadenas secrets, retrouver les cinq cristaux et rallumer le phare.",
+        "Les cadenas sont auto-corrigés : le bon code forme un vrai mot, l’enfant sait donc quand il a trouvé. Une feuille d’indices propose trois niveaux d’aide et un corrigé complet attend les adultes. Un monde prend 20 à 30 minutes, ou toute l’aventure sur un après-midi. Il est pensé pour les 5–7 ans : les jeunes lecteurs jouent seuls, les plus petits avec un adulte qui lit l’histoire. Imprimez un exemplaire par équipe. Les 33 pages sont en anglais, avec des pièces à découper et un diplôme d’explorateur à la fin."
+      ]
+    },
+    "products": ["wonder-island"],
+    "how": "kit",
+    "faq": {
+      "en": [
+        {"q": "How many children can play?", "a": "One child, siblings or a small group. Print one copy per team so everyone has their own clues."},
+        {"q": "How long does it take?", "a": "About 20 to 30 minutes per world, so the full adventure fills an afternoon. You can also play one world a day."},
+        {"q": "What if my child gets stuck?", "a": "Use the hint sheet: each mission has three levels of hints, from a gentle nudge to the answer. A full answer key is included for grown-ups."}
+      ],
+      "fr": [
+        {"q": "Combien d’enfants peuvent jouer ?", "a": "Un enfant, une fratrie ou un petit groupe. Imprimez un exemplaire par équipe pour que chacun ait ses indices."},
+        {"q": "Combien de temps faut-il ?", "a": "Environ 20 à 30 minutes par monde : toute l’aventure occupe un après-midi. On peut aussi jouer un monde par jour."},
+        {"q": "Et si mon enfant bloque ?", "a": "Utilisez la feuille d’indices : chaque mission a trois niveaux d’aide, du petit coup de pouce à la réponse. Un corrigé complet est inclus pour les adultes."}
+      ]
+    },
+    "related": ["party-kits", "discovery-kits", "busy-books"]
+  },
+  {
+    "id": "personalized-books",
+    "path": {"en": "personalized-books", "fr": "fr/livres-personnalises"},
+    "label": {"en": "Personalized storybooks", "fr": "Livres personnalisés"},
+    "short": {"en": "A birthday story starring your child, ages 3–8", "fr": "Une histoire d’anniversaire avec votre enfant en héros, 3–8 ans"},
+    "tile": "birthday-wish",
+    "title": {"en": "Personalized Storybooks for Kids — Birthday Book", "fr": "Livres personnalisés pour enfants — anniversaire"},
+    "description": {
+      "en": "A personalized birthday storybook for ages 3–8: your child’s name on the cover and 15+ pages, 6 hero looks, edited in free Canva in about 15 minutes.",
+      "fr": "Un livre d’anniversaire personnalisé pour les 3–8 ans : le prénom de votre enfant sur la couverture et 15+ pages, à modifier dans Canva en 15 minutes."
+    },
+    "h1": {"en": "Personalized storybooks", "fr": "Livres personnalisés"},
+    "intro": {
+      "en": [
+        "A personalized storybook makes your child the hero of the story, with their own name on the cover and throughout the pages. The Magical Birthday Wish is a 32-page birthday adventure: with Twinkle the tiny star and Gumdrop, a baby dragon who sneezes confetti, your child crosses a wobbly jelly bridge, climbs the Frosting Mountains and finds the lost birthday wish. It is a warm, funny story about bravery, kindness and sharing your special day, and it takes about ten minutes to read aloud.",
+        "You personalise it yourself in Canva, and a free account is enough. After checkout you receive a PDF with your template links and step-by-step instructions. Choose one of six hero looks to match your child, type their name once (Canva’s Find and replace changes it on every page), set their age and write a dedication, then download and print at home or at a copy shop. The story never uses he or she, so it fits every child. Inside are 24 illustrated story pages in six chapters, a find-the-hidden-stars game, a draw-your-wish page and a Wish Keeper certificate. The story is in English, for ages 3–8."
+      ],
+      "fr": [
+        "Un livre personnalisé fait de votre enfant le héros de l’histoire, avec son prénom sur la couverture et tout au long des pages. Le vœu d’anniversaire magique est une aventure de 32 pages : avec Twinkle la petite étoile et Gumdrop, un bébé dragon qui éternue des confettis, votre enfant traverse un pont en gelée, escalade les montagnes de glaçage et retrouve le vœu perdu. Une histoire tendre et drôle sur le courage, la gentillesse et le partage, à lire à voix haute en dix minutes environ.",
+        "Vous le personnalisez vous-même dans Canva, un compte gratuit suffit. Après le paiement, vous recevez un PDF avec vos liens de modèles et des instructions pas à pas. Choisissez l’un des six looks de héros, tapez le prénom une fois (la fonction Rechercher et remplacer le change partout), indiquez l’âge et une dédicace, puis téléchargez et imprimez chez vous ou en boutique. L’histoire n’utilise jamais « il » ou « elle » : elle convient à tous les enfants. À l’intérieur : 24 pages illustrées en six chapitres, un jeu des étoiles cachées, une page « dessine ton vœu » et un diplôme de Gardien des vœux. L’histoire est en anglais, pour les 3–8 ans."
+      ]
+    },
+    "products": ["birthday-wish"],
+    "how": "canva",
+    "faq": {
+      "en": [
+        {"q": "Do I need a paid Canva account?", "a": "No. A free Canva account is all you need to personalise and download the book."},
+        {"q": "How long does personalising take?", "a": "Most parents finish in about 15 minutes: pick the hero look, type the name once, add the age and a dedication, then download."},
+        {"q": "Is it printed and shipped?", "a": "No. It is a digital product: you download your personalised PDF and print it at home or at a copy shop."}
+      ],
+      "fr": [
+        {"q": "Faut-il un compte Canva payant ?", "a": "Non. Un compte Canva gratuit suffit pour personnaliser et télécharger le livre."},
+        {"q": "Combien de temps prend la personnalisation ?", "a": "Comptez environ 15 minutes : choisir le look du héros, taper le prénom une fois, ajouter l’âge et une dédicace, puis télécharger."},
+        {"q": "Est-il imprimé et expédié ?", "a": "Non. C’est un produit numérique : vous téléchargez votre PDF personnalisé et l’imprimez chez vous ou en boutique."}
+      ]
+    },
+    "related": ["party-kits", "books", "escape-rooms"]
+  },
+  {
+    "id": "party-kits",
+    "path": {"en": "party-kits", "fr": "fr/kits-de-fete"},
+    "label": {"en": "Party kits", "fr": "Kits de fête"},
+    "short": {"en": "A whole birthday adventure, planned and printable", "fr": "Une fête d’anniversaire aventure, prête à imprimer"},
+    "tile": "party-kit",
+    "title": {"en": "Printable Birthday Party Games Kit for Kids", "fr": "Kit de fête d’anniversaire enfant à imprimer"},
+    "description": {
+      "en": "A printable birthday party kit for 4–10 children: 16 games in 4 adventure zones, a treasure quest, badges, a party schedule and about 30 minutes of prep.",
+      "fr": "Un kit de fête d’anniversaire à imprimer pour 4 à 10 enfants : 16 jeux en 4 zones, une chasse au trésor, des badges et un programme de fête."
+    },
+    "h1": {"en": "Printable birthday party kits", "fr": "Kits de fête d’anniversaire à imprimer"},
+    "intro": {
+      "en": [
+        "A printable party kit gives you a whole birthday plan in one download: games, decorations, a story to tie it together and a schedule, so you are not inventing the party the night before. In the Birthday Adventure Party Kit, Twinkle the star invites the Birthday Captain and the Explorers to Wishland, where the Birthday Treasure Chest is locked. The children play their way through four adventure zones — the Detective Club, the Game Arena, the Creative Studio and the Treasure Quest — winning four treasure symbols, finding the magic word and unlocking the treasure together.",
+        "There are 16 games, most of which need no reading, plus a welcome poster, explorer passports, nine badges, clue cards, riddles and 14 photo booth props. You type the birthday child’s name and age straight into the PDF. A 90-minute schedule, a 60-minute “pick 6” plan, a supplies checklist, an answer key and six no-print backup games are included, and preparation takes about 30 minutes. It works for 4 to 10 children, is made for ages 5–7 with tips for ages 3–4 and 8–10, and suits every child. The pages are in English."
+      ],
+      "fr": [
+        "Un kit de fête à imprimer vous donne tout le programme d’un anniversaire en un seul téléchargement : des jeux, de la déco, une histoire pour tout relier et un déroulé, pour ne pas inventer la fête la veille au soir. Dans le kit de fête d’anniversaire aventure, l’étoile Twinkle invite le Capitaine d’anniversaire et ses Explorateurs à Wishland, où le coffre au trésor est fermé. Les enfants traversent quatre zones d’aventure — le club des détectives, l’arène des jeux, l’atelier créatif et la chasse au trésor — gagnent quatre symboles, trouvent le mot magique et ouvrent le trésor ensemble.",
+        "Il y a 16 jeux, la plupart sans lecture, plus une affiche d’accueil, des passeports d’explorateur, neuf badges, des cartes indices, des devinettes et 14 accessoires photo. Le prénom et l’âge se tapent directement dans le PDF. Un programme de 90 minutes, un plan express de 60 minutes, une liste de matériel, un corrigé et six jeux sans impression sont inclus ; la préparation prend environ 30 minutes. Il convient de 4 à 10 enfants, est pensé pour les 5–7 ans avec des conseils pour les 3–4 et 8–10 ans, pour filles et garçons. Les pages sont en anglais."
+      ]
+    },
+    "products": ["party-kit"],
+    "also": ["birthday-wish", "wonder-island"],
+    "how": "kit",
+    "faq": {
+      "en": [
+        {"q": "How much preparation does the party need?", "a": "About 30 minutes: print, cut and lay out the clues. The schedule tells you what happens when."},
+        {"q": "What ages and group size does it suit?", "a": "Made for ages 5 to 7, with tips for ages 3–4 and 8–10. It works for 4 to 10 children."},
+        {"q": "What else do I need?", "a": "A printer, scissors, glue, tape, crayons, a die (or the fold-up one in the kit), music, string, straws or sticks for the props and a few small favours for the treasure."}
+      ],
+      "fr": [
+        {"q": "Combien de préparation faut-il ?", "a": "Environ 30 minutes : imprimer, découper et placer les indices. Le programme indique ce qui se passe et quand."},
+        {"q": "Pour quel âge et combien d’enfants ?", "a": "Pensé pour les 5–7 ans, avec des conseils pour les 3–4 et 8–10 ans. De 4 à 10 enfants."},
+        {"q": "De quoi ai-je besoin ?", "a": "Une imprimante, des ciseaux, de la colle, du ruban adhésif, des crayons, un dé (ou celui à plier du kit), de la musique, de la ficelle, des pailles pour les accessoires et quelques petites surprises pour le trésor."}
+      ]
+    },
+    "related": ["personalized-books", "escape-rooms", "busy-books"]
+  }
+]

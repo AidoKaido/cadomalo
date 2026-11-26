@@ -1,7 +1,7 @@
 {
   "_comment": "Strings the design drop does not ship: accessibility labels, the cookie-consent banner (the drop has none, though its own cookie policy promises one), the shortened mobile announcement, and newsletter consent wording. Authored here rather than in ui.json so content/ui.json stays a faithful extract of the drop. Deep-merged over ui.json by scripts/build-pages.js.",
   "en": {
-    "announceShort": "Instant download · Ages 3–8",
+    "announceShort": "Instant download · Created by a midwife",
     "a11y": {
       "skip": "Skip to content",
       "openMenu": "Open menu",
@@ -68,10 +68,169 @@
       "sampleCta": "Send me the free sample",
       "kitsCta": "Shop activity kits",
       "noReviews": "Our shop is new, so we don’t have reviews to show you yet — and we won’t invent any. Bought from us? Share how it went."
+    },
+    "home3": {
+      "title": "Educational Books & Printables for Kids",
+      "description": "Picture books in four languages, busy books, science kits and party printables for curious kids aged 3–10. Created by a midwife. Instant PDF.",
+      "trust": [
+        "Screen-free",
+        "Midwife-created books",
+        "Instant downloads",
+        "4 languages"
+      ],
+      "catsKicker": "Shop by category",
+      "catsH": "What are you looking for?",
+      "featKicker": "Collections",
+      "featH": "Complete a collection and save",
+      "featP": "Ten picture books for $39.99 instead of $79.90 — or everything about the human body in one pack.",
+      "routineKicker": "Free printable sample · ages 5–7",
+      "routineT1": "Calmer mornings.",
+      "routineT2": "Easier bedtimes.",
+      "routineP": "The Morning & Bedtime Routine Busy Book turns getting ready and winding down into a game your child runs by themselves — picture cards, six routine worlds and a weekly star chart. Try 10 pages free: one routine world, the star chart and the certificate.",
+      "routineProduct": "See the full busy book",
+      "optinLabel": "Your email",
+      "optinCta": "Send me the free pages",
+      "optinPh": "you@example.com",
+      "optinConsent": "Yes, email me the free sample and occasional tips and offers from Cadomalo. I can unsubscribe at any time. See our",
+      "optinPrivacy": "privacy policy",
+      "optinInvalid": "Please enter a valid email address.",
+      "optinTick": "Please tick the box so we can email you the sample.",
+      "optinSending": "Sending…",
+      "optinError": "Something went wrong. Please try again.",
+      "picksKicker": "Good first picks",
+      "picksH": "A few places to start",
+      "picksCta": "See all products",
+      "ageKicker": "Shop by age",
+      "ageH": "Find the right fit for your child",
+      "ages": [
+        {
+          "h": "Ages 3–4",
+          "p": "Picture books to read aloud together, and a birthday story starring your child.",
+          "links": [
+            "books",
+            "personalized-books"
+          ]
+        },
+        {
+          "h": "Ages 5–7",
+          "p": "Everything we make: the books plus busy books, science missions, an escape room and a party kit.",
+          "links": [
+            "busy-books",
+            "discovery-kits",
+            "escape-rooms"
+          ]
+        },
+        {
+          "h": "Ages 8–10",
+          "p": "The party kit includes tips for ages 8–10, and the four-language books make fun language practice for older siblings.",
+          "links": [
+            "party-kits",
+            "books"
+          ]
+        }
+      ],
+      "founderKicker": "Created by a midwife",
+      "founderH": "From first breath to big discoveries",
+      "founderCta": "Read our story",
+      "faqKicker": "Good to know",
+      "faqH": "Questions parents ask",
+      "faq": [
+        {
+          "q": "How do digital downloads work?",
+          "a": "Right after checkout you get a download button on the confirmation page and an email with your files. Nothing is shipped — print at home or at any copy shop."
+        },
+        {
+          "q": "What ages are Cadomalo products for?",
+          "a": "Each product shows its own age range: the picture books are for ages 3–7, the busy book, science kit, escape room and party kit for ages 5–7 (the party kit has tips for 3–4 and 8–10), and the personalised birthday story for ages 3–8."
+        },
+        {
+          "q": "Which languages are they in?",
+          "a": "Every Human Body Wonders and Medical Heroes book has each page in English, French, Spanish and German. The activity kits and the personalised storybook are in English."
+        },
+        {
+          "q": "Can I print more than once?",
+          "a": "Yes — as often as you need for your own family, or for one classroom. Sharing or reselling the files is not allowed."
+        },
+        {
+          "q": "What if something isn’t right?",
+          "a": "Our 30-day happiness promise: write to support@cadomalo.com and we’ll fix it or refund you."
+        }
+      ]
+    },
+    "cat": {
+      "kicker": "Shop",
+      "howH": "How it works",
+      "faqH": "Questions parents ask",
+      "relatedH": "Explore more",
+      "postsH": "From the blog",
+      "alsoH": "Also great for a party",
+      "featuredH": "Best value",
+      "allLink": "See all products",
+      "how": {
+        "book": [
+          [
+            "Buy and download",
+            "Your PDF is ready on the confirmation page and in your inbox."
+          ],
+          [
+            "Print at home",
+            "Print at 100% on A4 or US Letter, or at any copy shop."
+          ],
+          [
+            "Read, colour, talk",
+            "Read the story together, then let your child colour the pages they just heard."
+          ]
+        ],
+        "kit": [
+          [
+            "Buy and download",
+            "Your PDFs are ready on the confirmation page and in your inbox."
+          ],
+          [
+            "Print and prepare",
+            "Print the pages you need; the grown-up guide tells you what to cut or laminate."
+          ],
+          [
+            "Play and learn",
+            "Your child works through the activities, with a grown-up nearby for the tricky bits."
+          ]
+        ],
+        "canva": [
+          [
+            "Buy",
+            "You receive a PDF with your Canva template links and instructions."
+          ],
+          [
+            "Personalise",
+            "Pick the hero look, type the name once, add the age and a dedication — about 15 minutes."
+          ],
+          [
+            "Download and print",
+            "Download your personalised PDF from Canva and print it at home or at a copy shop."
+          ]
+        ]
+      }
+    },
+    "notFound": {
+      "title": "Page not found",
+      "h": "This page wandered off",
+      "p": "The page you were looking for doesn’t exist or has moved. Try one of these instead:",
+      "fr": "Vous cherchez la version française ?",
+      "frLink": "Accueil en français",
+      "home": "Back to the home page",
+      "shop": "Shop all products"
+    },
+    "lightbox": {
+      "open": "Open page",
+      "close": "Close",
+      "prev": "Previous page",
+      "next": "Next page",
+      "label": "Inside pages",
+      "insideH": "Look inside"
     }
   },
   "fr": {
-    "announceShort": "Téléchargement immédiat · 3–8 ans",
+    "announceShort": "Téléchargement immédiat · Créé par une sage-femme",
     "a11y": {
       "skip": "Aller au contenu",
       "openMenu": "Ouvrir le menu",
@@ -138,6 +297,156 @@
       "sampleCta": "Recevoir l’échantillon gratuit",
       "kitsCta": "Voir les kits d’activités",
       "noReviews": "Notre boutique est nouvelle : nous n’avons pas encore d’avis à vous montrer — et nous n’en inventerons pas. Vous avez acheté chez nous ? Racontez-nous."
+    },
+    "home3": {
+      "title": "Livres éducatifs et printables pour enfants",
+      "description": "Des albums en quatre langues, des cahiers d’activités, des kits de sciences et des printables de fête pour les 3–10 ans. Créés par une sage-femme.",
+      "trust": [
+        "Sans écran",
+        "Livres écrits par une sage-femme",
+        "Téléchargement immédiat",
+        "4 langues"
+      ],
+      "catsKicker": "Par catégorie",
+      "catsH": "Que cherchez-vous ?",
+      "featKicker": "Collections",
+      "featH": "Complétez une collection et économisez",
+      "featP": "Dix albums pour 39,99 $ au lieu de 79,90 $ — ou tout le corps humain dans un seul pack.",
+      "routineKicker": "Échantillon gratuit à imprimer · 5–7 ans",
+      "routineT1": "Des matins plus calmes.",
+      "routineT2": "Des couchers plus doux.",
+      "routineP": "Le cahier routine du matin et du soir transforme la préparation et le coucher en un jeu que votre enfant mène lui-même — des cartes à déplacer, six mondes et un tableau d’étoiles. Essayez 10 pages gratuites (en anglais) : un monde, le tableau d’étoiles et le diplôme.",
+      "routineProduct": "Voir le cahier complet",
+      "optinLabel": "Votre e-mail",
+      "optinCta": "Recevoir les pages gratuites",
+      "optinPh": "vous@exemple.com",
+      "optinConsent": "Oui, envoyez-moi l’échantillon gratuit et, de temps en temps, des idées et des offres Cadomalo. Je peux me désabonner à tout moment. Voir notre",
+      "optinPrivacy": "politique de confidentialité",
+      "optinInvalid": "Merci d’indiquer une adresse e-mail valide.",
+      "optinTick": "Merci de cocher la case pour recevoir l’échantillon.",
+      "optinSending": "Envoi…",
+      "optinError": "Une erreur est survenue. Merci de réessayer.",
+      "picksKicker": "Pour bien commencer",
+      "picksH": "Quelques idées pour démarrer",
+      "picksCta": "Voir tous les produits",
+      "ageKicker": "Par âge",
+      "ageH": "Trouvez ce qui convient à votre enfant",
+      "ages": [
+        {
+          "h": "3–4 ans",
+          "p": "Des albums à lire ensemble à voix haute, et une histoire d’anniversaire dont votre enfant est le héros.",
+          "links": [
+            "books",
+            "personalized-books"
+          ]
+        },
+        {
+          "h": "5–7 ans",
+          "p": "Toute la gamme : les livres, plus le cahier de routine, les missions scientifiques, l’escape game et le kit de fête.",
+          "links": [
+            "busy-books",
+            "discovery-kits",
+            "escape-rooms"
+          ]
+        },
+        {
+          "h": "8–10 ans",
+          "p": "Le kit de fête propose des conseils pour les 8–10 ans, et les livres en quatre langues font un bon entraînement pour les grands frères et sœurs.",
+          "links": [
+            "party-kits",
+            "books"
+          ]
+        }
+      ],
+      "founderKicker": "Créé par une sage-femme",
+      "founderH": "Du premier souffle aux grandes découvertes",
+      "founderCta": "Lire notre histoire",
+      "faqKicker": "Bon à savoir",
+      "faqH": "Les questions des parents",
+      "faq": [
+        {
+          "q": "Comment fonctionnent les téléchargements ?",
+          "a": "Juste après le paiement, un bouton de téléchargement s’affiche sur la page de confirmation et vous recevez vos fichiers par e-mail. Rien n’est expédié : imprimez chez vous ou en boutique."
+        },
+        {
+          "q": "Pour quel âge sont les produits Cadomalo ?",
+          "a": "Chaque produit indique sa tranche d’âge : les albums pour les 3–7 ans, le cahier de routine, le kit de sciences, l’escape game et le kit de fête pour les 5–7 ans (avec des conseils pour les 3–4 et 8–10 ans pour la fête), et l’histoire d’anniversaire personnalisée pour les 3–8 ans."
+        },
+        {
+          "q": "En quelles langues ?",
+          "a": "Chaque livre Merveilles du corps et Les héros de la santé a toutes ses pages en français, anglais, espagnol et allemand. Les kits d’activités et le livre personnalisé sont en anglais."
+        },
+        {
+          "q": "Peut-on imprimer plusieurs fois ?",
+          "a": "Oui, autant que nécessaire pour votre famille ou pour une classe. Le partage et la revente des fichiers sont interdits."
+        },
+        {
+          "q": "Et si quelque chose ne va pas ?",
+          "a": "Notre promesse bonheur de 30 jours : écrivez à support@cadomalo.com, nous corrigeons ou nous vous remboursons."
+        }
+      ]
+    },
+    "cat": {
+      "kicker": "Boutique",
+      "howH": "Comment ça marche",
+      "faqH": "Les questions des parents",
+      "relatedH": "À découvrir aussi",
+      "postsH": "Sur le blog",
+      "alsoH": "Aussi parfait pour une fête",
+      "featuredH": "Meilleur prix",
+      "allLink": "Voir tous les produits",
+      "how": {
+        "book": [
+          [
+            "Achetez et téléchargez",
+            "Votre PDF est prêt sur la page de confirmation et dans votre boîte mail."
+          ],
+          [
+            "Imprimez",
+            "Imprimez à 100 % en A4 ou US Letter, ou en boutique."
+          ],
+          [
+            "Lisez, coloriez, discutez",
+            "Lisez l’histoire ensemble, puis votre enfant colorie les pages qu’il vient d’entendre."
+          ]
+        ],
+        "kit": [
+          [
+            "Achetez et téléchargez",
+            "Vos PDF sont prêts sur la page de confirmation et dans votre boîte mail."
+          ],
+          [
+            "Imprimez et préparez",
+            "Imprimez les pages utiles ; le guide parent indique quoi découper ou plastifier."
+          ],
+          [
+            "Jouez et apprenez",
+            "Votre enfant fait les activités, avec un adulte à côté pour les passages délicats."
+          ]
+        ],
+        "canva": [
+          [
+            "Achetez",
+            "Vous recevez un PDF avec vos liens de modèles Canva et les instructions."
+          ],
+          [
+            "Personnalisez",
+            "Choisissez le look du héros, tapez le prénom une fois, ajoutez l’âge et une dédicace — environ 15 minutes."
+          ],
+          [
+            "Téléchargez et imprimez",
+            "Téléchargez votre PDF personnalisé depuis Canva et imprimez-le chez vous ou en boutique."
+          ]
+        ]
+      }
+    },
+    "lightbox": {
+      "open": "Agrandir la page",
+      "close": "Fermer",
+      "prev": "Page précédente",
+      "next": "Page suivante",
+      "label": "Pages intérieures",
+      "insideH": "Feuilletez l’intérieur"
     }
   }
 }

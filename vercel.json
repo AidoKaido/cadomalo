@@ -4,9 +4,37 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "functions": {
-    "api/*.js": {"includeFiles": "{data/**,content/catalog.json}"}
+    "api/*.js": {
+      "includeFiles": "{data/**,content/catalog.json}"
+    }
   },
   "redirects": [
+    {"source": "/blog-anniversary", "destination": "/blog", "permanent": true},
+    {"source": "/blog-anniversary.html", "destination": "/blog", "permanent": true},
+    {"source": "/blog-baby", "destination": "/blog", "permanent": true},
+    {"source": "/blog-baby.html", "destination": "/blog", "permanent": true},
+    {"source": "/blog-budget", "destination": "/blog", "permanent": true},
+    {"source": "/blog-budget.html", "destination": "/blog", "permanent": true},
+    {"source": "/blog-digital", "destination": "/blog", "permanent": true},
+    {"source": "/blog-digital.html", "destination": "/blog", "permanent": true},
+    {"source": "/blog-holiday", "destination": "/blog", "permanent": true},
+    {"source": "/blog-holiday.html", "destination": "/blog", "permanent": true},
+    {"source": "/blog-last-minute", "destination": "/blog", "permanent": true},
+    {"source": "/blog-last-minute.html", "destination": "/blog", "permanent": true},
+    {"source": "/blog-men", "destination": "/blog", "permanent": true},
+    {"source": "/blog-men.html", "destination": "/blog", "permanent": true},
+    {"source": "/blog-personalized", "destination": "/blog", "permanent": true},
+    {"source": "/blog-personalized.html", "destination": "/blog", "permanent": true},
+    {"source": "/blog-wedding", "destination": "/blog", "permanent": true},
+    {"source": "/blog-wedding.html", "destination": "/blog", "permanent": true},
+    {"source": "/blog-post", "destination": "/blog", "permanent": true},
+    {"source": "/blog-post.html", "destination": "/blog", "permanent": true},
+    {"source": "/write-review", "destination": "/review", "permanent": true},
+    {"source": "/write-review.html", "destination": "/review", "permanent": true},
+    {"source": "/accessibility", "destination": "/", "permanent": true},
+    {"source": "/accessibility.html", "destination": "/", "permanent": true},
+    {"source": "/content/:path*", "destination": "/", "permanent": false},
+    {"source": "/emails/:path*", "destination": "/", "permanent": false},
     {"source": "/products/human-body-wonders-all-5-books", "destination": "/products/human-body-wonders-all-10-books", "permanent": true},
     {"source": "/fr/produits/merveilles-du-corps-les-5-livres", "destination": "/fr/produits/merveilles-du-corps-les-10-livres", "permanent": true},
     {"source": "/products/silly-goose-tumbler-wrap", "destination": "/shop", "permanent": true},
@@ -97,24 +125,41 @@
     {"source": "/products/funny-monday-shirt-some-things-are-better-left-alone-like-me-on-a-monday-tee-wor-6a352e", "destination": "/shop", "permanent": true}
   ],
   "rewrites": [
-    {"source": "/api/go", "destination": "/api/download"},
-    {"source": "/products/:slug", "destination": "/shop"}
+    {"source": "/api/go", "destination": "/api/download"}
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {"key": "X-Frame-Options", "value": "DENY"},
-        {"key": "X-Content-Type-Options", "value": "nosniff"},
-        {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"},
-        {"key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=(), payment=(self)"},
-        {"key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload"}
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(), microphone=(), camera=(), payment=(self)"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
       ]
     },
     {
       "source": "/data/(.*)",
       "headers": [
-        {"key": "Cache-Control", "value": "public, max-age=60, s-maxage=300, stale-while-revalidate=86400"}
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60, s-maxage=300, stale-while-revalidate=86400"
+        }
       ]
     }
   ]

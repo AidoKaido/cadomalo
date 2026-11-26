@@ -23,6 +23,10 @@ const ICON = {
   shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>',
   chevron: '<path d="m6 9 6 6 6-6"/>',
   pen: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+  zoom: '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v6M8 11h6"/>',
+  left: '<path d="m15 18-6-6 6-6"/>',
+  right: '<path d="m9 18 6-6-6-6"/>',
+  close: '<path d="M18 6 6 18M6 6l12 12"/>',
 }
 export const icon = (name, size) =>
   `<svg class="ic" width="${size || 20}" height="${size || 20}" viewBox="0 0 24 24" fill="none" ` +
@@ -36,29 +40,40 @@ export const amazonUrl = (p, lang) =>
 export function renderProductBody(p, lang, t, d) {
   const {esc, money, stars, badgeClass, urlFor, productUrl, media, reviews, complete, reviewUrl} = d
   const T = t.pdp2
+  const LB = t.lightbox
   const {images, videos} = media
+  const pages = d.pages || []
+  const title = p.title[lang]
+  const mockAlt = (i) => `${title} — ${lang === 'fr' ? 'aperçu' : 'product preview'} ${i + 1}`
+  /* every still image, in gallery order: cover, real inside pages, then mockups */
+  const stills = [
+    ...images.slice(0, 1).map((src) => ({src, w: 800, h: 800, alt: d.coverAlt || title})),
+    ...pages.map((pg) => ({src: pg.src, w: pg.w, h: pg.h, alt: pg.alt})),
+    ...images.slice(1).map((src, i) => ({src, w: 800, h: 800, alt: mockAlt(i)})),
+  ]
+  const stillIndex = (src) => stills.findIndex((s) => s.src === src)
   const savePct = p.compareAt ? Math.round((1 - p.price / p.compareAt) * 100) : 0
   const isCanva = p.fulfillment === 'canva-links'
 
   /* ---------- gallery: images on disk + optional demo video ---------- */
   const badge = p.badge ? `<span class="${badgeClass(p.badgeTone)} pdp-badge">${esc(p.badge[lang])}</span>` : ''
   const slides = [
-    ...images.slice(0, 1).map((src) => ({kind: 'img', src})),
+    ...stills.slice(0, images.length ? 1 : 0).map((s) => ({kind: 'img', ...s})),
     ...videos.map((v) => ({kind: 'video', src: v.src, poster: v.poster})),
-    ...images.slice(1).map((src) => ({kind: 'img', src})),
+    ...stills.slice(images.length ? 1 : 0).map((s) => ({kind: 'img', ...s})),
   ]
   const first = slides[0]
   const mainMedia = !first
     ? `<div class="pdp-cover-tile" style="--tile:${p.color}"><span>${esc(p.series[lang])}</span><strong>${esc(p.title[lang])}</strong></div>`
     : first.kind === 'img'
-      ? `<img data-gallery-main src="${first.src}" alt="${esc(p.title[lang])}" width="800" height="800" fetchpriority="high">`
+      ? `<img data-gallery-main src="${first.src}" alt="${esc(first.alt)}" width="800" height="800" fetchpriority="high">`
       : `<video data-gallery-main src="${first.src}"${first.poster ? ` poster="${first.poster}"` : ''} muted autoplay loop playsinline preload="metadata" aria-label="${esc(T.videoLabel)}"></video>`
 
   const thumbs = slides.length > 1
     ? `<div class="pdp-thumbs" data-gallery-thumbs>${slides
         .map((s, i) => s.kind === 'img'
-          ? `<button type="button" class="pdp-thumb${i === 0 ? ' is-active' : ''}" data-kind="img" data-src="${s.src}"
-              aria-label="${esc(p.title[lang])} — ${i + 1}"><img src="${s.src}" alt="" width="144" height="144" loading="lazy"></button>`
+          ? `<button type="button" class="pdp-thumb${i === 0 ? ' is-active' : ''}" data-kind="img" data-src="${s.src}" data-alt="${esc(s.alt)}"
+              aria-label="${esc(s.alt)}"><img src="${s.src}" alt="" width="144" height="144" loading="lazy"></button>`
           : `<button type="button" class="pdp-thumb pdp-thumb-video${i === 0 ? ' is-active' : ''}" data-kind="video" data-src="${s.src}"${s.poster ? ` data-poster="${s.poster}"` : ''}
               aria-label="${esc(T.playVideo)}">${s.poster ? `<img src="${s.poster}" alt="" width="144" height="144" loading="lazy">` : ''}<span class="thumb-play">${icon('play', 16)}</span></button>`)
         .join('')}</div>`
@@ -129,7 +144,8 @@ export function renderProductBody(p, lang, t, d) {
 
   /* ---------- what's inside + page previews ---------- */
   const inside = p.inside ? p.inside[lang] : []
-  const previews = images.slice(1, 5)
+  /* real inside pages when we have them, else the mockups; each opens the lightbox */
+  const previews = (pages.length ? stills.filter((s) => pages.some((pg) => pg.src === s.src)) : stills.slice(1, 5)).slice(0, 8)
   const insideBlock = inside.length || previews.length
     ? `<section class="section inside" id="inside">
       <div class="wrap inside-grid">
@@ -140,9 +156,9 @@ export function renderProductBody(p, lang, t, d) {
           ${p.specs ? `<ul class="spec-chips">${p.specs[lang].map((s) => `<li>${esc(s)}</li>`).join('')}</ul>` : ''}
         </div>
         ${previews.length ? `<div>
-          <h3 class="visually-hidden">${esc(T.previewsH)}</h3>
-          <div class="preview-grid">${previews
-            .map((src) => `<img src="${src}" alt="${esc(T.previewsH)} — ${esc(p.title[lang])}" width="400" height="400" loading="lazy">`).join('')}</div>
+          <h3 class="${pages.length ? 'preview-h' : 'visually-hidden'}">${esc(pages.length ? LB.insideH : T.previewsH)}</h3>
+          <div class="preview-grid${pages.length ? ' preview-grid-pages' : ''}">${previews
+            .map((s) => `<button type="button" class="preview-btn" data-lightbox-open="${stillIndex(s.src)}" aria-label="${esc(LB.open)}: ${esc(s.alt)}"><img src="${s.src}" alt="${esc(s.alt)}" width="${s.w}" height="${s.h}" loading="lazy"></button>`).join('')}</div>
         </div>` : ''}
       </div>
     </section>`
@@ -201,11 +217,11 @@ export function renderProductBody(p, lang, t, d) {
   const {bundle, cards, heading} = complete
   const bundleOffer = bundle
     ? `<div class="complete-offer">
-          ${bundle.image ? `<img src="${bundle.image}" alt="" width="240" height="240" loading="lazy">` : ''}
+          ${bundle.image ? `<img src="${bundle.image}" alt="${esc(bundle.p.title[lang])}" width="240" height="240" loading="lazy">` : ''}
           <div>
             <p class="eyebrow">${esc(bundle.p.series[lang])}</p>
             <h3><a href="${productUrl(bundle.p, lang)}">${esc(bundle.p.title[lang])}</a></h3>
-            <p>${esc(T.completeBundle)} <strong>${money(bundle.p.price)}</strong>
+            <p>${esc(bundle.lead || T.completeBundle)} <strong>${money(bundle.p.price)}</strong>
               ${bundle.p.compareAt ? `<s>${money(bundle.p.compareAt)}</s> · ${esc(T.completeSave)} ${money(bundle.p.compareAt - bundle.p.price)}` : ''}</p>
             <p class="complete-actions">
               <button type="button" class="btn btn-primary" data-add="${bundle.p.id}">${esc(t.product.add)}</button>
@@ -234,6 +250,7 @@ export function renderProductBody(p, lang, t, d) {
   return `    <nav class="breadcrumb wrap" aria-label="Breadcrumb">
       <a href="${urlFor('home', lang)}">${esc(t.product.home)}</a> <span aria-hidden="true">/</span>
       <a href="${urlFor('shop', lang)}">${esc(t.product.shop)}</a> <span aria-hidden="true">/</span>
+      ${d.crumb ? `<a href="${d.crumb.url}">${esc(d.crumb.label)}</a> <span aria-hidden="true">/</span>` : ''}
       <span>${esc(p.title[lang])}</span>
     </nav>
 
@@ -244,6 +261,7 @@ export function renderProductBody(p, lang, t, d) {
           <div class="pdp-frame" style="background:${p.color}22" data-gallery-frame>
             ${badge}
             ${mainMedia}
+            ${stills.length ? `<button type="button" class="pdp-zoom" data-lightbox-current aria-label="${esc(LB.open)}">${icon('zoom', 20)}</button>` : ''}
           </div>
           ${thumbs}
           ${couponBox}
@@ -268,7 +286,21 @@ export function renderProductBody(p, lang, t, d) {
     ${faqBlock}
     ${reviewsBlock}
     ${completeBlock}
-    ${sticky}`
+    ${sticky}
+    ${stills.length ? lightbox(stills, LB, esc) : ''}`
+}
+
+/* full-screen viewer for the gallery stills; js/main.js initLightbox() drives it.
+   The full-size image is only requested when the dialog opens. */
+function lightbox(stills, LB, esc) {
+  const data = JSON.stringify(stills.map((s) => ({src: s.src, w: s.w, h: s.h, alt: s.alt}))).replace(/</g, '\\u003c')
+  return `<div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="${esc(LB.label)}" hidden>
+      <script type="application/json" data-lightbox-data>${data}</script>
+      <button type="button" class="lightbox-btn lightbox-close" data-lightbox-close aria-label="${esc(LB.close)}">${icon('close', 26)}</button>
+      <button type="button" class="lightbox-btn lightbox-prev" data-lightbox-prev aria-label="${esc(LB.prev)}">${icon('left', 28)}</button>
+      <figure class="lightbox-stage"><img data-lightbox-img alt="" decoding="async"><figcaption class="lightbox-count" data-lightbox-count aria-live="polite"></figcaption></figure>
+      <button type="button" class="lightbox-btn lightbox-next" data-lightbox-next aria-label="${esc(LB.next)}">${icon('right', 28)}</button>
+    </div>`
 }
 
 export const avg = (rs) => (rs.length ? rs.reduce((a, r) => a + Number(r.rating || 0), 0) / rs.length : 0)

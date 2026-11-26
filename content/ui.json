@@ -1,27 +1,24 @@
 {
   "en": {
-    "announce": "Instant download · Books for curious minds, ages 3–8 · Created by a midwife",
+    "announce": "Instant download · Books & printables for curious kids · Created by a midwife",
     "nav": {
       "home": "Home",
       "shop": "Shop",
-      "collections": "Book collections",
+      "collections": "Collections",
       "blog": "Blog",
       "about": "About",
-      "sale": "Bundle deals"
+      "sale": "Bundle deals",
+      "all": "All products",
+      "bundles": "Bundles"
     },
     "basket": "Basket",
     "hero": {
-      "eyebrow": "Picture books & printable kits · ages 3–7",
-      "t1": "Calmer mornings.",
-      "t2": "Curious minds.",
-      "text": "Picture books in four languages and printable activity kits that make routines easier and learning playful — instant PDF download.",
-      "cta1": "Get the free routine sample",
-      "cta2": "Shop all",
-      "trust": [
-        "Instant PDF download",
-        "30-day happiness promise",
-        "Books in 4 languages"
-      ]
+      "eyebrow": "Picture books · busy books · science kits",
+      "t1": "Little minds.",
+      "t2": "Big discoveries.",
+      "text": "Books and printable adventures for curious children, ages 3–10.",
+      "cta1": "Explore the collection",
+      "cta2": "Free routine sample"
     },
     "topics": {
       "kicker": "Follow their curiosity",
@@ -141,7 +138,7 @@
       "cta2": "Shop single titles",
       "inside": "Inside the collection",
       "nextH": "Coming next",
-      "nextP": "We’re writing and illustrating the next collections now. Join the list to hear first — and get the first book at launch price.",
+      "nextP": "We’re writing and illustrating the next collections now. Join the newsletter to hear when they are ready.",
       "wait": "Join the waitlist",
       "soon": "Coming 2027",
       "next": [
@@ -164,11 +161,10 @@
       "h1": "From first breath",
       "h2": "to big discoveries.",
       "intro": "Cadomalo was created by a midwife who has spent her life around children and families — and never stopped being amazed by how they learn.",
-      "storyH": "Why a midwife writes children’s books",
+      "storyH": "Our story",
       "story": [
         "I became a midwife because of my love for children and families. Over the years my curiosity grew beyond the first moments of life — into the many ways children learn, imagine and discover the world.",
-        "Children ask the best questions: why do I breathe? where does my food go? what is inside my head? Cadomalo books answer them simply and accurately, with stories and pages to color, so the answer stays with them.",
-        "Our books are multilingual because so many families are. A child should be able to hear the same story in their parents’ language, their school’s language and the language of the grandparents they call on Sundays."
+        "Cadomalo grew out of that curiosity: picture books and printable activities that answer children’s questions simply, gently and accurately."
       ],
       "sign": "Aidora — midwife & founder",
       "valuesH": "What we promise",
@@ -187,21 +183,36 @@
         }
       ],
       "etsyH": "Also on Etsy",
-      "etsyP": "Our Etsy shop carries our books, tumbler wraps and editable birthday invitations. This site is our new home — with bundles, the full collection and early access to new titles.",
-      "etsyCta": "Visit our Etsy shop"
+      "etsyP": "Our Etsy shop carries our books and printables too. This site is our home — with the full collections, bundles and new titles first.",
+      "etsyCta": "Visit our Etsy shop",
+      "whyH": "Why Cadomalo",
+      "why": [
+        "Children ask the best questions: why do I breathe? where does my food go? what is inside my head? Cadomalo books answer them simply and accurately, with stories and pages to colour, so the answer stays with them.",
+        "Our books are multilingual because so many families are. A child should be able to hear the same story in their parents’ language, their school’s language and the language of their grandparents."
+      ],
+      "approachH": "Our educational approach",
+      "approach": [
+        {
+          "h": "Screen-free by design",
+          "p": "Everything we make is printed, coloured, cut and held. Children learn with their hands, at the table, with a grown-up nearby."
+        },
+        {
+          "h": "Four languages, one story",
+          "p": "Every Human Body Wonders and Medical Heroes book carries each page in English, French, Spanish and German, each language in its own colour. No language is a footnote."
+        },
+        {
+          "h": "How content is checked",
+          "p": "The books are written by a midwife and checked for accuracy and gentleness — simplified, never wrong. The Discovery Lab facts were checked against children’s health sources, which are listed on its grown-up pages. Our products are for learning and fun, not medical advice."
+        }
+      ],
+      "makeH": "What we make",
+      "makeP": "Two collections of picture books, printable busy books, science discovery kits, an escape room, a personalised birthday storybook and a birthday party kit — all instant PDF downloads."
     },
     "sale": {
       "eyebrow": "Collection savings",
       "h1": "Bigger bundles.",
       "h2": "Better value.",
-      "p": "Every 10-book collection is $39.99 instead of $79.90 when you buy the books one by one.",
-      "ends": "Sale ends in",
-      "units": [
-        "days",
-        "hrs",
-        "min",
-        "sec"
-      ],
+      "p": "Each 10-book collection is $39.99 instead of $79.90 bought one by one, and the Ultimate Human Body Learning Pack is $44.99 instead of $89.89.",
       "stack": "Stack it: use CURIOUS10 at checkout for an extra 10% off."
     },
     "product": {
@@ -216,7 +227,6 @@
       "reviewsH": "What parents say",
       "ugcH": "See it in real homes",
       "qty": "Quantity",
-      "urgency": "Launch price ends in",
       "add": "Add to basket",
       "instant": "Instant download",
       "secure": "Secure payment",
@@ -229,12 +239,12 @@
       "related": "You might also like",
       "based": "based on",
       "added": "Added to your basket",
-      "amazon": "Order on Amazon"
+      "amazon": "Paperback on Amazon (English/French edition)"
     },
     "cart": {
       "title": "Your basket",
       "empty": "Your basket is empty",
-      "emptyP": "Start with a book they’ll ask for again tonight.",
+      "emptyP": "Start with a book about the part of the body your child is most curious about.",
       "emptyCta": "Explore our books",
       "remove": "Remove",
       "code": "Discount code",
@@ -259,31 +269,29 @@
     "legal": {
       "updated": "Last updated 23 September 2026",
       "nav": "Legal information"
-    }
+    },
+    "home2": {}
   },
   "fr": {
-    "announce": "Téléchargement immédiat · Livres pour esprits curieux de 3 à 8 ans · Créé par une sage-femme",
+    "announce": "Téléchargement immédiat · Livres et activités à imprimer pour enfants curieux · Créé par une sage-femme",
     "nav": {
       "home": "Accueil",
       "shop": "Boutique",
       "collections": "Collections",
       "blog": "Blog",
       "about": "À propos",
-      "sale": "Coffrets"
+      "sale": "Coffrets",
+      "all": "Tous les produits",
+      "bundles": "Coffrets"
     },
     "basket": "Panier",
     "hero": {
-      "eyebrow": "Albums et kits à imprimer · 3–7 ans",
-      "t1": "Des matins plus calmes.",
-      "t2": "Des esprits curieux.",
-      "text": "Des albums en quatre langues et des kits d’activités à imprimer qui facilitent les routines et rendent l’apprentissage ludique — PDF à télécharger tout de suite.",
-      "cta1": "Recevoir l’échantillon gratuit",
-      "cta2": "Toute la boutique",
-      "trust": [
-        "PDF à télécharger tout de suite",
-        "Promesse bonheur 30 jours",
-        "Livres en 4 langues"
-      ]
+      "eyebrow": "Albums · cahiers d’activités · kits de sciences",
+      "t1": "Petits esprits,",
+      "t2": "grandes découvertes.",
+      "text": "Des livres et des aventures à imprimer pour les enfants curieux de 3 à 10 ans.",
+      "cta1": "Découvrir la collection",
+      "cta2": "Échantillon routine gratuit"
     },
     "topics": {
       "kicker": "Suivez leur curiosité",
@@ -403,7 +411,7 @@
       "cta2": "Voir les titres seuls",
       "inside": "Dans la collection",
       "nextH": "Bientôt",
-      "nextP": "Nous écrivons et illustrons les prochaines collections. Inscrivez-vous pour être prévenu en premier — et profiter du prix de lancement.",
+      "nextP": "Nous écrivons et illustrons les prochaines collections. Abonnez-vous à la newsletter pour savoir quand elles seront prêtes.",
       "wait": "Rejoindre la liste",
       "soon": "En 2027",
       "next": [
@@ -426,11 +434,10 @@
       "h1": "Du premier souffle",
       "h2": "aux grandes découvertes.",
       "intro": "Cadomalo a été créé par une sage-femme qui a passé sa vie auprès des enfants et des familles — et qui ne cesse de s’émerveiller de leur façon d’apprendre.",
-      "storyH": "Pourquoi une sage-femme écrit des livres pour enfants",
+      "storyH": "Notre histoire",
       "story": [
         "Je suis devenue sage-femme par amour des enfants et des familles. Au fil des années, ma curiosité a dépassé les premiers instants de la vie — pour s’intéresser à toutes les façons dont les enfants apprennent, imaginent et découvrent le monde.",
-        "Les enfants posent les meilleures questions : pourquoi je respire ? où va ce que je mange ? qu’y a-t-il dans ma tête ? Les livres Cadomalo y répondent simplement et avec justesse, avec des histoires et des pages à colorier, pour que la réponse reste.",
-        "Nos livres sont multilingues parce que tant de familles le sont. Un enfant devrait pouvoir entendre la même histoire dans la langue de ses parents, celle de son école et celle des grands-parents qu’il appelle le dimanche."
+        "Cadomalo est né de cette curiosité : des albums et des activités à imprimer qui répondent aux questions des enfants simplement, avec douceur et justesse."
       ],
       "sign": "Aidora — sage-femme et fondatrice",
       "valuesH": "Nos promesses",
@@ -449,21 +456,36 @@
         }
       ],
       "etsyH": "Aussi sur Etsy",
-      "etsyP": "Notre boutique Etsy propose nos livres, wraps tumbler et invitations d’anniversaire modifiables. Ce site est notre nouvelle maison — avec les packs, la collection complète et l’accès en avant-première aux nouveaux titres.",
-      "etsyCta": "Voir notre boutique Etsy"
+      "etsyP": "Notre boutique Etsy propose aussi nos livres et printables. Ce site est notre maison — avec les collections complètes, les coffrets et les nouveaux titres en premier.",
+      "etsyCta": "Voir notre boutique Etsy",
+      "whyH": "Pourquoi Cadomalo",
+      "why": [
+        "Les enfants posent les meilleures questions : pourquoi je respire ? où va ce que je mange ? qu’y a-t-il dans ma tête ? Les livres Cadomalo y répondent simplement et avec justesse, avec des histoires et des pages à colorier, pour que la réponse reste.",
+        "Nos livres sont multilingues parce que tant de familles le sont. Un enfant devrait pouvoir entendre la même histoire dans la langue de ses parents, celle de son école et celle de ses grands-parents."
+      ],
+      "approachH": "Notre approche éducative",
+      "approach": [
+        {
+          "h": "Sans écran, par principe",
+          "p": "Tout ce que nous créons s’imprime, se colorie, se découpe et se tient en main. Les enfants apprennent avec leurs mains, à table, avec un adulte à côté."
+        },
+        {
+          "h": "Quatre langues, une histoire",
+          "p": "Chaque livre Merveilles du corps et Les héros de la santé porte chaque page en français, anglais, espagnol et allemand, chaque langue dans sa couleur. Aucune langue n’est une note de bas de page."
+        },
+        {
+          "h": "Comment le contenu est vérifié",
+          "p": "Les livres sont écrits par une sage-femme et relus pour leur exactitude et leur douceur — simplifiés, jamais faux. Les faits du labo de découverte ont été vérifiés auprès de sources santé pour enfants, citées dans ses pages parents. Nos produits servent à apprendre et à s’amuser, pas à donner un avis médical."
+        }
+      ],
+      "makeH": "Ce que nous créons",
+      "makeP": "Deux collections d’albums, des cahiers d’activités, des kits de découverte scientifique, un escape game, un livre d’anniversaire personnalisé et un kit de fête — tous en PDF à télécharger immédiatement."
     },
     "sale": {
       "eyebrow": "Économies sur les collections",
       "h1": "Plus de livres.",
       "h2": "Meilleur prix.",
-      "p": "Chaque collection de 10 livres coûte 39,99 $ au lieu de 79,90 $ à l’unité.",
-      "ends": "Fin des promos dans",
-      "units": [
-        "jours",
-        "h",
-        "min",
-        "sec"
-      ],
+      "p": "Chaque collection de 10 livres coûte 39,99 $ au lieu de 79,90 $ à l’unité, et le pack ultime corps humain 44,99 $ au lieu de 89,89 $.",
       "stack": "Cumulez : code CURIOUS10 au paiement pour 10 % de plus."
     },
     "product": {
@@ -478,7 +500,6 @@
       "reviewsH": "Ce qu’en disent les parents",
       "ugcH": "Dans de vraies maisons",
       "qty": "Quantité",
-      "urgency": "Le prix de lancement se termine dans",
       "add": "Ajouter au panier",
       "instant": "Téléchargement immédiat",
       "secure": "Paiement sécurisé",
@@ -491,12 +512,12 @@
       "related": "Vous aimerez aussi",
       "based": "sur",
       "added": "Ajouté à votre panier",
-      "amazon": "Commander sur Amazon"
+      "amazon": "Livre broché sur Amazon (édition anglais/français)"
     },
     "cart": {
       "title": "Votre panier",
       "empty": "Votre panier est vide",
-      "emptyP": "Commencez par un livre qu’ils redemanderont ce soir.",
+      "emptyP": "Commencez par un livre sur la partie du corps qui intrigue le plus votre enfant.",
       "emptyCta": "Découvrir nos livres",
       "remove": "Retirer",
       "code": "Code promo",

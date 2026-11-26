@@ -369,6 +369,99 @@
     "attrs": []
   },
   {
+    "id": "ultimate-human-body",
+    "slug": "ultimate-human-body-learning-pack",
+    "type": "bundle",
+    "category": "bundle",
+    "collection": "hbw",
+    "fulfillment": "auto",
+    "hidden": false,
+    "price": 44.99,
+    "compareAt": 89.89,
+    "funnelPrice": null,
+    "img": "/images/products/ultimate-human-body/01.webp",
+    "title": {
+      "en": "Ultimate Human Body Learning Pack",
+      "fr": "Pack ultime — découvrir le corps humain"
+    },
+    "url": {
+      "en": "/products/ultimate-human-body-learning-pack",
+      "fr": "/fr/produits/pack-ultime-decouvrir-le-corps-humain"
+    },
+    "includes": [
+      "discovery-lab",
+      "head",
+      "lungs",
+      "stomach",
+      "bones",
+      "muscles",
+      "skin",
+      "blood",
+      "eyes",
+      "ears",
+      "teeth"
+    ],
+    "files": [
+      {
+        "label": "US Letter · full colour",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-us-letter-full-color.pdf"
+      },
+      {
+        "label": "US Letter · ink-saving",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-us-letter-ink-saving.pdf"
+      },
+      {
+        "label": "A4 · full colour",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-a4-full-color.pdf"
+      },
+      {
+        "label": "A4 · ink-saving",
+        "key": "products/discovery-lab/my-amazing-body-discovery-lab-ages-5-7-a4-ink-saving.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/head/head-inside-my-amazing-head.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/lungs/lungs-my-busy-breathing-lungs.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/stomach/stomach-my-stomach-mixing-machine.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/bones/bones-my-strong-body-bones.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/muscles/muscles-my-muscles-make-me-move.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/skin/skin-my-skin-super-suit.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/blood/blood-bloods-amazing-body-journey.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/eyes/eyes-my-eyes-see-everything.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/ears/ears-my-ears-catch-sounds.pdf"
+      },
+      {
+        "label": "PDF book · 58 pages",
+        "key": "products/teeth/teeth-my-super-strong-teeth.pdf"
+      }
+    ],
+    "attrs": []
+  },
+  {
     "id": "head",
     "slug": "inside-my-amazing-head",
     "type": "book",

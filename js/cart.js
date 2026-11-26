@@ -265,19 +265,24 @@
      replaces that collection's single books in the cart, so nobody pays twice. */
   var HBW = ['head', 'lungs', 'stomach', 'bones', 'muscles', 'skin', 'blood', 'eyes', 'ears', 'teeth'];
   var KITS = ['routine', 'party-kit', 'birthday-wish', 'wonder-island'];
+  var ULTIMATE = 'ultimate-human-body';
   var BUMP_COPY = {
     en: {
       bundle: 'Get all 10 Human Body Wonders books instead',
       'mh-bundle': 'Get all 10 Medical Heroes books instead',
       'discovery-lab': 'Add the My Amazing Body Discovery Lab',
+      'ultimate-human-body': 'Upgrade to the Ultimate Human Body Learning Pack (+ all 10 Human Body Wonders books)',
       replaces: 'replaces the single books in your cart',
+      replacesLab: 'replaces the Discovery Lab and any Human Body Wonders books in your cart',
       save: 'save'
     },
     fr: {
       bundle: 'Prenez plutôt les 10 livres Merveilles du corps',
       'mh-bundle': 'Prenez plutôt les 10 livres Medical Heroes',
       'discovery-lab': 'Ajoutez le Discovery Lab « Mon corps extraordinaire »',
+      'ultimate-human-body': 'Passez au pack ultime corps humain (+ les 10 livres Merveilles du corps)',
       replaces: 'remplace les livres à l’unité de votre panier',
+      replacesLab: 'remplace le Discovery Lab et les livres Merveilles du corps de votre panier',
       save: 'économisez'
     }
   };
@@ -301,9 +306,12 @@
     var prods = items.map(function (i) { return bySlug(i.slug); }).filter(Boolean);
     var has = function (id) { return prods.some(function (p) { return p.id === id; }); };
     var pick = null;
-    if (prods.some(function (p) { return isBook(p) && collectionOf(p) === 'hbw'; }) && !has('bundle')) pick = 'bundle';
+    var hasUlt = has(ULTIMATE);
+    /* Discovery Lab in the cart -> offer the Ultimate pack (lab + 10 HBW books) */
+    if (has('discovery-lab') && !hasUlt && !has('bundle')) pick = ULTIMATE;
+    else if (!hasUlt && prods.some(function (p) { return isBook(p) && collectionOf(p) === 'hbw'; }) && !has('bundle')) pick = 'bundle';
     else if (prods.some(function (p) { return isBook(p) && collectionOf(p) === 'mh'; }) && !has('mh-bundle')) pick = 'mh-bundle';
-    else if (prods.some(isKit) && !has('discovery-lab')) pick = 'discovery-lab';
+    else if (prods.some(isKit) && !has('discovery-lab') && !hasUlt) pick = 'discovery-lab';
     var b = pick && byId(pick);
     return b && !b.hidden && b.price > 0 ? b : null;
   }
@@ -322,7 +330,7 @@
     set('[data-bump-price]', money(b.price));
     var cmp = $('[data-bump-compare]', box);
     if (cmp) { cmp.textContent = hasCmp ? money(b.compareAt) : ''; cmp.hidden = !hasCmp; }
-    var note = isCollection ? copy.replaces : '';
+    var note = b.id === ULTIMATE ? copy.replacesLab : isCollection ? copy.replaces : '';
     if (hasCmp) note = (note ? note + ' · ' : '') + copy.save + ' ' + money(b.compareAt - b.price);
     set('[data-bump-note]', note);
     var img = $('[data-bump-img]', box);
@@ -336,7 +344,14 @@
     var box = $('[data-drawer-bump]');
     var id = box && box.getAttribute('data-bump-id');
     if (!id || !byId(id)) return;
-    if (id === 'bundle' || id === 'mh-bundle') {
+    if (id === ULTIMATE) {
+      /* the pack contains the lab and every HBW book: drop those lines */
+      var rest = read().filter(function (i) {
+        var p = bySlug(i.slug);
+        return !(p && (p.id === 'discovery-lab' || (isBook(p) && collectionOf(p) === 'hbw')));
+      });
+      try { localStorage.setItem(CART_KEY, JSON.stringify(rest)); } catch (e) {}
+    } else if (id === 'bundle' || id === 'mh-bundle') {
       var col = id === 'bundle' ? 'hbw' : 'mh';
       var keep = read().filter(function (i) {
         var p = bySlug(i.slug);

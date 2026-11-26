@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Le blog Cadomalo — Cadomalo</title>
+  <title>Blog : idées pour enfants curieux | Cadomalo</title>
   <meta name="description" content="Des idées douces et pratiques pour faire grandir des petits esprits curieux et multilingues.">
   
   <link rel="canonical" href="https://cadomalo.com/fr/blog">
@@ -12,9 +12,9 @@
   <link rel="alternate" hreflang="x-default" href="https://cadomalo.com/blog">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cadomalo.com/fr/blog">
-  <meta property="og:title" content="Le blog Cadomalo — Cadomalo">
+  <meta property="og:title" content="Blog : idées pour enfants curieux | Cadomalo">
   <meta property="og:description" content="Des idées douces et pratiques pour faire grandir des petits esprits curieux et multilingues.">
-  <meta property="og:image" content="https://cadomalo.com/assets/hero-reading.png">
+  <meta property="og:image" content="https://cadomalo.com/images/products/bones/02.webp">
   <meta property="og:locale" content="fr_FR">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#FFF8ED">
@@ -27,8 +27,8 @@
   <a class="skip-link" href="#main">Aller au contenu</a>
 
 <div class="announce">
-  <span class="announce-short">Téléchargement immédiat · 3–8 ans</span>
-  <span class="announce-long">Téléchargement immédiat · Livres pour esprits curieux de 3 à 8 ans · Créé par une sage-femme</span>
+  <span class="announce-short">Téléchargement immédiat · Créé par une sage-femme</span>
+  <span class="announce-long">Téléchargement immédiat · Livres et activités à imprimer pour enfants curieux · Créé par une sage-femme</span>
   <span class="lang-pills">
     <a class="lang-pill" href="/blog" hreflang="en" aria-current="false">EN</a>
     <a class="lang-pill" href="/fr/blog" hreflang="fr" aria-current="true">FR</a>
@@ -47,12 +47,13 @@
     </a>
 
     <nav class="site-nav" aria-label="Principale">
-      <a href="/fr">Accueil</a>
-      <a href="/fr/boutique">Boutique</a>
+      <div class="nav-shop">
+        <button type="button" class="nav-shop-btn" aria-expanded="false" aria-controls="shop-menu" data-menu-toggle>Boutique<svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown" id="shop-menu" hidden><ul><li><a href="/fr/livres">Albums</a></li><li><a href="/fr/cahiers-d-activites">Cahiers d’activités</a></li><li><a href="/fr/kits-de-decouverte">Kits de découverte</a></li><li><a href="/fr/escape-games">Escape games</a></li><li><a href="/fr/livres-personnalises">Livres personnalisés</a></li><li><a href="/fr/kits-de-fete">Kits de fête</a></li><li><a href="/fr/boutique">Tous les produits</a></li><li><a href="/fr/promotions">Coffrets</a></li></ul></div>
+      </div>
       <a href="/fr/collections">Collections</a>
       <a href="/fr/blog" aria-current="page">Blog</a>
       <a href="/fr/a-propos">À propos</a>
-      <a href="/fr/promotions">Coffrets</a>
     </nav>
 
     <div class="header-actions">
@@ -73,12 +74,11 @@
   </div>
 
   <nav aria-label="Principale">
-    <a href="/fr">Accueil<span class="arrow" aria-hidden="true">&rarr;</span></a>
-      <a href="/fr/boutique">Boutique<span class="arrow" aria-hidden="true">&rarr;</span></a>
+    <button type="button" class="mobile-sub-toggle" aria-expanded="false" aria-controls="mobile-shop-menu" data-menu-toggle>Boutique<svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+      <ul class="mobile-sub" id="mobile-shop-menu" hidden><li><a href="/fr/livres">Albums</a></li><li><a href="/fr/cahiers-d-activites">Cahiers d’activités</a></li><li><a href="/fr/kits-de-decouverte">Kits de découverte</a></li><li><a href="/fr/escape-games">Escape games</a></li><li><a href="/fr/livres-personnalises">Livres personnalisés</a></li><li><a href="/fr/kits-de-fete">Kits de fête</a></li><li><a href="/fr/boutique">Tous les produits</a></li><li><a href="/fr/promotions">Coffrets</a></li></ul>
       <a href="/fr/collections">Collections<span class="arrow" aria-hidden="true">&rarr;</span></a>
       <a href="/fr/blog">Blog<span class="arrow" aria-hidden="true">&rarr;</span></a>
       <a href="/fr/a-propos">À propos<span class="arrow" aria-hidden="true">&rarr;</span></a>
-      <a href="/fr/promotions">Coffrets<span class="arrow" aria-hidden="true">&rarr;</span></a>
   </nav>
 
   <div class="mobile-menu-langs">
@@ -103,24 +103,128 @@
     </section>
 
     <div class="wrap">
-      <div class="blog-cats"><button type="button" class="blog-filter-btn active" data-cat="all">Tous les articles</button><button type="button" class="blog-filter-btn" data-cat="Corps humain">Corps humain</button><button type="button" class="blog-filter-btn" data-cat="Langues">Langues</button><button type="button" class="blog-filter-btn" data-cat="Apprendre en jouant">Apprendre en jouant</button><button type="button" class="blog-filter-btn" data-cat="De notre sage-femme">De notre sage-femme</button></div>
+      <div class="blog-cats"><button type="button" class="blog-filter-btn active" data-cat="all">Tous les articles</button><button type="button" class="blog-filter-btn" data-cat="Corps humain">Corps humain</button><button type="button" class="blog-filter-btn" data-cat="Santé et soins">Santé et soins</button><button type="button" class="blog-filter-btn" data-cat="Fêtes">Fêtes</button><button type="button" class="blog-filter-btn" data-cat="Apprendre en jouant">Apprendre en jouant</button><button type="button" class="blog-filter-btn" data-cat="Routines">Routines</button><button type="button" class="blog-filter-btn" data-cat="Langues">Langues</button><button type="button" class="blog-filter-btn" data-cat="De notre sage-femme">De notre sage-femme</button></div>
 
       <div class="blog-layout">
         <div class="blog-main">
           <article class="blog-feat blog-item" data-cat="Corps humain">
-            <a class="blog-feat-img" href="/fr/blog/comment-parler-du-corps-humain-aux-jeunes-enfants" tabindex="-1" aria-hidden="true">
-              <img src="/assets/hero-reading.png" alt="" width="800" height="600" loading="lazy">
+            <a class="blog-feat-img" href="/fr/blog/faire-decouvrir-le-squelette-humain-aux-enfants" tabindex="-1" aria-hidden="true">
+              <img src="/images/products/bones/02.webp" alt="" width="800" height="600" loading="lazy">
             </a>
             <div class="blog-feat-body">
               <span class="blog-cat-pill">Corps humain</span>
-              <h2 class="blog-feat-title"><a href="/fr/blog/comment-parler-du-corps-humain-aux-jeunes-enfants">Comment parler du corps humain aux jeunes enfants</a></h2>
-              <p>Des mots simples, des faits justes et un peu d’émerveillement : l’approche d’une sage-femme face aux questions des enfants sur leur corps.</p>
-              <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>2 min de lecture</span>
-                <span class="blog-meta-dot"></span><span>18 septembre 2026</span></p>
-              <p class="blog-read"><a class="btn btn-quiet btn-sm" href="/fr/blog/comment-parler-du-corps-humain-aux-jeunes-enfants">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
+              <h2 class="blog-feat-title"><a href="/fr/blog/faire-decouvrir-le-squelette-humain-aux-enfants">Faire découvrir le squelette humain aux enfants</a></h2>
+              <p>Pourquoi a-t-on des os ? Des faits simples et justes sur le squelette pour les petits, avec des jeux pour explorer os et articulations.</p>
+              <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>8 min de lecture</span>
+                <span class="blog-meta-dot"></span><span>26 novembre 2026</span></p>
+              <p class="blog-read"><a class="btn btn-quiet btn-sm" href="/fr/blog/faire-decouvrir-le-squelette-humain-aux-enfants">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
             </div>
           </article>
           <div class="blog-grid">
+            <article class="blog-card blog-item" data-cat="Corps humain">
+              <a class="blog-thumb" href="/fr/blog/comment-expliquer-la-digestion-a-un-enfant-de-4-ans" tabindex="-1" aria-hidden="true">
+                <img src="/images/products/stomach/02.webp" alt="" width="600" height="400" loading="lazy">
+              </a>
+              <div class="blog-body">
+                <span class="blog-cat-pill">Corps humain</span>
+                <h3 class="blog-title"><a href="/fr/blog/comment-expliquer-la-digestion-a-un-enfant-de-4-ans">Comment expliquer la digestion à un enfant de 4 ans</a></h3>
+                <p>« Elle va où, ma nourriture ? » La digestion racontée simplement aux petits, de la première bouchée aux toilettes, avec des activités faciles.</p>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>8 min de lecture</span>
+                  <span class="blog-meta-dot"></span><span>24 novembre 2026</span></p>
+                <p class="blog-read"><a href="/fr/blog/comment-expliquer-la-digestion-a-un-enfant-de-4-ans">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
+              </div>
+            </article>
+            <article class="blog-card blog-item" data-cat="Santé et soins">
+              <a class="blog-thumb" href="/fr/blog/comment-apprendre-l-hygiene-dentaire-aux-enfants" tabindex="-1" aria-hidden="true">
+                <img src="/images/products/teeth/02.webp" alt="" width="600" height="400" loading="lazy">
+              </a>
+              <div class="blog-body">
+                <span class="blog-cat-pill">Santé et soins</span>
+                <h3 class="blog-title"><a href="/fr/blog/comment-apprendre-l-hygiene-dentaire-aux-enfants">Comment apprendre l’hygiène dentaire aux enfants</a></h3>
+                <p>Le brossage des dents tourne souvent à la bataille. Expliquer les dents simplement, installer une routine calme et préparer la visite chez le dentiste.</p>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>7 min de lecture</span>
+                  <span class="blog-meta-dot"></span><span>20 novembre 2026</span></p>
+                <p class="blog-read"><a href="/fr/blog/comment-apprendre-l-hygiene-dentaire-aux-enfants">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
+              </div>
+            </article>
+            <article class="blog-card blog-item" data-cat="Fêtes">
+              <a class="blog-thumb" href="/fr/blog/15-jeux-d-anniversaire-en-interieur-pour-les-enfants" tabindex="-1" aria-hidden="true">
+                <img src="/images/products/party-kit/02.webp" alt="" width="600" height="400" loading="lazy">
+              </a>
+              <div class="blog-body">
+                <span class="blog-cat-pill">Fêtes</span>
+                <h3 class="blog-title"><a href="/fr/blog/15-jeux-d-anniversaire-en-interieur-pour-les-enfants">15 jeux d’anniversaire en intérieur pour les enfants</a></h3>
+                <p>Pluie, petit appartement ou anniversaire d’hiver ? Voici 15 jeux d’intérieur avec ce que vous avez déjà, pour occuper joyeusement les petits invités.</p>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>8 min de lecture</span>
+                  <span class="blog-meta-dot"></span><span>17 novembre 2026</span></p>
+                <p class="blog-read"><a href="/fr/blog/15-jeux-d-anniversaire-en-interieur-pour-les-enfants">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
+              </div>
+            </article>
+            <article class="blog-card blog-item" data-cat="Apprendre en jouant">
+              <a class="blog-thumb" href="/fr/blog/comment-organiser-un-escape-game-pour-enfants-a-la-maison" tabindex="-1" aria-hidden="true">
+                <img src="/images/products/wonder-island/02.webp" alt="" width="600" height="400" loading="lazy">
+              </a>
+              <div class="blog-body">
+                <span class="blog-cat-pill">Apprendre en jouant</span>
+                <h3 class="blog-title"><a href="/fr/blog/comment-organiser-un-escape-game-pour-enfants-a-la-maison">Comment organiser un escape game pour enfants à la maison</a></h3>
+                <p>Une histoire, quelques énigmes et un « trésor » verrouillé : notre guide pas à pas pour un escape game maison magique et simple à animer.</p>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>7 min de lecture</span>
+                  <span class="blog-meta-dot"></span><span>13 novembre 2026</span></p>
+                <p class="blog-read"><a href="/fr/blog/comment-organiser-un-escape-game-pour-enfants-a-la-maison">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
+              </div>
+            </article>
+            <article class="blog-card blog-item" data-cat="Corps humain">
+              <a class="blog-thumb" href="/fr/blog/15-activites-sur-le-corps-humain-pour-les-enfants-de-maternelle" tabindex="-1" aria-hidden="true">
+                <img src="/images/products/discovery-lab/02.webp" alt="" width="600" height="400" loading="lazy">
+              </a>
+              <div class="blog-body">
+                <span class="blog-cat-pill">Corps humain</span>
+                <h3 class="blog-title"><a href="/fr/blog/15-activites-sur-le-corps-humain-pour-les-enfants-de-maternelle">15 activités sur le corps humain pour les enfants de maternelle</a></h3>
+                <p>Battements de cœur, squelette en ombre, sons mystère : 15 activités faciles et sans écran pour découvrir le corps humain avec ce que vous avez déjà.</p>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>8 min de lecture</span>
+                  <span class="blog-meta-dot"></span><span>10 novembre 2026</span></p>
+                <p class="blog-read"><a href="/fr/blog/15-activites-sur-le-corps-humain-pour-les-enfants-de-maternelle">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
+              </div>
+            </article>
+            <article class="blog-card blog-item" data-cat="Routines">
+              <a class="blog-thumb" href="/fr/blog/comment-creer-une-routine-du-matin-pour-les-enfants" tabindex="-1" aria-hidden="true">
+                <img src="/images/products/routine/02.webp" alt="" width="600" height="400" loading="lazy">
+              </a>
+              <div class="blog-body">
+                <span class="blog-cat-pill">Routines</span>
+                <h3 class="blog-title"><a href="/fr/blog/comment-creer-une-routine-du-matin-pour-les-enfants">Comment créer une routine du matin pour les enfants</a></h3>
+                <p>Moins de rappels, des matins plus calmes : notre méthode pas à pas pour créer une routine visuelle que votre enfant suit tout seul.</p>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>7 min de lecture</span>
+                  <span class="blog-meta-dot"></span><span>6 novembre 2026</span></p>
+                <p class="blog-read"><a href="/fr/blog/comment-creer-une-routine-du-matin-pour-les-enfants">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
+              </div>
+            </article>
+            <article class="blog-card blog-item" data-cat="Santé et soins">
+              <a class="blog-thumb" href="/fr/blog/comment-preparer-son-enfant-a-un-rendez-vous-chez-le-medecin" tabindex="-1" aria-hidden="true">
+                <img src="/images/products/mh01/02.webp" alt="" width="600" height="400" loading="lazy">
+              </a>
+              <div class="blog-body">
+                <span class="blog-cat-pill">Santé et soins</span>
+                <h3 class="blog-title"><a href="/fr/blog/comment-preparer-son-enfant-a-un-rendez-vous-chez-le-medecin">Comment préparer son enfant à un rendez-vous chez le médecin</a></h3>
+                <p>Des mots simples, un peu de jeu et un plan rassurant : nos idées pour aider un jeune enfant à se sentir prêt pour sa visite chez le médecin.</p>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>8 min de lecture</span>
+                  <span class="blog-meta-dot"></span><span>3 novembre 2026</span></p>
+                <p class="blog-read"><a href="/fr/blog/comment-preparer-son-enfant-a-un-rendez-vous-chez-le-medecin">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
+              </div>
+            </article>
+            <article class="blog-card blog-item" data-cat="Corps humain">
+              <a class="blog-thumb" href="/fr/blog/comment-parler-du-corps-humain-aux-jeunes-enfants" tabindex="-1" aria-hidden="true">
+                <img src="/assets/hero-reading.png" alt="" width="600" height="400" loading="lazy">
+              </a>
+              <div class="blog-body">
+                <span class="blog-cat-pill">Corps humain</span>
+                <h3 class="blog-title"><a href="/fr/blog/comment-parler-du-corps-humain-aux-jeunes-enfants">Comment parler du corps humain aux jeunes enfants</a></h3>
+                <p>Des mots simples, des faits justes et un peu d’émerveillement : l’approche d’une sage-femme face aux questions des enfants sur leur corps.</p>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>7 min de lecture</span>
+                  <span class="blog-meta-dot"></span><span>18 septembre 2026</span></p>
+                <p class="blog-read"><a href="/fr/blog/comment-parler-du-corps-humain-aux-jeunes-enfants">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
+              </div>
+            </article>
             <article class="blog-card blog-item" data-cat="Langues">
               <a class="blog-thumb" href="/fr/blog/elever-des-enfants-multilingues-5-habitudes-douces" tabindex="-1" aria-hidden="true">
                 <img src="/assets/multilingual-book.png" alt="" width="600" height="400" loading="lazy">
@@ -129,7 +233,7 @@
                 <span class="blog-cat-pill">Langues</span>
                 <h3 class="blog-title"><a href="/fr/blog/elever-des-enfants-multilingues-5-habitudes-douces">Élever des enfants multilingues : 5 habitudes douces</a></h3>
                 <p>Pas besoin de parler quatre langues couramment pour élever un enfant qui les aime. Voici ce qui aide vraiment.</p>
-                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>1 min de lecture</span>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>6 min de lecture</span>
                   <span class="blog-meta-dot"></span><span>9 septembre 2026</span></p>
                 <p class="blog-read"><a href="/fr/blog/elever-des-enfants-multilingues-5-habitudes-douces">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
               </div>
@@ -141,8 +245,8 @@
               <div class="blog-body">
                 <span class="blog-cat-pill">Apprendre en jouant</span>
                 <h3 class="blog-title"><a href="/fr/blog/pourquoi-colorier-aide-les-enfants-a-retenir-ce-qu-ils-lisent">Pourquoi colorier aide les enfants à retenir ce qu’ils lisent</a></h3>
-                <p>Colorier n’est pas qu’une activité calme. Après une histoire, cela devient une façon de réfléchir.</p>
-                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>1 min de lecture</span>
+                <p>Chaque livre Cadomalo alterne pages d’histoire et pages de coloriage. Voici pourquoi ce duo tout simple aide les enfants à retenir.</p>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>6 min de lecture</span>
                   <span class="blog-meta-dot"></span><span>28 août 2026</span></p>
                 <p class="blog-read"><a href="/fr/blog/pourquoi-colorier-aide-les-enfants-a-retenir-ce-qu-ils-lisent">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
               </div>
@@ -154,8 +258,8 @@
               <div class="blog-body">
                 <span class="blog-cat-pill">De notre sage-femme</span>
                 <h3 class="blog-title"><a href="/fr/blog/le-guide-d-une-sage-femme-pour-l-age-des-pourquoi">Le guide d’une sage-femme pour l’âge des « pourquoi ? »</a></h3>
-                <p>Les « pourquoi ? » sans fin sont le signe d’un cerveau curieux et en pleine forme. Voici comment en profiter — même les jours de fatigue.</p>
-                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>1 min de lecture</span>
+                <p>Vers trois ans, « pourquoi ? » devient le mot le plus utilisé de la maison. Voici comment l’accueillir sans perdre patience.</p>
+                <p class="blog-meta"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>6 min de lecture</span>
                   <span class="blog-meta-dot"></span><span>14 août 2026</span></p>
                 <p class="blog-read"><a href="/fr/blog/le-guide-d-une-sage-femme-pour-l-age-des-pourquoi">Lire l’article <span aria-hidden="true">&rarr;</span></a></p>
               </div>
@@ -167,32 +271,32 @@
           <div class="sidebar-widget">
             <h2>Sur le blog</h2>
             <div class="sidebar-posts">
-              <a class="sidebar-post" href="/fr/blog/comment-parler-du-corps-humain-aux-jeunes-enfants">
-                <span class="sidebar-thumb"><img src="/assets/hero-reading.png" alt="" width="64" height="64" loading="lazy"></span>
+              <a class="sidebar-post" href="/fr/blog/faire-decouvrir-le-squelette-humain-aux-enfants">
+                <span class="sidebar-thumb"><img src="/images/products/bones/02.webp" alt="" width="64" height="64" loading="lazy"></span>
                 <span>
-                  <span class="sidebar-post-title">Comment parler du corps humain aux jeunes enfants</span>
-                  <span class="sidebar-post-date">18 septembre 2026</span>
+                  <span class="sidebar-post-title">Faire découvrir le squelette humain aux enfants</span>
+                  <span class="sidebar-post-date">26 novembre 2026</span>
                 </span>
               </a>
-              <a class="sidebar-post" href="/fr/blog/elever-des-enfants-multilingues-5-habitudes-douces">
-                <span class="sidebar-thumb"><img src="/assets/multilingual-book.png" alt="" width="64" height="64" loading="lazy"></span>
+              <a class="sidebar-post" href="/fr/blog/comment-expliquer-la-digestion-a-un-enfant-de-4-ans">
+                <span class="sidebar-thumb"><img src="/images/products/stomach/02.webp" alt="" width="64" height="64" loading="lazy"></span>
                 <span>
-                  <span class="sidebar-post-title">Élever des enfants multilingues : 5 habitudes douces</span>
-                  <span class="sidebar-post-date">9 septembre 2026</span>
+                  <span class="sidebar-post-title">Comment expliquer la digestion à un enfant de 4 ans</span>
+                  <span class="sidebar-post-date">24 novembre 2026</span>
                 </span>
               </a>
-              <a class="sidebar-post" href="/fr/blog/pourquoi-colorier-aide-les-enfants-a-retenir-ce-qu-ils-lisent">
-                <span class="sidebar-thumb"><img src="/assets/kids-lying.png" alt="" width="64" height="64" loading="lazy"></span>
+              <a class="sidebar-post" href="/fr/blog/comment-apprendre-l-hygiene-dentaire-aux-enfants">
+                <span class="sidebar-thumb"><img src="/images/products/teeth/02.webp" alt="" width="64" height="64" loading="lazy"></span>
                 <span>
-                  <span class="sidebar-post-title">Pourquoi colorier aide les enfants à retenir ce qu’ils lisent</span>
-                  <span class="sidebar-post-date">28 août 2026</span>
+                  <span class="sidebar-post-title">Comment apprendre l’hygiène dentaire aux enfants</span>
+                  <span class="sidebar-post-date">20 novembre 2026</span>
                 </span>
               </a>
-              <a class="sidebar-post" href="/fr/blog/le-guide-d-une-sage-femme-pour-l-age-des-pourquoi">
-                <span class="sidebar-thumb"><img src="/assets/book-head.png" alt="" width="64" height="64" loading="lazy"></span>
+              <a class="sidebar-post" href="/fr/blog/15-jeux-d-anniversaire-en-interieur-pour-les-enfants">
+                <span class="sidebar-thumb"><img src="/images/products/party-kit/02.webp" alt="" width="64" height="64" loading="lazy"></span>
                 <span>
-                  <span class="sidebar-post-title">Le guide d’une sage-femme pour l’âge des « pourquoi ? »</span>
-                  <span class="sidebar-post-date">14 août 2026</span>
+                  <span class="sidebar-post-title">15 jeux d’anniversaire en intérieur pour les enfants</span>
+                  <span class="sidebar-post-date">17 novembre 2026</span>
                 </span>
               </a>
             </div>
@@ -306,7 +410,7 @@
   <div class="cart-drawer-empty" data-drawer-empty>
     <img class="cart-empty-art" src="/assets/kids-lying.png" alt="" width="320" height="213" loading="lazy">
     <h3>Votre panier est vide</h3>
-    <p>Commencez par un livre qu’ils redemanderont ce soir.</p>
+    <p>Commencez par un livre sur la partie du corps qui intrigue le plus votre enfant.</p>
     <a class="btn btn-primary" href="/fr/collections">Découvrir nos livres <span aria-hidden="true">&rarr;</span></a>
   </div>
 

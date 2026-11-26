@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (b.getAttribute('data-poster')) el.poster = b.getAttribute('data-poster');
         } else {
           el = document.createElement('img');
-          el.alt = alt; el.width = 800; el.height = 800;
+          el.alt = b.getAttribute('data-alt') || alt; el.width = 800; el.height = 800;
         }
         el.setAttribute('data-gallery-main', '');
         el.src = src;
@@ -628,6 +628,81 @@ document.addEventListener('DOMContentLoaded', () => {
         thumbs.forEach(function (x) { x.classList.remove('is-active'); });
         b.classList.add('is-active');
       });
+    });
+  }
+
+  /* ---------- lightbox: full-screen inside pages (PDP) ----------
+     Accessible dialog: focus moves in and is trapped, Esc closes, ←/→ page,
+     swipe on touch screens. The full-size file loads only when shown. */
+  function initLightbox() {
+    var box = $('[data-lightbox]');
+    var dataEl = box && $('[data-lightbox-data]', box);
+    if (!box || !dataEl) return;
+    var items = [];
+    try { items = JSON.parse(dataEl.textContent) || []; } catch (e) { return; }
+    if (!items.length) return;
+    var img = $('[data-lightbox-img]', box), count = $('[data-lightbox-count]', box);
+    var prevBtn = $('[data-lightbox-prev]', box), nextBtn = $('[data-lightbox-next]', box), closeBtn = $('[data-lightbox-close]', box);
+    var idx = 0, lastFocus = null;
+    function preload(i) { if (items[i]) { var p = new Image(); p.src = items[i].src; } }
+    function show(i) {
+      idx = (i + items.length) % items.length;
+      var it = items[idx];
+      img.removeAttribute('src');
+      img.width = it.w || 1600; img.height = it.h || 1600;
+      img.alt = it.alt || '';
+      img.src = it.src;
+      if (count) count.textContent = (idx + 1) + ' / ' + items.length + (it.alt ? ' — ' + it.alt : '');
+      prevBtn.hidden = nextBtn.hidden = items.length < 2;
+      preload(idx + 1); preload(idx - 1);
+    }
+    function open(i) {
+      lastFocus = document.activeElement;
+      box.hidden = false;
+      document.body.style.overflow = 'hidden';
+      show(i);
+      closeBtn.focus();
+    }
+    function close() {
+      box.hidden = true;
+      document.body.style.overflow = '';
+      img.removeAttribute('src');
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    $$('[data-lightbox-open]').forEach(function (b) {
+      b.addEventListener('click', function () { open(parseInt(b.getAttribute('data-lightbox-open'), 10) || 0); });
+    });
+    var cur = $('[data-lightbox-current]');
+    if (cur) cur.addEventListener('click', function () {
+      var main = $('[data-gallery-main]');
+      var src = main && main.tagName === 'IMG' ? main.getAttribute('src') : '';
+      var i = 0;
+      for (var k = 0; k < items.length; k++) if (items[k].src === src) { i = k; break; }
+      open(i);
+    });
+    prevBtn.addEventListener('click', function () { show(idx - 1); });
+    nextBtn.addEventListener('click', function () { show(idx + 1); });
+    closeBtn.addEventListener('click', close);
+    box.addEventListener('click', function (e) { if (e.target === box) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (box.hidden) return;
+      if (e.key === 'Escape') { e.preventDefault(); close(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1); }
+      else if (e.key === 'Tab') {
+        var f = [closeBtn, prevBtn, nextBtn].filter(function (x) { return !x.hidden; });
+        var at = f.indexOf(document.activeElement);
+        e.preventDefault();
+        f[(at + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+      }
+    });
+    var x0 = null, y0 = null;
+    box.addEventListener('touchstart', function (e) { if (e.touches.length === 1) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } }, {passive: true});
+    box.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(idx + (dx < 0 ? 1 : -1));
     });
   }
 
@@ -665,14 +740,16 @@ document.addEventListener('DOMContentLoaded', () => {
     var form = $('[data-optin-form]');
     if (!form) return;
     var status = $('[data-optin-status]', form);
+    /* messages come from the form so the French home page speaks French */
+    var msg = function (k, fallback) { return form.getAttribute('data-msg-' + k) || fallback; };
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var email = (form.email.value || '').trim();
-      if (!email || !form.email.checkValidity()) { setStatus(status, 'Please enter a valid email address.'); form.email.focus(); return; }
-      if (!form.consent.checked) { setStatus(status, 'Please tick the box so we can email you the sample.'); return; }
+      if (!email || !form.email.checkValidity()) { setStatus(status, msg('invalid', 'Please enter a valid email address.')); form.email.focus(); return; }
+      if (!form.consent.checked) { setStatus(status, msg('tick', 'Please tick the box so we can email you the sample.')); return; }
       if (form.website && form.website.value) return;
       var btn = form.querySelector('button[type="submit"]');
-      btn.disabled = true; setStatus(status, 'Sending…');
+      btn.disabled = true; setStatus(status, msg('sending', 'Sending…'));
       /* same id for the browser Lead and the server (CAPI) Lead → deduped */
       var eventId = window.cadomaloEventId ? window.cadomaloEventId() : String(Date.now());
       postJson('/api/lead', {email: email, consent: true, eventId: eventId, tracking: tracking()})
@@ -682,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
           try { if (window.trackLead) window.trackLead({source: 'routine-sample', eventID: eventId}); } catch (e2) {}
           window.location.href = '/thank-you-sample' + (token ? '?t=' + encodeURIComponent(token) : '');
         })
-        .catch(function (err) { btn.disabled = false; setStatus(status, err.message || 'Something went wrong. Please try again.'); });
+        .catch(function (err) { btn.disabled = false; setStatus(status, err.message || msg('error', 'Something went wrong. Please try again.')); });
     });
   }
 
@@ -856,7 +933,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------- header: Shop ▾ disclosure (desktop dropdown + mobile menu) ---------- */
+  function initMenuToggles() {
+    var toggles = $$('[data-menu-toggle]');
+    if (!toggles.length) return;
+    function panelOf(b) { return document.getElementById(b.getAttribute('aria-controls')); }
+    function set(b, open) {
+      var panel = panelOf(b);
+      if (!panel) return;
+      b.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+    }
+    toggles.forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        set(b, b.getAttribute('aria-expanded') !== 'true');
+      });
+    });
+    /* the desktop dropdown closes on Escape, outside click or focus leaving it */
+    var desk = $('.nav-shop-btn');
+    if (!desk) return;
+    var wrap = desk.parentNode;
+    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) set(desk, false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && desk.getAttribute('aria-expanded') === 'true') { set(desk, false); desk.focus(); }
+    });
+    wrap.addEventListener('focusout', function (e) { if (e.relatedTarget && !wrap.contains(e.relatedTarget)) set(desk, false); });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    initMenuToggles();
+    initLightbox();
     initShopFilter();
     initGallery();
     initStickyBuy();
