@@ -42,6 +42,12 @@ const CookieConsent = {
   },
 
   apply(prefs) {
+    // First-party record of the marketing choice so the server (Meta CAPI)
+    // can respect it on requests without a JSON body (e.g. email links).
+    try {
+      document.cookie = 'cadomalo_mc=' + (prefs?.marketing ? '1' : '0') + '; path=/; max-age=31536000; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
+    } catch (e) {}
+    if (!prefs?.marketing && typeof window.clearMarketingIds === 'function') window.clearMarketingIds();
     if (prefs?.marketing) {
       if (typeof window.loadMarketingPixels === 'function') window.loadMarketingPixels();
     }
@@ -522,6 +528,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
   function setStatus(el, msg) { if (el) el.textContent = msg || ''; }
+  /* Meta match data {consent, fbp, fbc} — ids only with marketing consent (js/pixels.js) */
+  function tracking() {
+    try { return window.cadomaloTracking ? window.cadomaloTracking() : {consent: false}; } catch (e) { return {consent: false}; }
+  }
 
   /* ---------- offer token (signed by the server; we only read `exp`) ---------- */
   function tokenExp(token) {
@@ -557,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var value = parseFloat((btn.textContent.match(/\$([\d.]+)/) || [])[1]) || 0;
     btn.disabled = true; btn.textContent = 'Taking you to secure checkout…';
     try { if (window.trackInitiateCheckout) window.trackInitiateCheckout({value: value, ids: [product]}); } catch (e) {}
-    postJson('/api/funnel-checkout', {offerToken: offer.token, product: product})
+    postJson('/api/funnel-checkout', {offerToken: offer.token, product: product, tracking: tracking()})
       .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error((d && d.error) || 'Checkout failed'); })
       .catch(function (err) { btn.disabled = false; btn.innerHTML = original; setStatus(status, err.message); });
   }
@@ -634,11 +644,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function initViewContent() {
     var box = $('.buy-box[data-product]');
     if (!box) return;
-    var fired = false;
+    /* trackViewContent fires each platform once per page, so calling it
+       again after consent only adds the pixels that just loaded. */
     var fire = function () {
-      if (fired || !window.trackViewContent) return;
-      if (!(window.fbTrack || window.ttTrack || window.gaTrack)) return;
-      fired = true;
+      if (!window.trackViewContent) return;
       try {
         window.trackViewContent({
           id: box.getAttribute('data-product'), name: box.getAttribute('data-name'),
@@ -664,11 +673,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (form.website && form.website.value) return;
       var btn = form.querySelector('button[type="submit"]');
       btn.disabled = true; setStatus(status, 'Sending…');
-      postJson('/api/lead', {email: email, consent: true})
+      /* same id for the browser Lead and the server (CAPI) Lead → deduped */
+      var eventId = window.cadomaloEventId ? window.cadomaloEventId() : String(Date.now());
+      postJson('/api/lead', {email: email, consent: true, eventId: eventId, tracking: tracking()})
         .then(function (d) {
           var token = d.t || d.token || d.offerToken || '';
           if (token) saveOffer(token);
-          try { if (window.trackLead) window.trackLead({source: 'routine-sample'}); } catch (e2) {}
+          try { if (window.trackLead) window.trackLead({source: 'routine-sample', eventID: eventId}); } catch (e2) {}
           window.location.href = '/thank-you-sample' + (token ? '?t=' + encodeURIComponent(token) : '');
         })
         .catch(function (err) { btn.disabled = false; setStatus(status, err.message || 'Something went wrong. Please try again.'); });
@@ -722,6 +733,14 @@ document.addEventListener('DOMContentLoaded', () => {
     $$('[data-funnel-buy]', page).forEach(function (b) {
       b.addEventListener('click', function () { funnelBuy(b, b.getAttribute('data-funnel-buy'), status); });
     });
+    /* This page is the Discovery Lab checkout's success_url: fire its
+       Purchase here (eventID = session id; deduped on the confirmation page). */
+    if (/^cs_(test|live)_/.test(sid) && window.trackOrder) {
+      fetch('/api/get-checkout-session?session_id=' + encodeURIComponent(sid))
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { try { if (d) window.trackOrder(d); } catch (e) {} })
+        .catch(function () {});
+    }
     var btn = $('[data-one-click]', page);
     if (!btn) return;
     if (!/^cs_(test|live)_/.test(sid)) { btn.disabled = true; setStatus(status, 'This offer is only available right after checkout.'); return; }

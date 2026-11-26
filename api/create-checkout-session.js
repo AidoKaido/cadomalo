@@ -1,6 +1,7 @@
 import {loadCatalog, isPurchasable, findProduct} from './_catalog.js'
 import {getStripe, createBrandedSession} from './_stripe.js'
 import {readJson, requestBaseUrl} from './_util.js'
+import {trackingFromRequest, trackingMetadata} from './_meta.js'
 
 const SHIPPING_COUNTRIES = [
   'US', 'CA', 'MX',
@@ -192,6 +193,8 @@ export default async function handler(req, res) {
       item_count: String(resolved.reduce((a, x) => a + x.qty, 0)),
       has_physical: hasPhysical ? '1' : '0',
       lang,
+      // Meta CAPI match data: mc=1/0 marketing consent; fbp/fbc/ip/ua only with consent.
+      ...trackingMetadata(trackingFromRequest(req, body)),
     },
     locale: lang === 'fr' ? 'fr' : 'auto',
   }

@@ -23,12 +23,19 @@
 //   checkout.session.completed, checkout.session.async_payment_succeeded,
 //   checkout.session.expired, checkout.session.async_payment_failed,
 //   payment_intent.succeeded
+//
+// Meta Conversions API: after delivery, a server Purchase is sent with
+// event_id = the Checkout Session id (or the upsell PaymentIntent id) — the
+// same eventID the browser pixel uses on the confirmation page, so Meta
+// deduplicates them. Sent ONLY when metadata.mc === '1' (the buyer accepted
+// marketing cookies before checkout); see api/_meta.js.
 
 import {loadCatalog, FREE_IDS} from './_catalog.js'
 import {getStripe, productsFromSession, productsFromPaymentIntent, buildDownloads} from './_stripe.js'
 import {brevoConfigured, listId, getContact, upsertContact} from './_brevo.js'
 import {escapeHtml, safeBaseUrl, defaultBaseUrl} from './_util.js'
 import {layout, button, h1, p, small, C} from './_email.js'
+import {sendPurchaseEvent, contentsFor} from './_meta.js'
 
 const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET
 const RESEND_KEY = process.env.RESEND_API_KEY
@@ -103,7 +110,7 @@ async function handleCheckoutCompleted(session) {
   const stripe = getStripe()
   const lines = await stripe.checkout.sessions
     .listLineItems(session.id, {limit: 100})
-    .then((r) => r.data.map((li) => ({description: li.description, quantity: li.quantity, amount: li.amount_total, currency: li.currency})))
+    .then((r) => r.data.map((li) => ({description: li.description, quantity: li.quantity, amount: li.amount_total, amount_subtotal: li.amount_subtotal, currency: li.currency})))
     .catch(() => [])
 
   await fulfil({
@@ -121,6 +128,17 @@ async function handleCheckoutCompleted(session) {
     catalog,
     products,
     lines,
+    capi: {
+      eventId: session.id,
+      meta: session.metadata || {},
+      email,
+      name: session.customer_details?.name || '',
+      phone: session.customer_details?.phone || '',
+      address: session.customer_details?.address || {},
+      value: (session.amount_total || 0) / 100,
+      currency: session.currency,
+      contents: contentsFor(products, lines),
+    },
   })
 }
 
@@ -148,6 +166,13 @@ async function handleUpsellPaymentIntent(pi) {
   const catalog = await loadCatalog()
   const products = productsFromPaymentIntent(catalog, pi)
   if (!products.length) return
+  // Buyer details for Meta matching come from the parent session (consent only).
+  let parentDetails = {}
+  if (pi.metadata?.mc === '1') {
+    const s = await stripe.checkout.sessions.retrieve(pi.metadata.upsell_of).catch(() => null)
+    parentDetails = s?.customer_details || {}
+  }
+  const amount = pi.amount_received || pi.amount
   await fulfil({
     orderId: pi.id,
     piId: pi.id,
@@ -161,6 +186,17 @@ async function handleUpsellPaymentIntent(pi) {
     catalog,
     products,
     lines: products.map((p) => ({description: `${p.title} (one-click add-on)`, quantity: 1, amount: pi.amount, currency: pi.currency})),
+    capi: {
+      eventId: pi.id,
+      meta: pi.metadata || {},
+      email,
+      name: name || parentDetails.name || '',
+      phone: parentDetails.phone || '',
+      address: parentDetails.address || {},
+      value: (amount || 0) / 100,
+      currency: pi.currency,
+      contents: products.map((p) => ({id: p.id || p.slug, quantity: 1, item_price: Math.round((amount || 0) / products.length) / 100})),
+    },
   })
 }
 
@@ -250,6 +286,15 @@ async function fulfil(o) {
     await stripe.paymentIntents
       .update(pi.id, {metadata: {delivered: new Date().toISOString()}})
       .catch((err) => console.error('[stripe-webhook] could not mark delivered:', err.message))
+  }
+
+  // Meta CAPI Purchase — last, so it can never delay or break delivery.
+  if (o.capi) {
+    try {
+      await sendPurchaseEvent({...o.capi, sourceUrl: `${o.base}/order-confirmation`})
+    } catch (err) {
+      console.warn('[stripe-webhook] meta capi:', err.message)
+    }
   }
 }
 

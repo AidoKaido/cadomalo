@@ -194,7 +194,7 @@
         {
           "h": "Who we share it with",
           "p": [
-            "Only with the providers who help us run the shop: hosting, payment, email delivery and analytics. We never sell your data."
+            "Only with the providers who help us run the shop: hosting, payment, email delivery and analytics — and, only if you accept marketing cookies, Meta (Facebook/Instagram) to measure our ads. We never sell your data."
           ]
         },
         {
@@ -232,7 +232,7 @@
         {
           "h": "Destinataires",
           "p": [
-            "Uniquement les prestataires qui nous aident à faire fonctionner la boutique : hébergement, paiement, envoi d’e-mails et mesure d’audience. Nous ne vendons jamais vos données."
+            "Uniquement avec les prestataires qui nous aident à faire fonctionner la boutique : hébergement, paiement, envoi d’e-mails et mesure d’audience — et, seulement si vous acceptez les cookies marketing, Meta (Facebook/Instagram) pour mesurer nos publicités. Nous ne vendons jamais vos données."
           ]
         },
         {
@@ -322,7 +322,7 @@
         {
           "h": "Cookies we use",
           "p": [
-            "Essential: basket, language, checkout security (always on). Analytics: anonymous visit statistics (only with consent). Marketing: none by default."
+            "Essential: basket, language, checkout security (always on). Analytics: anonymous visit statistics (only with consent). Marketing (only with consent): the Meta Pixel (Facebook/Instagram) measures which ads lead to visits, sign-ups and purchases. With the same consent, our server also reports sign-ups and purchases to Meta through the Meta Conversions API, using your email address in hashed (scrambled, one-way) form, your IP address, browser type and the order value. If you decline marketing cookies, nothing is sent to Meta."
           ]
         },
         {
@@ -342,7 +342,7 @@
         {
           "h": "Cookies utilisés",
           "p": [
-            "Essentiels : panier, langue, sécurité du paiement (toujours actifs). Mesure d’audience : statistiques de visite anonymes (uniquement avec votre accord). Marketing : aucun par défaut."
+            "Essentiels : panier, langue, sécurité du paiement (toujours actifs). Mesure d’audience : statistiques de visite anonymes (uniquement avec votre accord). Marketing (uniquement avec votre accord) : le pixel Meta (Facebook/Instagram) mesure quelles publicités mènent à des visites, inscriptions et achats. Avec ce même accord, notre serveur transmet aussi les inscriptions et achats à Meta via l’API Conversions de Meta, avec votre adresse e-mail sous forme hachée (brouillée, irréversible), votre adresse IP, le type de navigateur et le montant de la commande. Si vous refusez les cookies marketing, rien n’est envoyé à Meta."
           ]
         },
         {
