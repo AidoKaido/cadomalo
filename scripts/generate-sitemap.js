@@ -7,19 +7,6 @@ const SITE_URL = (process.env.SITE_URL || 'https://cadomalo.com').replace(/\/$/,
 // and list every page that isn't marked noindex (cart, order confirmation).
 const SKIP_DIRS = new Set(['node_modules', 'templates', 'api', 'scripts', 'content', 'data', 'css', 'js', 'assets', 'images', 'videos', '.git', '.vercel', '.github'])
 
-// Pre-redesign pages still served as flat .html files.
-const LEGACY_PAGES = [
-  '/accessibility',
-  '/blog-anniversary',
-  '/blog-personalized',
-  '/blog-wedding',
-  '/blog-digital',
-  '/blog-budget',
-  '/blog-last-minute',
-  '/blog-baby',
-  '/blog-holiday',
-  '/blog-men',
-]
 
 const today = new Date().toISOString().split('T')[0]
 
@@ -32,7 +19,12 @@ async function collectPages(dir, rel = '') {
   }
   if (entries.some((e) => e.isFile() && e.name === 'index.html')) {
     const html = await readFile(join(dir, 'index.html'), 'utf8')
-    if (!/<meta name="robots" content="noindex/.test(html)) found.push(rel || '/')
+    if (!/<meta name="robots" content="noindex/.test(html)) {
+      /* hreflang alternates exactly as the page declares them */
+      const alternates = [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">/g)]
+        .map((m) => ({lang: m[1], href: m[2].replace(/^https?:\/\/[^/]+/, SITE_URL)}))
+      found.push({loc: rel || '/', alternates})
+    }
   }
   return found
 }
@@ -40,6 +32,7 @@ async function collectPages(dir, rel = '') {
 function priorityFor(loc) {
   if (loc === '/' || loc === '/fr') return '1.0'
   if (/^(\/fr)?\/(shop|boutique)$/.test(loc)) return '0.9'
+  if (/^(\/fr)?\/(books|busy-books|discovery-kits|escape-rooms|personalized-books|party-kits|livres|cahiers-d-activites|kits-de-decouverte|escape-games|livres-personnalises|kits-de-fete)$/.test(loc)) return '0.9'
   if (/\/(products|produits)\//.test(loc)) return '0.8'
   if (/\/blog/.test(loc)) return '0.6'
   return '0.5'
@@ -47,8 +40,9 @@ function priorityFor(loc) {
 
 async function main() {
   const pages = await collectPages(process.cwd())
-  const urls = [...pages.sort(), ...LEGACY_PAGES].map((loc) => ({
+  const urls = pages.sort((a, b) => a.loc.localeCompare(b.loc)).map(({loc, alternates}) => ({
     loc: SITE_URL + (loc === '/' ? '/' : loc),
+    alternates,
     priority: priorityFor(loc),
     changefreq: 'weekly',
     lastmod: today,
@@ -56,9 +50,9 @@ async function main() {
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
     ...urls.map((u) =>
-      `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod><changefreq>${u.changefreq}</changefreq><priority>${u.priority}</priority></url>`
+      `  <url><loc>${u.loc}</loc>${u.alternates.map((a) => `<xhtml:link rel="alternate" hreflang="${a.lang}" href="${a.href}"/>`).join('')}<lastmod>${u.lastmod}</lastmod><changefreq>${u.changefreq}</changefreq><priority>${u.priority}</priority></url>`
     ),
     '</urlset>',
     '',

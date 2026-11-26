@@ -5,10 +5,9 @@
           <h1 class="hero-title"><span>{{ t.hero.t1 }}</span><span class="accent">{{ t.hero.t2 }}</span></h1>
           <p class="lead">{{ t.hero.text }}</p>
           <p class="hero-ctas">
-            <a class="btn btn-primary" href="{{ optinUrl }}">{{ t.hero.cta1 }} <span aria-hidden="true">&rarr;</span></a>
-            <a class="btn btn-quiet" href="{{ url.shop }}">{{ t.hero.cta2 }}</a>
+            <a class="btn btn-primary" href="{{ url.shop }}">{{ t.hero.cta1 }} <span aria-hidden="true">&rarr;</span></a>
+            <a class="btn btn-quiet" href="{{ optinUrl }}">{{ t.hero.cta2 }}</a>
           </p>
-          <ul class="trust-row">{{{ heroTrust }}}</ul>
         </div>
         <div class="hero-art hero-stage">
           <a href="{{ optinUrl }}" tabindex="-1" aria-hidden="true" class="hero-stage-link">
@@ -25,81 +24,80 @@
       </div>
     </section>
 
-    <section class="section band-peach">
-      <div class="wrap">
-        <div class="center">
-          <p class="eyebrow">{{ t.home2.bundlesKicker }}</p>
-          <h2>{{ t.home2.bundlesH }}</h2>
-          <p class="lead" style="margin-inline:auto">{{ t.home2.bundlesP }}</p>
-        </div>
-        <div class="bundle-features">{{{ bundleFeatures }}}</div>
-      </div>
+    <section class="trust-strip">
+      <ul class="wrap trust-strip-list">{{{ trustStrip }}}</ul>
     </section>
 
     <section class="section">
       <div class="wrap">
         <div class="center">
-          <p class="eyebrow">{{ t.collection.kicker }}</p>
-          <h2>{{ t.collection.h }}</h2>
-          <p class="lead" style="margin-inline:auto">{{ t.collection.p }}</p>
+          <p class="eyebrow">{{ t.home3.catsKicker }}</p>
+          <h2>{{ t.home3.catsH }}</h2>
         </div>
-        <div class="shop-section-head" style="margin-top:var(--space-8)">
-          <h3>{{ t.shop2.hbwH }}</h3>
-          <a class="btn btn-quiet btn-sm" href="{{ hbwUrl }}">{{ t.shop2.seeCollection }}</a>
+        <ul class="cat-grid">{{{ catTiles }}}</ul>
+      </div>
+    </section>
+
+    <section class="section band-peach">
+      <div class="wrap">
+        <div class="center">
+          <p class="eyebrow">{{ t.home3.featKicker }}</p>
+          <h2>{{ t.home3.featH }}</h2>
+          <p class="lead" style="margin-inline:auto">{{ t.home3.featP }}</p>
         </div>
-        <div class="grid-products">{{{ hbwCards }}}</div>
-        <div class="shop-section-head" style="margin-top:var(--space-8)">
-          <h3>{{ t.shop2.mhH }}</h3>
-          <a class="btn btn-quiet btn-sm" href="{{ mhUrl }}">{{ t.shop2.seeCollection }}</a>
+        <div class="bundle-features bundle-features-3">{{{ bundleFeatures }}}</div>
+      </div>
+    </section>
+
+    <section class="section" id="calmer-mornings">
+      <div class="wrap routine-band">
+        <div class="routine-media">
+          <a href="{{ routineUrl }}" tabindex="-1"><img src="{{ routineImg }}" alt="{{ routineAlt }}" width="640" height="640" loading="lazy"></a>
         </div>
-        <div class="grid-products">{{{ mhCards }}}</div>
+        <div class="routine-copy">
+          <p class="eyebrow">{{ t.home3.routineKicker }}</p>
+          <h2 class="hero-title"><span>{{ t.home3.routineT1 }}</span><span class="accent">{{ t.home3.routineT2 }}</span></h2>
+          <p class="lead">{{ t.home3.routineP }}</p>
+          {{{ optinForm }}}
+          <p><a class="btn btn-quiet" href="{{ routineUrl }}">{{ t.home3.routineProduct }} <span aria-hidden="true">&rarr;</span></a></p>
+        </div>
       </div>
     </section>
 
     <section class="section band-sky">
-      <div class="wrap center">
-        <p class="eyebrow">{{ t.topics.kicker }}</p>
-        <h2>{{ t.topics.h }}</h2>
-        <p class="lead" style="margin-inline:auto">{{ t.topics.p }}</p>
-        <ul class="topic-row">{{{ topicCards }}}</ul>
-      </div>
-    </section>
-
-    <section class="section band-blush">
       <div class="wrap">
-        <div class="center">
-          <p class="eyebrow">{{ t.celebrate.kicker }}</p>
-          <h2>{{ t.celebrate.h }}</h2>
-          <p class="lead" style="margin-inline:auto">{{ t.celebrate.p }}</p>
+        <div class="shop-section-head">
+          <div><p class="eyebrow">{{ t.home3.picksKicker }}</p><h2>{{ t.home3.picksH }}</h2></div>
+          <a class="btn btn-quiet btn-sm" href="{{ url.shop }}">{{ t.home3.picksCta }}</a>
         </div>
-        <div class="grid-products" style="margin-top:var(--space-8)">{{{ kitCards }}}</div>
-        <p class="center" style="margin-top:var(--space-7)">
-          <a class="btn btn-quiet" href="{{ shopKitsUrl }}">{{ t.celebrate.cta }}</a>
-        </p>
-      </div>
-    </section>
-
-    <section class="section band-mint">
-      <div class="wrap center">
-        <p class="eyebrow">{{ t.method.kicker }}</p>
-        <h2>{{ t.method.h }}</h2>
-        <ol class="method-row">{{{ methodSteps }}}</ol>
+        <div class="grid-products">{{{ pickCards }}}</div>
       </div>
     </section>
 
     <section class="section">
-      <div class="wrap multi-band">
-        <img src="/assets/multilingual-book.png" alt="" width="560" height="420" loading="lazy">
-        <div>
-          <p class="eyebrow">{{ t.multi.kicker }}</p>
-          <h2>{{ t.multi.h }}</h2>
-          <p class="lead">{{ t.multi.p }}</p>
-          <p><a class="btn btn-secondary" href="{{ url.collections }}">{{ t.multi.cta }} <span aria-hidden="true">&rarr;</span></a></p>
+      <div class="wrap">
+        <div class="center">
+          <p class="eyebrow">{{ t.home3.ageKicker }}</p>
+          <h2>{{ t.home3.ageH }}</h2>
         </div>
+        <div class="age-grid">{{{ ageTiles }}}</div>
       </div>
     </section>
 
     {{{ reviewsBlock }}}
+
+    <section class="section band-mint">
+      <div class="wrap founder-band">
+        <img src="/assets/multilingual-book.png" alt="{{ founderAlt }}" width="560" height="420" loading="lazy">
+        <div>
+          <p class="eyebrow">{{ t.home3.founderKicker }}</p>
+          <h2>{{ t.home3.founderH }}</h2>
+          <p class="lead">{{ t.about.intro }}</p>
+          <p class="signature">{{ t.about.sign }}</p>
+          <p><a class="btn btn-secondary" href="{{ url.about }}">{{ t.home3.founderCta }} <span aria-hidden="true">&rarr;</span></a></p>
+        </div>
+      </div>
+    </section>
 
     <section class="section band-butter">
       <div class="wrap">
@@ -114,13 +112,10 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="wrap">
-        <div class="newsletter">
-          <div class="eyebrow">{{ t.home2.sampleKicker }}</div>
-          <h2>{{ t.home2.sampleH }}</h2>
-          <p class="lead" style="margin:var(--space-3) auto 0">{{ t.home2.sampleP }}</p>
-          <p style="margin-top:var(--space-5)"><a class="btn btn-primary btn-lg" href="{{ optinUrl }}">{{ t.home2.sampleCta }} <span aria-hidden="true">&rarr;</span></a></p>
-        </div>
+    <section class="section" id="faq">
+      <div class="wrap-narrow">
+        <p class="eyebrow">{{ t.home3.faqKicker }}</p>
+        <h2>{{ t.home3.faqH }}</h2>
+        <div class="faq-list">{{{ faqItems }}}</div>
       </div>
     </section>

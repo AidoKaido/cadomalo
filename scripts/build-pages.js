@@ -19,7 +19,7 @@
 import {readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync} from 'node:fs'
 import {join, dirname} from 'node:path'
 import {renderProductBody, amazonUrl, icon, avg} from './lib/pdp.js'
-import {renderBlogIndex, renderPostBody, readingTime} from './lib/blog.js'
+import {renderBlogIndex, renderPostBody, postSeo, postJsonLd, postProducts} from './lib/blog.js'
 
 const ROOT = process.cwd()
 const TPL = join(ROOT, 'templates')
@@ -47,6 +47,14 @@ const SHOP = CATALOG.filter((p) => !p.hidden)
 const byId = (id) => CATALOG.find((p) => p.id === id)
 const POSTS = readJson('posts.json')
 const LEGAL = readJson('legal.json')
+const CATEGORIES = readJson('categories.json')
+const ULTIMATE = 'ultimate-human-body'
+/* real inside pages: {"<id>": [{src, w, h, alt: {en, fr}}]} — optional, partial is fine */
+const PAGE_PREVIEWS = (() => {
+  try { return readJson('page-previews.json') } catch { return {} }
+})()
+const pagesFor = (p) => (Array.isArray(PAGE_PREVIEWS[p.id]) ? PAGE_PREVIEWS[p.id] : [])
+  .filter((x) => x && x.src && onDisk(x.src))
 
 /* ---------- media: only what exists on disk --------------------------- */
 const onDisk = (url) => !!url && existsSync(join(ROOT, String(url).replace(/^\//, '')))
@@ -61,7 +69,8 @@ function mediaFor(p) {
   if (mediaCache.has(p.id)) return mediaCache.get(p.id)
   /* catalog-listed images that exist, then anything else in the product's folder */
   const listed = (p.images || []).filter(onDisk)
-  const found = listDir(`images/products/${p.id}`, /\.(webp|png|jpe?g)$/i).map((n) => `/images/products/${p.id}/${n}`)
+  /* p01.webp… are real inside pages (content/page-previews.json), shown separately */
+  const found = listDir(`images/products/${p.id}`, /^(?!p\d+\.)[^.].*\.(webp|png|jpe?g)$/i).map((n) => `/images/products/${p.id}/${n}`)
   const images = [...new Set([...listed, ...found])]
   /* legacy artwork in /assets (original 5 HBW books + HBW bundle) as a fallback */
   if (!images.length && p.img && onDisk(assetUrl(p.img))) images.push(assetUrl(p.img))
@@ -126,6 +135,10 @@ const ROUTES = {
   /* Stripe success_url — api/create-checkout-session.js builds these paths */
   thanks:      {en: 'order-confirmation', fr: 'fr/confirmation'},
 }
+/* category landing pages (content/categories.json) */
+for (const c of CATEGORIES) ROUTES[`cat:${c.id}`] = c.path
+const catUrl = (id, lang) => pathToUrl(ROUTES[`cat:${id}`][lang])
+const catById = (id) => CATEGORIES.find((c) => c.id === id)
 /* English-only funnel pages (noindex, not in the sitemap) */
 const FUNNEL = {
   optin: 'free-routine-sample',
@@ -161,6 +174,19 @@ const postPath = (post, lang) =>
 
 const pathToUrl = (p) => (p === '' ? '/' : `/${p}`)
 const urlFor = (page, lang) => pathToUrl(ROUTES[page][lang])
+/* "<title> | Cadomalo", dropping the suffix rather than overflowing ~65 chars */
+const pageTitle = (s) => (`${s} | Cadomalo`.length <= 65 ? `${s} | Cadomalo` : s)
+/* meta descriptions: ≤155 chars, cut at a word boundary */
+const clip = (s, n = 155) => {
+  const t = String(s || '').replace(/\s+/g, ' ').trim()
+  if (t.length <= n) return t
+  const cut = t.slice(0, n - 1)
+  return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:—–-]+$/, '') + '…'
+}
+const crumbsLd = (items) => ({
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: items.map(([name, url], i) => ({'@type': 'ListItem', position: i + 1, name, item: SITE_URL + url})),
+})
 const legalUrl = (id, lang) => pathToUrl(LEGAL_SLUGS[id][lang])
 const productUrl = (p, lang) => pathToUrl(productPath(p, lang))
 const postUrl = (post, lang) => pathToUrl(postPath(post, lang))
@@ -197,7 +223,7 @@ function render(tpl, ctx, where) {
 }
 
 /* ---------- head ------------------------------------------------------- */
-function renderHead({title, description, lang, pathEn, pathFr, ogImage, noindex, enOnly}) {
+function renderHead({title, description, lang, pathEn, pathFr, ogImage, noindex, enOnly, ogType, price}) {
   const self = lang === 'fr' ? pathFr : pathEn
   const canonical = SITE_URL + pathToUrl(self)
   const img = SITE_URL + (ogImage || '/assets/logo-square.png')
@@ -211,7 +237,9 @@ function renderHead({title, description, lang, pathEn, pathFr, ogImage, noindex,
   ${noindex ? '<meta name="robots" content="noindex,nofollow">' : ''}
   <link rel="canonical" href="${canonical}">
   ${alternates}
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="${ogType || 'website'}">${price != null ? `
+  <meta property="product:price:amount" content="${Number(price).toFixed(2)}">
+  <meta property="product:price:currency" content="USD">` : ''}
   <meta property="og:url" content="${canonical}">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
@@ -232,11 +260,28 @@ function baseContext(lang, activePage, pathEn, pathFr) {
   url.legalCookies = legalUrl('cookies', lang)
   url.legalRefunds = legalUrl('refunds', lang)
 
-  const navOrder = ['home', 'shop', 'collections', 'blog', 'about', 'sale']
-  const navLinks = navOrder
+  /* Shop ▾ (6 categories + All products + Bundles) · Collections · Blog · About */
+  const shopItems = [
+    ...CATEGORIES.map((c) => [catUrl(c.id, lang), c.label[lang], `cat:${c.id}`]),
+    [urlFor('shop', lang), t.nav.all, 'shop'],
+    [urlFor('sale', lang), t.nav.bundles, 'sale'],
+  ]
+  const shopActive = activePage === 'shop' || activePage === 'sale' || String(activePage).startsWith('cat:')
+  const chev = '<svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
+  const subLinks = shopItems
+    .map(([href, label, key]) => `<li><a href="${href}"${key === activePage ? ' aria-current="page"' : ''}>${esc(label)}</a></li>`)
+    .join('')
+  const navOrder = ['collections', 'blog', 'about']
+  const navLinks = `<div class="nav-shop">
+        <button type="button" class="nav-shop-btn${shopActive ? ' is-current' : ''}" aria-expanded="false" aria-controls="shop-menu" data-menu-toggle>${esc(t.nav.shop)}${chev}</button>
+        <div class="nav-dropdown" id="shop-menu" hidden><ul>${subLinks}</ul></div>
+      </div>
+      ` + navOrder
     .map((p) => `<a href="${urlFor(p, lang)}"${p === activePage ? ' aria-current="page"' : ''}>${esc(t.nav[p])}</a>`)
     .join('\n      ')
-  const navLinksMobile = navOrder
+  const navLinksMobile = `<button type="button" class="mobile-sub-toggle" aria-expanded="false" aria-controls="mobile-shop-menu" data-menu-toggle>${esc(t.nav.shop)}${chev}</button>
+      <ul class="mobile-sub" id="mobile-shop-menu" hidden>${subLinks}</ul>
+      ` + navOrder
     .map((p) => `<a href="${urlFor(p, lang)}">${esc(t.nav[p])}<span class="arrow" aria-hidden="true">&rarr;</span></a>`)
     .join('\n      ')
   const legalLinks = LEGAL.map(
@@ -263,9 +308,9 @@ function baseContext(lang, activePage, pathEn, pathFr) {
 }
 
 /* ---------- page shell -------------------------------------------------- */
-function shell({lang, activePage, pathEn, pathFr, title, description, body, ogImage, noindex, jsonLd, enOnly, bodyClass}) {
+function shell({lang, activePage, pathEn, pathFr, title, description, body, ogImage, noindex, jsonLd, enOnly, bodyClass, ogType, price}) {
   const ctx = baseContext(lang, activePage, pathEn, enOnly ? ROUTES.home.fr : pathFr)
-  const head = renderHead({title, description, lang, pathEn, pathFr, ogImage, noindex, enOnly})
+  const head = renderHead({title, description: clip(description), lang, pathEn, pathFr, ogImage, noindex, enOnly, ogType, price})
   const lds = [].concat(jsonLd || [])
   const ld = lds.map((j) => `\n  <script type="application/ld+json">${JSON.stringify(j)}</script>`).join('')
   const html = `<!DOCTYPE html>
@@ -292,6 +337,9 @@ ${body}
 
 /* ---------- product helpers -------------------------------------------- */
 const money = (n) => `$${Number(n).toFixed(2)}`
+const coverAlt = (p, lang) => (p.category === 'bundle'
+  ? (lang === 'fr' ? `Couvertures : ${p.title.fr}` : `Covers: ${p.title.en}`)
+  : (lang === 'fr' ? `Couverture de ${p.title.fr}` : `Cover of ${p.title.en}`))
 const badgeClass = (tone) =>
   tone === 'solid' ? 'badge badge-solid' : tone === 'sky' ? 'badge badge-sky' : 'badge badge-soft'
 const stars = (r) => '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r))
@@ -308,14 +356,14 @@ function renderCard(p, lang, t, {amazonSlot = false} = {}) {
   const was = p.compareAt ? `<del>${money(p.compareAt)}</del>` : ''
   const img = primaryImage(p)
   const media = img
-    ? `<img src="${img}" alt="" width="600" height="600" loading="lazy">`
+    ? `<img src="${img}" alt="${esc(coverAlt(p, lang))}" width="600" height="600" loading="lazy">`
     : `<span class="card-cover" style="--tile:${p.color}"><span>${esc(p.series[lang])}</span><strong>${esc(p.title[lang])}</strong><em>${esc(t.shop2.cover)}</em></span>`
   const rs = reviewsFor(p)
   const rating = rs.length
     ? `<p class="rating"><span class="stars" aria-hidden="true">${stars(avg(rs))}</span> <span>${avg(rs).toFixed(1)} (${rs.length})</span></p>`
     : ''
   return `<article class="card" data-type="${p.category}">
-          <a class="card-media" href="${href}" tabindex="-1" aria-hidden="true">
+          <a class="card-media" href="${href}" tabindex="-1">
             ${badge}${media}
           </a>
           <div class="card-body">
@@ -341,7 +389,7 @@ const cards = (items, lang, t) => {
 const grid = (items, lang, t) => `<div class="grid-products">${cards(items, lang, t)}</div>`
 
 const series = (c) => SHOP.filter((p) => p.collection === c && p.category === 'book')
-const bundleOf = (c) => SHOP.find((p) => p.collection === c && p.category === 'bundle')
+const bundleOf = (c) => SHOP.find((p) => p.collection === c && p.category === 'bundle' && p.id !== ULTIMATE)
 const KITS = SHOP.filter((p) => p.category === 'kit' || p.category === 'party')
 
 /* honest review section used on home + collections */
@@ -368,72 +416,120 @@ function reviewsSection(lang, t) {
 const out = []
 const add = (path, html) => out.push({path, html})
 
-function buildHome(lang) {
-  const t = UI[lang]
-  const TOPIC_KEYS = ['body', 'world', 'science', 'animals', 'feelings', 'languages', 'arts']
-  const ctx = baseContext(lang, 'home', ROUTES.home.en, ROUTES.home.fr)
-  const sampleImg = onDisk('/images/products/routine-sample/01.webp') ? '/images/products/routine-sample/01.webp'
-    : primaryImage(byId('routine')) || '/assets/hero-reading.png'
-  const bundleCard = (b) => {
-    const img = primaryImage(b)
-    return `<article class="bundle-feature" style="--tile:${b.color}">
-            ${img ? `<a href="${productUrl(b, lang)}" tabindex="-1" aria-hidden="true"><img src="${img}" alt="" width="520" height="520" loading="lazy"></a>` : ''}
+/* the free-sample opt-in form: one markup for /free-routine-sample and the
+   home page; js/main.js initOptin() handles both (POST /api/lead) */
+function optinForm(lang, id = 'optin-email') {
+  const H = UI[lang].home3
+  return `<form class="optin-form" data-optin-form novalidate data-msg-invalid="${esc(H.optinInvalid)}" data-msg-tick="${esc(H.optinTick)}" data-msg-sending="${esc(H.optinSending)}" data-msg-error="${esc(H.optinError)}">
+            <label for="${id}">${esc(H.optinLabel)}</label>
+            <div class="optin-row">
+              <input id="${id}" name="email" type="email" required autocomplete="email" placeholder="${esc(H.optinPh)}">
+              <button type="submit" class="btn btn-primary btn-lg">${esc(H.optinCta)}</button>
+            </div>
+            <label class="consent-row">
+              <input type="checkbox" name="consent" required>
+              <span>${esc(H.optinConsent)} <a href="${legalUrl('privacy', lang)}">${esc(H.optinPrivacy)}</a>.</span>
+            </label>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" class="visually-hidden" aria-hidden="true">
+            <p class="form-status" data-optin-status role="status"></p>
+          </form>`
+}
+
+const latestPosts = (n) => [...POSTS]
+  .sort((a, b) => String(b.published || '').localeCompare(String(a.published || '')))
+  .slice(0, n)
+
+const faqHtml = (faq) => faq.map((o, i) => `<details class="faq-item"${i === 0 ? ' open' : ''}>
+            <summary><span>${esc(o.q)}</span>${icon('chevron', 20)}</summary>
+            <p>${esc(o.a)}</p>
+          </details>`).join('\n          ')
+const faqLdOf = (faq) => ({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faq.map((o) => ({'@type': 'Question', name: o.q, acceptedAnswer: {'@type': 'Answer', text: o.a}})),
+})
+
+function bundleCard(b, lang, t) {
+  const img = primaryImage(b)
+  return `<article class="bundle-feature" style="--tile:${b.color}">
+            ${img ? `<a href="${productUrl(b, lang)}" tabindex="-1"><img src="${img}" alt="${esc(coverAlt(b, lang))}" width="520" height="520" loading="lazy"></a>` : ''}
             <div>
-              <p class="eyebrow">${esc(t.home2.bundlesKicker)}</p>
+              <p class="eyebrow">${esc(b.series[lang])}</p>
               <h3><a href="${productUrl(b, lang)}">${esc(b.title[lang])}</a></h3>
               <p>${esc(b.desc[lang])}</p>
-              <p class="card-price">${money(b.price)} <del>${money(b.compareAt)}</del></p>
+              <p class="card-price">${money(b.price)}${b.compareAt ? ` <del>${money(b.compareAt)}</del>` : ''}</p>
               <p class="hero-ctas">
                 <button type="button" class="btn btn-primary" data-add="${b.id}">${esc(t.product.add)}</button>
                 <a class="btn btn-quiet" href="${productUrl(b, lang)}">${esc(t.shop2.seeCollection)}</a>
               </p>
             </div>
           </article>`
-  }
+}
+
+function buildHome(lang) {
+  const t = UI[lang]
+  const H = t.home3
+  const ctx = baseContext(lang, 'home', ROUTES.home.en, ROUTES.home.fr)
+  const routine = byId('routine')
+  const picks = ['discovery-lab', 'routine', 'wonder-island', 'birthday-wish', 'head', 'bones', 'mh01', 'mh07']
+    .map(byId).filter((p) => p && !p.hidden)
+  const catLabel = (id) => catById(id).label[lang]
 
   Object.assign(ctx, {
-    heroTrust: t.hero.trust.map((x) => `<li>${esc(x)}</li>`).join('\n            '),
     heroImg: '/images/home/hero-sample.webp',
     optinUrl: `/${FUNNEL.optin}`,
-    topicCards: t.topics.items
-      .map((label, i) => `<li class="topic-card"><a href="${urlFor('shop', lang)}">
-              <img src="/assets/topic-${TOPIC_KEYS[i]}.png" alt="" width="96" height="96" loading="lazy">
-              <span>${esc(label)}</span></a></li>`)
-      .join('\n          '),
-    bundleFeatures: ['bundle', 'mh-bundle'].map(byId).filter(Boolean).map(bundleCard).join('\n          '),
-    hbwCards: cards(series('hbw').slice(0, 4), lang, t),
-    mhCards: cards(series('mh').slice(0, 4), lang, t),
-    kitCards: cards(KITS, lang, t),
-    methodSteps: t.method.items
-      .map((s) => `<li class="method-step"><span class="method-n">${esc(s.n)}</span>
-            <h3>${esc(s.h)}</h3><p>${esc(s.p)}</p></li>`)
-      .join('\n          '),
+    trustStrip: H.trust.map((x) => `<li>${icon('check', 16)}<span>${esc(x)}</span></li>`).join(''),
+    catTiles: CATEGORIES.map((c) => {
+      const img = primaryImage(byId(c.tile))
+      return `<li><a class="cat-tile" href="${catUrl(c.id, lang)}">
+            ${img ? `<img src="${img}" alt="" width="320" height="320" loading="lazy">` : ''}
+            <span class="cat-tile-body"><strong>${esc(c.label[lang])}</strong><span>${esc(c.short[lang])}</span></span></a></li>`
+    }).join('\n          '),
+    bundleFeatures: ['bundle', 'mh-bundle', ULTIMATE].map(byId).filter((b) => b && !b.hidden).map((b) => bundleCard(b, lang, t)).join('\n          '),
+    routineUrl: productUrl(routine, lang),
+    routineImg: primaryImage(routine),
+    routineAlt: coverAlt(routine, lang),
+    optinForm: optinForm(lang, 'home-optin-email'),
+    pickCards: cards(picks, lang, t),
+    ageTiles: H.ages.map((a) => `<div class="age-tile">
+            <h3>${esc(a.h)}</h3><p>${esc(a.p)}</p>
+            <p class="age-links">${a.links.map((id) => `<a href="${catUrl(id, lang)}">${esc(catLabel(id))}</a>`).join('')}</p>
+          </div>`).join('\n          '),
     reviewsBlock: reviewsSection(lang, t),
-    blogCards: POSTS.slice(0, 3).map((post) => postCard(post, lang, t)).join('\n          '),
-    shopKitsUrl: `${urlFor('shop', lang)}#kits`,
-    hbwUrl: `${urlFor('collections', lang)}#hbw`,
-    mhUrl: `${urlFor('collections', lang)}#mh`,
+    founderAlt: lang === 'fr' ? 'Illustration : un livre ouvert entouré des drapeaux anglais, français, allemand et espagnol' : 'Illustration: an open book with the English, French, German and Spanish flags',
+    blogCards: latestPosts(3).map((post) => postCard(post, lang, t)).join('\n          '),
+    faqItems: faqHtml(H.faq),
   })
 
   const body = render(readFileSync(join(TPL, 'home.html'), 'utf8'), ctx, `home.${lang}`)
   add(ROUTES.home[lang], shell({
     lang, activePage: 'home', pathEn: ROUTES.home.en, pathFr: ROUTES.home.fr,
-    title: `Cadomalo — ${t.hero.t1} ${t.hero.t2}`,
-    description: t.hero.text, body, ogImage: sampleImg,
-    jsonLd: {
-      '@context': 'https://schema.org', '@type': 'Organization', name: 'Cadomalo',
-      url: SITE_URL, logo: `${SITE_URL}/assets/logo-square.png`,
-      description: t.hero.text, email: 'support@cadomalo.com',
-    },
+    title: pageTitle(H.title), description: H.description, body,
+    ogImage: primaryImage(byId('bundle')) || undefined,
+    jsonLd: [
+      {
+        '@context': 'https://schema.org', '@type': 'Organization', name: 'Cadomalo',
+        url: SITE_URL, logo: `${SITE_URL}/assets/logo-square.png`,
+        description: H.description, email: 'support@cadomalo.com',
+        sameAs: ['https://www.etsy.com/shop/CadomaloShop'],
+      },
+      {
+        '@context': 'https://schema.org', '@type': 'WebSite', name: 'Cadomalo',
+        url: SITE_URL + urlFor('home', lang), inLanguage: lang,
+        publisher: {'@type': 'Organization', name: 'Cadomalo'},
+      },
+      faqLdOf(H.faq),
+    ],
   }))
 }
 
 function buildShop(lang) {
   const t = UI[lang]
-  const filters = ['all', 'book', 'kit', 'party', 'bundle']
-  const chips = t.shop.filters
-    .map((label, i) => `<button type="button" class="chip${i === 0 ? ' is-active' : ''}" data-shop-filter="${filters[i]}" aria-pressed="${i === 0}">${esc(label)}</button>`)
-    .join('\n          ')
+  /* category links (they used to be client-side filter chips) */
+  const chips = [
+    `<a class="chip is-active" href="${urlFor('shop', lang)}" aria-current="page">${esc(t.nav.all)}</a>`,
+    ...CATEGORIES.map((c) => `<a class="chip" href="${catUrl(c.id, lang)}">${esc(c.label[lang])}</a>`),
+    `<a class="chip" href="${urlFor('sale', lang)}">${esc(t.nav.bundles)}</a>`,
+  ].join('\n          ')
   const section = (id, h, p, items, link) => `<section class="shop-section" id="${id}" data-shop-section>
           <div class="shop-section-head">
             <div><h2>${esc(h)}</h2><p>${esc(p)}</p></div>
@@ -441,22 +537,120 @@ function buildShop(lang) {
           </div>
           ${grid(items, lang, t)}
         </section>`
-  const body = `    <section class="section">
+  const body = `    <nav class="breadcrumb wrap" aria-label="Breadcrumb">
+      <a href="${urlFor('home', lang)}">${esc(t.product.home)}</a> <span aria-hidden="true">/</span>
+      <span>${esc(t.shop.title)}</span>
+    </nav>
+    <section class="section section-tight">
       <div class="wrap">
         <h1>${esc(t.shop.title)}</h1>
         <p class="lead">${esc(t.shop.p)}</p>
-        <div class="filter-row" role="group" aria-label="${esc(t.shop.title)}">
+        <nav class="filter-row" aria-label="${esc(t.nav.shop)}">
           ${chips}
-          <span class="filter-count" data-shop-count data-label="${esc(t.shop.count)}">${SHOP.length} ${esc(t.shop.count)}</span>
-        </div>
-        ${section('hbw', t.shop2.hbwH, t.shop2.hbwP, [bundleOf('hbw'), ...series('hbw')].filter(Boolean), `${urlFor('collections', lang)}#hbw`)}
+          <span class="filter-count">${SHOP.length} ${esc(t.shop.count)}</span>
+        </nav>
+        ${section('hbw', t.shop2.hbwH, t.shop2.hbwP, [bundleOf('hbw'), byId(ULTIMATE), ...series('hbw')].filter((p) => p && !p.hidden), `${urlFor('collections', lang)}#hbw`)}
         ${section('mh', t.shop2.mhH, t.shop2.mhP, [bundleOf('mh'), ...series('mh')].filter(Boolean), `${urlFor('collections', lang)}#mh`)}
         ${section('kits', t.shop2.kitsH, t.shop2.kitsP, KITS, '')}
       </div>
     </section>`
   add(ROUTES.shop[lang], shell({
     lang, activePage: 'shop', pathEn: ROUTES.shop.en, pathFr: ROUTES.shop.fr,
-    title: `${t.shop.title} — Cadomalo`, description: t.shop.p, body,
+    title: pageTitle(lang === 'fr' ? 'Livres et activités à imprimer pour enfants' : 'Shop Kids’ Books & Printable Activities'),
+    description: t.shop.p, body,
+    jsonLd: crumbsLd([[t.product.home, urlFor('home', lang)], [t.shop.title, urlFor('shop', lang)]]),
+  }))
+}
+
+/* ---------- category landing pages -------------------------------------- */
+function buildCategory(c, lang) {
+  const t = UI[lang]
+  const C = t.cat
+  const key = `cat:${c.id}`
+  const self = catUrl(c.id, lang)
+  const sections = c.sections
+    ? c.sections.map(({collection}) => {
+        const b = bundleOf(collection)
+        const h = collection === 'hbw' ? t.shop2.hbwH : t.shop2.mhH
+        const p = collection === 'hbw' ? t.shop2.hbwP : t.shop2.mhP
+        return `<section class="shop-section" id="${collection}">
+          <div class="shop-section-head">
+            <div><h2>${esc(h)}</h2><p>${esc(p)}</p></div>
+            <a class="btn btn-quiet btn-sm" href="${urlFor('collections', lang)}#${collection}">${esc(t.shop2.seeCollection)}</a>
+          </div>
+          ${grid([b, ...series(collection)].filter(Boolean), lang, t)}
+        </section>`
+      }).join('\n        ')
+    : `<div class="cat-products">${grid((c.products || []).map(byId).filter((p) => p && !p.hidden), lang, t)}</div>`
+  const featured = (c.featured || []).map(byId).filter((p) => p && !p.hidden)
+  const featuredBlock = featured.length
+    ? `<div class="bundle-features cat-featured">${featured.map((b) => bundleCard(b, lang, t)).join('')}</div>`
+    : ''
+  const also = (c.also || []).map(byId).filter((p) => p && !p.hidden)
+  const alsoBlock = also.length ? `<section class="section band-blush">
+      <div class="wrap">
+        <h2>${esc(C.alsoH)}</h2>
+        ${grid(also, lang, t)}
+      </div>
+    </section>` : ''
+  const ids = new Set([...(c.products || []), ...featured.map((p) => p.id), ...(c.sections ? SHOP.filter((p) => c.sections.some((s) => s.collection === p.collection)).map((p) => p.id) : [])])
+  const posts = POSTS.filter((post) => postProducts(post).some((id) => ids.has(id))).slice(0, 3)
+  const postsBlock = posts.length ? `<section class="section band-butter">
+      <div class="wrap">
+        <h2>${esc(C.postsH)}</h2>
+        <div class="grid-products" style="margin-top:var(--space-6)">${posts.map((post) => postCard(post, lang, t)).join('\n          ')}</div>
+      </div>
+    </section>` : ''
+  const how = C.how[c.how] || C.how.kit
+  const faq = c.faq[lang] || []
+  const related = (c.related || []).map(catById).filter(Boolean)
+
+  const body = `    <nav class="breadcrumb wrap" aria-label="Breadcrumb">
+      <a href="${urlFor('home', lang)}">${esc(t.product.home)}</a> <span aria-hidden="true">/</span>
+      <a href="${urlFor('shop', lang)}">${esc(t.product.shop)}</a> <span aria-hidden="true">/</span>
+      <span>${esc(c.label[lang])}</span>
+    </nav>
+    <section class="section section-tight">
+      <div class="wrap">
+        <div class="cat-intro">
+          <p class="eyebrow">${esc(C.kicker)}</p>
+          <h1>${esc(c.h1[lang])}</h1>
+          ${c.intro[lang].map((p, i) => `<p${i === 0 ? ' class="lead"' : ''}>${esc(p)}</p>`).join('\n          ')}
+        </div>
+        ${featuredBlock}
+        ${sections}
+      </div>
+    </section>
+    ${alsoBlock}
+    <section class="section band-mint">
+      <div class="wrap center">
+        <h2>${esc(C.howH)}</h2>
+        <ol class="method-row">${how.map(([h, p], i) => `<li class="method-step"><span class="method-n">${i + 1}</span>
+            <h3>${esc(h)}</h3><p>${esc(p)}</p></li>`).join('\n          ')}</ol>
+      </div>
+    </section>
+    <section class="section" id="faq">
+      <div class="wrap-narrow">
+        <h2>${esc(C.faqH)}</h2>
+        <div class="faq-list">${faqHtml(faq)}</div>
+      </div>
+    </section>
+    ${postsBlock}
+    <section class="section">
+      <div class="wrap center">
+        <h2>${esc(C.relatedH)}</h2>
+        <p class="cat-related">${related.map((r) => `<a class="chip" href="${catUrl(r.id, lang)}">${esc(r.label[lang])}</a>`).join('')}
+          <a class="chip" href="${urlFor('shop', lang)}">${esc(C.allLink)}</a></p>
+      </div>
+    </section>`
+  add(c.path[lang], shell({
+    lang, activePage: key, pathEn: c.path.en, pathFr: c.path.fr,
+    title: pageTitle(c.title[lang]), description: c.description[lang], body,
+    ogImage: primaryImage(byId(c.tile)) || undefined,
+    jsonLd: [
+      crumbsLd([[t.product.home, urlFor('home', lang)], [t.product.shop, urlFor('shop', lang)], [c.label[lang], self]]),
+      ...(faq.length ? [faqLdOf(faq)] : []),
+    ],
   }))
 }
 
@@ -469,7 +663,7 @@ function buildCollections(lang) {
     return `<section class="section${band ? ` ${band}` : ''}" id="${c}">
       <div class="wrap">
         <div class="collection-head">
-          ${img ? `<img src="${img}" alt="" width="420" height="420" loading="lazy">` : ''}
+          ${img ? `<img src="${img}" alt="${esc(coverAlt(b, lang))}" width="420" height="420" loading="lazy">` : ''}
           <div>
             <p class="eyebrow">${esc(t.cols.eyebrow.replace(/^2 collections · /, ''))} · ${books.length} ${esc(t.shop.count)}</p>
             <h2>${esc(h)}</h2>
@@ -516,7 +710,7 @@ function buildCollections(lang) {
   const og = primaryImage(byId('bundle'))
   add(ROUTES.collections[lang], shell({
     lang, activePage: 'collections', pathEn: ROUTES.collections.en, pathFr: ROUTES.collections.fr,
-    title: `${t.cols.h} — Cadomalo`, description: t.cols.p, body, ogImage: og || undefined,
+    title: pageTitle(lang === 'fr' ? 'Collections de livres pour enfants en 4 langues' : 'Picture Book Collections for Kids in 4 Languages'), description: t.cols.p, body, ogImage: og || undefined,
   }))
 }
 
@@ -536,50 +730,66 @@ function buildSale(lang) {
     </section>`
   add(ROUTES.sale[lang], shell({
     lang, activePage: 'sale', pathEn: ROUTES.sale.en, pathFr: ROUTES.sale.fr,
-    title: `${t.sale.h1} ${t.sale.h2} — Cadomalo`, description: t.sale.p, body,
+    title: pageTitle(lang === 'fr' ? 'Coffrets de livres pour enfants à prix réduit' : 'Kids’ Book Bundles & Collection Savings'), description: t.sale.p, body,
   }))
 }
 
 function buildAbout(lang) {
   const t = UI[lang]
+  const A = t.about
+  const makeLinks = CATEGORIES.map((c) => `<a class="chip" href="${catUrl(c.id, lang)}">${esc(c.label[lang])}</a>`).join('')
   const body = `    <section class="section">
       <div class="wrap-narrow">
-        <p class="eyebrow">${esc(t.about.eyebrow)}</p>
-        <h1 class="hero-title"><span>${esc(t.about.h1)}</span><span class="accent">${esc(t.about.h2)}</span></h1>
-        <p class="lead">${esc(t.about.intro)}</p>
+        <p class="eyebrow">${esc(A.eyebrow)}</p>
+        <h1 class="hero-title"><span>${esc(A.h1)}</span><span class="accent">${esc(A.h2)}</span></h1>
+        <p class="lead">${esc(A.intro)}</p>
       </div>
     </section>
     <section class="section band-mint">
       <div class="wrap-narrow prose">
-        <h2>${esc(t.about.storyH)}</h2>
-        ${t.about.story.map((p) => `<p>${esc(p)}</p>`).join('\n        ')}
-        <p class="signature">${esc(t.about.sign)}</p>
+        <h2>${esc(A.storyH)}</h2>
+        ${A.story.map((p) => `<p>${esc(p)}</p>`).join('\n        ')}
+        <p class="signature">${esc(A.sign)}</p>
       </div>
     </section>
     <section class="section">
+      <div class="wrap-narrow prose">
+        <h2>${esc(A.whyH)}</h2>
+        ${A.why.map((p) => `<p>${esc(p)}</p>`).join('\n        ')}
+      </div>
+    </section>
+    <section class="section band-sky">
       <div class="wrap">
-        <h2 class="center">${esc(t.about.valuesH)}</h2>
+        <h2 class="center">${esc(A.approachH)}</h2>
         <div class="method-row" style="margin-top:var(--space-8)">
-          ${t.about.values.map((v) => `<div class="method-step"><h3>${esc(v.h)}</h3><p>${esc(v.p)}</p></div>`).join('\n          ')}
+          ${A.approach.map((v) => `<div class="method-step"><h3>${esc(v.h)}</h3><p>${esc(v.p)}</p></div>`).join('\n          ')}
         </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="wrap-narrow center">
+        <h2>${esc(A.makeH)}</h2>
+        <p class="lead" style="margin-inline:auto">${esc(A.makeP)}</p>
+        <p class="cat-related">${makeLinks}</p>
       </div>
     </section>
     <section class="section band-butter">
       <div class="wrap-narrow center">
-        <h2>${esc(t.about.etsyH)}</h2>
-        <p class="lead" style="margin-inline:auto">${esc(t.about.etsyP)}</p>
-        <p><a class="btn btn-secondary" href="https://www.etsy.com/shop/CadomaloShop" target="_blank" rel="noopener">${esc(t.about.etsyCta)}</a></p>
+        <h2>${esc(A.etsyH)}</h2>
+        <p class="lead" style="margin-inline:auto">${esc(A.etsyP)}</p>
+        <p><a class="btn btn-secondary" href="https://www.etsy.com/shop/CadomaloShop" target="_blank" rel="noopener">${esc(A.etsyCta)}</a></p>
       </div>
     </section>`
   add(ROUTES.about[lang], shell({
     lang, activePage: 'about', pathEn: ROUTES.about.en, pathFr: ROUTES.about.fr,
-    title: `${t.about.eyebrow} — Cadomalo`, description: t.about.intro, body,
+    title: pageTitle(lang === 'fr' ? 'À propos — livres créés par une sage-femme' : 'About Cadomalo — Books Created by a Midwife'),
+    description: A.intro, body,
   }))
 }
 
 const postCard = (post, lang, t) => `<article class="card">
-            <a class="card-media" href="${postUrl(post, lang)}" tabindex="-1" aria-hidden="true">
-              <img src="${assetUrl(post.img)}" alt="" width="600" height="600" loading="lazy"></a>
+            <a class="card-media" href="${postUrl(post, lang)}" tabindex="-1">
+              <img src="${assetUrl(post.img)}" alt="${esc((post.imgAlt && post.imgAlt[lang]) || post.title[lang])}" width="600" height="600" loading="lazy"></a>
             <div class="card-body">
               <p class="card-series">${esc(post.cat[lang])} · ${post.min} ${esc(t.blog.min)}</p>
               <h3 class="card-title"><a href="${postUrl(post, lang)}">${esc(post.title[lang])}</a></h3>
@@ -599,7 +809,7 @@ function buildBlogIndex(lang) {
   })
   add(ROUTES.blog[lang], shell({
     lang, activePage: 'blog', pathEn: ROUTES.blog.en, pathFr: ROUTES.blog.fr,
-    title: `${t.blog.title} — Cadomalo`, description: t.blog.p, body,
+    title: pageTitle(lang === 'fr' ? 'Blog : idées pour enfants curieux' : 'Blog: Ideas for Curious Kids and Their Parents'), description: t.blog.p, body,
     ogImage: assetUrl(POSTS[0].img),
   }))
 }
@@ -608,54 +818,73 @@ function buildPost(post, lang) {
   const t = UI[lang]
   const related = SHOP.find((p) => p.id === post.product)
   const body = renderPostBody(post, lang, t, {
-    esc, postUrl, assetUrl, urlFor,
+    esc, postUrl, assetUrl, urlFor, siteUrl: SITE_URL,
     relatedCard: related ? renderCard(related, lang, t) : '',
+    renderCard, productById: (id) => SHOP.find((p) => p.id === id), productUrl, primaryImage, money,
   })
+  const seo = postSeo(post, lang)
   add(postPath(post, lang), shell({
     lang, activePage: 'blog', pathEn: postPath(post, 'en'), pathFr: postPath(post, 'fr'),
-    title: `${post.title[lang]} — Cadomalo`, description: post.excerpt[lang], body,
-    ogImage: assetUrl(post.img),
-    jsonLd: {
-      '@context': 'https://schema.org', '@type': 'BlogPosting',
-      headline: post.title[lang], description: post.excerpt[lang],
-      image: SITE_URL + assetUrl(post.img), inLanguage: lang,
-      timeRequired: `PT${readingTime(post, lang)}M`,
-      author: {'@type': 'Organization', name: 'Cadomalo'},
-      publisher: {'@type': 'Organization', name: 'Cadomalo',
-        logo: {'@type': 'ImageObject', url: `${SITE_URL}/assets/logo-square.png`}},
-      mainEntityOfPage: SITE_URL + postUrl(post, lang),
-    },
+    title: /Cadomalo/.test(seo.title) ? seo.title : pageTitle(seo.title), description: seo.description, body,
+    ogImage: assetUrl(post.img), ogType: 'article',
+    jsonLd: postJsonLd(post, lang, {siteUrl: SITE_URL, postUrl, assetUrl}),
   }))
 }
 
-/* "Complete the collection": books -> their 10-book bundle + sibling books;
-   bundles -> the other bundle + Discovery Lab; kits -> related kits */
+/* "Complete the collection": HBW books -> their 10-book bundle + the Ultimate
+   pack + siblings; MH books -> bundle + siblings; Discovery Lab and the HBW
+   bundle -> the Ultimate pack; other bundles/kits -> related products */
+const ULT_COPY = {
+  en: {h: 'Make it the Ultimate pack', fromLab: 'This kit plus all 10 Human Body Wonders books for', fromBundle: 'Add the Discovery Lab science kit — all 11 for'},
+  fr: {h: 'Passez au pack ultime', fromLab: 'Ce kit et les 10 livres Merveilles du corps pour', fromBundle: 'Ajoutez le labo de découverte — les 11 pour'},
+}
 function completeFor(p, lang, t) {
   const T = t.pdp2
+  const U = ULT_COPY[lang]
+  const ult = byId(ULTIMATE)
+  const ultOffer = (lead) => (ult && !ult.hidden ? {p: ult, image: primaryImage(ult), lead} : null)
+  const visible = (xs) => xs.filter((x) => x && !x.hidden && x.id !== p.id)
   if (p.category === 'book' && p.collection) {
     const b = bundleOf(p.collection)
     const sib = series(p.collection).filter((x) => x.id !== p.id)
     const i = sib.findIndex((x) => x.id > p.id)
     const pick = [...sib.slice(Math.max(0, i)), ...sib].slice(0, 4)
-    return {heading: T.completeH, bundle: b ? {p: b, image: primaryImage(b)} : null, cards: cards(pick, lang, t)}
+    const items = p.collection === 'hbw' ? visible([ult, ...pick]).slice(0, 4) : pick
+    return {heading: T.completeH, bundle: b ? {p: b, image: primaryImage(b)} : null, cards: cards(items, lang, t)}
+  }
+  if (p.id === 'discovery-lab') {
+    return {heading: U.h, bundle: ultOffer(U.fromLab), cards: cards(visible([byId('bundle'), byId('routine'), byId('wonder-island')]), lang, t)}
+  }
+  if (p.id === 'bundle') {
+    return {heading: U.h, bundle: ultOffer(U.fromBundle), cards: cards(visible([byId('mh-bundle'), byId('discovery-lab'), byId('routine')]), lang, t)}
   }
   if (p.category === 'bundle') {
-    const other = SHOP.find((x) => x.category === 'bundle' && x.id !== p.id)
-    const items = [other, byId('discovery-lab'), byId('routine')].filter((x) => x && !x.hidden)
+    const items = visible([byId('bundle'), byId('mh-bundle'), byId(ULTIMATE), byId('discovery-lab'), byId('routine')]).slice(0, 3)
     return {heading: T.relatedKits, bundle: null, cards: cards(items, lang, t)}
   }
   const items = KITS.filter((x) => x.id !== p.id).slice(0, 4)
   return {heading: T.relatedKits, bundle: null, cards: cards(items, lang, t)}
 }
 
+/* the category page a product belongs to (for breadcrumbs) */
+const categoryOf = (p) =>
+  CATEGORIES.find((c) => (c.featured || []).includes(p.id)) ||
+  CATEGORIES.find((c) => (c.products || []).includes(p.id)) ||
+  (p.collection ? catById('books') : null)
+
 function buildProduct(p, lang) {
   const t = UI[lang]
   const media = mediaFor(p)
   const reviews = reviewsFor(p)
+  const cat = categoryOf(p)
+  const pages = pagesFor(p).map((x) => ({src: x.src, w: x.w || 1600, h: x.h || 1600,
+    alt: (x.alt && (x.alt[lang] || x.alt.en)) || `${lang === 'fr' ? 'Page intérieure' : 'Inside page'} — ${p.title[lang]}`}))
   const body = renderProductBody(p, lang, t, {
-    esc, money, stars, badgeClass, urlFor, productUrl, media, reviews,
+    esc, money, stars, badgeClass, urlFor, productUrl, media, reviews, pages,
     complete: completeFor(p, lang, t),
     reviewUrl: reviewUrl(p),
+    coverAlt: coverAlt(p, lang),
+    crumb: cat ? {label: cat.label[lang], url: catUrl(cat.id, lang)} : null,
   })
   const productLd = {
     '@context': 'https://schema.org', '@type': 'Product',
@@ -676,16 +905,16 @@ function buildProduct(p, lang) {
     } : {}),
   }
   const faq = (p.objections && p.objections[lang]) || []
-  const faqLd = faq.length ? {
-    '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: faq.map((o) => ({'@type': 'Question', name: o.q, acceptedAnswer: {'@type': 'Answer', text: o.a}})),
-  } : null
+  const crumbs = [[t.product.home, urlFor('home', lang)], [t.product.shop, urlFor('shop', lang)],
+    ...(cat ? [[cat.label[lang], catUrl(cat.id, lang)]] : []), [p.title[lang], productUrl(p, lang)]]
 
   add(productPath(p, lang), shell({
     lang, activePage: 'shop', pathEn: productPath(p, 'en'), pathFr: productPath(p, 'fr'),
-    title: `${p.title[lang]} — Cadomalo`, description: p.desc[lang], body,
+    title: pageTitle((p.seo && p.seo.title && p.seo.title[lang]) || p.title[lang]),
+    description: (p.seo && p.seo.description && p.seo.description[lang]) || p.desc[lang], body,
     ogImage: media.images[0] || undefined, bodyClass: 'has-sticky-buy',
-    jsonLd: [productLd, faqLd].filter(Boolean),
+    ogType: 'product', price: p.price,
+    jsonLd: [productLd, crumbsLd(crumbs), ...(faq.length ? [faqLdOf(faq)] : [])],
   }))
 }
 
@@ -711,7 +940,7 @@ function buildLegal(doc, lang) {
   add(LEGAL_SLUGS[doc.id][lang], shell({
     lang, activePage: 'legal',
     pathEn: LEGAL_SLUGS[doc.id].en, pathFr: LEGAL_SLUGS[doc.id].fr,
-    title: `${doc.title[lang]} — Cadomalo`, description: doc.title[lang], body,
+    title: pageTitle(doc.title[lang]), description: `${doc.title[lang]} — Cadomalo (cadomalo.com).`, body,
   }))
 }
 
@@ -738,7 +967,7 @@ function buildCart(lang) {
     </section>`
   add(ROUTES.cart[lang], shell({
     lang, activePage: 'cart', pathEn: ROUTES.cart.en, pathFr: ROUTES.cart.fr,
-    title: `${t.cart.title} — Cadomalo`, description: t.cart.title, body, noindex: true,
+    title: pageTitle(t.cart.title), description: t.cart.title, body, noindex: true,
   }))
 }
 
@@ -769,7 +998,7 @@ function buildContact(lang) {
     </section>`
   add(ROUTES.contact[lang], shell({
     lang, activePage: 'contact', pathEn: ROUTES.contact.en, pathFr: ROUTES.contact.fr,
-    title: `${t.footer.contact} — Cadomalo`, description: t.footer.contact, body,
+    title: pageTitle(t.footer.contact), description: lang === 'fr' ? 'Une question sur une commande ou un produit Cadomalo ? Écrivez-nous, nous répondons sous 2 jours ouvrés.' : 'Questions about an order or a Cadomalo product? Write to us — we reply within 2 working days.', body,
   }))
 }
 
@@ -837,7 +1066,7 @@ function buildThanks(lang) {
   const b = byId('bundle')
   const bImg = primaryImage(b)
   const nbo = b ? `<aside class="nbo-card" data-nbo data-nbo-product="bundle" data-funnel-price="${b.funnelPrice || ''}">
-          ${bImg ? `<img src="${bImg}" alt="" width="240" height="240" loading="lazy">` : ''}
+          ${bImg ? `<img src="${bImg}" alt="${esc(coverAlt(b, lang))}" width="240" height="240" loading="lazy">` : ''}
           <div>
             <p class="eyebrow">${esc(L.nboKicker)}</p>
             <h2 class="thanks-h">${esc(L.nboH)}</h2>
@@ -885,7 +1114,7 @@ function buildThanks(lang) {
     </section>`
   add(ROUTES.thanks[lang], shell({
     lang, activePage: 'thanks', pathEn: ROUTES.thanks.en, pathFr: ROUTES.thanks.fr,
-    title: `${L.title} — Cadomalo`, description: L.title, body, noindex: true,
+    title: pageTitle(L.title), description: L.title, body, noindex: true,
   }))
 }
 
@@ -914,19 +1143,7 @@ function buildOptin() {
             <li><span class="benefit-check">${icon('check', 14)}</span><span>One complete routine world, the weekly star chart and a Routine Superstar certificate</span></li>
             <li><span class="benefit-check">${icon('check', 14)}</span><span>One short PDF to print at home tonight</span></li>
           </ul>
-          <form class="optin-form" data-optin-form novalidate>
-            <label for="optin-email">Your email</label>
-            <div class="optin-row">
-              <input id="optin-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
-              <button type="submit" class="btn btn-primary btn-lg">Send me the free pages</button>
-            </div>
-            <label class="consent-row">
-              <input type="checkbox" name="consent" required>
-              <span>Yes, email me the free sample and occasional tips and offers from Cadomalo. I can unsubscribe at any time. See our <a href="/privacy-policy">privacy policy</a>.</span>
-            </label>
-            <input type="text" name="website" tabindex="-1" autocomplete="off" class="visually-hidden" aria-hidden="true">
-            <p class="form-status" data-optin-status role="status"></p>
-          </form>
+          ${optinForm('en', 'optin-email')}
         </div>
         <div class="funnel-media">
           ${mock ? `<img src="${mock}" alt="Printed pages from the Morning and Bedtime Routine Busy Book" width="640" height="640" fetchpriority="high">` : ''}
@@ -992,7 +1209,7 @@ function buildMhOffer() {
         <div class="funnel-media">
           ${img ? `<img src="${img}" alt="Medical Heroes collection" width="640" height="640" fetchpriority="high">` : ''}
           ${vid ? videoTag(vid) : ''}
-          ${covers.length > 1 ? `<div class="cover-strip">${covers.map((c) => `<img src="${c}" alt="" width="120" height="120" loading="lazy">`).join('')}</div>` : ''}
+          ${covers.length > 1 ? `<div class="cover-strip">${covers.map((c) => `<img src="${c}" alt="Medical Heroes book cover" width="120" height="120" loading="lazy">`).join('')}</div>` : ''}
         </div>
         <div class="funnel-copy">
           ${priceStack(mh.price, mh.funnelPrice)}
@@ -1044,6 +1261,30 @@ function buildReview() {
   funnelShell(FUNNEL.review, 'Write a review — Cadomalo', 'Share your experience with a Cadomalo product.', body)
 }
 
+/* Branded 404 (Vercel serves /404.html for any path with no file or route).
+   English first, with a French line; noindex. */
+function build404() {
+  const t = UI.en
+  const N = t.notFound
+  const body = `    <section class="section">
+      <div class="wrap-narrow center not-found">
+        <p class="eyebrow">404</p>
+        <h1>${esc(N.h)}</h1>
+        <p class="lead" style="margin-inline:auto">${esc(N.p)}</p>
+        <p class="cat-related">${CATEGORIES.map((c) => `<a class="chip" href="${catUrl(c.id, 'en')}">${esc(c.label.en)}</a>`).join('')}</p>
+        <p class="hero-ctas" style="justify-content:center">
+          <a class="btn btn-primary" href="${urlFor('shop', 'en')}">${esc(N.shop)}</a>
+          <a class="btn btn-quiet" href="${urlFor('home', 'en')}">${esc(N.home)}</a>
+        </p>
+        <p lang="fr">${esc(N.fr)} <a href="${urlFor('home', 'fr')}">${esc(N.frLink)}</a> · <a href="${urlFor('shop', 'fr')}">Boutique</a></p>
+      </div>
+    </section>`
+  add('404', shell({
+    lang: 'en', activePage: '404', pathEn: '', pathFr: '', enOnly: true, noindex: true,
+    title: pageTitle(N.title), description: N.p, body,
+  }))
+}
+
 /* ---------- run --------------------------------------------------------- */
 for (const lang of LANGS) {
   buildHome(lang)
@@ -1058,14 +1299,16 @@ for (const lang of LANGS) {
   for (const post of POSTS) buildPost(post, lang)
   for (const p of SHOP) buildProduct(p, lang)
   for (const doc of LEGAL) buildLegal(doc, lang)
+  for (const c of CATEGORIES) buildCategory(c, lang)
 }
 buildOptin()
 buildThankYouSample()
 buildMhOffer()
 buildReview()
+build404()
 
 for (const {path, html} of out) {
-  const file = path === '' ? join(ROOT, 'index.html') : join(ROOT, path, 'index.html')
+  const file = path === '' ? join(ROOT, 'index.html') : path === '404' ? join(ROOT, '404.html') : join(ROOT, path, 'index.html')
   mkdirSync(dirname(file), {recursive: true})
   writeFileSync(file, html)
 }

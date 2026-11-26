@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shop all — Cadomalo</title>
+  <title>Shop Kids’ Books &amp; Printable Activities | Cadomalo</title>
   <meta name="description" content="Picture books, activity kits and party printables — every one an instant PDF download.">
   
   <link rel="canonical" href="https://cadomalo.com/shop">
@@ -12,7 +12,7 @@
   <link rel="alternate" hreflang="x-default" href="https://cadomalo.com/shop">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cadomalo.com/shop">
-  <meta property="og:title" content="Shop all — Cadomalo">
+  <meta property="og:title" content="Shop Kids’ Books &amp; Printable Activities | Cadomalo">
   <meta property="og:description" content="Picture books, activity kits and party printables — every one an instant PDF download.">
   <meta property="og:image" content="https://cadomalo.com/assets/logo-square.png">
   <meta property="og:locale" content="en_US">
@@ -22,13 +22,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cadomalo.com/"},{"@type":"ListItem","position":2,"name":"Shop all","item":"https://cadomalo.com/shop"}]}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
 <div class="announce">
-  <span class="announce-short">Instant download · Ages 3–8</span>
-  <span class="announce-long">Instant download · Books for curious minds, ages 3–8 · Created by a midwife</span>
+  <span class="announce-short">Instant download · Created by a midwife</span>
+  <span class="announce-long">Instant download · Books &amp; printables for curious kids · Created by a midwife</span>
   <span class="lang-pills">
     <a class="lang-pill" href="/shop" hreflang="en" aria-current="true">EN</a>
     <a class="lang-pill" href="/fr/boutique" hreflang="fr" aria-current="false">FR</a>
@@ -47,12 +48,13 @@
     </a>
 
     <nav class="site-nav" aria-label="Primary">
-      <a href="/">Home</a>
-      <a href="/shop" aria-current="page">Shop</a>
-      <a href="/collections">Book collections</a>
+      <div class="nav-shop">
+        <button type="button" class="nav-shop-btn is-current" aria-expanded="false" aria-controls="shop-menu" data-menu-toggle>Shop<svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown" id="shop-menu" hidden><ul><li><a href="/books">Picture books</a></li><li><a href="/busy-books">Busy books</a></li><li><a href="/discovery-kits">Discovery kits</a></li><li><a href="/escape-rooms">Escape rooms</a></li><li><a href="/personalized-books">Personalized storybooks</a></li><li><a href="/party-kits">Party kits</a></li><li><a href="/shop" aria-current="page">All products</a></li><li><a href="/sale">Bundles</a></li></ul></div>
+      </div>
+      <a href="/collections">Collections</a>
       <a href="/blog">Blog</a>
       <a href="/about">About</a>
-      <a href="/sale">Bundle deals</a>
     </nav>
 
     <div class="header-actions">
@@ -73,12 +75,11 @@
   </div>
 
   <nav aria-label="Primary">
-    <a href="/">Home<span class="arrow" aria-hidden="true">&rarr;</span></a>
-      <a href="/shop">Shop<span class="arrow" aria-hidden="true">&rarr;</span></a>
-      <a href="/collections">Book collections<span class="arrow" aria-hidden="true">&rarr;</span></a>
+    <button type="button" class="mobile-sub-toggle" aria-expanded="false" aria-controls="mobile-shop-menu" data-menu-toggle>Shop<svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+      <ul class="mobile-sub" id="mobile-shop-menu" hidden><li><a href="/books">Picture books</a></li><li><a href="/busy-books">Busy books</a></li><li><a href="/discovery-kits">Discovery kits</a></li><li><a href="/escape-rooms">Escape rooms</a></li><li><a href="/personalized-books">Personalized storybooks</a></li><li><a href="/party-kits">Party kits</a></li><li><a href="/shop" aria-current="page">All products</a></li><li><a href="/sale">Bundles</a></li></ul>
+      <a href="/collections">Collections<span class="arrow" aria-hidden="true">&rarr;</span></a>
       <a href="/blog">Blog<span class="arrow" aria-hidden="true">&rarr;</span></a>
       <a href="/about">About<span class="arrow" aria-hidden="true">&rarr;</span></a>
-      <a href="/sale">Bundle deals<span class="arrow" aria-hidden="true">&rarr;</span></a>
   </nav>
 
   <div class="mobile-menu-langs">
@@ -95,26 +96,33 @@
 </div>
 
   <main id="main">
-    <section class="section">
+    <nav class="breadcrumb wrap" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span>
+      <span>Shop all</span>
+    </nav>
+    <section class="section section-tight">
       <div class="wrap">
         <h1>Shop all</h1>
         <p class="lead">Picture books, activity kits and party printables — every one an instant PDF download.</p>
-        <div class="filter-row" role="group" aria-label="Shop all">
-          <button type="button" class="chip is-active" data-shop-filter="all" aria-pressed="true">All</button>
-          <button type="button" class="chip" data-shop-filter="book" aria-pressed="false">Books</button>
-          <button type="button" class="chip" data-shop-filter="kit" aria-pressed="false">Activity kits</button>
-          <button type="button" class="chip" data-shop-filter="party" aria-pressed="false">Party</button>
-          <button type="button" class="chip" data-shop-filter="bundle" aria-pressed="false">Bundles</button>
-          <span class="filter-count" data-shop-count data-label="products">27 products</span>
-        </div>
+        <nav class="filter-row" aria-label="Shop">
+          <a class="chip is-active" href="/shop" aria-current="page">All products</a>
+          <a class="chip" href="/books">Picture books</a>
+          <a class="chip" href="/busy-books">Busy books</a>
+          <a class="chip" href="/discovery-kits">Discovery kits</a>
+          <a class="chip" href="/escape-rooms">Escape rooms</a>
+          <a class="chip" href="/personalized-books">Personalized storybooks</a>
+          <a class="chip" href="/party-kits">Party kits</a>
+          <a class="chip" href="/sale">Bundles</a>
+          <span class="filter-count">28 products</span>
+        </nav>
         <section class="shop-section" id="hbw" data-shop-section>
           <div class="shop-section-head">
             <div><h2>Human Body Wonders</h2><p>Ten first books about how the body works — from the brain to the teeth.</p></div>
             <a class="btn btn-quiet btn-sm" href="/collections#hbw">About this collection</a>
           </div>
           <div class="grid-products"><article class="card" data-type="bundle">
-          <a class="card-media" href="/products/human-body-wonders-all-10-books" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-solid">Save 21%</span><img src="/images/products/bundle/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/human-body-wonders-all-10-books" tabindex="-1">
+            <img src="/images/products/bundle/01.webp" alt="Covers: Human Body Wonders — all 10 books" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Complete collection</p>
@@ -128,9 +136,25 @@
             <span class="btn btn-full card-slot" aria-hidden="true"></span>
           </div>
         </article>
+          <article class="card" data-type="bundle">
+          <a class="card-media" href="/products/ultimate-human-body-learning-pack" tabindex="-1">
+            <img src="/images/products/ultimate-human-body/01.webp" alt="Covers: Ultimate Human Body Learning Pack" width="600" height="600" loading="lazy">
+          </a>
+          <div class="card-body">
+            <p class="card-series">Learning pack</p>
+            <h3 class="card-title"><a href="/products/ultimate-human-body-learning-pack">Ultimate Human Body Learning Pack</a></h3>
+            
+            <p class="card-price">$44.99 <del>$89.89</del></p>
+            <p class="card-langs">EN · FR · ES · DE</p>
+          </div>
+          <div class="card-actions">
+            <button type="button" class="btn btn-primary btn-full" data-add="ultimate-human-body">Add to basket</button>
+            <span class="btn btn-full card-slot" aria-hidden="true"></span>
+          </div>
+        </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/inside-my-amazing-head" tabindex="-1" aria-hidden="true">
-            <img src="/images/products/head/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/inside-my-amazing-head" tabindex="-1">
+            <img src="/images/products/head/01.webp" alt="Cover of Inside My Amazing Head" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Human Body Wonders</p>
@@ -141,12 +165,12 @@
           </div>
           <div class="card-actions">
             <button type="button" class="btn btn-primary btn-full" data-add="head">Add to basket</button>
-            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HJMZGT6L" target="_blank" rel="noopener">Order on Amazon</a>
+            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HJMZGT6L" target="_blank" rel="noopener">Paperback on Amazon (English/French edition)</a>
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/my-busy-breathing-lungs" tabindex="-1" aria-hidden="true">
-            <img src="/images/products/lungs/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/my-busy-breathing-lungs" tabindex="-1">
+            <img src="/images/products/lungs/01.webp" alt="Cover of My Busy Breathing Lungs" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Human Body Wonders</p>
@@ -157,12 +181,12 @@
           </div>
           <div class="card-actions">
             <button type="button" class="btn btn-primary btn-full" data-add="lungs">Add to basket</button>
-            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HJFQMN4S" target="_blank" rel="noopener">Order on Amazon</a>
+            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HJFQMN4S" target="_blank" rel="noopener">Paperback on Amazon (English/French edition)</a>
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/my-stomach-mixing-machine" tabindex="-1" aria-hidden="true">
-            <img src="/images/products/stomach/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/my-stomach-mixing-machine" tabindex="-1">
+            <img src="/images/products/stomach/01.webp" alt="Cover of My Stomach Mixing Machine" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Human Body Wonders</p>
@@ -173,12 +197,12 @@
           </div>
           <div class="card-actions">
             <button type="button" class="btn btn-primary btn-full" data-add="stomach">Add to basket</button>
-            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HK4XBF7F" target="_blank" rel="noopener">Order on Amazon</a>
+            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HK4XBF7F" target="_blank" rel="noopener">Paperback on Amazon (English/French edition)</a>
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/my-strong-body-bones" tabindex="-1" aria-hidden="true">
-            <img src="/images/products/bones/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/my-strong-body-bones" tabindex="-1">
+            <img src="/images/products/bones/01.webp" alt="Cover of My Strong Body Bones" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Human Body Wonders</p>
@@ -193,8 +217,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/my-muscles-make-me-move" tabindex="-1" aria-hidden="true">
-            <img src="/images/products/muscles/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/my-muscles-make-me-move" tabindex="-1">
+            <img src="/images/products/muscles/01.webp" alt="Cover of My Muscles Make Me Move" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Human Body Wonders</p>
@@ -205,12 +229,12 @@
           </div>
           <div class="card-actions">
             <button type="button" class="btn btn-primary btn-full" data-add="muscles">Add to basket</button>
-            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HKGSW1PN" target="_blank" rel="noopener">Order on Amazon</a>
+            <a class="btn btn-quiet btn-full" href="https://www.amazon.com/dp/B0HKGSW1PN" target="_blank" rel="noopener">Paperback on Amazon (English/French edition)</a>
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/my-skin-super-suit" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/skin/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/my-skin-super-suit" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/skin/01.webp" alt="Cover of My Skin Super Suit" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Human Body Wonders</p>
@@ -225,8 +249,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/blood-s-amazing-body-journey" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/blood/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/blood-s-amazing-body-journey" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/blood/01.webp" alt="Cover of Blood’s Amazing Body Journey" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Human Body Wonders</p>
@@ -241,8 +265,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/my-eyes-see-everything" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/eyes/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/my-eyes-see-everything" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/eyes/01.webp" alt="Cover of My Eyes See Everything" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Human Body Wonders</p>
@@ -257,8 +281,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/my-ears-catch-sounds" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/ears/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/my-ears-catch-sounds" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/ears/01.webp" alt="Cover of My Ears Catch Sounds" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Human Body Wonders</p>
@@ -273,8 +297,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/my-super-strong-teeth" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/teeth/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/my-super-strong-teeth" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/teeth/01.webp" alt="Cover of My Super Strong Teeth" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Human Body Wonders</p>
@@ -295,8 +319,8 @@
             <a class="btn btn-quiet btn-sm" href="/collections#mh">About this collection</a>
           </div>
           <div class="grid-products"><article class="card" data-type="bundle">
-          <a class="card-media" href="/products/medical-heroes-all-10-books" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-solid">Save 21%</span><img src="/images/products/mh-bundle/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/medical-heroes-all-10-books" tabindex="-1">
+            <img src="/images/products/mh-bundle/01.webp" alt="Covers: Medical Heroes — all 10 books" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Complete collection</p>
@@ -311,8 +335,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/the-doctor-listens-closely" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/mh01/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/the-doctor-listens-closely" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/mh01/01.webp" alt="Cover of The Doctor Listens Closely" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Medical Heroes</p>
@@ -327,8 +351,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/nurses-make-care-better" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/mh02/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/nurses-make-care-better" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/mh02/01.webp" alt="Cover of Nurses Make Care Better" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Medical Heroes</p>
@@ -343,8 +367,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/pharmacists-prepare-helpful-medicines" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/mh03/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/pharmacists-prepare-helpful-medicines" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/mh03/01.webp" alt="Cover of Pharmacists Prepare Helpful Medicines" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Medical Heroes</p>
@@ -359,8 +383,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/paramedics-race-to-help" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/mh04/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/paramedics-race-to-help" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/mh04/01.webp" alt="Cover of Paramedics Race to Help" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Medical Heroes</p>
@@ -375,8 +399,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/midwives-welcome-new-babies" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/mh05/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/midwives-welcome-new-babies" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/mh05/01.webp" alt="Cover of Midwives Welcome New Babies" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Medical Heroes</p>
@@ -391,8 +415,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/physiotherapists-make-movement-stronger" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/mh06/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/physiotherapists-make-movement-stronger" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/mh06/01.webp" alt="Cover of Physiotherapists Make Movement Stronger" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Medical Heroes</p>
@@ -407,8 +431,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/dentists-protect-every-smile" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/mh07/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/dentists-protect-every-smile" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/mh07/01.webp" alt="Cover of Dentists Protect Every Smile" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Medical Heroes</p>
@@ -423,8 +447,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/laboratory-scientists-find-clues" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/mh08/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/laboratory-scientists-find-clues" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/mh08/01.webp" alt="Cover of Laboratory Scientists Find Clues" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Medical Heroes</p>
@@ -439,8 +463,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/psychologists-help-big-feelings" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/mh09/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/psychologists-help-big-feelings" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/mh09/01.webp" alt="Cover of Psychologists Help Big Feelings" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Medical Heroes</p>
@@ -455,8 +479,8 @@
           </div>
         </article>
           <article class="card" data-type="book">
-          <a class="card-media" href="/products/dietitians-help-bodies-grow" tabindex="-1" aria-hidden="true">
-            <span class="badge badge-sky">New</span><img src="/images/products/mh10/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/dietitians-help-bodies-grow" tabindex="-1">
+            <span class="badge badge-sky">New</span><img src="/images/products/mh10/01.webp" alt="Cover of Dietitians Help Bodies Grow" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Medical Heroes</p>
@@ -477,8 +501,8 @@
             
           </div>
           <div class="grid-products"><article class="card" data-type="kit">
-          <a class="card-media" href="/products/morning-bedtime-routine-busy-book" tabindex="-1" aria-hidden="true">
-            <img src="/images/products/routine/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/morning-bedtime-routine-busy-book" tabindex="-1">
+            <img src="/images/products/routine/01.webp" alt="Cover of Morning &amp; Bedtime Routine Busy Book" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Printable busy book</p>
@@ -493,8 +517,8 @@
           </div>
         </article>
           <article class="card" data-type="kit">
-          <a class="card-media" href="/products/my-amazing-body-discovery-lab" tabindex="-1" aria-hidden="true">
-            <img src="/images/products/discovery-lab/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/my-amazing-body-discovery-lab" tabindex="-1">
+            <img src="/images/products/discovery-lab/01.webp" alt="Cover of My Amazing Body Discovery Lab" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Printable science kit</p>
@@ -509,8 +533,8 @@
           </div>
         </article>
           <article class="card" data-type="party">
-          <a class="card-media" href="/products/birthday-adventure-party-kit" tabindex="-1" aria-hidden="true">
-            <img src="/images/products/party-kit/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/birthday-adventure-party-kit" tabindex="-1">
+            <img src="/images/products/party-kit/01.webp" alt="Cover of Birthday Adventure Party Kit" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Printable party kit</p>
@@ -525,8 +549,8 @@
           </div>
         </article>
           <article class="card" data-type="party">
-          <a class="card-media" href="/products/the-magical-birthday-wish" tabindex="-1" aria-hidden="true">
-            <img src="/images/products/birthday-wish/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/the-magical-birthday-wish" tabindex="-1">
+            <img src="/images/products/birthday-wish/01.webp" alt="Cover of The Magical Birthday Wish" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Personalised storybook</p>
@@ -541,8 +565,8 @@
           </div>
         </article>
           <article class="card" data-type="kit">
-          <a class="card-media" href="/products/wonder-island-escape-room" tabindex="-1" aria-hidden="true">
-            <img src="/images/products/wonder-island/01.webp" alt="" width="600" height="600" loading="lazy">
+          <a class="card-media" href="/products/wonder-island-escape-room" tabindex="-1">
+            <img src="/images/products/wonder-island/01.webp" alt="Cover of Wonder Island Escape Room" width="600" height="600" loading="lazy">
           </a>
           <div class="card-body">
             <p class="card-series">Printable escape room</p>
@@ -572,7 +596,7 @@
         <h3>Shop</h3>
         <ul>
           <li><a href="/shop">Shop</a></li>
-          <li><a href="/collections">Book collections</a></li>
+          <li><a href="/collections">Collections</a></li>
           <li><a href="/sale">Bundle deals</a></li>
           <li><a href="/blog">Blog</a></li>
         </ul>
@@ -655,7 +679,7 @@
   <div class="cart-drawer-empty" data-drawer-empty>
     <img class="cart-empty-art" src="/assets/kids-lying.png" alt="" width="320" height="213" loading="lazy">
     <h3>Your basket is empty</h3>
-    <p>Start with a book they’ll ask for again tonight.</p>
+    <p>Start with a book about the part of the body your child is most curious about.</p>
     <a class="btn btn-primary" href="/collections">Explore our books <span aria-hidden="true">&rarr;</span></a>
   </div>
 
