@@ -6,12 +6,18 @@
 // PaymentIntent succeeded for the same customer and points at this session.
 // A funnel session created as a follow-up (metadata.parent) also includes
 // the parent order's files, so one confirmation page shows everything.
+//
+// `pixel` gives the browser Meta pixel the Purchase data with the same
+// event ids the webhook's server events use: {session: {event_id: cs_…,
+// value, currency, content_ids, contents, num_items}, upsell: {event_id:
+// pi_…, …} | null}. Tracking metadata (ip/ua/fbp/fbc) is never returned.
 
 import {readFile} from 'node:fs/promises'
 import {join} from 'node:path'
 import {loadCatalog, FREE_IDS} from './_catalog.js'
 import {getStripe, productsFromSession, productsFromPaymentIntent, buildDownloads} from './_stripe.js'
 import {safeBaseUrl, requestBaseUrl} from './_util.js'
+import {contentsFor, purchaseData, publicMetadata} from './_meta.js'
 
 async function loadDigitalDelivery(slug) {
   if (!slug) return null
@@ -58,9 +64,18 @@ export default async function handler(req, res) {
     let products = []
     const extraLines = []
     let extraTotal = 0
+    let pixel = null
     if (paid) {
       const catalog = await loadCatalog().catch(() => [])
       products = productsFromSession(catalog, session)
+      const lineData = session.line_items?.data || []
+      pixel = {
+        session: {
+          event_id: session.id,
+          ...purchaseData({value: (session.amount_total || 0) / 100, currency: session.currency, contents: contentsFor(products, lineData)}),
+        },
+        upsell: null,
+      }
 
       // Follow-up funnel session → include the parent order.
       const parentId = session.metadata?.parent
@@ -86,6 +101,14 @@ export default async function handler(req, res) {
             products = [...products, ...extra]
             extra.forEach((p) => extraLines.push({description: p.title, quantity: 1, amount_total: pi.amount, currency: pi.currency}))
             extraTotal += pi.amount
+            pixel.upsell = {
+              event_id: pi.id,
+              ...purchaseData({
+                value: (pi.amount_received || pi.amount || 0) / 100,
+                currency: pi.currency,
+                contents: extra.map((p) => ({id: p.id || p.slug, quantity: 1, item_price: Math.round((pi.amount || 0) / extra.length) / 100})),
+              }),
+            }
           }
         } catch {}
       }
@@ -117,10 +140,11 @@ export default async function handler(req, res) {
       ],
       products: products.map((p) => p.id || p.slug),
       funnel: session.metadata?.funnel === '1',
-      metadata: session.metadata || {},
+      metadata: publicMetadata(session.metadata),
       digital_delivery: digitalDelivery,
       downloads,
       manual_fulfillment: manual,
+      pixel,
     })
   } catch (err) {
     console.error('[get-checkout-session]', err.message)

@@ -19,6 +19,7 @@ import {loadCatalog, findProduct, funnelPriceOf, toCents} from './_catalog.js'
 import {getStripe} from './_stripe.js'
 import {createFallbackSession} from './funnel-checkout.js'
 import {readJson, requestBaseUrl, clientIp, makeRateLimiter} from './_util.js'
+import {copyTrackingMetadata} from './_meta.js'
 
 const UPSELL_ID = 'mh-bundle'
 const WINDOW_S = 3600
@@ -104,7 +105,8 @@ export default async function handler(req, res) {
         confirm: true,
         description: `${product.title} (one-click add-on)`,
         receipt_email: session.customer_details?.email || undefined,
-        metadata: {items: UPSELL_ID, upsell_of: sessionId, funnel: '1', site: base},
+        // Meta CAPI match data (mc/fbp/fbc/ip/ua) copied from the parent session.
+        metadata: {items: UPSELL_ID, upsell_of: sessionId, funnel: '1', site: base, ...copyTrackingMetadata(session.metadata)},
       },
       {idempotencyKey: `upsell-${sessionId}`}
     )

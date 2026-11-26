@@ -122,7 +122,7 @@
 
     if (window.trackAddToCart) {
       try {
-        window.trackAddToCart({id: p.slug, name: item.title, price: item.unitPrice, quantity: qty, currency: 'USD'});
+        window.trackAddToCart({id: p.id, name: item.title, price: item.unitPrice, quantity: qty, currency: 'USD'});
       } catch (e) {}
     }
     if (!opts.silent) openDrawer();
@@ -522,7 +522,11 @@
               value: subtotal(items),
               currency: 'USD',
               num_items: items.reduce(function (a, x) { return a + x.quantity; }, 0),
-              content_ids: items.map(function (x) { var p = bySlug(x.slug); return p ? p.id : x.slug; })
+              content_ids: items.map(function (x) { var p = bySlug(x.slug); return p ? p.id : x.slug; }),
+              contents: items.map(function (x) {
+                var p = bySlug(x.slug);
+                return {id: p ? p.id : x.slug, quantity: x.quantity, item_price: x.unitPrice};
+              })
             });
           } catch (e) {}
         }
@@ -537,7 +541,11 @@
               return {slug: x.slug, quantity: x.quantity, variantId: x.variantId};
             }),
             discountCode: meta().code || undefined,
-            lang: LANG
+            lang: LANG,
+            /* Meta CAPI match data {consent, fbp, fbc} (js/pixels.js) */
+            tracking: (function () {
+              try { return window.cadomaloTracking ? window.cadomaloTracking() : {consent: false}; } catch (e) { return {consent: false}; }
+            })()
           })
         })
           .then(function (r) { return r.json(); })
@@ -597,8 +605,11 @@
         $('[data-confirm-total]', root).textContent = fmt(d.amount_total);
         renderDownloads(root, d.downloads || []);
         $('[data-confirm-summary]', root).hidden = false;
-        if (window.trackPurchase && d.payment_status === 'paid') {
-          try { window.trackPurchase({orderId: d.id, value: (d.amount_total || 0) / 100, currency: 'USD'}); } catch (e) {}
+        /* Purchase with eventID = session id (+ a separate one for a
+           one-click upsell pi_…); deduped against the webhook's CAPI event
+           and against reloads (sessionStorage) — see js/pixels.js. */
+        if (window.trackOrder && d.payment_status === 'paid') {
+          try { window.trackOrder(d); } catch (e) {}
         }
       })
       .catch(function () { fail(root.getAttribute('data-missing')); });

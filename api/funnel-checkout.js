@@ -16,6 +16,7 @@
 import {loadCatalog, findProduct, funnelPriceOf, storePrice, FREE_IDS} from './_catalog.js'
 import {getStripe, createBrandedSession, lineItemFor} from './_stripe.js'
 import {readJson, verifyToken, offerUnlocks, requestBaseUrl, clientIp, makeRateLimiter} from './_util.js'
+import {trackingFromRequest, trackingMetadata, copyTrackingMetadata} from './_meta.js'
 
 const limited = makeRateLimiter(30, 10 * 60 * 1000)
 const SESSION_WINDOW_S = 24 * 3600
@@ -131,6 +132,8 @@ export default async function handler(req, res) {
       parent: parent ? parent.id : '',
       site: base,
       lang: 'en',
+      // Meta CAPI match data (see api/_meta.js). GET links fall back to cookies.
+      ...trackingMetadata(trackingFromRequest(req, input)),
     },
   }
   if (!params.payment_intent_data) delete params.payment_intent_data
@@ -167,6 +170,9 @@ export async function createFallbackSession({parent, product, price, base}) {
     cancel_url: `${base}/order-confirmation?session_id=${encodeURIComponent(parent.id)}`,
     billing_address_collection: 'auto',
     automatic_tax: {enabled: true},
-    metadata: {funnel: '1', items: product.id, offer: product.id, price_type: 'funnel', parent: parent.id, site: base, lang: 'en'},
+    metadata: {
+      funnel: '1', items: product.id, offer: product.id, price_type: 'funnel', parent: parent.id, site: base, lang: 'en',
+      ...copyTrackingMetadata(parent.metadata),
+    },
   })
 }

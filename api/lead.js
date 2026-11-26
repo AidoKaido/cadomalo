@@ -9,9 +9,14 @@
 //      FUNNEL_SECRET (falls back to STRIPE_WEBHOOK_SECRET).
 // One offer per email: signing up again returns the original token (so the
 // 48-hour deadline is real), it never mints a fresh one.
+//
+// Meta CAPI: body.eventId (uuid, same as the browser Lead's eventID) and
+// body.tracking {fbp, fbc, consent}. A server Lead is sent only when
+// tracking.consent is true (marketing cookies accepted).
 
 import {brevoConfigured, listId, getContact, doubleOptIn, updateContact} from './_brevo.js'
 import {readJson, clientIp, makeRateLimiter, isEmail, makeOfferToken, verifyToken, requestBaseUrl} from './_util.js'
+import {sendCapiEvent, trackingFromRequest} from './_meta.js'
 
 const limited = makeRateLimiter(5, 10 * 60 * 1000)
 
@@ -69,9 +74,28 @@ export default async function handler(req, res) {
       console.error('[lead] Brevo', r.status, JSON.stringify(r.data).slice(0, 300))
       return res.status(502).json({ok: false, error: 'We could not sign you up right now. Please try again shortly.'})
     }
+    await sendLeadEvent(req, body, email, base)
     return res.status(200).json({ok: true, t, alreadySubscribed: onList})
   } catch (err) {
     console.error('[lead] error:', err.message)
     return res.status(502).json({ok: false, error: 'We could not sign you up right now. Please try again shortly.'})
+  }
+}
+
+// Server Lead for Meta (consent only). Never throws; capped at 4 s.
+async function sendLeadEvent(req, body, email, base) {
+  try {
+    const tr = trackingFromRequest(req, body)
+    if (!tr.mc) return
+    const eventId = /^[A-Za-z0-9_-]{8,64}$/.test(String(body.eventId || '')) ? String(body.eventId) : undefined
+    await sendCapiEvent({
+      event_name: 'Lead',
+      event_id: eventId,
+      event_source_url: `${base}/free-routine-sample`,
+      user_data: {em: email, external_id: email, client_ip_address: tr.ip, client_user_agent: tr.ua, fbp: tr.fbp, fbc: tr.fbc},
+      custom_data: {content_name: 'routine-sample', value: 0, currency: 'USD'},
+    })
+  } catch (err) {
+    console.warn('[lead] meta capi:', err.message)
   }
 }
